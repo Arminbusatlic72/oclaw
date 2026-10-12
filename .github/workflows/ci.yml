@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main, feat/ci-renovate-prettier]
+  pull_request:
+    branches: [main, feat/ci-renovate-prettier]
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 9
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22.22.1
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm type-check

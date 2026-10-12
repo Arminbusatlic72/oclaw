@@ -1,0 +1,38 @@
+{
+  "name": "next-sanity-blocks-starter",
+  "description": "A blocks-first Next.js and Sanity starter for quick CMS project setup",
+  "keywords": [
+    "Sanity",
+    "Next.js",
+    "Headless CMS",
+    "Visual Editing",
+    "Live Content API (LCAPI)",
+    "Real-time"
+  ],
+  "workspaces": [
+    "studio",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "npx run-p --print-label dev:*",
+    "dev:next": "pnpm --filter frontend dev",
+    "dev:studio": "pnpm --filter studio dev",
+    "bootstrap": "node ./scripts/setup.mjs",
+    "preflight": "node ./scripts/preflight.mjs",
+    "new:block": "node ./scripts/new-block.mjs",
+    "format": "prettier --cache --write .",
+    "lint": "pnpm --filter frontend lint",
+    "type-check": "pnpm --filter frontend type-check && pnpm --filter studio type-check",
+    "build": "pnpm --filter frontend build && pnpm --filter studio build",
+    "validate": "pnpm preflight && pnpm type-check && pnpm lint && pnpm build"
+  },
+  "prettier": "@sanity/prettier-config",
+  "devDependencies": {
+    "@sanity/prettier-config": "^2.0.2",
+    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/typography": "^0.5.19",
+    "npm-run-all2": "^5.0.2",
+    "prettier": "^3.7.3",
+    "tailwindcss": "^4.2.1"
+  }
+}
