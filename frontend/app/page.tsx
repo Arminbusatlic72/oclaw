@@ -123,7 +123,6 @@ export default async function Page() {
           </ScrollReveal>
         </div>
       </section>
-
     </>
   )
 }

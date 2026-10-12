@@ -42,9 +42,7 @@ export default function ParallaxFeatures({block}: ParallaxFeaturesProps) {
 
   const sectionId = `parallax-features-${toIdFragment(heading ?? undefined)}`
   const isDark = theme === 'dark'
-  const sectionClass = isDark
-    ? 'bg-slate-950 text-slate-100'
-    : 'bg-white text-slate-950'
+  const sectionClass = isDark ? 'bg-slate-950 text-slate-100' : 'bg-white text-slate-950'
   const headingClass = isDark ? 'text-slate-100' : 'text-slate-900'
   const mutedClass = isDark ? 'text-slate-300' : 'text-slate-600'
   const columnCount = columnMap(columns ?? undefined)
@@ -55,7 +53,10 @@ export default function ParallaxFeatures({block}: ParallaxFeaturesProps) {
       <div className="container">
         <ScrollReveal direction="up" className="mx-auto max-w-2xl text-center">
           {heading && (
-            <h2 id={sectionId} className={`text-3xl font-semibold md:text-4xl lg:text-5xl ${headingClass}`}>
+            <h2
+              id={sectionId}
+              className={`text-3xl font-semibold md:text-4xl lg:text-5xl ${headingClass}`}
+            >
               {heading}
             </h2>
           )}
@@ -78,10 +79,14 @@ function ParallaxCard({feature}: {feature: ParallaxFeature}) {
   // Use parallax only if we have an image (hook handles null refs gracefully)
   useParallax(imageRef, 0.12)
 
-  const imageUrl = feature.image?.asset?.url || (feature.image ? urlForImage(feature.image).url() : null)
+  const imageUrl =
+    feature.image?.asset?.url || (feature.image ? urlForImage(feature.image).url() : null)
 
   return (
-    <ScrollReveal direction="up" className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
+    <ScrollReveal
+      direction="up"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-slate-800 dark:bg-slate-900"
+    >
       {/* Image with parallax */}
       {imageUrl && (
         <div
@@ -100,10 +105,16 @@ function ParallaxCard({feature}: {feature: ParallaxFeature}) {
 
       {/* Content */}
       <div className="flex flex-1 flex-col p-6">
-        {feature.title && <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{feature.title}</h3>}
+        {feature.title && (
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+            {feature.title}
+          </h3>
+        )}
 
         {feature.description && (
-          <p className="mt-2 flex-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{feature.description}</p>
+          <p className="mt-2 flex-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+            {feature.description}
+          </p>
         )}
 
         {feature.cta?.label && feature.cta.url && (

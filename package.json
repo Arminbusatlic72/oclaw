@@ -14,16 +14,16 @@
     "frontend"
   ],
   "scripts": {
+    "bootstrap": "node ./scripts/setup.mjs",
+    "build": "pnpm --filter frontend build && pnpm --filter studio build",
     "dev": "npx run-p --print-label dev:*",
     "dev:next": "pnpm --filter frontend dev",
     "dev:studio": "pnpm --filter studio dev",
-    "bootstrap": "node ./scripts/setup.mjs",
-    "preflight": "node ./scripts/preflight.mjs",
-    "new:block": "node ./scripts/new-block.mjs",
     "format": "prettier --cache --write .",
     "lint": "pnpm --filter frontend lint",
+    "new:block": "node ./scripts/new-block.mjs",
+    "preflight": "node ./scripts/preflight.mjs",
     "type-check": "pnpm --filter frontend type-check && pnpm --filter studio type-check",
-    "build": "pnpm --filter frontend build && pnpm --filter studio build",
     "validate": "pnpm preflight && pnpm type-check && pnpm lint && pnpm build"
   },
   "prettier": "@sanity/prettier-config",

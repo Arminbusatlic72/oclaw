@@ -39,7 +39,11 @@ if (!fileExists('pnpm-workspace.yaml')) {
 const envChecks = [
   {
     file: 'frontend/.env.local',
-    requiredKeys: ['NEXT_PUBLIC_SANITY_PROJECT_ID', 'NEXT_PUBLIC_SANITY_DATASET', 'SANITY_API_READ_TOKEN'],
+    requiredKeys: [
+      'NEXT_PUBLIC_SANITY_PROJECT_ID',
+      'NEXT_PUBLIC_SANITY_DATASET',
+      'SANITY_API_READ_TOKEN',
+    ],
   },
   {
     file: 'studio/.env.local',
@@ -69,7 +73,9 @@ for (const check of envChecks) {
 }
 
 if (fileExists('frontend/.next/dev/lock')) {
-  warn('Detected frontend/.next/dev/lock. If dev fails, stop old dev processes and remove this lock file.')
+  warn(
+    'Detected frontend/.next/dev/lock. If dev fails, stop old dev processes and remove this lock file.',
+  )
 }
 
 if (process.exitCode && process.exitCode !== 0) {

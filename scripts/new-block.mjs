@@ -36,8 +36,22 @@ const componentName = toPascalCase(rawName)
 const title = componentName.replace(/([a-z])([A-Z])/g, '$1 $2')
 
 const projectRoot = process.cwd()
-const schemaFile = path.join(projectRoot, 'studio', 'src', 'schemaTypes', 'blocks', `${blockType}.ts`)
-const componentDir = path.join(projectRoot, 'frontend', 'app', 'components', 'blocks', componentName)
+const schemaFile = path.join(
+  projectRoot,
+  'studio',
+  'src',
+  'schemaTypes',
+  'blocks',
+  `${blockType}.ts`,
+)
+const componentDir = path.join(
+  projectRoot,
+  'frontend',
+  'app',
+  'components',
+  'blocks',
+  componentName,
+)
 const componentFile = path.join(componentDir, 'index.tsx')
 
 if (fs.existsSync(schemaFile)) {
@@ -118,8 +132,16 @@ console.log(`- studio/src/schemaTypes/blocks/${blockType}.ts`)
 console.log(`- frontend/app/components/blocks/${componentName}/index.tsx`)
 
 console.log('\nNext steps:')
-console.log(`1. Register schema in studio/src/schemaTypes/index.ts (import and add ${blockType} to schemaTypes).`)
-console.log(`2. Add {type: '${blockType}'} to the pageBuilder array in studio/src/schemaTypes/documents/page.ts.`)
-console.log(`3. Import ${componentName} and map '${blockType}' in frontend/app/components/BlockRenderer.tsx.`)
-console.log(`4. Extend the page query projection in frontend/sanity/lib/queries.ts for '${blockType}'.`)
+console.log(
+  `1. Register schema in studio/src/schemaTypes/index.ts (import and add ${blockType} to schemaTypes).`,
+)
+console.log(
+  `2. Add {type: '${blockType}'} to the pageBuilder array in studio/src/schemaTypes/documents/page.ts.`,
+)
+console.log(
+  `3. Import ${componentName} and map '${blockType}' in frontend/app/components/BlockRenderer.tsx.`,
+)
+console.log(
+  `4. Extend the page query projection in frontend/sanity/lib/queries.ts for '${blockType}'.`,
+)
 console.log('5. Run: pnpm --filter frontend sanity:typegen')

@@ -47,7 +47,9 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
   return (
     <section aria-labelledby={sectionId} className={`py-16 sm:py-24 ${sectionClass}`}>
       <div className="container">
-        <div className={`overflow-hidden rounded-[2rem] border p-8 shadow-xl sm:p-10 ${shellClass}`}>
+        <div
+          className={`overflow-hidden rounded-[2rem] border p-8 shadow-xl sm:p-10 ${shellClass}`}
+        >
           <ScrollReveal direction="up" className="mx-auto max-w-3xl text-center">
             {eyebrow && (
               <span
@@ -80,7 +82,9 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   {step.eyebrow && (
-                    <p className={`mt-5 text-xs font-semibold uppercase tracking-[0.18em] ${mutedClass}`}>
+                    <p
+                      className={`mt-5 text-xs font-semibold uppercase tracking-[0.18em] ${mutedClass}`}
+                    >
                       {step.eyebrow}
                     </p>
                   )}

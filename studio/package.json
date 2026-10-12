@@ -30,9 +30,9 @@
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
+    "@prettier/plugin-oxc": "^0.1.3",
     "@sanity/eslint-config-studio": "^5.0.2",
     "@types/react": "^19.2.7",
-    "@prettier/plugin-oxc": "^0.1.3",
     "typescript": "^5.9.3"
   }
 }

@@ -11,15 +11,15 @@ Repository: [github.com/Arminbusatlic72/oclaw](https://github.com/Arminbusatlic7
 
 The current workspace uses:
 
-| Technology | Version |
-| --- | --- |
-| Node.js | `22.22.1` (pinned in `.nvmrc`; preflight requires Node 22.x) |
-| pnpm | `9.15.9` |
-| Next.js | `16.1.5` |
-| React / React DOM | `19.2.3` |
-| Sanity | `5.15.0` |
-| next-sanity | `12.1.1` |
-| TypeScript | `5.9.3` |
+| Technology        | Version                                                      |
+| ----------------- | ------------------------------------------------------------ |
+| Node.js           | `22.22.1` (pinned in `.nvmrc`; preflight requires Node 22.x) |
+| pnpm              | `9.15.9`                                                     |
+| Next.js           | `16.1.5`                                                     |
+| React / React DOM | `19.2.3`                                                     |
+| Sanity            | `5.15.0`                                                     |
+| next-sanity       | `12.1.1`                                                     |
+| TypeScript        | `5.9.3`                                                      |
 
 The package manifests may use compatible version ranges for some dependencies;
 the versions above are the versions currently resolved in the workspace.
@@ -105,23 +105,23 @@ replace the example placeholders with real secrets.
 
 ### `frontend/.env.local`
 
-| Variable | Required | Purpose |
-| --- | --- | --- |
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Yes | Sanity project ID used by the frontend |
-| `NEXT_PUBLIC_SANITY_DATASET` | Yes | Sanity dataset name, commonly `production` |
-| `SANITY_API_READ_TOKEN` | Yes | Server-side token for authenticated reads and previews |
-| `NEXT_PUBLIC_SANITY_API_VERSION` | No | Sanity API version used by the frontend client |
-| `NEXT_PUBLIC_SANITY_STUDIO_URL` | No | Studio URL; the example uses `http://localhost:3333` |
+| Variable                         | Required | Purpose                                                |
+| -------------------------------- | -------- | ------------------------------------------------------ |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID`  | Yes      | Sanity project ID used by the frontend                 |
+| `NEXT_PUBLIC_SANITY_DATASET`     | Yes      | Sanity dataset name, commonly `production`             |
+| `SANITY_API_READ_TOKEN`          | Yes      | Server-side token for authenticated reads and previews |
+| `NEXT_PUBLIC_SANITY_API_VERSION` | No       | Sanity API version used by the frontend client         |
+| `NEXT_PUBLIC_SANITY_STUDIO_URL`  | No       | Studio URL; the example uses `http://localhost:3333`   |
 
 ### `studio/.env.local`
 
-| Variable | Required | Purpose |
-| --- | --- | --- |
-| `SANITY_STUDIO_PROJECT_ID` | Yes | Sanity project ID used by the Studio |
-| `SANITY_STUDIO_DATASET` | Yes | Sanity dataset name, commonly `production` |
-| `SANITY_STUDIO_PREVIEW_URL` | No | Frontend preview origin; defaults to `http://localhost:3000` |
-| `SANITY_STUDIO_STUDIO_HOST` | No | Hosted Studio name used by Sanity deployment |
-| `SANITY_STUDIO_AUTO_UPDATES` | No | Set to `true` to enable Studio deployment auto-updates |
+| Variable                     | Required | Purpose                                                      |
+| ---------------------------- | -------- | ------------------------------------------------------------ |
+| `SANITY_STUDIO_PROJECT_ID`   | Yes      | Sanity project ID used by the Studio                         |
+| `SANITY_STUDIO_DATASET`      | Yes      | Sanity dataset name, commonly `production`                   |
+| `SANITY_STUDIO_PREVIEW_URL`  | No       | Frontend preview origin; defaults to `http://localhost:3000` |
+| `SANITY_STUDIO_STUDIO_HOST`  | No       | Hosted Studio name used by Sanity deployment                 |
+| `SANITY_STUDIO_AUTO_UPDATES` | No       | Set to `true` to enable Studio deployment auto-updates       |
 
 Run the environment and runtime checks independently with:
 
@@ -152,19 +152,19 @@ Studio types before starting Sanity.
 
 Run these commands from the repository root:
 
-| Command | Description |
-| --- | --- |
-| `pnpm bootstrap` | Install dependencies, run preflight checks, generate Sanity types, and type-check the workspace |
-| `pnpm dev` | Run the frontend and Studio development servers together |
-| `pnpm dev:next` | Run only the Next.js frontend |
-| `pnpm dev:studio` | Run only Sanity Studio |
-| `pnpm preflight` | Check the Node.js version, workspace, and required environment values |
-| `pnpm lint` | Lint the frontend with ESLint |
-| `pnpm type-check` | Type-check both workspace applications |
-| `pnpm build` | Build the frontend and Studio |
-| `pnpm validate` | Run preflight, type-checking, linting, and both production builds |
-| `pnpm format` | Format the workspace with Prettier |
-| `pnpm new:block --name FeatureCards` | Scaffold frontend and Studio files for a new content block |
+| Command                              | Description                                                                                     |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `pnpm bootstrap`                     | Install dependencies, run preflight checks, generate Sanity types, and type-check the workspace |
+| `pnpm dev`                           | Run the frontend and Studio development servers together                                        |
+| `pnpm dev:next`                      | Run only the Next.js frontend                                                                   |
+| `pnpm dev:studio`                    | Run only Sanity Studio                                                                          |
+| `pnpm preflight`                     | Check the Node.js version, workspace, and required environment values                           |
+| `pnpm lint`                          | Lint the frontend with ESLint                                                                   |
+| `pnpm type-check`                    | Type-check both workspace applications                                                          |
+| `pnpm build`                         | Build the frontend and Studio                                                                   |
+| `pnpm validate`                      | Run preflight, type-checking, linting, and both production builds                               |
+| `pnpm format`                        | Format the workspace with Prettier                                                              |
+| `pnpm new:block --name FeatureCards` | Scaffold frontend and Studio files for a new content block                                      |
 
 ## Source attribution
 

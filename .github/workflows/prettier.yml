@@ -4,12 +4,12 @@ on:
   push:
     branches: [main, feat/ci-renovate-prettier]
     paths-ignore:
-      - 'package-lock.json'
-      - '**/package-lock.json'
-      - 'yarn.lock'
-      - '**/yarn.lock'
-      - 'pnpm-lock.yaml'
-      - '**/pnpm-lock.yaml'
+      - "package-lock.json"
+      - "**/package-lock.json"
+      - "yarn.lock"
+      - "**/yarn.lock"
+      - "pnpm-lock.yaml"
+      - "**/pnpm-lock.yaml"
   workflow_dispatch:
 
 concurrency:
@@ -18,31 +18,17 @@ concurrency:
 
 jobs:
   run:
-    name: Can the code be prettier? 🤔
+    name: Check formatting
     runs-on: ubuntu-latest
-    # workflow_dispatch always lets you select the branch ref, even though in this case we only ever want to run the action on `main` this we need an if check
     steps:
-    - uses: actions/checkout@v5
-
-    - uses: actions/setup-node@v4
-      with:
-        cache: npm
-        node-version: lts/*
-
-    - run: npm install
-    - run: npm run format
-    
-    - uses: actions/create-github-app-token@v2
-      id: generate-token
-      with:
-        app-id: ${{ secrets.ECOSPARK_APP_ID }}
-        private-key: ${{ secrets.ECOSPARK_APP_PRIVATE_KEY }}
-    - uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7
-      with:
-        body: I ran `pnpm format` 🧑‍💻
-        branch: actions/prettier
-        commit-message: "chore(prettier): 🤖 ✨"
-        labels: 🤖 bot
-        sign-commits: true
-        title: "chore(prettier): 🤖 ✨"
-        token: ${{ steps.generate-token.outputs.token }}
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 9
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22.22.1
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec prettier --check .
