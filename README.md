@@ -1,131 +1,181 @@
-# Next + Sanity Blocks Starter
+# Oclaw
 
-A starter template for building CMS-driven websites fast with:
+Oclaw is a pnpm workspace containing a Next.js frontend and a standalone
+Sanity Studio. The frontend renders content from Sanity, while the Studio
+provides the editing interface, schema definitions, and presentation preview
+configuration.
 
-- Next.js frontend in `frontend`
-- Sanity Studio in `studio`
-- Page builder block architecture (`heroSlider`, `cardGrid`, `callToAction`, `infoSection`)
-- Typed GROQ queries + generated schema types
-- One-command setup and preflight checks
+Repository: [github.com/Arminbusatlic72/oclaw](https://github.com/Arminbusatlic72/oclaw)
 
-![Preview of Sanity Studio + Next.js](/sanity-next-preview.png)
+## Technology versions
 
-## What You Get
+The current workspace uses:
 
-- `pnpm bootstrap` to install, validate env, generate types, and type-check
-- `pnpm dev` to run both frontend and studio
-- `pnpm preflight` to catch Node/env misconfiguration early
-- `pnpm new:block --name YourBlock` scaffold command for new blocks
-- Monorepo setup with shared lockfile and workspace scripts
+| Technology | Version |
+| --- | --- |
+| Node.js | `22.22.1` (pinned in `.nvmrc`; preflight requires Node 22.x) |
+| pnpm | `9.15.9` |
+| Next.js | `16.1.5` |
+| React / React DOM | `19.2.3` |
+| Sanity | `5.15.0` |
+| next-sanity | `12.1.1` |
+| TypeScript | `5.9.3` |
+
+The package manifests may use compatible version ranges for some dependencies;
+the versions above are the versions currently resolved in the workspace.
+
+## Architecture
+
+Oclaw is organized as a two-application monorepo:
+
+```text
+oclaw/
+├── frontend/              # Next.js application
+├── studio/                # Standalone Sanity Studio
+├── sanity.schema.json/    # Extracted schema used for type generation
+├── scripts/               # Setup, preflight, and block scaffolding scripts
+├── package.json           # Root workspace commands
+├── pnpm-lock.yaml         # Shared dependency lockfile
+└── pnpm-workspace.yaml    # Workspace definition
+```
+
+### Frontend
+
+`frontend/` contains the Next.js App Router application. It includes the page
+routes, UI components, Sanity client configuration, GROQ queries, generated
+Sanity types, and the draft-mode endpoint used by Sanity's presentation tools.
+
+The development server runs at [http://localhost:3000](http://localhost:3000).
+
+### Sanity Studio
+
+`studio/` contains the independently configured Sanity Studio. It owns the
+content schemas, custom desk structure, initial values, presentation preview
+configuration, and Studio plugins. Schema extraction produces
+`sanity.schema.json/schema.json`, which is then used to generate typed Sanity
+definitions for both applications.
+
+The Studio development server runs at
+[http://localhost:3333](http://localhost:3333).
 
 ## Prerequisites
 
-- Node `22.22.1` (see `.nvmrc`)
-- pnpm `>=9`
+- Node.js 22.x; `22.22.1` is provided in `.nvmrc`
+- pnpm 9; the current local version is `9.15.9`
+- A Sanity project and dataset
+- A Sanity read token for authenticated frontend reads and previews
 
-If you use nvm:
+With `nvm` installed, select the repository's Node.js version with:
 
 ```bash
-source ~/.nvm/nvm.sh
 nvm use
 ```
 
-## Quick Start
+## Local installation
 
-1. Install and prepare the project:
-
-```bash
-pnpm bootstrap
-```
-
-2. Start both apps:
+Clone the repository and enter the project directory:
 
 ```bash
-pnpm dev
+git clone https://github.com/Arminbusatlic72/oclaw.git
+cd oclaw
 ```
 
-3. Open:
-
-- Frontend: http://localhost:3000
-- Studio: http://localhost:3333
-
-## Environment Setup
-
-Create local env files from templates:
+Create local environment files from the committed templates:
 
 ```bash
 cp frontend/.env.example frontend/.env.local
 cp studio/.env.example studio/.env.local
 ```
 
-Required values:
-
-- Frontend (`frontend/.env.local`):
-  - `NEXT_PUBLIC_SANITY_PROJECT_ID`
-  - `NEXT_PUBLIC_SANITY_DATASET`
-  - `SANITY_API_READ_TOKEN`
-- Studio (`studio/.env.local`):
-  - `SANITY_STUDIO_PROJECT_ID`
-  - `SANITY_STUDIO_DATASET`
-
-Studio auto-updates are opt-in through:
-
-- `SANITY_STUDIO_AUTO_UPDATES=true`
-
-## Commands
-
-- `pnpm bootstrap`: install + preflight + typegen + type-check
-- `pnpm preflight`: validate Node/env prerequisites
-- `pnpm dev`: run Next + Studio together
-- `pnpm new:block --name FeatureCards`: scaffold new block files
-- `pnpm type-check`: run TypeScript checks across apps
-- `pnpm lint`: lint frontend
-- `pnpm build`: build frontend and studio
-- `pnpm validate`: preflight + type-check + lint + build
-
-## Add A New Block
-
-Generate boilerplate:
+Fill in the required values described below, then run the workspace bootstrap:
 
 ```bash
-pnpm new:block --name FeatureCards
+pnpm bootstrap
 ```
 
-This creates:
+The bootstrap command installs dependencies, validates the local environment,
+extracts the Sanity schema, generates types, and type-checks both applications.
+To install dependencies without running the remaining setup steps, use
+`pnpm install`.
 
-- `studio/src/schemaTypes/blocks/featureCards.ts`
-- `frontend/app/components/blocks/FeatureCards/index.tsx`
+## Environment configuration
 
-Then wire it in:
+Local environment files are excluded from Git. Do not commit credentials or
+replace the example placeholders with real secrets.
 
-1. Register schema export in `studio/src/schemaTypes/index.ts`.
-2. Add `{type: 'featureCards'}` to `pageBuilder` in `studio/src/schemaTypes/documents/page.ts`.
-3. Add import and `_type` mapping in `frontend/app/components/BlockRenderer.tsx`.
-4. Extend `getPageQuery` in `frontend/sanity/lib/queries.ts`.
-5. Regenerate types:
+### `frontend/.env.local`
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Yes | Sanity project ID used by the frontend |
+| `NEXT_PUBLIC_SANITY_DATASET` | Yes | Sanity dataset name, commonly `production` |
+| `SANITY_API_READ_TOKEN` | Yes | Server-side token for authenticated reads and previews |
+| `NEXT_PUBLIC_SANITY_API_VERSION` | No | Sanity API version used by the frontend client |
+| `NEXT_PUBLIC_SANITY_STUDIO_URL` | No | Studio URL; the example uses `http://localhost:3333` |
+
+### `studio/.env.local`
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `SANITY_STUDIO_PROJECT_ID` | Yes | Sanity project ID used by the Studio |
+| `SANITY_STUDIO_DATASET` | Yes | Sanity dataset name, commonly `production` |
+| `SANITY_STUDIO_PREVIEW_URL` | No | Frontend preview origin; defaults to `http://localhost:3000` |
+| `SANITY_STUDIO_STUDIO_HOST` | No | Hosted Studio name used by Sanity deployment |
+| `SANITY_STUDIO_AUTO_UPDATES` | No | Set to `true` to enable Studio deployment auto-updates |
+
+Run the environment and runtime checks independently with:
 
 ```bash
-pnpm --filter frontend sanity:typegen
+pnpm preflight
 ```
 
-## Template Checklist (for new projects)
+## Running locally
 
-1. Clone template and create a new repo.
-2. Run `pnpm bootstrap`.
-3. Confirm both apps open locally.
-4. Update brand styles, fonts, and design tokens.
-5. Add/remove block types for your project.
-6. Add project-specific schemas and seed content.
-7. Run `pnpm validate` before first push.
+Start the frontend and Studio together:
 
-## Deploy
+```bash
+pnpm dev
+```
 
-- Studio: `pnpm --filter studio deploy`
-- Frontend: deploy `frontend` to your host (Vercel recommended)
+To run them separately:
 
-For deployment from existing Vercel-created projects, see [vercel-installation-instructions.md](vercel-installation-instructions.md).
+```bash
+pnpm dev:next
+pnpm dev:studio
+```
 
-## Resources
+The frontend development command regenerates Sanity types before starting
+Next.js. The Studio development command also extracts the schema and regenerates
+Studio types before starting Sanity.
 
-- https://www.sanity.io/docs
-- https://nextjs.org/docs
+## Project commands
+
+Run these commands from the repository root:
+
+| Command | Description |
+| --- | --- |
+| `pnpm bootstrap` | Install dependencies, run preflight checks, generate Sanity types, and type-check the workspace |
+| `pnpm dev` | Run the frontend and Studio development servers together |
+| `pnpm dev:next` | Run only the Next.js frontend |
+| `pnpm dev:studio` | Run only Sanity Studio |
+| `pnpm preflight` | Check the Node.js version, workspace, and required environment values |
+| `pnpm lint` | Lint the frontend with ESLint |
+| `pnpm type-check` | Type-check both workspace applications |
+| `pnpm build` | Build the frontend and Studio |
+| `pnpm validate` | Run preflight, type-checking, linting, and both production builds |
+| `pnpm format` | Format the workspace with Prettier |
+| `pnpm new:block --name FeatureCards` | Scaffold frontend and Studio files for a new content block |
+
+## Source attribution
+
+Oclaw was initially derived from Sanity's
+[Clean Next.js template](https://github.com/sanity-io/sanity-template-nextjs-clean),
+whose earlier history came from
+[nextjs-blog-cms-sanity-v3](https://github.com/sanity-io/nextjs-blog-cms-sanity-v3).
+See [NOTICE.md](NOTICE.md) for the preserved provenance and licensing notice.
+
+## Documentation
+
+- [Next.js documentation](https://nextjs.org/docs)
+- [Sanity documentation](https://www.sanity.io/docs)
+- [pnpm documentation](https://pnpm.io/)
