@@ -51,6 +51,12 @@ const slideObject = defineArrayMember({
           title: 'URL',
           type: 'url',
         }),
+        defineField({
+          name: 'link',
+          title: 'Referenced link',
+          description: 'Preferred for new links. The legacy URL remains supported.',
+          type: 'link',
+        }),
       ],
     }),
   ],

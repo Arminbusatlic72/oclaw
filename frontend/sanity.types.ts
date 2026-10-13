@@ -18,6 +18,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol
 export type Cta = {
   label?: string
   url?: string
+  link?: Link
 }
 
 export type SanityImageAssetReference = {
@@ -39,6 +40,7 @@ export type HeroSliderSlideImage = {
 export type HeroSliderSlideCta = {
   label?: string
   url?: string
+  link?: Link
 }
 
 export type ParallaxFeatureItemImage = {
@@ -53,6 +55,22 @@ export type ParallaxFeatureItemImage = {
 export type ParallaxFeatureItemCta = {
   label?: string
   url?: string
+  link?: Link
+}
+
+export type Seo = {
+  _type: 'seo'
+  title?: string
+  description?: string
+  openGraphImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  noIndex?: boolean
 }
 
 export type PageReference = {
@@ -229,131 +247,6 @@ export type Button = {
   link?: Link
 }
 
-export type Navigation = {
-  _id: string
-  _type: 'navigation'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  logo?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    _type: 'image'
-  }
-  navItems: Array<{
-    title: string
-    href?: string
-    externalUrl?: string
-    isButton?: boolean
-    children?: Array<{
-      title: string
-      href?: string
-      _type: 'navChildItem'
-      _key: string
-    }>
-    _type: 'navItem'
-    _key: string
-  }>
-  ctaLabel?: string
-  ctaHref?: string
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
-}
-
-export type Settings = {
-  _id: string
-  _type: 'settings'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title: string
-  description?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal'
-    listItem?: never
-    markDefs?: Array<{
-      linkType?: 'href' | 'page'
-      href?: string
-      page?: PageReference
-      openInNewTab?: boolean
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
-    _key: string
-  }>
-  ogImage?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    metadataBase?: string
-    _type: 'image'
-  }
-}
-
-export type Page = {
-  _id: string
-  _type: 'page'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name: string
-  slug: Slug
-  heading: string
-  subheading?: string
-  pageBuilder?: Array<
-    | ({
-        _key: string
-      } & HeroSlider)
-    | ({
-        _key: string
-      } & CardGrid)
-    | ({
-        _key: string
-      } & ProcessSteps)
-    | ({
-        _key: string
-      } & ParallaxFeatures)
-    | ({
-        _key: string
-      } & CallToAction)
-    | ({
-        _key: string
-      } & InfoSection)
-  >
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
-}
-
 export type SanityAssistInstructionTask = {
   _type: 'sanity.assist.instructionTask'
   path?: string
@@ -491,6 +384,200 @@ export type SanityAssistSchemaTypeField = {
   >
 }
 
+export type TranslationMetadata = {
+  _id: string
+  _type: 'translation.metadata'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  translations?: InternationalizedArrayReference
+  schemaTypes?: Array<string>
+}
+
+export type InternationalizedArrayReference = Array<
+  {
+    _key: string
+  } & InternationalizedArrayReferenceValue
+>
+
+export type NavigationReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'navigation'
+}
+
+export type SettingsReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'settings'
+}
+
+export type FooterReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'footer'
+}
+
+export type InternationalizedArrayReferenceValue = {
+  _type: 'internationalizedArrayReferenceValue'
+  value?: PageReference | NavigationReference | SettingsReference | FooterReference
+  language: string
+}
+
+export type Footer = {
+  _id: string
+  _type: 'footer'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  heading?: string
+  description?: string
+  links?: Array<{
+    label: string
+    link: Link
+    _type: 'footerLink'
+    _key: string
+  }>
+  copyright?: string
+}
+
+export type Settings = {
+  _id: string
+  _type: 'settings'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  title: string
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: Array<{
+      linkType?: 'href' | 'page'
+      href?: string
+      page?: PageReference
+      openInNewTab?: boolean
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  homePage?: PageReference
+  ogImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    metadataBase?: string
+    _type: 'image'
+  }
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
+
+export type Navigation = {
+  _id: string
+  _type: 'navigation'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  logo?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  navItems: Array<{
+    title: string
+    href?: string
+    link?: Link
+    externalUrl?: string
+    isButton?: boolean
+    children?: Array<{
+      title: string
+      href?: string
+      link?: Link
+      _type: 'navChildItem'
+      _key: string
+    }>
+    _type: 'navItem'
+    _key: string
+  }>
+  ctaLabel?: string
+  ctaHref?: string
+  ctaLink?: Link
+}
+
+export type Page = {
+  _id: string
+  _type: 'page'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  name: string
+  slug: Slug
+  heading: string
+  subheading?: string
+  pageBuilder?: Array<
+    | ({
+        _key: string
+      } & HeroSlider)
+    | ({
+        _key: string
+      } & CardGrid)
+    | ({
+        _key: string
+      } & ProcessSteps)
+    | ({
+        _key: string
+      } & ParallaxFeatures)
+    | ({
+        _key: string
+      } & CallToAction)
+    | ({
+        _key: string
+      } & InfoSection)
+  >
+  seo?: Seo
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
+}
+
 export type SanityImagePaletteSwatch = {
   _type: 'sanity.imagePaletteSwatch'
   background?: string
@@ -595,6 +682,7 @@ export type AllSanitySchemaTypes =
   | HeroSliderSlideCta
   | ParallaxFeatureItemImage
   | ParallaxFeatureItemCta
+  | Seo
   | PageReference
   | Link
   | ParallaxFeatures
@@ -607,12 +695,6 @@ export type AllSanitySchemaTypes =
   | BlockContentTextOnly
   | BlockContent
   | Button
-  | Navigation
-  | SanityImageCrop
-  | SanityImageHotspot
-  | Settings
-  | Page
-  | Slug
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
@@ -626,6 +708,19 @@ export type AllSanitySchemaTypes =
   | SanityAssistInstructionFieldRef
   | SanityAssistInstruction
   | SanityAssistSchemaTypeField
+  | TranslationMetadata
+  | InternationalizedArrayReference
+  | NavigationReference
+  | SettingsReference
+  | FooterReference
+  | InternationalizedArrayReferenceValue
+  | Footer
+  | Settings
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Navigation
+  | Page
+  | Slug
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -644,6 +739,7 @@ export type SettingsQueryResult = {
   _createdAt: string
   _updatedAt: string
   _rev: string
+  language?: 'en' | 'es'
   title: string
   description?: Array<{
     children?: Array<{
@@ -666,6 +762,7 @@ export type SettingsQueryResult = {
     _type: 'block'
     _key: string
   }>
+  homePage?: PageReference
   ogImage?: {
     asset?: SanityImageAssetReference
     media?: unknown

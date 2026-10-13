@@ -1,5 +1,6 @@
 import {MenuIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {createLanguageField} from '../../i18n/config'
 
 const navChildItem = defineArrayMember({
   name: 'navChildItem',
@@ -18,11 +19,19 @@ const navChildItem = defineArrayMember({
       description: 'Example: /about',
       type: 'string',
       validation: (rule) =>
-        rule.custom((value) => {
-          if (!value) return 'Internal path is required'
+        rule.custom((value, context) => {
+          const parent = context.parent as {link?: unknown}
+          if (parent?.link) return true
+          if (!value) return 'A referenced link or legacy internal path is required'
           if (!value.startsWith('/')) return 'Internal path must start with /'
           return true
         }),
+    }),
+    defineField({
+      name: 'link',
+      title: 'Referenced link',
+      description: 'Preferred for new internal links. The legacy path remains supported.',
+      type: 'link',
     }),
   ],
 })
@@ -45,12 +54,30 @@ const navItem = defineArrayMember({
       type: 'string',
       validation: (rule) =>
         rule.custom((value, context) => {
-          const parent = context.parent as {externalUrl?: string; children?: unknown[]}
-          if (parent?.externalUrl || (parent?.children && parent.children.length > 0)) return true
-          if (!value) return 'Internal path is required when no external URL or children are set'
+          const parent = context.parent as {
+            externalUrl?: string
+            link?: unknown
+            children?: unknown[]
+          }
+          if (
+            parent?.externalUrl ||
+            parent?.link ||
+            (parent?.children && parent.children.length > 0)
+          ) {
+            return true
+          }
+          if (!value) {
+            return 'A referenced link, legacy path, external URL, or child item is required'
+          }
           if (!value.startsWith('/')) return 'Internal path must start with /'
           return true
         }),
+    }),
+    defineField({
+      name: 'link',
+      title: 'Referenced link',
+      description: 'Preferred for new links. Legacy path and external URL fields remain supported.',
+      type: 'link',
     }),
     defineField({
       name: 'externalUrl',
@@ -78,6 +105,7 @@ export const navigation = defineType({
   type: 'document',
   icon: MenuIcon,
   fields: [
+    createLanguageField(),
     defineField({
       name: 'logo',
       title: 'Logo',
@@ -112,18 +140,29 @@ export const navigation = defineType({
       type: 'string',
       validation: (rule) =>
         rule.custom((value, context) => {
-          const parent = context.parent as {ctaLabel?: string}
+          const parent = context.parent as {ctaLabel?: string; ctaLink?: unknown}
           if (!parent?.ctaLabel) return true
-          if (!value) return 'CTA path is required when CTA label is set'
+          if (parent?.ctaLink) return true
+          if (!value) return 'A referenced link or legacy CTA path is required when a label is set'
           if (!value.startsWith('/')) return 'CTA path must start with /'
           return true
         }),
     }),
+    defineField({
+      name: 'ctaLink',
+      title: 'CTA referenced link',
+      description: 'Preferred for new links. The legacy CTA path remains supported.',
+      type: 'link',
+    }),
   ],
   preview: {
-    prepare() {
+    select: {
+      language: 'language',
+    },
+    prepare({language}) {
       return {
         title: 'Navigation',
+        subtitle: language ? String(language).toUpperCase() : 'Language not assigned',
       }
     },
   },

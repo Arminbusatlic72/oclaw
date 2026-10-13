@@ -17,7 +17,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/assist": "^5.0.2",
+    "@sanity/assist": "^6.2.4",
+    "@sanity/document-internationalization": "6.2.41",
     "@sanity/icons": "^3.7.4",
     "@sanity/vision": "^5.1.0",
     "date-fns": "^4.1.0",
@@ -27,6 +28,7 @@
     "rxjs": "^7.8.2",
     "sanity": "^5.1.0",
     "sanity-plugin-asset-source-unsplash": "^7.0.0",
+    "sanity-plugin-internationalized-array": "5.3.4",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {

@@ -1,5 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {DocumentIcon} from '@sanity/icons'
+import {createLanguageField} from '../../i18n/config'
+import {isUniquePageSlug, validatePageSlug} from '../../lib/isUniquePageSlug'
 
 /**
  * Page schema.  Define and edit the fields for the 'page' content type.
@@ -12,6 +14,7 @@ export const page = defineType({
   type: 'document',
   icon: DocumentIcon,
   fields: [
+    createLanguageField(),
     defineField({
       name: 'name',
       title: 'Name',
@@ -23,10 +26,11 @@ export const page = defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().custom(validatePageSlug),
       options: {
         source: 'name',
         maxLength: 96,
+        isUnique: isUniquePageSlug,
       },
     }),
     defineField({
@@ -64,6 +68,11 @@ export const page = defineType({
           ],
         },
       },
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
     }),
   ],
 })

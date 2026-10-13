@@ -1,33 +1,75 @@
-import {CogIcon} from '@sanity/icons'
+import {CogIcon, DocumentIcon} from '@sanity/icons'
 import type {StructureBuilder, StructureResolver} from 'sanity/structure'
-import pluralize from 'pluralize-esm'
 
-/**
- * Structure builder is useful whenever you want to control how documents are grouped and
- * listed in the studio or for adding additional in-studio previews or content to documents.
- * Learn more: https://www.sanity.io/docs/structure-builder-introduction
- */
+import {DEFAULT_LANGUAGE, localizedSingletons, supportedLanguages} from '../i18n/config'
 
-const DISABLED_TYPES = ['settings', 'navigation', 'assist.instruction.context']
+function pagesByLanguage(S: StructureBuilder) {
+  return S.listItem()
+    .title('Pages')
+    .icon(DocumentIcon)
+    .child(
+      S.list()
+        .title('Pages')
+        .items(
+          supportedLanguages.map((language) =>
+            S.listItem()
+              .id(`pages-${language.id}`)
+              .title(language.title)
+              .icon(DocumentIcon)
+              .child(
+                S.documentList()
+                  .id(`pages-${language.id}-list`)
+                  .title(`${language.title} Pages`)
+                  .schemaType('page')
+                  .initialValueTemplates([S.initialValueTemplateItem(`page-${language.id}`)])
+                  .filter(
+                    language.id === DEFAULT_LANGUAGE
+                      ? '_type == "page" && coalesce(language, $defaultLanguage) == $language'
+                      : '_type == "page" && language == $language',
+                  )
+                  .params({language: language.id, defaultLanguage: DEFAULT_LANGUAGE}),
+              ),
+          ),
+        ),
+    )
+}
 
-export const structure: StructureResolver = (S: StructureBuilder) =>
+function localizedSingletonGroups(S: StructureBuilder) {
+  return localizedSingletons.map((singleton) =>
+    S.listItem()
+      .id(`${singleton.schemaType}-group`)
+      .title(singleton.title)
+      .icon(CogIcon)
+      .child(
+        S.list()
+          .id(`${singleton.schemaType}-languages`)
+          .title(singleton.title)
+          .items(
+            supportedLanguages.map((language) => {
+              const documentId = singleton.documents[language.id]
+
+              return S.listItem()
+                .id(`${singleton.schemaType}-${language.id}`)
+                .title(language.title)
+                .icon(CogIcon)
+                .child(
+                  S.document()
+                    .id(documentId)
+                    .schemaType(singleton.schemaType)
+                    .documentId(documentId),
+                )
+            }),
+          )
+          .canHandleIntent(
+            (intentName, params) =>
+              intentName === 'edit' &&
+              Object.values(singleton.documents).some((documentId) => documentId === params.id),
+          ),
+      ),
+  )
+}
+
+export const structure: StructureResolver = (S) =>
   S.list()
     .title('Website Content')
-    .items([
-      ...S.documentTypeListItems()
-        // Remove the "assist.instruction.context" and "settings" content  from the list of content types
-        .filter((listItem: any) => !DISABLED_TYPES.includes(listItem.getId()))
-        // Pluralize the title of each document type.  This is not required but just an option to consider.
-        .map((listItem) => {
-          return listItem.title(pluralize(listItem.getTitle() as string))
-        }),
-      // Settings Singleton in order to view/edit the one particular document for Settings.  Learn more about Singletons: https://www.sanity.io/docs/create-a-link-to-a-single-edit-page-in-your-main-document-type-list
-      S.listItem()
-        .title('Navigation')
-        .child(S.document().schemaType('navigation').documentId('siteNavigation'))
-        .icon(CogIcon),
-      S.listItem()
-        .title('Site Settings')
-        .child(S.document().schemaType('settings').documentId('siteSettings'))
-        .icon(CogIcon),
-    ])
+    .items([pagesByLanguage(S), ...localizedSingletonGroups(S)])

@@ -3,6 +3,7 @@ import {defineArrayMember, defineField, defineType} from 'sanity'
 import type {Link, Settings} from '../../../sanity.types'
 
 import * as demo from '../../lib/initialValues'
+import {createLanguageField, DEFAULT_LANGUAGE} from '../../i18n/config'
 
 /**
  * Settings schema Singleton.  Singletons are single documents that are displayed not in a collection, handy for things like site settings and other global configurations.
@@ -15,6 +16,7 @@ export const settings = defineType({
   type: 'document',
   icon: CogIcon,
   fields: [
+    createLanguageField(),
     defineField({
       name: 'title',
       description: 'This field is the global title for your website.',
@@ -100,6 +102,22 @@ export const settings = defineType({
       ],
     }),
     defineField({
+      name: 'homePage',
+      title: 'Homepage',
+      description: 'Select the page rendered at the root URL for this language.',
+      type: 'reference',
+      to: [{type: 'page'}],
+      options: {
+        filter: ({document}) => ({
+          filter: 'coalesce(language, $defaultLanguage) == $language',
+          params: {
+            language: typeof document.language === 'string' ? document.language : DEFAULT_LANGUAGE,
+            defaultLanguage: DEFAULT_LANGUAGE,
+          },
+        }),
+      },
+    }),
+    defineField({
       name: 'ogImage',
       title: 'Open Graph Image',
       type: 'image',
@@ -129,22 +147,19 @@ export const settings = defineType({
         defineField({
           name: 'metadataBase',
           type: 'url',
-          description: (
-            <a
-              href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase"
-              rel="noreferrer noopener"
-            >
-              More information
-            </a>
-          ),
+          description: 'The absolute base URL used to resolve canonical and social metadata URLs.',
         }),
       ],
     }),
   ],
   preview: {
-    prepare() {
+    select: {
+      language: 'language',
+    },
+    prepare({language}) {
       return {
         title: 'Settings',
+        subtitle: language ? String(language).toUpperCase() : 'Language not assigned',
       }
     },
   },
