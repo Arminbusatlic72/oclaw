@@ -51,6 +51,6 @@ export type DereferencedLink = {
   _type: 'link'
   linkType?: 'href' | 'page'
   href?: string
-  page?: string | null
+  page?: string | {_id: string; language?: string | null; slug?: string | null} | null
   openInNewTab?: boolean
 }

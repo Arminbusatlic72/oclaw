@@ -32,17 +32,14 @@ export function linkResolver(link: Link | DereferencedLink | undefined) {
   if (!link) return null
 
   // If linkType is not set but href is, lets set linkType to "href".  This comes into play when pasting links into the portable text editor because a link type is not assumed.
-  if (!link.linkType && link.href) {
-    link.linkType = 'href'
-  }
-
-  switch (link.linkType) {
+  switch (link.linkType || (link.href ? 'href' : undefined)) {
     case 'href':
       return link.href || null
     case 'page':
       if (link?.page && typeof link.page === 'string') {
-        return `/${link.page}`
+        return link.page.startsWith('/') ? link.page : `/${link.page}/`
       }
+      return null
     default:
       return null
   }

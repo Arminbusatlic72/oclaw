@@ -20,10 +20,14 @@ import {
   NavigationMenuList,
 } from '@/components/ui/navigation-menu'
 import {Sheet, SheetContent, SheetTrigger} from '@/components/ui/sheet'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
+import {dictionary, localePath, type Locale} from '@/lib/i18n'
 
 type NavbarProps = {
   data: NavigationData
   siteTitle?: string
+  locale: Locale
+  availableLanguages: Partial<Record<Locale, string>>
 }
 
 function NavLink({item, onNavigate}: {item: NavItem; onNavigate?: () => void}) {
@@ -101,7 +105,12 @@ function MobileNavItem({item, onNavigate}: {item: NavItem; onNavigate: () => voi
   return <NavLink item={item} onNavigate={onNavigate} />
 }
 
-export default function Navbar({data, siteTitle = 'Sanity + Next.js'}: NavbarProps) {
+export default function Navbar({
+  data,
+  siteTitle = 'Sanity + Next.js',
+  locale,
+  availableLanguages,
+}: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const logoUrl = data.logo
     ? urlForImage(data.logo)?.width(180).height(56).fit('max').url()
@@ -110,7 +119,11 @@ export default function Navbar({data, siteTitle = 'Sanity + Next.js'}: NavbarPro
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-md dark:border-slate-800/80 dark:bg-zinc-900/80">
       <div className="container mx-auto flex h-20 items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" className="flex items-center" aria-label="Home">
+        <Link
+          href={localePath(locale)}
+          className="flex items-center"
+          aria-label={dictionary[locale].home}
+        >
           {logoUrl ? (
             <Image
               src={logoUrl}
@@ -177,12 +190,13 @@ export default function Navbar({data, siteTitle = 'Sanity + Next.js'}: NavbarPro
           </NavigationMenu>
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-4 md:flex">
           {data.ctaLabel && data.ctaHref && (
             <Button asChild>
               <Link href={data.ctaHref}>{data.ctaLabel}</Link>
             </Button>
           )}
+          <LanguageSwitcher locale={locale} available={availableLanguages} />
         </div>
 
         <div className="md:hidden">
@@ -194,6 +208,11 @@ export default function Navbar({data, siteTitle = 'Sanity + Next.js'}: NavbarPro
             </SheetTrigger>
             <SheetContent aria-label="Mobile navigation">
               <div className="mt-8 flex h-full flex-col">
+                <LanguageSwitcher
+                  locale={locale}
+                  available={availableLanguages}
+                  onNavigate={() => setMobileOpen(false)}
+                />
                 <nav className="space-y-3" aria-label="Mobile main navigation">
                   {data.navItems.map((item) => (
                     <MobileNavItem

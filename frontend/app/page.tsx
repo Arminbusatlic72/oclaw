@@ -8,6 +8,23 @@ import {settingsQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
 import {studioUrl} from '@/sanity/lib/api'
 import {dataAttr} from '@/sanity/lib/utils'
+import DynamicPage from '@/app/components/DynamicPage'
+import {localizeContent} from '@/lib/localized-content'
+import {pageMetadata} from '@/lib/page-metadata'
+import {homePageQuery} from '@/sanity/lib/queries'
+import type {Metadata} from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const {data: page} = await sanityFetch({
+    query: homePageQuery,
+    params: {id: 'siteSettings'},
+    stega: false,
+  })
+  if (!page || (page.language && page.language !== 'en')) {
+    return {alternates: {canonical: 'https://www.oclaw.us/'}}
+  }
+  return pageMetadata(page, 'en', null, true)
+}
 
 const starterHighlights = [
   'Page builder with reusable blocks for fast page composition.',
@@ -16,9 +33,13 @@ const starterHighlights = [
 ] as const
 
 export default async function Page() {
-  const {data: settings} = await sanityFetch({
-    query: settingsQuery,
-  })
+  const [{data: settings}, {data: homePage}] = await Promise.all([
+    sanityFetch({query: settingsQuery, params: {id: 'siteSettings'}}),
+    sanityFetch({query: homePageQuery, params: {id: 'siteSettings'}}),
+  ])
+  if (homePage && (!homePage.language || homePage.language === 'en')) {
+    return <DynamicPage page={await localizeContent(homePage, 'en')} />
+  }
 
   return (
     <>

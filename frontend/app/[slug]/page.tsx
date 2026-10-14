@@ -1,78 +1,49 @@
 import type {Metadata} from 'next'
+import {notFound, permanentRedirect} from 'next/navigation'
 
-import PageBuilderPage from '@/app/components/PageBuilder'
-import {PageOnboarding} from '@/app/components/Onboarding'
+import DynamicPage from '@/app/components/DynamicPage'
+import {localizeContent} from '@/lib/localized-content'
+import {pageMetadata} from '@/lib/page-metadata'
 import {sanityFetch} from '@/sanity/lib/live'
 import {getPageQuery, pagesSlugs} from '@/sanity/lib/queries'
-import {GetPageQueryResult} from '@/sanity.types'
+import {homePageIdsQuery} from '@/sanity/lib/queries'
 
-type Props = {
-  params: Promise<{slug: string}>
-}
+type Props = {params: Promise<{slug: string}>}
 
-/**
- * Generate the static params for the page.
- * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-static-params
- */
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
   const {data} = await sanityFetch({
     query: pagesSlugs,
-    // // Use the published perspective in generateStaticParams
+    params: {language: 'en'},
     perspective: 'published',
     stega: false,
   })
   return data
 }
 
-/**
- * Generate metadata for the page.
- * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
- */
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {slug} = await params
   const {data: page} = await sanityFetch({
     query: getPageQuery,
-    params,
-    // Metadata should never contain stega
+    params: {slug, language: 'en'},
     stega: false,
   })
-
-  return {
-    title: page?.name,
-    description: page?.heading,
-  } satisfies Metadata
+  if (!page) return {}
+  return pageMetadata(page, 'en', slug)
 }
 
-export default async function Page(props: Props) {
-  const params = await props.params
-  const [{data: page}] = await Promise.all([sanityFetch({query: getPageQuery, params})])
-  if (!page?._id) {
-    return (
-      <div className="py-40">
-        <PageOnboarding />
-      </div>
+export default async function Page({params}: Props) {
+  const {slug} = await params
+  const {data: page} = await sanityFetch({query: getPageQuery, params: {slug, language: 'en'}})
+  if (!page) notFound()
+  const {data: homes} = await sanityFetch({query: homePageIdsQuery, stega: false})
+  if (
+    homes.some(
+      (home) => home._id === 'siteSettings' && home.pageId === page._id.replace(/^drafts\./, ''),
     )
+  ) {
+    permanentRedirect('/')
   }
-
-  return (
-    <div className="my-10 lg:my-16">
-      <section>
-        <div className="container">
-          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
-            <div className="max-w-3xl">
-              <h1 className="text-4xl text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100">
-                {page.heading}
-              </h1>
-              {page.subheading && (
-                <p className="mt-4 text-sm uppercase tracking-[0.12em] text-slate-600 dark:text-slate-300">
-                  {page.subheading}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-      <PageBuilderPage page={page as GetPageQueryResult} />
-    </div>
-  )
+  return <DynamicPage page={await localizeContent(page, 'en')} />
 }

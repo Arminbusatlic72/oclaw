@@ -732,7 +732,7 @@ export type AllSanitySchemaTypes =
 
 // Source: sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]
+// Query: *[_type == "settings" && _id == $id][0]
 export type SettingsQueryResult = {
   _id: string
   _type: 'settings'
@@ -775,15 +775,103 @@ export type SettingsQueryResult = {
 } | null
 
 // Source: sanity/lib/queries.ts
+// Variable: footerQuery
+// Query: *[_type == "footer" && _id == $id][0]{..., links[]{..., link{..., page->{_id, language, "slug": slug.current}}}}
+export type FooterQueryResult = {
+  _id: string
+  _type: 'footer'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  heading?: string
+  description?: string
+  links: Array<{
+    label: string
+    link: {
+      _type: 'link'
+      linkType?: 'href' | 'page'
+      href?: string
+      page: {
+        _id: string
+        language: 'en' | 'es' | null
+        slug: string
+      } | null
+      openInNewTab?: boolean
+    }
+    _type: 'footerLink'
+    _key: string
+  }> | null
+  copyright?: string
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: navigationQuery
+// Query: *[_type == "navigation" && _id == $id][0]{    logo{alt, asset},    navItems[]{title, href, externalUrl, isButton,      link{..., page->{_id,language,"slug":slug.current}},      children[]{title,href,link{...,page->{_id,language,"slug":slug.current}}}    },    ctaLabel, ctaHref, ctaLink{...,page->{_id,language,"slug":slug.current}}  }
+export type NavigationQueryResult = {
+  logo: {
+    alt: string | null
+    asset: SanityImageAssetReference | null
+  } | null
+  navItems: Array<{
+    title: string
+    href: string | null
+    externalUrl: string | null
+    isButton: boolean | null
+    link: {
+      _type: 'link'
+      linkType?: 'href' | 'page'
+      href?: string
+      page: {
+        _id: string
+        language: 'en' | 'es' | null
+        slug: string
+      } | null
+      openInNewTab?: boolean
+    } | null
+    children: Array<{
+      title: string
+      href: string | null
+      link: {
+        _type: 'link'
+        linkType?: 'href' | 'page'
+        href?: string
+        page: {
+          _id: string
+          language: 'en' | 'es' | null
+          slug: string
+        } | null
+        openInNewTab?: boolean
+      } | null
+    }> | null
+  }>
+  ctaLabel: string | null
+  ctaHref: string | null
+  ctaLink: {
+    _type: 'link'
+    linkType?: 'href' | 'page'
+    href?: string
+    page: {
+      _id: string
+      language: 'en' | 'es' | null
+      slug: string
+    } | null
+    openInNewTab?: boolean
+  } | null
+} | null
+
+// Source: sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        ...,        button {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current  }      }        }      },      _type == "heroSlider" => {        slides[]{          _key,          title,          subtitle,          description,          image{            ...,             crop,            hotspot,            alt,            asset->{              _id,              metadata {                dimensions {                  width,                  height,                },              },            },          },          cta {            label,            url,          },        },        autoplay,        autoplayInterval,        showDots,        showArrows,      },      _type == "cardGrid" => {        heading,        subheading,        columns,        alignment,        cards[]{          _key,          title,          description,          tag,          cta {            label,            url,          },          image {            ...,             crop,            hotspot,            alt,            asset->{              _id,              url,            },          },        },      },      _type == "processSteps" => {        ...,        button {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current  }      }        }      },      _type == "parallaxFeatures" => {        heading,        subheading,        columns,        theme,        features[]{          _key,          title,          description,          image{            ...,            crop,            hotspot,            alt,            asset->{              _id,              _ref,              url,            },          },          cta {            label,            url,          },        },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current  }          }        }      },    },  }
+// Query: *[_type == "page" && slug.current == $slug &&    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}  }}
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
+  language: 'en' | 'es' | null
   name: string
   slug: Slug
   heading: string
   subheading: string | null
+  seo: Seo | null
   pageBuilder: Array<
     | {
         _key: string
@@ -798,7 +886,11 @@ export type GetPageQueryResult = {
             _type: 'link'
             linkType?: 'href' | 'page'
             href?: string
-            page: string | null
+            page: {
+              _id: string
+              language: 'en' | 'es' | null
+              slug: string
+            } | null
             openInNewTab?: boolean
           } | null
         } | null
@@ -815,40 +907,51 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'cardGrid'
-        heading: string | null
-        subheading: string | null
+        heading?: string
+        subheading?: string
         cards: Array<{
           _key: string
-          title: string
-          description: string | null
-          tag: string | null
-          cta: {
-            label: string | null
-            url: string | null
-          } | null
+          _type: 'card'
           image: {
             asset: {
               _id: string
               url: string
             } | null
             media?: unknown
-            hotspot: SanityImageHotspot | null
-            crop: SanityImageCrop | null
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
             alt: string
             _type: 'image'
           } | null
+          tag?: string
+          title: string
+          description?: string
+          cta: {
+            label?: string
+            url?: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page'
+              href?: string
+              page: {
+                _id: string
+                language: 'en' | 'es' | null
+                slug: string
+              } | null
+              openInNewTab?: boolean
+            } | null
+          } | null
         }> | null
-        columns: 2 | 3 | 4 | null
-        alignment: 'center' | 'left' | null
+        columns?: 2 | 3 | 4
+        alignment?: 'center' | 'left'
       }
     | {
         _key: string
         _type: 'heroSlider'
         slides: Array<{
-          _key: string
-          title: string | null
-          subtitle: string | null
-          description: string | null
+          title?: string
+          subtitle?: string
+          description?: string
           image: {
             asset: {
               _id: string
@@ -860,20 +963,33 @@ export type GetPageQueryResult = {
               } | null
             } | null
             media?: unknown // Unable to locate the referenced type "heroSliderSlide.image.media" in schema
-            hotspot: SanityImageHotspot | null
-            crop: SanityImageCrop | null
-            alt: string | null
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            alt?: string
             _type: 'image'
           } | null
           cta: {
-            label: string | null
-            url: string | null
+            label?: string
+            url?: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page'
+              href?: string
+              page: {
+                _id: string
+                language: 'en' | 'es' | null
+                slug: string
+              } | null
+              openInNewTab?: boolean
+            } | null
           } | null
+          _type: 'heroSliderSlide'
+          _key: string
         }> | null
-        autoplay: boolean | null
-        autoplayInterval: number | null
-        showDots: boolean | null
-        showArrows: boolean | null
+        autoplay?: boolean
+        autoplayInterval?: number
+        showDots?: boolean
+        showArrows?: boolean
       }
     | {
         _key: string
@@ -893,7 +1009,11 @@ export type GetPageQueryResult = {
               markDefs: Array<{
                 linkType?: 'href' | 'page'
                 href?: string
-                page: string | null
+                page: {
+                  _id: string
+                  language: 'en' | 'es' | null
+                  slug: string
+                } | null
                 openInNewTab?: boolean
                 _type: 'link'
                 _key: string
@@ -917,11 +1037,10 @@ export type GetPageQueryResult = {
         _key: string
         _type: 'parallaxFeatures'
         heading: string
-        subheading: string | null
+        subheading?: string
         features: Array<{
-          _key: string
           title: string
-          description: string | null
+          description?: string
           image: {
             asset: {
               _id: string
@@ -929,18 +1048,31 @@ export type GetPageQueryResult = {
               url: string
             } | null
             media?: unknown // Unable to locate the referenced type "parallaxFeatureItem.image.media" in schema
-            hotspot: SanityImageHotspot | null
-            crop: SanityImageCrop | null
-            alt: string | null
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            alt?: string
             _type: 'image'
           } | null
           cta: {
-            label: string | null
-            url: string | null
+            label?: string
+            url?: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page'
+              href?: string
+              page: {
+                _id: string
+                language: 'en' | 'es' | null
+                slug: string
+              } | null
+              openInNewTab?: boolean
+            } | null
           } | null
+          _type: 'parallaxFeatureItem'
+          _key: string
         }>
-        columns: 1 | 2 | 3 | null
-        theme: 'dark' | 'light' | null
+        columns?: 1 | 2 | 3
+        theme?: 'dark' | 'light'
       }
     | {
         _key: string
@@ -962,7 +1094,11 @@ export type GetPageQueryResult = {
             _type: 'link'
             linkType?: 'href' | 'page'
             href?: string
-            page: string | null
+            page: {
+              _id: string
+              language: 'en' | 'es' | null
+              slug: string
+            } | null
             openInNewTab?: boolean
           } | null
         } | null
@@ -972,17 +1108,312 @@ export type GetPageQueryResult = {
 } | null
 
 // Source: sanity/lib/queries.ts
-// Variable: sitemapData
-// Query: *[_type == "page" && defined(slug.current)] | order(_updatedAt desc) {    "slug": slug.current,    _type,    _updatedAt,  }
-export type SitemapDataResult = Array<{
-  slug: string
+// Variable: homePageQuery
+// Query: *[_type == "settings" && _id == $id][0].homePage->{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}  }}
+export type HomePageQueryResult = {
+  _id: string
   _type: 'page'
+  language: 'en' | 'es' | null
+  name: string
+  slug: Slug
+  heading: string
+  subheading: string | null
+  seo: Seo | null
+  pageBuilder: Array<
+    | {
+        _key: string
+        _type: 'callToAction'
+        eyebrow?: string
+        heading: string
+        body?: BlockContentTextOnly
+        button: {
+          _type: 'button'
+          buttonText?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page'
+            href?: string
+            page: {
+              _id: string
+              language: 'en' | 'es' | null
+              slug: string
+            } | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+        image?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        theme?: 'dark' | 'light'
+        contentAlignment?: 'imageFirst' | 'textFirst'
+      }
+    | {
+        _key: string
+        _type: 'cardGrid'
+        heading?: string
+        subheading?: string
+        cards: Array<{
+          _key: string
+          _type: 'card'
+          image: {
+            asset: {
+              _id: string
+              url: string
+            } | null
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            alt: string
+            _type: 'image'
+          } | null
+          tag?: string
+          title: string
+          description?: string
+          cta: {
+            label?: string
+            url?: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page'
+              href?: string
+              page: {
+                _id: string
+                language: 'en' | 'es' | null
+                slug: string
+              } | null
+              openInNewTab?: boolean
+            } | null
+          } | null
+        }> | null
+        columns?: 2 | 3 | 4
+        alignment?: 'center' | 'left'
+      }
+    | {
+        _key: string
+        _type: 'heroSlider'
+        slides: Array<{
+          title?: string
+          subtitle?: string
+          description?: string
+          image: {
+            asset: {
+              _id: string
+              metadata: {
+                dimensions: {
+                  width: number
+                  height: number
+                } | null
+              } | null
+            } | null
+            media?: unknown // Unable to locate the referenced type "heroSliderSlide.image.media" in schema
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            alt?: string
+            _type: 'image'
+          } | null
+          cta: {
+            label?: string
+            url?: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page'
+              href?: string
+              page: {
+                _id: string
+                language: 'en' | 'es' | null
+                slug: string
+              } | null
+              openInNewTab?: boolean
+            } | null
+          } | null
+          _type: 'heroSliderSlide'
+          _key: string
+        }> | null
+        autoplay?: boolean
+        autoplayInterval?: number
+        showDots?: boolean
+        showArrows?: boolean
+      }
+    | {
+        _key: string
+        _type: 'infoSection'
+        heading?: string
+        subheading?: string
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<{
+                linkType?: 'href' | 'page'
+                href?: string
+                page: {
+                  _id: string
+                  language: 'en' | 'es' | null
+                  slug: string
+                } | null
+                openInNewTab?: boolean
+                _type: 'link'
+                _key: string
+              }> | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+              _key: string
+              markDefs: null
+            }
+        > | null
+      }
+    | {
+        _key: string
+        _type: 'parallaxFeatures'
+        heading: string
+        subheading?: string
+        features: Array<{
+          title: string
+          description?: string
+          image: {
+            asset: {
+              _id: string
+              _ref: null
+              url: string
+            } | null
+            media?: unknown // Unable to locate the referenced type "parallaxFeatureItem.image.media" in schema
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            alt?: string
+            _type: 'image'
+          } | null
+          cta: {
+            label?: string
+            url?: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page'
+              href?: string
+              page: {
+                _id: string
+                language: 'en' | 'es' | null
+                slug: string
+              } | null
+              openInNewTab?: boolean
+            } | null
+          } | null
+          _type: 'parallaxFeatureItem'
+          _key: string
+        }>
+        columns?: 1 | 2 | 3
+        theme?: 'dark' | 'light'
+      }
+    | {
+        _key: string
+        _type: 'processSteps'
+        eyebrow?: string
+        heading: string
+        subheading?: string
+        steps: Array<{
+          eyebrow?: string
+          title: string
+          description?: string
+          _type: 'processStepItem'
+          _key: string
+        }>
+        button: {
+          _type: 'button'
+          buttonText?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page'
+            href?: string
+            page: {
+              _id: string
+              language: 'en' | 'es' | null
+              slug: string
+            } | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+        theme?: 'dark' | 'light'
+      }
+  > | null
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: homePageIdsQuery
+// Query: *[_type == "settings" && _id in ["siteSettings", "siteSettings-es"]]{_id, "pageId": homePage._ref}
+export type HomePageIdsQueryResult = Array<{
+  _id: string
+  pageId: string | null
+}>
+
+// Source: sanity/lib/queries.ts
+// Variable: translationQuery
+// Query: *[_type == "translation.metadata" && references($id)][0]{    translations[]{language, "page": value->{_id, language, "slug": slug.current, "noIndex": seo.noIndex}}  }
+export type TranslationQueryResult = {
+  translations: Array<{
+    language: string
+    page:
+      | {
+          _id: string
+          language: 'en' | 'es' | null
+          slug: null
+          noIndex: null
+        }
+      | {
+          _id: string
+          language: 'en' | 'es' | null
+          slug: string
+          noIndex: boolean | null
+        }
+      | null
+  }> | null
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: sitemapData
+// Query: *[_type == "page" && defined(slug.current) && (coalesce(language, "en") == "en" || language == "es")] {    _id, language, "slug": slug.current, _updatedAt, seo,    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "page": value->{_id, language, "slug": slug.current}}  }
+export type SitemapDataResult = Array<{
+  _id: string
+  language: 'en' | 'es' | null
+  slug: string
   _updatedAt: string
+  seo: Seo | null
+  translations: Array<{
+    language: string
+    page:
+      | {
+          _id: string
+          language: 'en' | 'es' | null
+          slug: null
+        }
+      | {
+          _id: string
+          language: 'en' | 'es' | null
+          slug: string
+        }
+      | null
+  }> | null
 }>
 
 // Source: sanity/lib/queries.ts
 // Variable: pagesSlugs
-// Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current}
+// Query: *[_type == "page" && defined(slug.current) &&    ($language == "en" && coalesce(language, "en") == "en" || language == $language)]{"slug": slug.current}
 export type PagesSlugsResult = Array<{
   slug: string
 }>
@@ -991,9 +1422,14 @@ export type PagesSlugsResult = Array<{
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "settings"][0]': SettingsQueryResult
-    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        ...,\n        button {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "heroSlider" => {\n        slides[]{\n          _key,\n          title,\n          subtitle,\n          description,\n          image{\n            ..., \n            crop,\n            hotspot,\n            alt,\n            asset->{\n              _id,\n              metadata {\n                dimensions {\n                  width,\n                  height,\n                },\n              },\n            },\n          },\n          cta {\n            label,\n            url,\n          },\n        },\n        autoplay,\n        autoplayInterval,\n        showDots,\n        showArrows,\n      },\n      _type == "cardGrid" => {\n        heading,\n        subheading,\n        columns,\n        alignment,\n        cards[]{\n          _key,\n          title,\n          description,\n          tag,\n          cta {\n            label,\n            url,\n          },\n          image {\n            ..., \n            crop,\n            hotspot,\n            alt,\n            asset->{\n              _id,\n              url,\n            },\n          },\n        },\n      },\n      _type == "processSteps" => {\n        ...,\n        button {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "parallaxFeatures" => {\n        heading,\n        subheading,\n        columns,\n        theme,\n        features[]{\n          _key,\n          title,\n          description,\n          image{\n            ...,\n            crop,\n            hotspot,\n            alt,\n            asset->{\n              _id,\n              _ref,\n              url,\n            },\n          },\n          cta {\n            label,\n            url,\n          },\n        },\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n          }\n        }\n      },\n    },\n  }\n': GetPageQueryResult
-    '\n  *[_type == "page" && defined(slug.current)] | order(_updatedAt desc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
-    '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult
+    '*[_type == "settings" && _id == $id][0]': SettingsQueryResult
+    '*[_type == "footer" && _id == $id][0]{..., links[]{..., link{..., page->{_id, language, "slug": slug.current}}}}': FooterQueryResult
+    '\n  *[_type == "navigation" && _id == $id][0]{\n    logo{alt, asset},\n    navItems[]{title, href, externalUrl, isButton,\n      link{..., page->{_id,language,"slug":slug.current}},\n      children[]{title,href,link{...,page->{_id,language,"slug":slug.current}}}\n    },\n    ctaLabel, ctaHref, ctaLink{...,page->{_id,language,"slug":slug.current}}\n  }\n': NavigationQueryResult
+    '\n  *[_type == "page" && slug.current == $slug &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n  }\n}\n': GetPageQueryResult
+    '\n  *[_type == "settings" && _id == $id][0].homePage->{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n  }\n}\n': HomePageQueryResult
+    '\n  *[_type == "settings" && _id in ["siteSettings", "siteSettings-es"]]{_id, "pageId": homePage._ref}\n': HomePageIdsQueryResult
+    '\n  *[_type == "translation.metadata" && references($id)][0]{\n    translations[]{language, "page": value->{_id, language, "slug": slug.current, "noIndex": seo.noIndex}}\n  }\n': TranslationQueryResult
+    '\n  *[_type == "page" && defined(slug.current) && (coalesce(language, "en") == "en" || language == "es")] {\n    _id, language, "slug": slug.current, _updatedAt, seo,\n    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "page": value->{_id, language, "slug": slug.current}}\n  }\n': SitemapDataResult
+    '\n  *[_type == "page" && defined(slug.current) &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)]{"slug": slug.current}\n': PagesSlugsResult
   }
 }

@@ -3,7 +3,7 @@ import './globals.css'
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
 import {Inter, IBM_Plex_Mono} from 'next/font/google'
-import {draftMode} from 'next/headers'
+import {draftMode, headers} from 'next/headers'
 import {toPlainText} from 'next-sanity'
 import {VisualEditing} from 'next-sanity/visual-editing'
 import {Toaster} from 'sonner'
@@ -17,14 +17,21 @@ import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {settingsQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 import {handleError} from '@/app/client-utils'
+import {settingsId, SITE_ORIGIN, type Locale} from '@/lib/i18n'
+
+async function requestLocale(): Promise<Locale> {
+  return (await headers()).get('x-oclaw-locale') === 'es' ? 'es' : 'en'
+}
 
 /**
  * Generate metadata for the page.
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
  */
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await requestLocale()
   const {data: settings} = await sanityFetch({
     query: settingsQuery,
+    params: {id: settingsId(locale)},
     // Metadata should never contain stega
     stega: false,
   })
@@ -32,22 +39,15 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = settings?.description || demo.description
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage)
-  let metadataBase: URL | undefined = undefined
-  try {
-    metadataBase = settings?.ogImage?.metadataBase
-      ? new URL(settings.ogImage.metadataBase)
-      : undefined
-  } catch {
-    // ignore
-  }
   return {
-    metadataBase,
+    metadataBase: new URL(SITE_ORIGIN),
     title: {
       template: `%s | ${title}`,
       default: title,
     },
     description: toPlainText(description),
     openGraph: {
+      locale: locale === 'es' ? 'es_ES' : 'en_US',
       images: ogImage ? [ogImage] : [],
     },
   }
@@ -68,9 +68,10 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const {isEnabled: isDraftMode} = await draftMode()
+  const locale = await requestLocale()
 
   return (
-    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable} bg-white text-black`}>
+    <html lang={locale} className={`${inter.variable} ${ibmPlexMono.variable} bg-white text-black`}>
       <body>
         <SmoothScrollProvider>
           <section className="min-h-screen pt-24">
@@ -85,9 +86,9 @@ export default async function RootLayout({children}: {children: React.ReactNode}
             )}
             {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
             <SanityLive onError={handleError} />
-            <NavbarWrapper />
+            <NavbarWrapper locale={locale} />
             <main className="">{children}</main>
-            <Footer />
+            <Footer locale={locale} />
           </section>
         </SmoothScrollProvider>
         <SpeedInsights />
