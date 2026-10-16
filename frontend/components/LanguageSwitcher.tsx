@@ -1,10 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import {useRouter} from 'next/navigation'
+import {usePathname, useRouter} from 'next/navigation'
 import {Globe2} from 'lucide-react'
+import {useEffect, useRef} from 'react'
 
 import {dictionary, type Locale} from '@/lib/i18n'
+
+function normalizePath(path: string) {
+  const pathname = path.split(/[?#]/, 1)[0] || '/'
+  return pathname === '/' || pathname.endsWith('/') ? pathname : `${pathname}/`
+}
 
 export default function LanguageSwitcher({
   locale,
@@ -15,7 +21,20 @@ export default function LanguageSwitcher({
   available: Partial<Record<Locale, string>>
   onNavigate?: () => void
 }) {
+  const pathname = usePathname()
   const router = useRouter()
+  const previousPathname = useRef(pathname)
+  const currentHref = available[locale]
+  const dataMatchesPath = Boolean(
+    currentHref && normalizePath(currentHref) === normalizePath(pathname),
+  )
+
+  useEffect(() => {
+    if (previousPathname.current === pathname) return
+    previousPathname.current = pathname
+    router.refresh()
+  }, [pathname, router])
+
   return (
     <nav
       aria-label={dictionary[locale].language}
@@ -23,7 +42,14 @@ export default function LanguageSwitcher({
     >
       <Globe2 aria-hidden="true" className="mr-1 h-4 w-4 text-slate-500" />
       {(['en', 'es'] as const).map((language) => {
-        const href = available[language]
+        const href =
+          language === locale
+            ? dataMatchesPath
+              ? available[language]
+              : pathname
+            : dataMatchesPath
+              ? available[language]
+              : undefined
         const label = language.toUpperCase()
         if (!href) {
           return (
@@ -50,12 +76,15 @@ export default function LanguageSwitcher({
             aria-label={language === 'en' ? 'English' : 'Español'}
             className={`rounded px-2 py-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 ${locale === language ? 'active bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-200'}`}
             onClick={(event) => {
+              const isModifiedClick =
+                event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey
+              if (isModifiedClick) return
+
+              event.preventDefault()
+              if (language === locale) return
+
               onNavigate?.()
-              const query = window.location.search
-              if (query && language !== locale) {
-                event.preventDefault()
-                router.push(`${href}${query}`)
-              }
+              window.location.assign(`${href}${window.location.search}`)
             }}
           >
             {label}

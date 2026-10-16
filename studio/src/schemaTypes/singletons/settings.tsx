@@ -3,7 +3,31 @@ import {defineArrayMember, defineField, defineType} from 'sanity'
 import type {Link, Settings} from '../../../sanity.types'
 
 import * as demo from '../../lib/initialValues'
-import {createLanguageField, DEFAULT_LANGUAGE} from '../../i18n/config'
+import {
+  createLanguageField,
+  DEFAULT_LANGUAGE,
+  type SupportedLanguage,
+} from '../../i18n/config'
+
+type SettingsDocumentLocaleSource = {
+  _id?: unknown
+  language?: unknown
+}
+
+/**
+ * Localized settings use fixed IDs. The ID must win over the language field
+ * because a newly opened singleton can be filtered before its hidden initial
+ * language value has been applied.
+ */
+export function resolveSettingsLanguage(
+  document: SettingsDocumentLocaleSource,
+): SupportedLanguage {
+  const documentId = typeof document._id === 'string' ? document._id : ''
+  if (/(^|\.)siteSettings-es$/.test(documentId)) return 'es'
+  if (/(^|\.)siteSettings$/.test(documentId)) return 'en'
+  if (document.language === 'es') return 'es'
+  return DEFAULT_LANGUAGE
+}
 
 /**
  * Settings schema Singleton.  Singletons are single documents that are displayed not in a collection, handy for things like site settings and other global configurations.
@@ -111,7 +135,7 @@ export const settings = defineType({
         filter: ({document}) => ({
           filter: 'coalesce(language, $defaultLanguage) == $language',
           params: {
-            language: typeof document.language === 'string' ? document.language : DEFAULT_LANGUAGE,
+            language: resolveSettingsLanguage(document),
             defaultLanguage: DEFAULT_LANGUAGE,
           },
         }),
