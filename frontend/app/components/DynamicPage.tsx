@@ -1,7 +1,16 @@
 import PageBuilderPage from '@/app/components/PageBuilder'
 import type {GetPageQueryResult} from '@/sanity.types'
 
-export default function DynamicPage({page}: {page: NonNullable<GetPageQueryResult>}) {
+export default function DynamicPage({page, isHomepage = false}: {page: NonNullable<GetPageQueryResult>; isHomepage?: boolean}) {
+  if (isHomepage) {
+    return (
+      <div className="homepage">
+        <h1 className="sr-only">{page.heading}</h1>
+        <PageBuilderPage page={page} />
+      </div>
+    )
+  }
+
   return (
     <div className="my-10 lg:my-16">
       <section>

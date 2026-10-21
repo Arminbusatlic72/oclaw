@@ -38,9 +38,9 @@ export default function LanguageSwitcher({
   return (
     <nav
       aria-label={dictionary[locale].language}
-      className="flex items-center gap-1 text-sm font-medium"
+      className="flex items-center gap-1 text-xs font-bold tracking-wide"
     >
-      <Globe2 aria-hidden="true" className="mr-1 h-4 w-4 text-slate-500" />
+      <Globe2 aria-hidden="true" className="mr-1 hidden h-4 w-4 text-brand sm:block" />
       {(['en', 'es'] as const).map((language) => {
         const href =
           language === locale
@@ -60,7 +60,7 @@ export default function LanguageSwitcher({
               tabIndex={0}
               title={dictionary[locale].unavailable}
               aria-label={`${language === 'en' ? 'English' : 'Español'} — ${dictionary[locale].unavailable}`}
-              className="cursor-not-allowed rounded border border-dashed border-slate-300 px-2 py-1 text-slate-400 line-through dark:border-slate-700"
+              className="cursor-not-allowed border border-white/25 px-2 py-1 text-white/45 line-through"
             >
               {label}
             </span>
@@ -74,7 +74,7 @@ export default function LanguageSwitcher({
             lang={language}
             aria-current={locale === language ? 'page' : undefined}
             aria-label={language === 'en' ? 'English' : 'Español'}
-            className={`rounded px-2 py-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 ${locale === language ? 'active bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-200'}`}
+            className={`px-2 py-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${locale === language ? 'active border-b border-brand text-brand' : 'text-white/75 hover:text-brand'}`}
             onClick={(event) => {
               const isModifiedClick =
                 event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey

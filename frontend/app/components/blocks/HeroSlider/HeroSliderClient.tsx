@@ -4,7 +4,7 @@ import {useCallback, useEffect, useMemo, useState} from 'react'
 import Image from 'next/image'
 
 import {HeroSliderSlide} from '@/sanity/lib/types'
-import {urlForImage} from '@/sanity/lib/utils'
+import {linkResolver, urlForImage} from '@/sanity/lib/utils'
 
 type HeroSliderClientProps = {
   slides: HeroSliderSlide[]
@@ -14,7 +14,7 @@ type HeroSliderClientProps = {
   showArrows: boolean
 }
 
-const sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px'
+const sizes = '(max-width: 1279px) 100vw, 60vw'
 
 export default function HeroSliderClient({
   slides,
@@ -29,7 +29,7 @@ export default function HeroSliderClient({
         ...slide,
         id: slide._key ?? `hero-slide-${index}`,
         imageUrl: slide.image
-          ? urlForImage(slide.image)?.width(1800).height(1000).fit('crop').auto('format').url()
+          ? urlForImage(slide.image)?.width(1800).auto('format').url()
           : undefined,
       }))
       .filter((slide) => slide.title || slide.subtitle || slide.description || slide.imageUrl)
@@ -75,11 +75,15 @@ export default function HeroSliderClient({
         >
           {preparedSlides.map((slide, index) => {
             const isActive = index === currentIndex
-            const isExternalCta = Boolean(slide.cta?.url?.match(/^https?:\/\//))
+            const ctaHref = linkResolver(slide.cta?.link) || slide.cta?.url
+            const isExternalCta = Boolean(ctaHref?.match(/^https?:\/\//))
+            const secondaryCtaHref =
+              linkResolver(slide.secondaryCta?.link) || slide.secondaryCta?.url
+            const isExternalSecondaryCta = Boolean(secondaryCtaHref?.match(/^https?:\/\//))
             return (
-              <article key={slide.id} className="relative w-full shrink-0" aria-hidden={!isActive}>
+              <article key={slide.id} className="site-hero-slide w-full shrink-0" aria-hidden={!isActive}>
                 {slide.imageUrl && (
-                  <div className="relative h-105 w-full sm:h-130">
+                  <div className="site-hero-image">
                     <Image
                       src={slide.imageUrl}
                       alt={slide.image?.alt || slide.title || 'Hero slide image'}
@@ -92,35 +96,58 @@ export default function HeroSliderClient({
                     />
                   </div>
                 )}
-                <div className="absolute inset-0 bg-linear-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
+                <div className="site-hero-shade" />
                 <div
                   aria-live="polite"
                   aria-atomic="true"
-                  className="absolute inset-0 flex flex-col items-start justify-center gap-3 px-6 py-10 text-white sm:px-12"
+                  className="site-hero-content flex flex-col gap-4"
                 >
                   {slide.subtitle && (
-                    <span className="uppercase tracking-[0.35em] text-xs text-white/70">
+                    <span className="site-eyebrow">
                       {slide.subtitle}
                     </span>
                   )}
                   {slide.title && (
-                    <h2 className="text-3xl font-semibold leading-tight sm:text-5xl">
+                    <h2 className="site-hero-title text-white">
                       {slide.title}
                     </h2>
                   )}
                   {slide.description && (
-                    <p className="max-w-3xl text-lg text-white/80">{slide.description}</p>
+                    <p className="text-lg text-white/85">{slide.description}</p>
                   )}
-                  {slide.cta?.label && slide.cta?.url && (
-                    <a
-                      href={slide.cta.url}
-                      target={isExternalCta ? '_blank' : undefined}
-                      rel={isExternalCta ? 'noreferrer' : undefined}
-                      className="mt-2 inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-900 transition hover:bg-white"
-                    >
-                      {slide.cta.label}
-                      <span aria-hidden="true">→</span>
-                    </a>
+                  {(slide.cta?.label || slide.secondaryCta?.label) && (
+                    <div className="site-hero-actions">
+                      {slide.cta?.label &&
+                        (ctaHref ? (
+                          <a
+                            href={ctaHref}
+                            target={isExternalCta ? '_blank' : undefined}
+                            rel={isExternalCta ? 'noopener noreferrer' : undefined}
+                            className="site-button-outline site-hero-cta"
+                          >
+                            {slide.cta.label}
+                          </a>
+                        ) : (
+                          <span className="site-button-outline site-hero-cta" aria-disabled="true">
+                            {slide.cta.label}
+                          </span>
+                        ))}
+                      {slide.secondaryCta?.label &&
+                        (secondaryCtaHref ? (
+                          <a
+                            href={secondaryCtaHref}
+                            target={isExternalSecondaryCta ? '_blank' : undefined}
+                            rel={isExternalSecondaryCta ? 'noopener noreferrer' : undefined}
+                            className="site-button-secondary site-hero-cta"
+                          >
+                            {slide.secondaryCta.label}
+                          </a>
+                        ) : (
+                          <span className="site-button-secondary site-hero-cta" aria-disabled="true">
+                            {slide.secondaryCta.label}
+                          </span>
+                        ))}
+                    </div>
                   )}
                 </div>
               </article>
@@ -135,7 +162,7 @@ export default function HeroSliderClient({
             type="button"
             onClick={handlePrev}
             aria-label="Show previous slide"
-            className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-slate-900/60 p-2 text-white transition hover:bg-slate-900"
+            className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-brand/70 bg-ink/70 p-2 text-white transition hover:bg-brand hover:text-ink"
           >
             <svg
               className="h-5 w-5"
@@ -151,7 +178,7 @@ export default function HeroSliderClient({
             type="button"
             onClick={handleNext}
             aria-label="Show next slide"
-            className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-slate-900/60 p-2 text-white transition hover:bg-slate-900"
+            className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-brand/70 bg-ink/70 p-2 text-white transition hover:bg-brand hover:text-ink"
           >
             <svg
               className="h-5 w-5"
@@ -167,15 +194,15 @@ export default function HeroSliderClient({
       )}
 
       {showDots && slideCount > 1 && (
-        <div className="mt-6 flex justify-center gap-2">
+        <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center gap-2">
           {preparedSlides.map((_, dotIndex) => (
             <button
               key={`dot-${dotIndex}`}
               type="button"
               aria-label={`Show slide ${dotIndex + 1}`}
               onClick={() => setCurrentIndex(dotIndex)}
-              className={`h-2 w-8 rounded-full transition-all ${
-                dotIndex === currentIndex ? 'bg-white' : 'bg-white/40'
+              className={`h-1.5 w-8 transition-all ${
+                dotIndex === currentIndex ? 'bg-brand' : 'bg-white/40'
               }`}
             />
           ))}

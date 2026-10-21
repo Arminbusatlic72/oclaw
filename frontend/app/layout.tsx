@@ -2,7 +2,7 @@ import './globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
-import {Inter, IBM_Plex_Mono} from 'next/font/google'
+import {DM_Serif_Text, Mulish} from 'next/font/google'
 import {draftMode, headers} from 'next/headers'
 import {toPlainText} from 'next-sanity'
 import {VisualEditing} from 'next-sanity/visual-editing'
@@ -53,15 +53,15 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const inter = Inter({
-  variable: '--font-inter',
+const mulish = Mulish({
+  variable: '--font-mulish',
   subsets: ['latin'],
   display: 'swap',
 })
 
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: '--font-ibm-plex-mono',
-  weight: ['400'],
+const dmSerifText = DM_Serif_Text({
+  variable: '--font-dm-serif-text',
+  weight: '400',
   subsets: ['latin'],
   display: 'swap',
 })
@@ -71,10 +71,10 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   const locale = await requestLocale()
 
   return (
-    <html lang={locale} className={`${inter.variable} ${ibmPlexMono.variable} bg-white text-black`}>
+    <html lang={locale} className={`${mulish.variable} ${dmSerifText.variable}`}>
       <body>
         <SmoothScrollProvider>
-          <section className="min-h-screen pt-24">
+          <section className="min-h-screen pt-[var(--site-header-height)]">
             {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
             <Toaster />
             {isDraftMode && (

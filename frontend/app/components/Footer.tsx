@@ -23,10 +23,10 @@ export default async function Footer({locale}: {locale: Locale}) {
   if (!blocks.length && !hasLegacyContent && !footer.links?.length && !hasBottomRow) return null
 
   return (
-    <footer className="mt-20 border-t border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950">
-      <div className="container py-12">
+    <footer className="site-footer">
+      <div className="site-footer-inner container">
         {blocks.length > 0 ? (
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
             {blocks.map((block) => (
               <FooterBlock key={block._key} block={block} locale={locale} />
             ))}
@@ -56,7 +56,7 @@ export default async function Footer({locale}: {locale: Locale}) {
         )}
 
         {hasBottomRow && (
-          <div className="mt-10 flex flex-col gap-4 border-t border-slate-200 pt-6 text-sm text-slate-500 md:flex-row md:items-center md:justify-between dark:border-slate-800 dark:text-slate-400">
+          <div className="site-footer-bottom mt-14 flex flex-col gap-4 border-t pt-6 text-sm md:flex-row md:items-center md:justify-between">
             {copyright && <p>{copyright}</p>}
             {bottomLinks?.length ? (
               <nav aria-label={footer.bottomLinksLabel || undefined}>

@@ -29,7 +29,7 @@ export default async function Page() {
     sanityFetch({query: homePageQuery, params: {id: 'siteSettings-es'}}),
   ])
   if (page?.language === 'es') {
-    return <DynamicPage page={await localizeContent(page, 'es')} />
+    return <DynamicPage page={await localizeContent(page, 'es')} isHomepage />
   }
 
   return (

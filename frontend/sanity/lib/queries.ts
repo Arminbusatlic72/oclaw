@@ -16,7 +16,7 @@ export const footerQuery = defineQuery(`
 
 export const navigationQuery = defineQuery(`
   *[_type == "navigation" && _id == $id][0]{
-    logo{alt, asset},
+    logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},
     navItems[]{title, href, externalUrl, isButton,
       link{..., page->{_id,language,"slug":slug.current}},
       children[]{title,href,link{...,page->{_id,language,"slug":slug.current}}}
@@ -32,7 +32,7 @@ const pageFields = /* groq */ `
   "pageBuilder": pageBuilder[]{
     ...,
     _type == "callToAction" => {..., button{..., ${linkFields}}},
-    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., ${linkFields}}}},
+    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., ${linkFields}}, secondaryCta{..., ${linkFields}}}},
     _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., ${linkFields}}}},
     _type == "processSteps" => {..., button{..., ${linkFields}}},
     _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., ${linkFields}}}},

@@ -19,7 +19,10 @@ export interface NavItem {
 export interface NavigationData {
   logo?: {
     alt?: string
-    asset?: {_ref?: string; url?: string}
+    asset?: {
+      _id?: string
+      metadata?: {dimensions?: {aspectRatio?: number}}
+    }
   }
   navItems: NavItem[]
   ctaLabel?: string
@@ -52,9 +55,16 @@ export async function getNavigation(locale: Locale): Promise<NavigationData> {
     navItems?: RawItem[] | null
     ctaLink?: LinkInput | null
   }
+  const sharedLogo =
+    locale === 'es' && !localized.logo
+      ? (
+          await sanityFetch({query: navigationQuery, params: {id: navigationId('en')}})
+        ).data?.logo
+      : null
+  const logo = localized.logo ?? sharedLogo
   return {
-    logo: localized.logo
-      ? {alt: localized.logo.alt ?? undefined, asset: localized.logo.asset ?? undefined}
+    logo: logo
+      ? {alt: logo.alt ?? undefined, asset: logo.asset ?? undefined}
       : undefined,
     navItems: (localized.navItems ?? []).flatMap((item: RawItem) => {
       if (!item?.title) return []

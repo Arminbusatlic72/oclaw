@@ -38,7 +38,31 @@ const slideObject = defineArrayMember({
     }),
     defineField({
       name: 'cta',
-      title: 'Call to action',
+      title: 'Primary call to action',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'label',
+          title: 'Label',
+          type: 'string',
+        }),
+        defineField({
+          name: 'url',
+          title: 'URL',
+          type: 'url',
+        }),
+        defineField({
+          name: 'link',
+          title: 'Referenced link',
+          description: 'Preferred for new links. The legacy URL remains supported.',
+          type: 'link',
+        }),
+      ],
+    }),
+    defineField({
+      name: 'secondaryCta',
+      title: 'Secondary call to action',
+      description: 'Optional second button displayed beside the primary call to action.',
       type: 'object',
       fields: [
         defineField({

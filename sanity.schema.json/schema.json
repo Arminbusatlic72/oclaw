@@ -171,6 +171,37 @@
   },
   {
     "type": "type",
+    "name": "secondaryCta",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "label": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "url": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "link": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "link"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
     "name": "parallaxFeatureItem.image",
     "value": {
       "type": "object",
@@ -915,6 +946,14 @@
                   "value": {
                     "type": "inline",
                     "name": "heroSliderSlide.cta"
+                  },
+                  "optional": true
+                },
+                "secondaryCta": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "inline",
+                    "name": "secondaryCta"
                   },
                   "optional": true
                 },

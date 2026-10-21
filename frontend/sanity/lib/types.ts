@@ -24,6 +24,12 @@ export type HeroSliderSlide = {
   cta?: {
     label?: string
     url?: string
+    link?: DereferencedLink
+  }
+  secondaryCta?: {
+    label?: string
+    url?: string
+    link?: DereferencedLink
   }
 }
 

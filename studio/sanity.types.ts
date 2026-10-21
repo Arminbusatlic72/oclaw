@@ -48,6 +48,12 @@ export type HeroSliderSlideCta = {
   link?: Link
 }
 
+export type SecondaryCta = {
+  label?: string
+  url?: string
+  link?: Link
+}
+
 export type ParallaxFeatureItemImage = {
   asset?: SanityImageAssetReference
   media?: unknown // Unable to locate the referenced type "parallaxFeatureItem.image.media" in schema
@@ -162,6 +168,7 @@ export type HeroSlider = {
     description?: string
     image?: HeroSliderSlideImage
     cta?: HeroSliderSlideCta
+    secondaryCta?: SecondaryCta
     _type: 'heroSliderSlide'
     _key: string
   }>
@@ -878,6 +885,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | HeroSliderSlideImage
   | HeroSliderSlideCta
+  | SecondaryCta
   | ParallaxFeatureItemImage
   | ParallaxFeatureItemCta
   | Seo
