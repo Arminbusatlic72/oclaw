@@ -9,9 +9,13 @@ export const supportedLanguages = [
 
 export type SupportedLanguage = (typeof supportedLanguages)[number]['id']
 
-export const translatedSchemaTypes = ['page', 'navigation', 'settings', 'footer']
+export const translatedSchemaTypes = ['page', 'blogPost', 'navigation', 'settings', 'footer']
 
 export const localizedSingletons = [
+  {
+    schemaType: 'blogArchive', title: 'Blog archive',
+    documents: {en: 'blogArchive-en', es: 'blogArchive-es'},
+  },
   {
     schemaType: 'navigation',
     title: 'Navigation',

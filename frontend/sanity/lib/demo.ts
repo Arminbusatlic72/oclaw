@@ -2,7 +2,7 @@
  * Demo data used as placeholders and fallbacks for the starter.
  */
 
-export const title = 'Stribbo Starter'
+export const title = 'OC Law CMS Starter'
 
 export const description = [
   {

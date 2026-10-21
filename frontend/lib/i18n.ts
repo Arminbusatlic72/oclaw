@@ -8,16 +8,12 @@ export const dictionary = {
     menu: 'Toggle navigation menu',
     language: 'Language',
     unavailable: 'Translation unavailable',
-    footerHeading: 'Built with Sanity + Next.js',
-    footerDescription: 'Use this project as a reusable, CMS-first starter for modern websites.',
   },
   es: {
     home: 'Inicio',
     menu: 'Abrir menú de navegación',
     language: 'Idioma',
     unavailable: 'Traducción no disponible',
-    footerHeading: 'Creado con Sanity + Next.js',
-    footerDescription: 'Un sitio web creado con contenido administrado en Sanity.',
   },
 } as const
 

@@ -3,6 +3,8 @@ import type {MetadataRoute} from 'next'
 import {absoluteUrl, localePath, type Locale} from '@/lib/i18n'
 import {sanityFetch} from '@/sanity/lib/live'
 import {homePageQuery, sitemapData} from '@/sanity/lib/queries'
+import {blogSitemapQuery, blogArchiveQuery} from '@/sanity/lib/queries'
+import {archiveId, archivePath, postPath} from '@/lib/blog'
 
 export const dynamic = 'force-dynamic'
 
@@ -90,7 +92,7 @@ export function buildSitemap(
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [{data: pages}, {data: englishHome}, {data: spanishHome}] = await Promise.all([
+  const [{data: pages}, {data: englishHome}, {data: spanishHome}, {data: posts}, {data: englishArchive}, {data: spanishArchive}] = await Promise.all([
     sanityFetch({query: sitemapData, perspective: 'published', stega: false}),
     sanityFetch({
       query: homePageQuery,
@@ -104,6 +106,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       perspective: 'published',
       stega: false,
     }),
+    sanityFetch({query: blogSitemapQuery, perspective: 'published', stega: false}),
+    sanityFetch({query: blogArchiveQuery, params: {id: archiveId('en')}, perspective: 'published', stega: false}),
+    sanityFetch({query: blogArchiveQuery, params: {id: archiveId('es')}, perspective: 'published', stega: false}),
   ])
   const linkedHomes = Boolean(
     englishHome?._id &&
@@ -119,11 +124,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ),
     ),
   )
-  return buildSitemap(
+  const result = buildSitemap(
     pages,
     spanishHome?.language === 'es' && !spanishHome.seo?.noIndex,
     linkedHomes,
     [englishHome?._id, spanishHome?._id].filter((id): id is string => Boolean(id)),
     !englishHome?.seo?.noIndex,
   )
+  if (!englishArchive?.seo?.noIndex) result.push({url: absoluteUrl(archivePath('en')), alternates: {languages: {en: absoluteUrl(archivePath('en')), es: absoluteUrl(archivePath('es')), 'x-default': absoluteUrl(archivePath('en'))}}})
+  if (!spanishArchive?.seo?.noIndex) result.push({url: absoluteUrl(archivePath('es')), alternates: {languages: {en: absoluteUrl(archivePath('en')), es: absoluteUrl(archivePath('es')), 'x-default': absoluteUrl(archivePath('en'))}}})
+  const published = new Map(posts.map((post) => [post._id, post]))
+  for (const post of posts) {
+    if (post.seo?.noIndex) continue
+    const locale: Locale = post.language === 'es' ? 'es' : 'en'
+    const paths: Partial<Record<Locale, string>> = {[locale]: postPath(locale, post.slug)}
+    for (const entry of post.translations || []) {
+      const translated = entry.post
+      if ((entry.language === 'en' || entry.language === 'es') && translated?._id && translated.language === entry.language && translated.slug && translated.publishedAt && new Date(translated.publishedAt) <= new Date() && published.has(translated._id) && !published.get(translated._id)?.seo?.noIndex) paths[entry.language] = postPath(entry.language, translated.slug)
+    }
+    const languages: Record<string, string> = {}
+    if (paths.en) {languages.en = absoluteUrl(paths.en); languages['x-default'] = absoluteUrl(paths.en)}
+    if (paths.es) languages.es = absoluteUrl(paths.es)
+    result.push({url: absoluteUrl(postPath(locale, post.slug)), lastModified: post.updatedAt || post._updatedAt, alternates: Object.keys(languages).length > 1 ? {languages} : undefined})
+  }
+  const urls = new Set<string>()
+  for (const entry of result) {if (urls.has(entry.url)) throw new Error(`Sitemap URL collision: ${entry.url}`); urls.add(entry.url)}
+  return result
 }

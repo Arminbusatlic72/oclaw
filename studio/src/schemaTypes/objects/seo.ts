@@ -14,7 +14,7 @@ export const seo = defineType({
       title: 'SEO title',
       type: 'string',
       description: 'Optional search and social title. Falls back to the page name.',
-      validation: (rule) => rule.max(70),
+      validation: (rule) => rule.max(160),
     }),
     defineField({
       name: 'description',

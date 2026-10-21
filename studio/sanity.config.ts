@@ -37,6 +37,7 @@ const homeLocation = {
 function resolveHref(documentType?: string, slug?: string, language = 'en'): string | undefined {
   switch (documentType) {
     case 'page':
+    case 'blogPost':
       if (!slug) return language === 'es' ? '/es/' : '/'
       return language === 'es' ? `/es/${slug}/` : `/${slug}/`
     default:
@@ -48,7 +49,7 @@ function resolveHref(documentType?: string, slug?: string, language = 'en'): str
 // Main Sanity configuration
 export default defineConfig({
   name: 'default',
-  title: 'Stribbo CMS Starter',
+  title: 'OC Law CMS Starter',
 
   projectId,
   dataset,
@@ -81,7 +82,7 @@ export default defineConfig({
           },
           {
             route: '/es/:slug',
-            filter: `_type == "page" && language == "es" && slug.current == $slug`,
+            filter: `_type in ["page", "blogPost"] && language == "es" && slug.current == $slug`,
           },
           {
             route: '/',
@@ -89,11 +90,15 @@ export default defineConfig({
           },
           {
             route: '/:slug',
-            filter: `_type == "page" && coalesce(language, "en") == "en" && slug.current == $slug`,
+            filter: `_type in ["page", "blogPost"] && coalesce(language, "en") == "en" && slug.current == $slug`,
           },
         ]),
         // Locations Resolver API allows you to define where data is being used in your application. https://www.sanity.io/docs/visual-editing/presentation-resolver-api#8d8bca7bfcd7
         locations: {
+          blogPost: defineLocations({
+            select: {title: 'title', slug: 'slug.current', language: 'language'},
+            resolve: (doc) => ({locations: doc?.slug ? [{title: doc.title || 'Article', href: resolveHref('blogPost', doc.slug, doc.language)!}] : []}),
+          }),
           settings: defineLocations({
             select: {id: '_id'},
             resolve: (doc) => ({
@@ -156,13 +161,24 @@ export default defineConfig({
     types: schemaTypes,
     templates: (templates) => {
       const singletonTypes = new Set(localizedSingletons.map(({schemaType}) => schemaType))
-
-      return templates.filter(
-        (template) =>
-          !singletonTypes.has(
-            template.schemaType as (typeof localizedSingletons)[number]['schemaType'],
-          ) && !(template.schemaType === 'page' && template.id === 'page'),
+      const localizedSingletonTemplates = localizedSingletons.flatMap((singleton) =>
+        supportedLanguages.map((language) => ({
+          id: `${singleton.schemaType}-${language.id}`,
+          title: `${singleton.title} (${language.title})`,
+          schemaType: singleton.schemaType,
+          value: {language: language.id},
+        })),
       )
+
+      return [
+        ...templates.filter(
+          (template) =>
+            !singletonTypes.has(
+              template.schemaType as (typeof localizedSingletons)[number]['schemaType'],
+            ) && !(template.schemaType === 'page' && template.id === 'page'),
+        ),
+        ...localizedSingletonTemplates,
+      ]
     },
   },
 })

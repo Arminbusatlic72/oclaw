@@ -56,7 +56,8 @@ function localizedSingletonGroups(S: StructureBuilder) {
                   S.document()
                     .id(documentId)
                     .schemaType(singleton.schemaType)
-                    .documentId(documentId),
+                    .documentId(documentId)
+                    .initialValueTemplate(`${singleton.schemaType}-${language.id}`),
                 )
             }),
           )
@@ -72,4 +73,4 @@ function localizedSingletonGroups(S: StructureBuilder) {
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Website Content')
-    .items([pagesByLanguage(S), ...localizedSingletonGroups(S)])
+    .items([pagesByLanguage(S), S.listItem().title('Blog posts').icon(DocumentIcon).child(S.documentTypeList('blogPost').title('Blog posts')), ...localizedSingletonGroups(S)])

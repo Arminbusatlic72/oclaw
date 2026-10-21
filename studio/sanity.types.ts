@@ -21,6 +21,11 @@ export type Cta = {
   link?: Link
 }
 
+export type FooterContactEmail = {
+  label?: string
+  address: string
+}
+
 export type SanityImageAssetReference = {
   _ref: string
   _type: 'reference'
@@ -209,6 +214,46 @@ export type BlockContentTextOnly = Array<{
   _key: string
 }>
 
+export type BlogPostReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'blogPost'
+}
+
+export type BlogBody = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>
+        text?: string
+        _type: 'span'
+        _key: string
+      }>
+      style?: 'normal' | 'h2' | 'h3' | 'h4' | 'blockquote'
+      listItem?: 'bullet' | 'number'
+      markDefs?: Array<{
+        href?: string
+        page?: PageReference | BlogPostReference
+        openInNewTab?: boolean
+        _type: 'link'
+        _key: string
+      }>
+      level?: number
+      _type: 'block'
+      _key: string
+    }
+  | {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt: string
+      caption?: string
+      _type: 'image'
+      _key: string
+    }
+>
+
 export type BlockContent = Array<
   | {
       children?: Array<{
@@ -245,6 +290,98 @@ export type Button = {
   _type: 'button'
   buttonText?: string
   link?: Link
+}
+
+export type FooterWorkingHours = {
+  _type: 'footerWorkingHours'
+  heading?: string
+  entries: Array<{
+    days: string
+    isClosed?: boolean
+    hours?: string
+    closedLabel?: string
+    note?: string
+    _type: 'footerHoursEntry'
+    _key: string
+  }>
+}
+
+export type FooterSocial = {
+  _type: 'footerSocial'
+  heading?: string
+  links: Array<{
+    platform: 'facebook' | 'instagram' | 'youtube' | 'linkedin' | 'x' | 'tiktok' | 'other'
+    iconIdentifier?: 'globe' | 'link' | 'message'
+    label: string
+    url: string
+    _type: 'footerSocialLink'
+    _key: string
+  }>
+}
+
+export type FooterLinkGroup = {
+  _type: 'footerLinkGroup'
+  heading: string
+  links: Array<
+    {
+      _key: string
+    } & FooterLink
+  >
+}
+
+export type FooterLink = {
+  _type: 'footerLink'
+  label: string
+  link: Link
+}
+
+export type FooterContact = {
+  _type: 'footerContact'
+  heading?: string
+  email?: FooterContactEmail
+  phones?: Array<{
+    label?: string
+    number: string
+    _type: 'footerPhone'
+    _key: string
+  }>
+  addresses?: Array<{
+    label?: string
+    address: string
+    _type: 'footerAddress'
+    _key: string
+  }>
+}
+
+export type FooterBrand = {
+  _type: 'footerBrand'
+  logo?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  linkToHomepage?: boolean
+  supportingText?: string
+}
+
+export type BlogArchive = {
+  _id: string
+  _type: 'blogArchive'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  heading?: string
+  description?: string
+  introduction?: BlockContentTextOnly
+  ctaLabel?: string
+  ctaHref?: string
+  postsPerPage?: number
+  emptyMessage?: string
+  seo?: Seo
 }
 
 export type SanityAssistInstructionTask = {
@@ -423,7 +560,12 @@ export type FooterReference = {
 
 export type InternationalizedArrayReferenceValue = {
   _type: 'internationalizedArrayReferenceValue'
-  value?: PageReference | NavigationReference | SettingsReference | FooterReference
+  value?:
+    | PageReference
+    | BlogPostReference
+    | NavigationReference
+    | SettingsReference
+    | FooterReference
   language: string
 }
 
@@ -434,15 +576,54 @@ export type Footer = {
   _updatedAt: string
   _rev: string
   language?: 'en' | 'es'
+  blocks?: Array<
+    | ({
+        _key: string
+      } & FooterBrand)
+    | ({
+        _key: string
+      } & FooterContact)
+    | ({
+        _key: string
+      } & FooterWorkingHours)
+    | ({
+        _key: string
+      } & FooterSocial)
+    | ({
+        _key: string
+      } & FooterLinkGroup)
+  >
   heading?: string
   description?: string
-  links?: Array<{
-    label: string
-    link: Link
-    _type: 'footerLink'
-    _key: string
-  }>
+  links?: Array<
+    {
+      _key: string
+    } & FooterLink
+  >
   copyright?: string
+  includeCurrentYear?: boolean
+  bottomLinksLabel?: string
+  bottomLinks?: Array<
+    {
+      _key: string
+    } & FooterLink
+  >
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
 }
 
 export type Settings = {
@@ -486,22 +667,6 @@ export type Settings = {
   }
 }
 
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
-}
-
 export type Navigation = {
   _id: string
   _type: 'navigation'
@@ -538,6 +703,44 @@ export type Navigation = {
   ctaLink?: Link
 }
 
+export type BlogPost = {
+  _id: string
+  _type: 'blogPost'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  title: string
+  slug: Slug
+  excerpt?: string
+  featuredImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+  }
+  author?: string
+  publishedAt: string
+  updatedAt?: string
+  body: BlogBody
+  categories?: Array<string>
+  tags?: Array<string>
+  relatedPosts?: Array<
+    {
+      _key: string
+    } & BlogPostReference
+  >
+  seo?: Seo
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
+}
+
 export type Page = {
   _id: string
   _type: 'page'
@@ -570,12 +773,6 @@ export type Page = {
       } & InfoSection)
   >
   seo?: Seo
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
 }
 
 export type SanityImagePaletteSwatch = {
@@ -677,6 +874,7 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | Cta
+  | FooterContactEmail
   | SanityImageAssetReference
   | HeroSliderSlideImage
   | HeroSliderSlideCta
@@ -693,8 +891,17 @@ export type AllSanitySchemaTypes =
   | CallToAction
   | InfoSection
   | BlockContentTextOnly
+  | BlogPostReference
+  | BlogBody
   | BlockContent
   | Button
+  | FooterWorkingHours
+  | FooterSocial
+  | FooterLinkGroup
+  | FooterLink
+  | FooterContact
+  | FooterBrand
+  | BlogArchive
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
@@ -715,12 +922,13 @@ export type AllSanitySchemaTypes =
   | FooterReference
   | InternationalizedArrayReferenceValue
   | Footer
-  | Settings
   | SanityImageCrop
   | SanityImageHotspot
+  | Settings
   | Navigation
-  | Page
+  | BlogPost
   | Slug
+  | Page
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions

@@ -1,4 +1,7 @@
 import {page} from './documents/page'
+import {blogPost} from './documents/blogPost'
+import {blogArchive} from './singletons/blogArchive'
+import {blogBody} from './objects/blogBody'
 import {navigation} from './documents/navigation'
 import {footer} from './documents/footer'
 import {callToAction} from './objects/callToAction'
@@ -14,19 +17,34 @@ import {blockContent} from './objects/blockContent'
 import button from './objects/button'
 import {blockContentTextOnly} from './objects/blockContentTextOnly'
 import {seo} from './objects/seo'
+import {footerBrand} from './footer/footerBrand'
+import {footerContact} from './footer/footerContact'
+import {footerLink} from './footer/footerLink'
+import {footerLinkGroup} from './footer/footerLinkGroup'
+import {footerSocial} from './footer/footerSocial'
+import {footerWorkingHours} from './footer/footerWorkingHours'
 
 // Export an array of all the schema types.  This is used in the Sanity Studio configuration. https://www.sanity.io/docs/studio/schema-types
 
 export const schemaTypes = [
   // Singletons
   settings,
+  blogArchive,
   // Documents
   page,
+  blogPost,
   navigation,
   footer,
   // Objects
+  footerBrand,
+  footerContact,
+  footerLink,
+  footerLinkGroup,
+  footerSocial,
+  footerWorkingHours,
   button,
   blockContent,
+  blogBody,
   blockContentTextOnly,
   infoSection,
   callToAction,

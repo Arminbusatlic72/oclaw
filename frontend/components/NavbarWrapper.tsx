@@ -6,6 +6,7 @@ import {settingsId, type Locale} from '@/lib/i18n'
 import {translationPaths} from '@/lib/localized-content'
 import {headers} from 'next/headers'
 import {getPageQuery, homePageQuery} from '@/sanity/lib/queries'
+import {archivePath, getPublishedPost, postTranslationPaths, resolveContentRoute} from '@/lib/blog'
 
 /** Server component wrapper that fetches Sanity navigation data. */
 export default async function NavbarWrapper({locale}: {locale: Locale}) {
@@ -15,12 +16,23 @@ export default async function NavbarWrapper({locale}: {locale: Locale}) {
     getNavigation(locale),
     sanityFetch({query: settingsQuery, params: {id: settingsId(locale)}}),
   ])
-  const {data: page} = slug
-    ? await sanityFetch({query: getPageQuery, params: {slug, language: locale}, stega: false})
-    : await sanityFetch({query: homePageQuery, params: {id: settingsId(locale)}, stega: false})
-  const available = page?._id
-    ? await translationPaths(page._id, locale, slug || null, !slug)
-    : {[locale]: locale === 'es' ? '/es/' : '/'}
+  let available: Partial<Record<Locale, string>>
+  if (path === '/blog/' || path === '/es/blog-espanol/') {
+    available = {en: archivePath('en'), es: archivePath('es')}
+  } else {
+    const route = slug ? await resolveContentRoute(slug, locale) : null
+    if (route?._type === 'blogPost') {
+      const post = await getPublishedPost(slug, locale)
+      available = post ? await postTranslationPaths(post._id, locale, slug) : {[locale]: path}
+    } else {
+      const {data: page} = slug
+        ? await sanityFetch({query: getPageQuery, params: {slug, language: locale}, stega: false})
+        : await sanityFetch({query: homePageQuery, params: {id: settingsId(locale)}, stega: false})
+      available = page?._id
+        ? await translationPaths(page._id, locale, slug || null, !slug)
+        : {[locale]: locale === 'es' ? '/es/' : '/'}
+    }
+  }
 
   return (
     <Navbar

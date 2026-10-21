@@ -1,50 +1,70 @@
-import Link from 'next/link'
-
-import {dictionary, footerId, type Locale} from '@/lib/i18n'
+import FooterBlock from '@/app/components/footer/FooterBlock'
+import FooterLinks from '@/app/components/footer/FooterLinks'
+import type {FooterData, FooterLinkItem} from '@/app/components/footer/types'
+import {footerId, type Locale} from '@/lib/i18n'
 import {localizeContent} from '@/lib/localized-content'
 import {footerQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
-import {linkResolver} from '@/sanity/lib/utils'
 
 export default async function Footer({locale}: {locale: Locale}) {
   const {data} = await sanityFetch({query: footerQuery, params: {id: footerId(locale)}})
-  const footer = data ? await localizeContent(data, locale) : null
-  const labels = dictionary[locale]
+  const footer = data ? ((await localizeContent(data, locale)) as FooterData) : null
+  if (!footer) return null
+
+  const blocks = footer.blocks ?? []
+  const hasLegacyContent = !blocks.length && Boolean(footer.heading || footer.description)
+  const bottomLinks = (blocks.length ? footer.bottomLinks || footer.links : footer.bottomLinks) as
+    | FooterLinkItem[]
+    | null
+  const copyright = footer.includeCurrentYear
+    ? `© ${new Date().getFullYear()}${footer.copyright ? ` ${footer.copyright}` : ''}`
+    : footer.copyright
+  const hasBottomRow = Boolean(copyright || bottomLinks?.length)
+  if (!blocks.length && !hasLegacyContent && !footer.links?.length && !hasBottomRow) return null
 
   return (
-    <footer className="mt-20 border-t border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-950/70">
-      <div className="container py-10">
-        <div className="flex flex-col gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
-          <div>
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-              {footer?.heading || labels.footerHeading}
-            </h3>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-              {footer?.description || labels.footerDescription}
-            </p>
-            {footer?.copyright && <p className="mt-2 text-xs text-slate-500">{footer.copyright}</p>}
+    <footer className="mt-20 border-t border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950">
+      <div className="container py-12">
+        {blocks.length > 0 ? (
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+            {blocks.map((block) => (
+              <FooterBlock key={block._key} block={block} locale={locale} />
+            ))}
           </div>
-          <nav
-            className="flex flex-wrap items-center justify-center gap-3 md:justify-end"
-            aria-label="Footer"
-          >
-            {footer?.links?.map((item) => {
-              const href = linkResolver(item.link)
-              if (!href || !item.label) return null
-              return (
-                <Link
-                  key={item._key}
-                  href={href}
-                  target={item.link?.openInNewTab ? '_blank' : undefined}
-                  rel={item.link?.openInNewTab ? 'noopener noreferrer' : undefined}
-                  className="inline-flex items-center rounded-full border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-                >
-                  {item.label}
-                </Link>
-              )
-            })}
-          </nav>
-        </div>
+        ) : (
+          <div className="grid gap-8 md:grid-cols-2 md:items-start">
+            {hasLegacyContent && (
+              <div>
+                {footer.heading && (
+                  <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                    {footer.heading}
+                  </h2>
+                )}
+                {footer.description && (
+                  <p className="mt-2 whitespace-pre-line text-sm text-slate-600 dark:text-slate-300">
+                    {footer.description}
+                  </p>
+                )}
+              </div>
+            )}
+            {footer.links?.length ? (
+              <nav aria-label={footer.heading || undefined} className="md:justify-self-end">
+                <FooterLinks links={footer.links as FooterLinkItem[]} />
+              </nav>
+            ) : null}
+          </div>
+        )}
+
+        {hasBottomRow && (
+          <div className="mt-10 flex flex-col gap-4 border-t border-slate-200 pt-6 text-sm text-slate-500 md:flex-row md:items-center md:justify-between dark:border-slate-800 dark:text-slate-400">
+            {copyright && <p>{copyright}</p>}
+            {bottomLinks?.length ? (
+              <nav aria-label={footer.bottomLinksLabel || undefined}>
+                <FooterLinks links={bottomLinks} compact />
+              </nav>
+            ) : null}
+          </div>
+        )}
       </div>
     </footer>
   )

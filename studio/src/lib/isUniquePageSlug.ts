@@ -1,4 +1,4 @@
-import type {SlugValidationContext, SlugValue} from 'sanity'
+import type {SlugValidationContext, SlugValue, ValidationContext} from 'sanity'
 
 import {DEFAULT_LANGUAGE} from '../i18n/config'
 
@@ -9,19 +9,27 @@ export const RESERVED_PAGE_SLUGS = new Set([
   'robots.txt',
   'sitemap.xml',
   '_next',
+  'blog',
+  'blog-espanol',
+  'studio',
+  'opengraph-image',
+  'icon',
+  'apple-icon',
 ])
 
-export function validatePageSlug(value: SlugValue | undefined) {
+export async function validatePageSlug(value: SlugValue | undefined, context: ValidationContext) {
   const slug = value?.current?.trim().toLowerCase()
 
   if (!slug) return true
-  if (slug.includes('/')) return 'Page slugs must contain a single URL segment'
+  if (slug.includes('/') || slug.includes('?') || slug.includes('#') || slug.includes('.')) return 'Slugs must contain a single URL-safe segment'
   if (RESERVED_PAGE_SLUGS.has(slug)) return `"${slug}" is reserved by the application`
 
-  return true
+  return (await isUniquePageSlug(slug, context as SlugValidationContext))
+    ? true
+    : `"${slug}" is already used by a page or blog post in this language`
 }
 
-/** Allows the same slug in different languages, but not within one language. */
+/** Pages and posts share the same public URL namespace within each language. */
 export async function isUniquePageSlug(slug: string, context: SlugValidationContext) {
   const {document, getClient} = context
 
@@ -33,18 +41,18 @@ export async function isUniquePageSlug(slug: string, context: SlugValidationCont
 
   return getClient({apiVersion: '2025-09-25'}).fetch<boolean>(
     `!defined(*[
-      _type == $type &&
+      _type in ["page", "blogPost"] &&
       slug.current == $slug &&
       coalesce(language, $defaultLanguage) == $language &&
       !(_id in [$documentId, $draftId])
     ][0]._id)`,
     {
-      type: document._type,
       slug,
       language,
       defaultLanguage: DEFAULT_LANGUAGE,
       documentId,
       draftId,
     },
+    {perspective: 'raw'},
   )
 }

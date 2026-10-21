@@ -21,6 +21,11 @@ export type Cta = {
   link?: Link
 }
 
+export type FooterContactEmail = {
+  label?: string
+  address: string
+}
+
 export type SanityImageAssetReference = {
   _ref: string
   _type: 'reference'
@@ -209,6 +214,46 @@ export type BlockContentTextOnly = Array<{
   _key: string
 }>
 
+export type BlogPostReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'blogPost'
+}
+
+export type BlogBody = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>
+        text?: string
+        _type: 'span'
+        _key: string
+      }>
+      style?: 'normal' | 'h2' | 'h3' | 'h4' | 'blockquote'
+      listItem?: 'bullet' | 'number'
+      markDefs?: Array<{
+        href?: string
+        page?: PageReference | BlogPostReference
+        openInNewTab?: boolean
+        _type: 'link'
+        _key: string
+      }>
+      level?: number
+      _type: 'block'
+      _key: string
+    }
+  | {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt: string
+      caption?: string
+      _type: 'image'
+      _key: string
+    }
+>
+
 export type BlockContent = Array<
   | {
       children?: Array<{
@@ -245,6 +290,98 @@ export type Button = {
   _type: 'button'
   buttonText?: string
   link?: Link
+}
+
+export type FooterWorkingHours = {
+  _type: 'footerWorkingHours'
+  heading?: string
+  entries: Array<{
+    days: string
+    isClosed?: boolean
+    hours?: string
+    closedLabel?: string
+    note?: string
+    _type: 'footerHoursEntry'
+    _key: string
+  }>
+}
+
+export type FooterSocial = {
+  _type: 'footerSocial'
+  heading?: string
+  links: Array<{
+    platform: 'facebook' | 'instagram' | 'youtube' | 'linkedin' | 'x' | 'tiktok' | 'other'
+    iconIdentifier?: 'globe' | 'link' | 'message'
+    label: string
+    url: string
+    _type: 'footerSocialLink'
+    _key: string
+  }>
+}
+
+export type FooterLinkGroup = {
+  _type: 'footerLinkGroup'
+  heading: string
+  links: Array<
+    {
+      _key: string
+    } & FooterLink
+  >
+}
+
+export type FooterLink = {
+  _type: 'footerLink'
+  label: string
+  link: Link
+}
+
+export type FooterContact = {
+  _type: 'footerContact'
+  heading?: string
+  email?: FooterContactEmail
+  phones?: Array<{
+    label?: string
+    number: string
+    _type: 'footerPhone'
+    _key: string
+  }>
+  addresses?: Array<{
+    label?: string
+    address: string
+    _type: 'footerAddress'
+    _key: string
+  }>
+}
+
+export type FooterBrand = {
+  _type: 'footerBrand'
+  logo?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  linkToHomepage?: boolean
+  supportingText?: string
+}
+
+export type BlogArchive = {
+  _id: string
+  _type: 'blogArchive'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  heading?: string
+  description?: string
+  introduction?: BlockContentTextOnly
+  ctaLabel?: string
+  ctaHref?: string
+  postsPerPage?: number
+  emptyMessage?: string
+  seo?: Seo
 }
 
 export type SanityAssistInstructionTask = {
@@ -423,7 +560,12 @@ export type FooterReference = {
 
 export type InternationalizedArrayReferenceValue = {
   _type: 'internationalizedArrayReferenceValue'
-  value?: PageReference | NavigationReference | SettingsReference | FooterReference
+  value?:
+    | PageReference
+    | BlogPostReference
+    | NavigationReference
+    | SettingsReference
+    | FooterReference
   language: string
 }
 
@@ -434,15 +576,54 @@ export type Footer = {
   _updatedAt: string
   _rev: string
   language?: 'en' | 'es'
+  blocks?: Array<
+    | ({
+        _key: string
+      } & FooterBrand)
+    | ({
+        _key: string
+      } & FooterContact)
+    | ({
+        _key: string
+      } & FooterWorkingHours)
+    | ({
+        _key: string
+      } & FooterSocial)
+    | ({
+        _key: string
+      } & FooterLinkGroup)
+  >
   heading?: string
   description?: string
-  links?: Array<{
-    label: string
-    link: Link
-    _type: 'footerLink'
-    _key: string
-  }>
+  links?: Array<
+    {
+      _key: string
+    } & FooterLink
+  >
   copyright?: string
+  includeCurrentYear?: boolean
+  bottomLinksLabel?: string
+  bottomLinks?: Array<
+    {
+      _key: string
+    } & FooterLink
+  >
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
 }
 
 export type Settings = {
@@ -486,22 +667,6 @@ export type Settings = {
   }
 }
 
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
-}
-
 export type Navigation = {
   _id: string
   _type: 'navigation'
@@ -538,6 +703,44 @@ export type Navigation = {
   ctaLink?: Link
 }
 
+export type BlogPost = {
+  _id: string
+  _type: 'blogPost'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  title: string
+  slug: Slug
+  excerpt?: string
+  featuredImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+  }
+  author?: string
+  publishedAt: string
+  updatedAt?: string
+  body: BlogBody
+  categories?: Array<string>
+  tags?: Array<string>
+  relatedPosts?: Array<
+    {
+      _key: string
+    } & BlogPostReference
+  >
+  seo?: Seo
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
+}
+
 export type Page = {
   _id: string
   _type: 'page'
@@ -570,12 +773,6 @@ export type Page = {
       } & InfoSection)
   >
   seo?: Seo
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
 }
 
 export type SanityImagePaletteSwatch = {
@@ -677,6 +874,7 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | Cta
+  | FooterContactEmail
   | SanityImageAssetReference
   | HeroSliderSlideImage
   | HeroSliderSlideCta
@@ -693,8 +891,17 @@ export type AllSanitySchemaTypes =
   | CallToAction
   | InfoSection
   | BlockContentTextOnly
+  | BlogPostReference
+  | BlogBody
   | BlockContent
   | Button
+  | FooterWorkingHours
+  | FooterSocial
+  | FooterLinkGroup
+  | FooterLink
+  | FooterContact
+  | FooterBrand
+  | BlogArchive
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
@@ -715,12 +922,13 @@ export type AllSanitySchemaTypes =
   | FooterReference
   | InternationalizedArrayReferenceValue
   | Footer
-  | Settings
   | SanityImageCrop
   | SanityImageHotspot
+  | Settings
   | Navigation
-  | Page
+  | BlogPost
   | Slug
+  | Page
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -776,7 +984,7 @@ export type SettingsQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: footerQuery
-// Query: *[_type == "footer" && _id == $id][0]{..., links[]{..., link{..., page->{_id, language, "slug": slug.current}}}}
+// Query: *[_type == "footer" && _id == $id][0]{    ...,    blocks[]{      ...,      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, language, "slug": slug.current}}}}    },    bottomLinks[]{..., link{..., page->{_id, language, "slug": slug.current}}},    links[]{..., link{..., page->{_id, language, "slug": slug.current}}}  }
 export type FooterQueryResult = {
   _id: string
   _type: 'footer'
@@ -784,9 +992,93 @@ export type FooterQueryResult = {
   _updatedAt: string
   _rev: string
   language?: 'en' | 'es'
+  blocks: Array<
+    | {
+        _key: string
+        _type: 'footerBrand'
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          alt?: string
+          _type: 'image'
+        }
+        linkToHomepage?: boolean
+        supportingText?: string
+      }
+    | {
+        _key: string
+        _type: 'footerContact'
+        heading?: string
+        email?: FooterContactEmail
+        phones?: Array<{
+          label?: string
+          number: string
+          _type: 'footerPhone'
+          _key: string
+        }>
+        addresses?: Array<{
+          label?: string
+          address: string
+          _type: 'footerAddress'
+          _key: string
+        }>
+      }
+    | {
+        _key: string
+        _type: 'footerLinkGroup'
+        heading: string
+        links: Array<{
+          _key: string
+          _type: 'footerLink'
+          label: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page'
+            href?: string
+            page: {
+              _id: string
+              language: 'en' | 'es' | null
+              slug: string
+            } | null
+            openInNewTab?: boolean
+          }
+        }>
+      }
+    | {
+        _key: string
+        _type: 'footerSocial'
+        heading?: string
+        links: Array<{
+          platform: 'facebook' | 'instagram' | 'linkedin' | 'other' | 'tiktok' | 'x' | 'youtube'
+          iconIdentifier?: 'globe' | 'link' | 'message'
+          label: string
+          url: string
+          _type: 'footerSocialLink'
+          _key: string
+        }>
+      }
+    | {
+        _key: string
+        _type: 'footerWorkingHours'
+        heading?: string
+        entries: Array<{
+          days: string
+          isClosed?: boolean
+          hours?: string
+          closedLabel?: string
+          note?: string
+          _type: 'footerHoursEntry'
+          _key: string
+        }>
+      }
+  > | null
   heading?: string
   description?: string
   links: Array<{
+    _key: string
+    _type: 'footerLink'
     label: string
     link: {
       _type: 'link'
@@ -799,10 +1091,26 @@ export type FooterQueryResult = {
       } | null
       openInNewTab?: boolean
     }
-    _type: 'footerLink'
-    _key: string
   }> | null
   copyright?: string
+  includeCurrentYear?: boolean
+  bottomLinksLabel?: string
+  bottomLinks: Array<{
+    _key: string
+    _type: 'footerLink'
+    label: string
+    link: {
+      _type: 'link'
+      linkType?: 'href' | 'page'
+      href?: string
+      page: {
+        _id: string
+        language: 'en' | 'es' | null
+        slug: string
+      } | null
+      openInNewTab?: boolean
+    }
+  }> | null
 } | null
 
 // Source: sanity/lib/queries.ts
@@ -1418,12 +1726,276 @@ export type PagesSlugsResult = Array<{
   slug: string
 }>
 
+// Source: sanity/lib/queries.ts
+// Variable: routeCandidatesQuery
+// Query: *[_type in ["page", "blogPost"] && slug.current == $slug &&    ($language == "en" && coalesce(language, "en") == "en" || language == $language)]{_id, _type}
+export type RouteCandidatesQueryResult = Array<
+  | {
+      _id: string
+      _type: 'blogPost'
+    }
+  | {
+      _id: string
+      _type: 'page'
+    }
+>
+
+// Source: sanity/lib/queries.ts
+// Variable: blogPostQuery
+// Query: *[_type == "blogPost" && slug.current == $slug && language == $language && defined(publishedAt) && publishedAt <= now()][0]{_id, _type, title, "slug": slug.current, language, excerpt, featuredImage, author, publishedAt, updatedAt, body[]{..., markDefs[]{..., page->{_id, _type, language, "slug": slug.current}}}, categories, tags, seo,  relatedPosts[]->{_id, title, "slug": slug.current, language, publishedAt, featuredImage, excerpt}}
+export type BlogPostQueryResult = {
+  _id: string
+  _type: 'blogPost'
+  title: string
+  slug: string
+  language: 'en' | 'es' | null
+  excerpt: string | null
+  featuredImage: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+  } | null
+  author: string | null
+  publishedAt: string
+  updatedAt: string | null
+  body: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?: 'blockquote' | 'h2' | 'h3' | 'h4' | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs: Array<{
+          href?: string
+          page:
+            | {
+                _id: string
+                _type: 'blogPost'
+                language: 'en' | 'es' | null
+                slug: string
+              }
+            | {
+                _id: string
+                _type: 'page'
+                language: 'en' | 'es' | null
+                slug: string
+              }
+            | null
+          openInNewTab?: boolean
+          _type: 'link'
+          _key: string
+        }> | null
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        alt: string
+        caption?: string
+        _type: 'image'
+        _key: string
+        markDefs: null
+      }
+  >
+  categories: Array<string> | null
+  tags: Array<string> | null
+  seo: Seo | null
+  relatedPosts: Array<{
+    _id: string
+    title: string
+    slug: string
+    language: 'en' | 'es' | null
+    publishedAt: string
+    featuredImage: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt: string
+      _type: 'image'
+    } | null
+    excerpt: string | null
+  }> | null
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: blogPostByIdQuery
+// Query: *[_type == "blogPost" && _id == $id && defined(publishedAt) && publishedAt <= now()][0]{_id, title, "slug": slug.current, language, seo}
+export type BlogPostByIdQueryResult = {
+  _id: string
+  title: string
+  slug: string
+  language: 'en' | 'es' | null
+  seo: Seo | null
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: blogArchiveQuery
+// Query: *[_type == "blogArchive" && _id == $id][0]
+export type BlogArchiveQueryResult = {
+  _id: string
+  _type: 'blogArchive'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  heading?: string
+  description?: string
+  introduction?: BlockContentTextOnly
+  ctaLabel?: string
+  ctaHref?: string
+  postsPerPage?: number
+  emptyMessage?: string
+  seo?: Seo
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: blogPostsQuery
+// Query: *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc, _id asc)[$start...$end]{_id, title, "slug": slug.current, excerpt, featuredImage, publishedAt, language}
+export type BlogPostsQueryResult = Array<{
+  _id: string
+  title: string
+  slug: string
+  excerpt: string | null
+  featuredImage: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+  } | null
+  publishedAt: string
+  language: 'en' | 'es' | null
+}>
+
+// Source: sanity/lib/queries.ts
+// Variable: blogCountQuery
+// Query: count(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()])
+export type BlogCountQueryResult = number
+
+// Source: sanity/lib/queries.ts
+// Variable: newerBlogPostQuery
+// Query: *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && (publishedAt > $date || publishedAt == $date && _id < $id)] | order(publishedAt asc, _id desc)[0]{_id, title, "slug": slug.current}
+export type NewerBlogPostQueryResult = {
+  _id: string
+  title: string
+  slug: string
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: olderBlogPostQuery
+// Query: *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && (publishedAt < $date || publishedAt == $date && _id > $id)] | order(publishedAt desc, _id asc)[0]{_id, title, "slug": slug.current}
+export type OlderBlogPostQueryResult = {
+  _id: string
+  title: string
+  slug: string
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: blogTranslationQuery
+// Query: *[_type == "translation.metadata" && references($id)][0].translations[]{language, "post": value->{_id, _type, language, "slug": slug.current, publishedAt, seo}}
+export type BlogTranslationQueryResult = Array<{
+  language: string
+  post:
+    | {
+        _id: string
+        _type: 'blogPost'
+        language: 'en' | 'es' | null
+        slug: string
+        publishedAt: string
+        seo: Seo | null
+      }
+    | {
+        _id: string
+        _type: 'footer'
+        language: 'en' | 'es' | null
+        slug: null
+        publishedAt: null
+        seo: null
+      }
+    | {
+        _id: string
+        _type: 'navigation'
+        language: 'en' | 'es' | null
+        slug: null
+        publishedAt: null
+        seo: null
+      }
+    | {
+        _id: string
+        _type: 'page'
+        language: 'en' | 'es' | null
+        slug: string
+        publishedAt: null
+        seo: Seo | null
+      }
+    | {
+        _id: string
+        _type: 'settings'
+        language: 'en' | 'es' | null
+        slug: null
+        publishedAt: null
+        seo: null
+      }
+    | null
+}> | null
+
+// Source: sanity/lib/queries.ts
+// Variable: blogSitemapQuery
+// Query: *[_type == "blogPost" && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && language in ["en", "es"]]{    _id, language, "slug": slug.current, publishedAt, updatedAt, _updatedAt, seo,    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "post": value->{_id, language, "slug": slug.current, publishedAt, seo}}  }
+export type BlogSitemapQueryResult = Array<{
+  _id: string
+  language: 'en' | 'es' | null
+  slug: string
+  publishedAt: string
+  updatedAt: string | null
+  _updatedAt: string
+  seo: Seo | null
+  translations: Array<{
+    language: string
+    post:
+      | {
+          _id: string
+          language: 'en' | 'es' | null
+          slug: null
+          publishedAt: null
+          seo: null
+        }
+      | {
+          _id: string
+          language: 'en' | 'es' | null
+          slug: string
+          publishedAt: null
+          seo: Seo | null
+        }
+      | {
+          _id: string
+          language: 'en' | 'es' | null
+          slug: string
+          publishedAt: string
+          seo: Seo | null
+        }
+      | null
+  }> | null
+}>
+
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "settings" && _id == $id][0]': SettingsQueryResult
-    '*[_type == "footer" && _id == $id][0]{..., links[]{..., link{..., page->{_id, language, "slug": slug.current}}}}': FooterQueryResult
+    '\n  *[_type == "footer" && _id == $id][0]{\n    ...,\n    blocks[]{\n      ...,\n      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, language, "slug": slug.current}}}}\n    },\n    bottomLinks[]{..., link{..., page->{_id, language, "slug": slug.current}}},\n    links[]{..., link{..., page->{_id, language, "slug": slug.current}}}\n  }\n': FooterQueryResult
     '\n  *[_type == "navigation" && _id == $id][0]{\n    logo{alt, asset},\n    navItems[]{title, href, externalUrl, isButton,\n      link{..., page->{_id,language,"slug":slug.current}},\n      children[]{title,href,link{...,page->{_id,language,"slug":slug.current}}}\n    },\n    ctaLabel, ctaHref, ctaLink{...,page->{_id,language,"slug":slug.current}}\n  }\n': NavigationQueryResult
     '\n  *[_type == "page" && slug.current == $slug &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n  }\n}\n': GetPageQueryResult
     '\n  *[_type == "settings" && _id == $id][0].homePage->{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n  }\n}\n': HomePageQueryResult
@@ -1431,5 +2003,15 @@ declare module '@sanity/client' {
     '\n  *[_type == "translation.metadata" && references($id)][0]{\n    translations[]{language, "page": value->{_id, language, "slug": slug.current, "noIndex": seo.noIndex}}\n  }\n': TranslationQueryResult
     '\n  *[_type == "page" && defined(slug.current) && (coalesce(language, "en") == "en" || language == "es")] {\n    _id, language, "slug": slug.current, _updatedAt, seo,\n    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "page": value->{_id, language, "slug": slug.current}}\n  }\n': SitemapDataResult
     '\n  *[_type == "page" && defined(slug.current) &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)]{"slug": slug.current}\n': PagesSlugsResult
+    '\n  *[_type in ["page", "blogPost"] && slug.current == $slug &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)]{_id, _type}\n': RouteCandidatesQueryResult
+    '\n  *[_type == "blogPost" && slug.current == $slug && language == $language && defined(publishedAt) && publishedAt <= now()][0]{_id, _type, title, "slug": slug.current, language, excerpt, featuredImage, author, publishedAt, updatedAt, body[]{..., markDefs[]{..., page->{_id, _type, language, "slug": slug.current}}}, categories, tags, seo,\n  relatedPosts[]->{_id, title, "slug": slug.current, language, publishedAt, featuredImage, excerpt}}\n': BlogPostQueryResult
+    '\n  *[_type == "blogPost" && _id == $id && defined(publishedAt) && publishedAt <= now()][0]{_id, title, "slug": slug.current, language, seo}\n': BlogPostByIdQueryResult
+    '*[_type == "blogArchive" && _id == $id][0]': BlogArchiveQueryResult
+    '\n  *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc, _id asc)[$start...$end]{_id, title, "slug": slug.current, excerpt, featuredImage, publishedAt, language}\n': BlogPostsQueryResult
+    'count(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()])': BlogCountQueryResult
+    '\n  *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && (publishedAt > $date || publishedAt == $date && _id < $id)] | order(publishedAt asc, _id desc)[0]{_id, title, "slug": slug.current}\n': NewerBlogPostQueryResult
+    '\n  *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && (publishedAt < $date || publishedAt == $date && _id > $id)] | order(publishedAt desc, _id asc)[0]{_id, title, "slug": slug.current}\n': OlderBlogPostQueryResult
+    '\n  *[_type == "translation.metadata" && references($id)][0].translations[]{language, "post": value->{_id, _type, language, "slug": slug.current, publishedAt, seo}}\n': BlogTranslationQueryResult
+    '\n  *[_type == "blogPost" && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && language in ["en", "es"]]{\n    _id, language, "slug": slug.current, publishedAt, updatedAt, _updatedAt, seo,\n    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "post": value->{_id, language, "slug": slug.current, publishedAt, seo}}\n  }\n': BlogSitemapQueryResult
   }
 }
