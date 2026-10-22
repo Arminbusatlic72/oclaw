@@ -21,7 +21,7 @@ export interface NavigationData {
     alt?: string
     asset?: {
       _id?: string
-      metadata?: {dimensions?: {aspectRatio?: number}}
+      metadata?: {dimensions?: {aspectRatio?: number} | null} | null
     }
   }
   navItems: NavItem[]

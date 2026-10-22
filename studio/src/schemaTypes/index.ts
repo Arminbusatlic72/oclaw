@@ -12,6 +12,7 @@ import {heroSlider} from './blocks/heroSlider'
 import {cardGrid} from './blocks/cardGrid'
 import {processSteps} from './blocks/processSteps'
 import {parallaxFeatures} from './blocks/parallaxFeatures'
+import {whyChooseUs} from './blocks/whyChooseUs'
 import {link} from './objects/link'
 import {blockContent} from './objects/blockContent'
 import button from './objects/button'
@@ -53,6 +54,7 @@ export const schemaTypes = [
   cardGrid,
   processSteps,
   parallaxFeatures,
+  whyChooseUs,
   link,
   seo,
 ]

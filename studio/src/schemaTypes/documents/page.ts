@@ -53,6 +53,7 @@ export const page = defineType({
         {type: 'cardGrid'},
         {type: 'processSteps'},
         {type: 'parallaxFeatures'},
+        {type: 'whyChooseUs'},
         {type: 'callToAction'},
         {type: 'infoSection'},
       ],

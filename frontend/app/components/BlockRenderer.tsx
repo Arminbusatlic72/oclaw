@@ -6,6 +6,7 @@ import ProcessSteps from '@/app/components/blocks/ProcessSteps'
 import ParallaxFeatures from '@/app/components/blocks/ParallaxFeatures'
 import Cta from '@/app/components/Cta'
 import Info from '@/app/components/InfoSection'
+import WhyChooseUs from '@/app/components/blocks/WhyChooseUs'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 
@@ -27,6 +28,7 @@ const Blocks = {
   parallaxFeatures: ParallaxFeatures,
   callToAction: Cta,
   infoSection: Info,
+  whyChooseUs: WhyChooseUs,
 } as BlocksType
 
 /**

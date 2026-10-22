@@ -14,9 +14,11 @@ import Image from '@/app/components/SanityImage'
 
 export default function CustomPortableText({
   className,
+  plainCode = false,
   value,
 }: {
   className?: string
+  plainCode?: boolean
   value: PortableTextBlock[]
 }) {
   const components: PortableTextComponents = {
@@ -98,6 +100,7 @@ export default function CustomPortableText({
       link: ({children, value: link}) => {
         return <ResolvedLink link={link}>{children}</ResolvedLink>
       },
+      ...(plainCode ? {code: ({children}: {children: React.ReactNode}) => <span>{children}</span>} : {}),
     },
   }
 

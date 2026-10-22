@@ -138,12 +138,15 @@ export default function HeroSliderClient({
                             href={secondaryCtaHref}
                             target={isExternalSecondaryCta ? '_blank' : undefined}
                             rel={isExternalSecondaryCta ? 'noopener noreferrer' : undefined}
-                            className="site-button-secondary site-hero-cta"
+                            className="site-button-outline site-button-secondary site-hero-cta"
                           >
                             {slide.secondaryCta.label}
                           </a>
                         ) : (
-                          <span className="site-button-secondary site-hero-cta" aria-disabled="true">
+                          <span
+                            className="site-button-outline site-button-secondary site-hero-cta"
+                            aria-disabled="true"
+                          >
                             {slide.secondaryCta.label}
                           </span>
                         ))}
