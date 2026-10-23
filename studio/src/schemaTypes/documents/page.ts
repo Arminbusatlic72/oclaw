@@ -56,6 +56,7 @@ export const page = defineType({
         {type: 'whyChooseUs'},
         {type: 'callToAction'},
         {type: 'infoSection'},
+        {type: 'practiceAreasSection'},
       ],
       options: {
         insertMenu: {

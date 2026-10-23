@@ -11,7 +11,7 @@ export default function FooterBlock({block, locale}: {block: FooterBlockType; lo
     case 'footerBrand':
       return <FooterBrand block={block} locale={locale} />
     case 'footerContact':
-      return <FooterContact block={block} />
+      return <FooterContact block={block} locale={locale} />
     case 'footerWorkingHours':
       return <FooterWorkingHours block={block} />
     case 'footerSocial':

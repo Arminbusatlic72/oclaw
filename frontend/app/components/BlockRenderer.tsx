@@ -7,6 +7,8 @@ import ParallaxFeatures from '@/app/components/blocks/ParallaxFeatures'
 import Cta from '@/app/components/Cta'
 import Info from '@/app/components/InfoSection'
 import WhyChooseUs from '@/app/components/blocks/WhyChooseUs'
+import PracticeAreasSection from '@/app/components/blocks/PracticeAreasSection'
+import type {Locale} from '@/lib/i18n'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 
@@ -15,6 +17,7 @@ type BlockProps = {
   block: PageBuilderSection
   pageId: string
   pageType: string
+  locale?: Locale
 }
 
 type BlocksType = {
@@ -34,7 +37,8 @@ const Blocks = {
 /**
  * Used by the <PageBuilder>, this component renders a the component that matches the block type.
  */
-export default function BlockRenderer({block, index, pageId, pageType}: BlockProps) {
+export default function BlockRenderer({block, index, pageId, pageType, locale = 'en'}: BlockProps) {
+  if (block._type === 'practiceAreasSection') return <div data-sanity={dataAttr({id: pageId, type: pageType, path: `pageBuilder[_key=="${block._key}"]`}).toString()}><PracticeAreasSection block={block} locale={locale} /></div>
   // Block does exist
   if (typeof Blocks[block._type] !== 'undefined') {
     return (

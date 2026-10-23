@@ -26,6 +26,9 @@ yarn-error.log*
 .env.*
 !.env.example
 
+# private Sanity dataset exports
+migration/wordpress/backups/
+
 # vercel
 .vercel
 

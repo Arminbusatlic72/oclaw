@@ -1,0 +1,593 @@
+{
+  "source": "Public WordPress REST API, read only",
+  "retrievedDate": "2026-10-22",
+  "englishArchive": "https://www.oclaw.us/practice-areas/",
+  "spanishArchive": "https://www.oclaw.us/es/areas-de-practica/",
+  "count": 14,
+  "items": [
+    {
+      "english": {
+        "wordpressId": 1061,
+        "url": "https://www.oclaw.us/practice-areas/investor-business/",
+        "slug": "investor-business",
+        "title": "Investor & Business",
+        "excerptHtml": "<p>We have a successful record of helping clients get United States visas for a range of business needs, like managing investments or hiring non-U.S. citizens. The visa is more likely to be renewed Our experience successfully helping clients means we know how to get the initial visa approved. We also make sure the visa is [&hellip;]</p>\n",
+        "contentHtml": "<p>We have a successful record of helping clients get United States visas for a range of business needs, like managing investments or hiring non-U.S. citizens.</p>\n<p><strong>The visa is more likely to be renewed</strong><br />\nOur experience successfully helping clients means we know how to get the initial visa approved. We also make sure the visa is renewed in the future if clients do what they are advised to do.</p>\n<p><strong>We have services for your specific needs</strong><br />\nEvery situation is unique. We have the experience and knowledge needed to give you services that meet your specific needs. That means we can save you time and money by knowing how to do it right for you the first time.</p>\n<p><strong>We make the process easier</strong><br />\nMany successful businesses hire non-U.S. citizens because they can bring specialized knowledge and cultural diversity to the workplace. But the immigration process is complicated, so some businesses decide not to hire non-U.S. citizens. We make the process easier and faster so you don’t miss out on the advantages of hiring non-U.S. citizens.</p>\n<p><strong>We can help with any issue</strong><br />\nWe have expert knowledge and experience to help you with any business or investor needs you have. We know immigration laws and have experience with organizations of all types and sizes. That means we can offer the best options for your situation and guide you through the application process.</p>\n<p><strong>Contact us</strong><br />\nYou can’t afford to make mistakes that cost you time and money. With our help, you’re more likely to get a visa application right the first time. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Investor & Business - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/investor-business/",
+          "openGraphTitle": "Investor & Business - OC Law Group",
+          "openGraphDescription": "We have a successful record of helping clients get United States visas for a range of business needs, like managing investments or hiring non-U.S. citizens. The visa is more likely to be renewed Our experience successfully helping clients means we know how to get the initial visa approved. We also make sure the visa is [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2281,
+        "url": "https://www.oclaw.us/es/areas-de-practica/inversor-y-negocios/",
+        "slug": "inversor-y-negocios",
+        "title": "Inversor y Negocios",
+        "excerptHtml": "<p>Tenemos un historial exitoso ayudando a clientes a obtener visas estadounidenses para una variedad de necesidades comerciales, como administrar inversiones o contratar ciudadanos no estadounidenses. Es más probable que se renueve la visaNuestra experiencia ayudando exitosamente a los clientes significa que sabemos cómo obtener la aprobación de la visa inicial. También nos aseguramos de que [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\">Tenemos un historial exitoso ayudando a clientes a obtener visas estadounidenses para una variedad de necesidades comerciales, como administrar inversiones o contratar ciudadanos no estadounidenses.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Es más probable que se renueve la visa<br></strong>Nuestra experiencia ayudando exitosamente a los clientes significa que sabemos cómo obtener la aprobación de la visa inicial. También nos aseguramos de que la visa se renueve en el futuro si los clientes hacen lo que se les recomienda hacer.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Contamos con servicios para sus necesidades específicas<br></strong>Cada situación es única. Contamos con la experiencia y el conocimiento necesarios para brindarle servicios que satisfagan sus necesidades específicas. Eso significa que podemos ahorrarle tiempo y dinero sabiendo cómo hacerlo bien la primera vez.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Hacemos el proceso más fácil<br></strong>Muchas empresas exitosas contratan a ciudadanos no estadounidenses porque pueden aportar conocimientos especializados y diversidad cultural al lugar de trabajo. Pero el proceso de inmigración es complicado, por lo que algunas empresas deciden no contratar a ciudadanos no estadounidenses. Hacemos que el proceso sea más fácil y rápido para que no se pierda las ventajas de contratar ciudadanos no estadounidenses.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Podemos ayudar con cualquier problema<br></strong>Contamos con conocimiento experto y experiencia para ayudarlo con cualquier necesidad comercial o de inversionista que tenga. Conocemos las leyes de inmigración y tenemos experiencia con organizaciones de todo tipo y tamaño. Eso significa que podemos ofrecer las mejores opciones para su situación y guiarlo a través del proceso de solicitud.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Contáctenos<br></strong>No puede permitirse el lujo de cometer errores que le cuesten tiempo y dinero. Con nuestra ayuda, es más probable que obtenga una solicitud de visa correcta la primera vez. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Inversor y Negocios - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/inversor-y-negocios/",
+          "openGraphTitle": "Inversor y Negocios - OC Law Group",
+          "openGraphDescription": "Tenemos un historial exitoso ayudando a clientes a obtener visas estadounidenses para una variedad de necesidades comerciales, como administrar inversiones o contratar ciudadanos no estadounidenses. Es más probable que se renueve la visaNuestra experiencia ayudando exitosamente a los clientes significa que sabemos cómo obtener la aprobación de la visa inicial. También nos aseguramos de que [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1067,
+        "url": "https://www.oclaw.us/practice-areas/family-sponsorship/",
+        "slug": "family-sponsorship",
+        "title": "Family Sponsorship",
+        "excerptHtml": "<p>The most common way non-U.S. citizens get Permanent Resident Status (a green card) is through family sponsorship. That’s because any U.S. citizen, even naturalized citizens, are allowed to sponsor an immediate relative. Who can be sponsored by a U.S. citizen? Most relatives can be sponsored by a U.S. citizen. Those who are allowed include: Parents [&hellip;]</p>\n",
+        "contentHtml": "<p>The most common way non-U.S. citizens get Permanent Resident Status (a green card) is through family sponsorship. That’s because any U.S. citizen, even naturalized citizens, are allowed to sponsor an immediate relative.</p>\n<p><strong>Who can be sponsored by a U.S. citizen?</strong><br />\nMost relatives can be sponsored by a U.S. citizen. Those who are allowed include:</p>\n<ul>\n<li>Parents</li>\n<li>Spouses</li>\n<li>Unmarried children</li>\n<li>Siblings</li>\n<li>Married children</li>\n</ul>\n<p><strong>Who can be sponsored by a permanent resident?</strong><br />\nPermanent residents can also sponsor some family members for a green card, but the list is much shorter. Permanent residents can only sponsor unmarried children and spouses.</p>\n<p><strong>The process to sponsor a family member</strong><br />\nThere are several steps to apply for a green card through family sponsorship:</p>\n<ul>\n<li>The family sponsor has to complete an immigrant visa petition called a Petition for Alien Relative (I-130).</li>\n<li>Once that petition is approved by the USCIS, the Application to Register Permanent Residence or Adjust Status (I-485) has to be filled out and turned in. Sometimes the I-485 can be turned in at the same time as the I-130.</li>\n<li>The citizen or permanent resident who is sponsoring the family member has to prove they can support this relative at least 125 percent above the poverty line.</li>\n</ul>\n<p><strong>Common issues with family sponsorship</strong><br />\nThere are some reasons a relative won’t be approved for adjustment of status:</p>\n<ul>\n<li>The relative is not in the U.S.</li>\n<li>The relative entered the U.S. without going through a port of entry.</li>\n<li>The relative overstayed the visa they used to come to the U.S.</li>\n</ul>\n<p>If this happens, consular processing may be needed. That means the relative has to apply at a consulate or U.S. embassy in a country other than the U.S. Sometimes you may have to apply for a waiver.</p>\n<p><strong>Contact us</strong><br />\nYou can’t afford to make mistakes that cost you time and money. With our help, you’re more likely to get a visa application right the first time. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Family Sponsorship - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/family-sponsorship/",
+          "openGraphTitle": "Family Sponsorship - OC Law Group",
+          "openGraphDescription": "The most common way non-U.S. citizens get Permanent Resident Status (a green card) is through family sponsorship. That’s because any U.S. citizen, even naturalized citizens, are allowed to sponsor an immediate relative. Who can be sponsored by a U.S. citizen? Most relatives can be sponsored by a U.S. citizen. Those who are allowed include: Parents [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2277,
+        "url": "https://www.oclaw.us/es/areas-de-practica/el-patrocinio-de-la-familia/",
+        "slug": "el-patrocinio-de-la-familia",
+        "title": "El patrocinio de la familia",
+        "excerptHtml": "<p>La forma más común en que los ciudadanos no estadounidenses obtienen el estatus de residente permanente (una tarjeta verde) es a través del patrocinio familiar. Esto se debe a que cualquier ciudadano estadounidense, incluso los naturalizados, puede patrocinar a un familiar inmediato. ¿Quién puede ser patrocinado por un ciudadano estadounidense?La mayoría de los familiares pueden [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\">La forma más común en que los ciudadanos no estadounidenses obtienen el estatus de residente permanente (una tarjeta verde) es a través del patrocinio familiar. Esto se debe a que cualquier ciudadano estadounidense, incluso los naturalizados, puede patrocinar a un familiar inmediato.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>¿Quién puede ser patrocinado por un ciudadano estadounidense?<br></strong>La mayoría de los familiares pueden ser patrocinados por un ciudadano estadounidense. Los que están permitidos incluyen:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Padres</li>\n\n\n\n<li>Esposos</li>\n\n\n\n<li>Hijos solteros</li>\n\n\n\n<li>Hermanos</li>\n\n\n\n<li>Hijos casados</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>¿Quién puede ser patrocinado por un residente permanente?<br></strong>Los residentes permanentes también pueden patrocinar a algunos miembros de su familia para obtener una tarjeta de residencia, pero la lista es mucho más corta. Los residentes permanentes sólo pueden patrocinar a hijos solteros y a sus cónyuges.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>El proceso para apadrinar a un familiar<br></strong>Hay varios pasos para solicitar una tarjeta verde a través del patrocinio familiar:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>El patrocinador de la familia debe completar una petición de visa de inmigrante llamada Petición de pariente extranjero (I-130).</li>\n\n\n\n<li>Una vez que el USCIS aprueba esa petición, se debe completar y entregar la Solicitud para registrar residencia permanente o ajuste de estatus (I-485). A veces, la I-485 se puede entregar al mismo tiempo que la I-130. .</li>\n\n\n\n<li>El ciudadano o residente permanente que patrocina al miembro de la familia tiene que demostrar que puede mantener a este pariente al menos un 125 por ciento por encima del umbral de pobreza.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Problemas comunes con el patrocinio familiar<br></strong>Hay algunas razones por las que no se aprobará el ajuste de estatus de un familiar:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>El familiar no está en los EE.UU.</li>\n\n\n\n<li>El familiar ingresó a los EE. UU. sin pasar por un puerto de entrada.</li>\n\n\n\n<li>El familiar excedió la visa que utilizó para venir a los EE. UU.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\">Si esto sucede, es posible que sea necesario realizar un trámite consular. Eso significa que el familiar tiene que presentar la solicitud en un consulado o embajada de los EE. UU. en un país que no sea los EE. UU. A veces es posible que deba solicitar una exención.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Contáctenos<br></strong>No puede permitirse el lujo de cometer errores que le cuesten tiempo y dinero. Con nuestra ayuda, es más probable que obtenga una solicitud de visa correcta la primera vez. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "El patrocinio de la familia - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/el-patrocinio-de-la-familia/",
+          "openGraphTitle": "El patrocinio de la familia - OC Law Group",
+          "openGraphDescription": "La forma más común en que los ciudadanos no estadounidenses obtienen el estatus de residente permanente (una tarjeta verde) es a través del patrocinio familiar. Esto se debe a que cualquier ciudadano estadounidense, incluso los naturalizados, puede patrocinar a un familiar inmediato. ¿Quién puede ser patrocinado por un ciudadano estadounidense?La mayoría de los familiares pueden [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1072,
+        "url": "https://www.oclaw.us/practice-areas/violence-against-women-act-vawa/",
+        "slug": "violence-against-women-act-vawa",
+        "title": "Violence Against Women Act (VAWA)",
+        "excerptHtml": "<p>The Violence Against Women Act (VAWA) is a law that allows non-citizens who are victims of domestic violence (or abuse) to get a visa or become a legal resident of the United States. The purpose of VAWA is to make sure victims of domestic abuse can report the abuse and get help without worrying about their immigration [&hellip;]</p>\n",
+        "contentHtml": "<p>The Violence Against Women Act (VAWA) is a law that allows non-citizens who are victims of domestic violence (or abuse) to get a visa or become a legal resident of the United States.</p>\n<p>The purpose of VAWA is to make sure victims of domestic abuse can report the abuse and get help without worrying about their immigration status.</p>\n<p><strong>Requirements for VAWA</strong><br />\nThe abuser must be a citizen or permanent resident of the United States. Spouses, former spouses, and children of an abusive U.S. citizen or permanent resident can apply. Here are some important things to know about the requirements for VAWA:</p>\n<ul>\n<li>The abuser does not have to be part of the process or even told that the process is happening. This is called self-petitioning.</li>\n<li>A parent can apply on behalf of their child.</li>\n<li>The person who is applying has to prove that the abuse is occurring or that the abuse occurred.</li>\n<li>The person who is applying has to prove that the victim is living or was living with the abuser.</li>\n<li>The victim must have good moral character.</li>\n</ul>\n<p><strong>VAWA protection benefits</strong><br />\nYou are given several benefits when you are approved for protection under VAWA:</p>\n<ul>\n<li>You could be given Deferred Action, which means you won’t be deported if you’re here without permission from the U.S. government.</li>\n<li>You can apply for a visa or permanent residency status.</li>\n<li>You can apply for an authorization to work so you can get a job.</li>\n<li>If you are supposed to be deported, it could be canceled.</li>\n</ul>\n<p><strong>Don’t do it alone—contact us</strong><br />\nIt is scary and stressful to apply for VAWA protection. You shouldn’t have to do it alone. We can answer your questions and help you with your concerns.</p>\n<p>We can also give you advice on how and when to apply for protection. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Violence Against Women Act (VAWA) - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/violence-against-women-act-vawa/",
+          "openGraphTitle": "Violence Against Women Act (VAWA) - OC Law Group",
+          "openGraphDescription": "The Violence Against Women Act (VAWA) is a law that allows non-citizens who are victims of domestic violence (or abuse) to get a visa or become a legal resident of the United States. The purpose of VAWA is to make sure victims of domestic abuse can report the abuse and get help without worrying about their immigration [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2295,
+        "url": "https://www.oclaw.us/es/areas-de-practica/ley-de-violencia-contra-la-mujer-vawa/",
+        "slug": "ley-de-violencia-contra-la-mujer-vawa",
+        "title": "Ley de Violencia contra la Mujer (VAWA)",
+        "excerptHtml": "<p>La Ley de Violencia contra las Mujeres (VAWA) es una ley que permite a los no ciudadanos que son víctimas de violencia doméstica (o abuso) obtener una visa o convertirse en residentes legales de los Estados Unidos. El propósito de VAWA es garantizar que las víctimas de abuso doméstico puedan denunciar el abuso y obtener [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\">La Ley de Violencia contra las Mujeres (VAWA) es una ley que permite a los no ciudadanos que son víctimas de violencia doméstica (o abuso) obtener una visa o convertirse en residentes legales de los Estados Unidos.</p>\n\n\n\n<p class=\"wp-block-paragraph\">El propósito de VAWA es garantizar que las víctimas de abuso doméstico puedan denunciar el abuso y obtener ayuda sin preocuparse por su estado migratorio.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Requisitos para VAWA<br></strong>El abusador debe ser ciudadano o residente permanente de los Estados Unidos. Pueden presentar una solicitud los cónyuges, ex cónyuges e hijos de un ciudadano estadounidense o residente permanente abusivo. Aquí hay algunas cosas importantes que debe saber sobre los requisitos de VAWA:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>El abusador no tiene que ser parte del proceso ni siquiera decirle que el proceso está sucediendo. A esto se le llama autopetición.</li>\n\n\n\n<li>Un padre puede presentar una solicitud en nombre de su hijo.</li>\n\n\n\n<li>La persona que presenta la solicitud debe demostrar que el abuso está ocurriendo o que el abuso ocurrió.</li>\n\n\n\n<li>La persona que presenta la solicitud debe demostrar que la víctima vive o vivía con el abusador.</li>\n\n\n\n<li>La víctima debe tener buen carácter moral.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Beneficios de protección VAWA<br></strong>Se le otorgan varios beneficios cuando se le aprueba la protección bajo VAWA:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Se le podría otorgar Acción Diferida, lo que significa que no será deportado si está aquí sin permiso del gobierno de los Estados Unidos.</li>\n\n\n\n<li>Puede solicitar una visa o un estatus de residencia permanente.</li>\n\n\n\n<li>Puedes solicitar una autorización para trabajar para poder conseguir un empleo.</li>\n\n\n\n<li>Si se supone que usted será deportado, podría cancelarse.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>No lo hagas solo, contáctanos<br></strong>Es aterrador y estresante solicitar la protección VAWA. No deberías tener que hacerlo solo. Podemos responder a tus preguntas y ayudarte con tus inquietudes.</p>\n\n\n\n<p class=\"wp-block-paragraph\">También podemos darle consejos sobre cómo y cuándo solicitar protección. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Ley de Violencia contra la Mujer (VAWA) - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/ley-de-violencia-contra-la-mujer-vawa/",
+          "openGraphTitle": "Ley de Violencia contra la Mujer (VAWA) - OC Law Group",
+          "openGraphDescription": "La Ley de Violencia contra las Mujeres (VAWA) es una ley que permite a los no ciudadanos que son víctimas de violencia doméstica (o abuso) obtener una visa o convertirse en residentes legales de los Estados Unidos. El propósito de VAWA es garantizar que las víctimas de abuso doméstico puedan denunciar el abuso y obtener [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1076,
+        "url": "https://www.oclaw.us/practice-areas/u-visas-for-victims-of-crime/",
+        "slug": "u-visas-for-victims-of-crime",
+        "title": "U-Visas for Victims of Crime",
+        "excerptHtml": "<p>The U-Visa is for victims of specific crimes who have endured physical or mental harm. The goal of the U-Visa is to help government officials and law enforcement solve the crime, so the victim must cooperate with law enforcement to be approved. U-Visa requirements To be approved for a U-Visa, the following must be true: You [&hellip;]</p>\n",
+        "contentHtml": "<p>The U-Visa is for victims of specific crimes who have endured physical or mental harm. The goal of the U-Visa is to help government officials and law enforcement solve the crime, so the victim must cooperate with law enforcement to be approved.</p>\n<p><strong>U-Visa requirements</strong><br />\nTo be approved for a U-Visa, the following must be true:</p>\n<ul>\n<li>You are the victim of a certain type of crime. We can help determine if you are.</li>\n<li>You have already been helpful or will be helpful in solving the crime and prosecuting the criminals.</li>\n<li>You have information about what the criminals did. If you’re under age 16 or can’t share the information because of a disability, a guardian, parent, or friend may do it for you.</li>\n<li>You have suffered serious mental or physical harm because of the crime.</li>\n<li>The crime happened in the U.S. or broke U.S. laws.</li>\n<li>You are admissible to the U.S. If not, you can apply for a waiver.</li>\n</ul>\n<p><strong>Contact us</strong><br />\nThe process of applying for a U-Visa is complicated and takes a lot of time. It is a stressful situation, so you shouldn’t have to do it alone. We can help you better understand what to do. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "U-Visas for Victims of Crime - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/u-visas-for-victims-of-crime/",
+          "openGraphTitle": "U-Visas for Victims of Crime - OC Law Group",
+          "openGraphDescription": "The U-Visa is for victims of specific crimes who have endured physical or mental harm. The goal of the U-Visa is to help government officials and law enforcement solve the crime, so the victim must cooperate with law enforcement to be approved. U-Visa requirements To be approved for a U-Visa, the following must be true: You [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2291,
+        "url": "https://www.oclaw.us/es/areas-de-practica/visas-u-para-victimas-de-delitos/",
+        "slug": "visas-u-para-victimas-de-delitos",
+        "title": "Visas U para víctimas de delitos",
+        "excerptHtml": "<p>La Visa U es para víctimas de delitos específicos que han sufrido daños físicos o mentales. El objetivo de la Visa U es ayudar a los funcionarios gubernamentales y a las autoridades a resolver el delito, por lo que la víctima debe cooperar con las autoridades para ser aprobada. Requisitos de la Visa UPara ser [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\">La Visa U es para víctimas de delitos específicos que han sufrido daños físicos o mentales. El objetivo de la Visa U es ayudar a los funcionarios gubernamentales y a las autoridades a resolver el delito, por lo que la víctima debe cooperar con las autoridades para ser aprobada.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Requisitos de la Visa U<br></strong>Para ser aprobado para una Visa U, lo siguiente debe ser cierto:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Eres víctima de cierto tipo de delito. Podemos ayudarle a determinar si es así.</li>\n\n\n\n<li>Ya ha ayudado o ayudará a resolver el crimen y procesar a los criminales.</li>\n\n\n\n<li>Tienes información sobre lo que hicieron los delincuentes. Si es menor de 16 años o no puede compartir la información debido a una discapacidad, un tutor, padre o amigo puede hacerlo por usted.</li>\n\n\n\n<li>Ha sufrido daños físicos o mentales graves debido al delito.</li>\n\n\n\n<li>El delito ocurrió en los EE. UU. o violó las leyes estadounidenses.</li>\n\n\n\n<li>Usted es admisible en los EE. UU. De lo contrario, puede solicitar una exención.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Contáctenos<br></strong>El proceso de solicitud de una Visa U es complicado y lleva mucho tiempo. Es una situación estresante, por lo que no deberías tener que hacerlo solo. Podemos ayudarle a comprender mejor qué hacer. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Visas U para víctimas de delitos - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/visas-u-para-victimas-de-delitos/",
+          "openGraphTitle": "Visas U para víctimas de delitos - OC Law Group",
+          "openGraphDescription": "La Visa U es para víctimas de delitos específicos que han sufrido daños físicos o mentales. El objetivo de la Visa U es ayudar a los funcionarios gubernamentales y a las autoridades a resolver el delito, por lo que la víctima debe cooperar con las autoridades para ser aprobada. Requisitos de la Visa UPara ser [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1080,
+        "url": "https://www.oclaw.us/practice-areas/t-visas-for-victims-of-human-trafficking/",
+        "slug": "t-visas-for-victims-of-human-trafficking",
+        "title": "T-Visas for Victims of Human Trafficking",
+        "excerptHtml": "<p>What is human trafficking? Human trafficking means selling human beings against their will. It is a modern version of slavery. The people who do this are called human traffickers. They promise people a job and a better life, but it’s a lie. They are sold instead. Traffickers usually take advantage of poor people and those who can’t [&hellip;]</p>\n",
+        "contentHtml": "<p><strong>What is human trafficking?</strong><br />\nHuman trafficking means selling human beings against their will. It is a modern version of slavery. The people who do this are called human traffickers. They promise people a job and a better life, but it’s a lie. They are sold instead. Traffickers usually take advantage of poor people and those who can’t get food, housing, or healthcare from the government.</p>\n<p><strong>What is the T-Visa?</strong><br />\nThe T-Visa is a non-immigrant visa. That means it is for a specific period of time. The T-Visa is for victims of human trafficking. It gives the victims protection and allows them to stay in the U.S. to help catch and punish human traffickers.</p>\n<p><strong>Requirements for a T-Visa</strong><br />\nThere are some things that need to be true to get a T-Visa:</p>\n<ul>\n<li>You are or were a human trafficking victim.</li>\n<li>You are brought to a port of entry by the human traffickers. Or, you may already be in the U.S., the Commonwealth of the Northern Mariana Islands, or American Soma because of the traffickers.</li>\n<li>If you’re at least 18 years old, you must do what you can to help law enforcement officers catch and punish human traffickers. If your body or mind is too badly injured to help, you usually won’t have to.</li>\n<li>You’re able to show that returning to your home country would be extremely dangerous.</li>\n<li>You are considered admissible to the U.S. If not, you can apply for a waiver.</li>\n</ul>\n<p>If you think you could be approved for a T-Visa, please talk to us. It’s a stressful and painful time. We can answer your questions and listen to your concerns. We’ll be with you every step of the way. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "T-Visas for Victims of Human Trafficking - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/t-visas-for-victims-of-human-trafficking/",
+          "openGraphTitle": "T-Visas for Victims of Human Trafficking - OC Law Group",
+          "openGraphDescription": "What is human trafficking? Human trafficking means selling human beings against their will. It is a modern version of slavery. The people who do this are called human traffickers. They promise people a job and a better life, but it’s a lie. They are sold instead. Traffickers usually take advantage of poor people and those who can’t [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2287,
+        "url": "https://www.oclaw.us/es/areas-de-practica/visas-t-para-victimas-de-trata-de-personas/",
+        "slug": "visas-t-para-victimas-de-trata-de-personas",
+        "title": "Visas T para víctimas de trata de personas",
+        "excerptHtml": "<p>¿Qué es la trata de personas?La trata de personas significa vender seres humanos contra su voluntad. Es una versión moderna de la esclavitud. A las personas que hacen esto se les llama traficantes de personas. Prometen a la gente un trabajo y una vida mejor, pero es mentira. Se venden en su lugar. Los traficantes [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\"><strong>¿Qué es la trata de personas?<br></strong>La trata de personas significa vender seres humanos contra su voluntad. Es una versión moderna de la esclavitud. A las personas que hacen esto se les llama traficantes de personas. Prometen a la gente un trabajo y una vida mejor, pero es mentira. Se venden en su lugar. Los traficantes suelen aprovecharse de los pobres y de aquellos que no pueden obtener comida, vivienda o atención médica del gobierno.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>¿Qué es la Visa T?<br></strong>La Visa T es una visa de no inmigrante. Eso significa que es por un período de tiempo específico. La Visa T es para víctimas de trata de personas. Brinda protección a las víctimas y les permite permanecer en los EE. UU. para ayudar a atrapar y castigar a los traficantes de personas.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Requisitos para una Visa T<br></strong>Hay algunas cosas que deben ser ciertas para obtener una Visa T:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Eres o fuiste víctima de trata de personas.</li>\n\n\n\n<li>Los traficantes de personas te llevan a un puerto de entrada. O es posible que ya se encuentre en los EE. UU., la Commonwealth de las Islas Marianas del Norte o en American Soma debido a los traficantes.</li>\n\n\n\n<li>Si tienes al menos 18 años, debes hacer todo lo que puedas para ayudar a los agentes del orden a atrapar y castigar a los traficantes de personas. Si su cuerpo o mente están demasiado dañados para ayudar, normalmente no será necesario.</li>\n\n\n\n<li>Puede demostrar que regresar a su país de origen sería extremadamente peligroso.</li>\n\n\n\n<li>Se le considera admisible en los EE. UU. De lo contrario, puede solicitar una exención.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\">Si cree que podrían aprobarle una Visa T, hable con nosotros. Es un momento estresante y doloroso. Podemos responder a tus preguntas y escuchar tus inquietudes. Estaremos contigo en cada paso del camino. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Visas T para víctimas de trata de personas - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/visas-t-para-victimas-de-trata-de-personas/",
+          "openGraphTitle": "Visas T para víctimas de trata de personas - OC Law Group",
+          "openGraphDescription": "¿Qué es la trata de personas?La trata de personas significa vender seres humanos contra su voluntad. Es una versión moderna de la esclavitud. A las personas que hacen esto se les llama traficantes de personas. Prometen a la gente un trabajo y una vida mejor, pero es mentira. Se venden en su lugar. Los traficantes [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1083,
+        "url": "https://www.oclaw.us/practice-areas/political-asylum-or-refugee-status/",
+        "slug": "political-asylum-or-refugee-status",
+        "title": "Political Asylum or Refugee Status",
+        "excerptHtml": "<p>What is asylum? People whose lives are in danger in their home country can move to another country and apply for asylum. This means asking for permission from another country’s government to live there because it isn’t safe to return home. Common reasons for asylum The person might be unsafe at home because of race, religion, sexual orientation, political beliefs, [&hellip;]</p>\n",
+        "contentHtml": "<p><strong>What is asylum?</strong><br />\nPeople whose lives are in danger in their home country can move to another country and apply for asylum. This means asking for permission from another country’s government to live there because it isn’t safe to return home.</p>\n<p><strong>Common reasons for asylum</strong><br />\nThe person might be unsafe at home because of race, religion, sexual orientation, political beliefs, or other beliefs that make people want to hurt them or put them in prison. Often the government of their home country also wants to hurt them or put in them prison for one or more of these reasons.</p>\n<p><strong>When to apply for asylum</strong><br />\nA person who moves to the U.S. for asylum has to apply within the first year. If the U.S. government agrees, it’s called political asylum or refugee status. It’s usually approved because the person is unsafe at home.</p>\n<p><strong>Permanent Residency Status</strong><br />\nIf someone has political asylum or refugee status the person is allowed to apply for Permanent Residency Status after one year of receiving the asylum or refugee status approval. This means the person can live in the U.S., get a job, and work indefinitely. People who have Permanent Residency Status are given a card to prove they have permission to live and work in the U.S. It is often called a “green card.”</p>\n<p><strong>You’re more likely to succeed with a lawyer</strong><br />\nIf you want to apply for asylum, we are here to help you. There are important documents you need to turn in, and they have to be turned in at the right time. If they aren’t filled out right or turned in at the right time, you might not get asylum or refugee status.</p>\n<p>Our lawyers know what documents you need, how to fill them out, and when to turn them in. We will also listen to your fears and answer all of your questions. If you are forced to appear in court, we will be there for you too. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Political Asylum or Refugee Status - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/political-asylum-or-refugee-status/",
+          "openGraphTitle": "Political Asylum or Refugee Status - OC Law Group",
+          "openGraphDescription": "What is asylum? People whose lives are in danger in their home country can move to another country and apply for asylum. This means asking for permission from another country’s government to live there because it isn’t safe to return home. Common reasons for asylum The person might be unsafe at home because of race, religion, sexual orientation, political beliefs, [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2285,
+        "url": "https://www.oclaw.us/es/areas-de-practica/asilo-politico-o-estatus-de-refugiado/",
+        "slug": "asilo-politico-o-estatus-de-refugiado",
+        "title": "Asilo político o estatus de refugiado",
+        "excerptHtml": "<p>¿Qué es el asilo?Las personas cuyas vidas corren peligro en su país de origen pueden trasladarse a otro país y solicitar asilo. Esto significa pedir permiso al gobierno de otro país para vivir allí porque no es seguro regresar a casa. Razones comunes para el asiloLa persona puede sentirse insegura en casa debido a su [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\"><strong>¿Qué es el asilo?<br></strong>Las personas cuyas vidas corren peligro en su país de origen pueden trasladarse a otro país y solicitar asilo. Esto significa pedir permiso al gobierno de otro país para vivir allí porque no es seguro regresar a casa.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Razones comunes para el asilo<br></strong>La persona puede sentirse insegura en casa debido a su raza, religión, orientación sexual, creencias políticas u otras creencias que hacen que la gente quiera lastimarla o encarcelarla. A menudo, el gobierno de su país de origen también quiere hacerles daño o encarcelarlos por una o más de estas razones.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Cuando solicitar asilo<br></strong>Una persona que se muda a los EE. UU. en busca de asilo debe presentar la solicitud dentro del primer año. Si el gobierno de Estados Unidos está de acuerdo, se le llama asilo político o estatus de refugiado. Generalmente se aprueba porque la persona no está segura en casa.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Estado de residencia permanente<br></strong>Si alguien tiene asilo político o estatus de refugiado, se le permite solicitar el estatus de residencia permanente después de un año de recibir la aprobación del estatus de asilo o refugiado. Esto significa que la persona puede vivir en los EE. UU., conseguir un trabajo y trabajar indefinidamente. Las personas que tienen estatus de residencia permanente reciben una tarjeta para demostrar que tienen permiso para vivir y trabajar en los EE. UU. A menudo se la llama “tarjeta verde”.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Es más probable que tenga éxito con un abogado<br></strong>Si desea solicitar asilo, estamos aquí para ayudarle. Hay documentos importantes que debe entregar y deben entregarse en el momento adecuado. Si no los completa correctamente o no los entrega en el momento adecuado, es posible que no obtenga asilo o estatus de refugiado.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Nuestros abogados saben qué documentos necesita, cómo completarlos y cuándo entregarlos. También escucharemos sus temores y responderemos a todas sus preguntas. Si se ve obligado a comparecer ante el tribunal, también estaremos allí para ayudarle. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Asilo político o estatus de refugiado - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/asilo-politico-o-estatus-de-refugiado/",
+          "openGraphTitle": "Asilo político o estatus de refugiado - OC Law Group",
+          "openGraphDescription": "¿Qué es el asilo?Las personas cuyas vidas corren peligro en su país de origen pueden trasladarse a otro país y solicitar asilo. Esto significa pedir permiso al gobierno de otro país para vivir allí porque no es seguro regresar a casa. Razones comunes para el asiloLa persona puede sentirse insegura en casa debido a su [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1092,
+        "url": "https://www.oclaw.us/practice-areas/employment-sponsorship/",
+        "slug": "employment-sponsorship",
+        "title": "Employment Sponsorship",
+        "excerptHtml": "<p>You can apply for Permanent Resident Status through employment sponsorship if you have a permanent job in the United States. How to apply for permanent residency status There is more than one step to the process. Some steps need to be done by you and some need to be done by the U.S. employer. The employer [&hellip;]</p>\n",
+        "contentHtml": "<p>You can apply for Permanent Resident Status through employment sponsorship if you have a permanent job in the United States.</p>\n<p><strong>How to apply for permanent residency status</strong><br />\nThere is more than one step to the process. Some steps need to be done by you and some need to be done by the U.S. employer. The employer has to:</p>\n<ul>\n<li>Complete a labor certification and turn it in to the Department of Labor’s Employment and Training Administration.</li>\n<li>Advertise the job you want to U.S. citizens. There is no required amount of time for how long the employer has to advertise the job. This can take a lot of time.</li>\n<li>Complete an immigration visa petition called Form I-140, Petition for Alien Worker.</li>\n</ul>\n<p><strong>You will have to:</strong><br />\nComplete Form I-485, Application to Register Permanent Residence and give it to the USCIS. This is called adjusting your status. This happens after Form I-140 is approved. You will be given a green card after you are approved to be a permanent resident.</p>\n<p><strong>Contact us</strong><br />\nThe process usually takes over two years. The process can also be complicated. We can make the process less stressful because we know what forms to fill out.</p>\n<p>We can also give you advice so you fill the forms out correctly. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Employment Sponsorship - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/employment-sponsorship/",
+          "openGraphTitle": "Employment Sponsorship - OC Law Group",
+          "openGraphDescription": "You can apply for Permanent Resident Status through employment sponsorship if you have a permanent job in the United States. How to apply for permanent residency status There is more than one step to the process. Some steps need to be done by you and some need to be done by the U.S. employer. The employer [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2275,
+        "url": "https://www.oclaw.us/es/areas-de-practica/patrocinio-de-empleo/",
+        "slug": "patrocinio-de-empleo",
+        "title": "Patrocinio de Empleo",
+        "excerptHtml": "<p>Puede solicitar el estatus de residente permanente a través del patrocinio de empleo si tiene un trabajo permanente en los Estados Unidos. Cómo solicitar el estatus de residencia permanenteHay más de un paso en el proceso. Algunos pasos deben ser realizados por usted y otros deben ser realizados por el empleador estadounidense. El empleador tiene [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\">Puede solicitar el estatus de residente permanente a través del patrocinio de empleo si tiene un trabajo permanente en los Estados Unidos.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Cómo solicitar el estatus de residencia permanente<br></strong>Hay más de un paso en el proceso. Algunos pasos deben ser realizados por usted y otros deben ser realizados por el empleador estadounidense. El empleador tiene que:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Complete una certificación laboral y entréguela a la Administración de Empleo y Capacitación del Departamento de Trabajo.</li>\n\n\n\n<li>Anuncie el trabajo que desea a los ciudadanos estadounidenses. No hay una cantidad de tiempo requerida sobre cuánto tiempo tiene el empleador para anunciar el trabajo. Esto puede llevar mucho tiempo.</li>\n\n\n\n<li>Complete una petición de visa de inmigración llamada Formulario I-140, Petición de trabajador extranjero.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Tendras que:<br></strong>Complete el Formulario I-485, Solicitud de Registro de Residencia Permanente y entréguelo al USCIS. A esto se le llama ajustar su estatus. Esto sucede después de que se aprueba el Formulario I-140. Se le otorgará una tarjeta verde después de que se le apruebe para ser residente permanente.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Contáctenos<br></strong>El proceso suele tardar más de dos años. El proceso también puede resultar complicado. Podemos hacer que el proceso sea menos estresante porque sabemos qué formularios llenar.</p>\n\n\n\n<p class=\"wp-block-paragraph\">También podemos asesorarte para que rellenes los formularios correctamente. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Patrocinio de Empleo - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/patrocinio-de-empleo/",
+          "openGraphTitle": "Patrocinio de Empleo - OC Law Group",
+          "openGraphDescription": "Puede solicitar el estatus de residente permanente a través del patrocinio de empleo si tiene un trabajo permanente en los Estados Unidos. Cómo solicitar el estatus de residencia permanenteHay más de un paso en el proceso. Algunos pasos deben ser realizados por usted y otros deben ser realizados por el empleador estadounidense. El empleador tiene [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1096,
+        "url": "https://www.oclaw.us/practice-areas/waivers-of-inadmissibility/",
+        "slug": "waivers-of-inadmissibility",
+        "title": "Waivers of Inadmissibility",
+        "excerptHtml": "<p>It can be stressful and frustrating to follow the steps of applying for a visa to the United States and be told you are inadmissible. Thankfully you can still apply for a waiver of inadmissibility in some cases. There are several kinds of waivers of inadmissibility. We can help you decide which one is right [&hellip;]</p>\n",
+        "contentHtml": "<p>It can be stressful and frustrating to follow the steps of applying for a visa to the United States and be told you are inadmissible. Thankfully you can still apply for a waiver of inadmissibility in some cases.</p>\n<p>There are several kinds of waivers of inadmissibility. We can help you decide which one is right for you.</p>\n<p><strong>Form 601A Provisional Waiver for unlawful presence</strong><br />\nThe 601A Waiver is for spouses, parents, and children of U.S. citizens or legal permanent residents who are inadmissible because of unlawful presence in the U.S. This could mean the person entered the U.S. without inspection. Or, it could mean the person stayed longer in the U.S. than their visa allowed.</p>\n<p>The benefit of a 601A Waiver is you can apply for the waiver in the U.S. before leaving for your home country to be interviewed for an immigrant visa. This shortens the time that you’ll be away from loved ones.</p>\n<p>The 601A Waiver only covers inadmissibility because of unlawful presence. If there are other reasons you are inadmissible, like criminal convictions, it’s important you work out those issues too. If you don’t, you could be separated for a long time from your loved ones even if you are given a 601A Waiver.</p>\n<p><strong>Form I-601 Waiver for extreme hardship to family members</strong><br />\nThe I-601 Waiver is for situations where a family member would experience extreme hardship if you are not allowed to live in the U.S. legally. The family member must be a citizen or permanent resident.</p>\n<p>There is no clear definition of extreme hardship, so the decision is made on a case-by-case basis. To increase your chances of being approved, you should be as clear and detailed as you can about the hardship your family member would experience.</p>\n<p>You should also be honest about any criminal convictions or past immigration offenses. If you don’t explain criminal convictions or immigration offenses your chances of being approved for this waiver may decrease. You should address these issues when you apply for a waiver because it may be the only opportunity you’ll have.</p>\n<p><strong>Form I-212 Waiver for prior deportation</strong><br />\nThe I-212 Waiver is for people who have been deported from the U.S. and are inadmissible for a certain amount of time, maybe even permanently. An I-212 Waiver allows you to apply for an immigrant or non-immigrant visa.</p>\n<p>I-212 Waivers are given on a case-by-case basis, just like the I-601 Waiver. It’s important to address any criminal record in your waiver application so you have the opportunity to explain it. Since there are no specific rules about who is given a waiver, it’s important to provide all of the information you can.</p>\n<p><strong>Contact us</strong><br />\nSince the waivers are mostly given on a case-by-case basis, it’s important to have the advice of an attorney who has experience in these situations.</p>\n<p>We can tell you which waiver is best for you and help you complete the application so your chances of being approved are higher. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Waivers of Inadmissibility - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/waivers-of-inadmissibility/",
+          "openGraphTitle": "Waivers of Inadmissibility - OC Law Group",
+          "openGraphDescription": "It can be stressful and frustrating to follow the steps of applying for a visa to the United States and be told you are inadmissible. Thankfully you can still apply for a waiver of inadmissibility in some cases. There are several kinds of waivers of inadmissibility. We can help you decide which one is right [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2297,
+        "url": "https://www.oclaw.us/es/areas-de-practica/exenciones-de-inadmisibilidad/",
+        "slug": "exenciones-de-inadmisibilidad",
+        "title": "Exenciones de inadmisibilidad",
+        "excerptHtml": "<p>Puede ser estresante y frustrante seguir los pasos para solicitar una visa para los Estados Unidos y que te digan que eres inadmisible. Afortunadamente, en algunos casos todavía puedes solicitar una exención de inadmisibilidad. Existen varios tipos de renuncias de inadmisibilidad. Podemos ayudarle a decidir cuál es el adecuado para usted. Formulario 601A Renuncia provisional [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\">Puede ser estresante y frustrante seguir los pasos para solicitar una visa para los Estados Unidos y que te digan que eres inadmisible. Afortunadamente, en algunos casos todavía puedes solicitar una exención de inadmisibilidad.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Existen varios tipos de renuncias de inadmisibilidad. Podemos ayudarle a decidir cuál es el adecuado para usted.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Formulario 601A Renuncia provisional por presencia ilegal<br></strong>La exención 601A es para cónyuges, padres e hijos de ciudadanos estadounidenses o residentes legales permanentes que son inadmisibles debido a presencia ilegal en los EE. UU. Esto podría significar que la persona ingresó a los EE. UU. sin inspección. O podría significar que la persona permaneció en los EE. UU. más tiempo del permitido por su visa.</p>\n\n\n\n<p class=\"wp-block-paragraph\">El beneficio de una exención 601A es que puede solicitar la exención en los EE. UU. antes de partir hacia su país de origen para ser entrevistado para una visa de inmigrante. Esto acorta el tiempo que estará lejos de sus seres queridos.</p>\n\n\n\n<p class=\"wp-block-paragraph\">La Exención 601A solo cubre la inadmisibilidad debido a presencia ilegal. Si hay otras razones por las que usted es inadmisible, como condenas penales, es importante que resuelva esas cuestiones también. Si no lo hace, podría estar separado de sus seres queridos durante mucho tiempo incluso si recibe una exención 601A.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Formulario I-601 Exención por dificultades extremas para miembros de la familia<br></strong>La exención I-601 es para situaciones en las que un miembro de la familia experimentaría dificultades extremas si no se le permite vivir legalmente en los EE. UU. El familiar debe ser ciudadano o residente permanente.</p>\n\n\n\n<p class=\"wp-block-paragraph\">No existe una definición clara de dificultad extrema, por lo que la decisión se toma caso por caso. Para aumentar sus posibilidades de ser aprobado, debe ser lo más claro y detallado posible sobre las dificultades que experimentaría su familiar.</p>\n\n\n\n<p class=\"wp-block-paragraph\">También debe ser honesto acerca de cualquier condena penal o delitos de inmigración pasados. Si no explica sus condenas penales o delitos de inmigración, sus posibilidades de ser aprobado para esta exención pueden disminuir. Debe abordar estos problemas cuando solicite una exención porque puede ser la única oportunidad que tendrá.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Formulario I-212 Renuncia por deportación previa<br></strong>La exención I-212 es para personas que han sido deportadas de los EE. UU. y son inadmisibles por un cierto período de tiempo, tal vez incluso de forma permanente. Una exención I-212 le permite solicitar una visa de inmigrante o de no inmigrante.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Las exenciones I-212 se otorgan caso por caso, al igual que la exención I-601. Es importante abordar cualquier antecedente penal en su solicitud de exención para que tenga la oportunidad de explicarlo. Dado que no existen reglas específicas sobre a quién se le otorga una exención, es importante brindar toda la información que pueda.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Contáctenos<br></strong>Dado que las exenciones se otorgan en su mayoría caso por caso, es importante contar con el asesoramiento de un abogado que tenga experiencia en estas situaciones.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Podemos decirle qué exención es mejor para usted y ayudarlo a completar la solicitud para que sus posibilidades de ser aprobado sean mayores. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Exenciones de inadmisibilidad - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/exenciones-de-inadmisibilidad/",
+          "openGraphTitle": "Exenciones de inadmisibilidad - OC Law Group",
+          "openGraphDescription": "Puede ser estresante y frustrante seguir los pasos para solicitar una visa para los Estados Unidos y que te digan que eres inadmisible. Afortunadamente, en algunos casos todavía puedes solicitar una exención de inadmisibilidad. Existen varios tipos de renuncias de inadmisibilidad. Podemos ayudarle a decidir cuál es el adecuado para usted. Formulario 601A Renuncia provisional [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1100,
+        "url": "https://www.oclaw.us/practice-areas/deportation-defense/",
+        "slug": "deportation-defense",
+        "title": "Deportation Defense",
+        "excerptHtml": "<p>What is a deportation defense lawyer? Many people around the world want to live in the United States, but just moving to the U.S. does not mean you are allowed to stay. If you don’t follow the right rules, the U.S. government can decide to deport you. That means they make you leave the country, even if [&hellip;]</p>\n",
+        "contentHtml": "<p><strong>What is a deportation defense lawyer?</strong><br />\nMany people around the world want to live in the United States, but just moving to the U.S. does not mean you are allowed to stay. If you don’t follow the right rules, the U.S. government can decide to deport you. That means they make you leave the country, even if you want to stay in the U.S.</p>\n<p>A deportation defense lawyer is someone who helps you understand the rules of the Immigration and Nationality Act, which is the law the U.S. government uses to decide who should be deported. If the U.S. government thinks you have broken the law, a deportation defense lawyer will help you decide what to do next.</p>\n<p><strong>The most common reasons a person is deported</strong><br />\nIn general, there are five reasons the U.S. government might believe a non-U.S. citizen should be deported:</p>\n<ul>\n<li>If a non-U.S. citizen comes to the U.S. without getting permission from the government first, like with a visa.</li>\n<li>If a non-U.S. citizen does get permission before visiting, but breaks the rules for the visit. For example, getting a job without permission or staying longer than the government said was ok. This is called a “Status Violation.”</li>\n<li>If a non-U.S. citizen is found guilty of breaking a law or belonging to a group or organization that the U.S. government does not allow.</li>\n<li>If a non-U.S. citizen has applied for asylum, but the U.S. government says no to the application.</li>\n<li>If a non-U.S. citizen becomes a public charge within five years of coming to the country.</li>\n</ul>\n<p><strong>The steps of the deportation process</strong><br />\nIf the U.S. government thinks someone might need to be deported, the deportation process, or deportation proceeding, begins. There are five general parts of the deportation process:</p>\n<ol>\n<li>The non-U.S. citizen is arrested by a member of U.S. Immigration and Customs Enforcement, often known as ICE.</li>\n<li>Soon after being arrested, the person receives a document called a Notice to Appear. The Notice to Appear tells the person why the government believes he or she should not be allowed to stay in the United States.</li>\n<li>An ICE official decides if the person is allowed to pay a bond and go home or if they have to stay in jail until the deportation hearings—meetings with an immigration judge.</li>\n<li>At the deportation hearings an immigration judge decides if the person should be deported or not.</li>\n<li>If the immigration judge decides the person should be deported, he or she has 30 days to ask for a second opinion on the decision, called filing an appeal. All appeals are read by the Board of Immigration Appeals.The Board reads a document that tells them every word spoken at the deportation hearings so they know what happened, even though they were not there. An attorney can write to the Board about why they disagree with the person being deported (called a legal brief), but the person is not allowed to talk to the Board at the appeals meeting.</li>\n</ol>\n<p><strong>The Center for U.S. Immigration Services can help you</strong><br />\nWe know it is scary and stressful to face deportation proceedings. Each of the deportation defense lawyers at the Center for U.S. Immigration Services has gone through the immigration process personally or helped a friend or family member go through it.</p>\n<p>That’s why we take the time to listen to your concerns and answer all of the questions you have so you understand each part of the process. We believe the best answer to fear is knowledge, and we are by your side to make sure you understand everything you need to know.</p>\n<p>The first step we take with you is to give our honest opinion about your case. If we believe there is not enough evidence to prove you should have to leave the country, we will help you prepare for deportation hearings by listening to your concerns, answering all of your questions, and creating any documents you will need.</p>\n<p><strong>What if I have to leave the country?</strong><br />\nIf we believe there is enough evidence to make deportation likely, we will explain the options you still have. For example, we can help you decide if you should apply for asylum, permanent residency status, or a waiver under the Immigration and Nationality Act.</p>\n<p>We will do everything in our power to prevent deportation, but sometimes it still happens. If so, we will help you understand the process and give you advice on what to do.</p>\n<p>For example, we can help you leave the country voluntarily rather than being forced to by the government. This is important because you might be able to come back to the U.S. in the future if you leave voluntarily.</p>\n<p>Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Deportation Defense - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/deportation-defense/",
+          "openGraphTitle": "Deportation Defense - OC Law Group",
+          "openGraphDescription": "What is a deportation defense lawyer? Many people around the world want to live in the United States, but just moving to the U.S. does not mean you are allowed to stay. If you don’t follow the right rules, the U.S. government can decide to deport you. That means they make you leave the country, even if [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2273,
+        "url": "https://www.oclaw.us/es/areas-de-practica/defensa-contra-la-deportacion/",
+        "slug": "defensa-contra-la-deportacion",
+        "title": "Defensa contra la deportación",
+        "excerptHtml": "<p>¿Qué es un abogado defensor de deportación?Muchas personas en todo el mundo quieren vivir en los Estados Unidos, pero el simple hecho de mudarse a los EE. UU. no significa que se les permita quedarse. Si no sigue las reglas correctas, el gobierno de los Estados Unidos puede decidir deportarlo. Eso significa que te obligan [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\"><strong>¿Qué es un abogado defensor de deportación?<br></strong>Muchas personas en todo el mundo quieren vivir en los Estados Unidos, pero el simple hecho de mudarse a los EE. UU. no significa que se les permita quedarse. Si no sigue las reglas correctas, el gobierno de los Estados Unidos puede decidir deportarlo. Eso significa que te obligan a salir del país, incluso si quieres quedarte en Estados Unidos.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Un abogado defensor de deportación es alguien que le ayuda a comprender las reglas de la Ley de Inmigración y Nacionalidad, que es la ley que utiliza el gobierno de los Estados Unidos para decidir quién debe ser deportado. Si el gobierno de los Estados Unidos cree que usted ha violado la ley, un abogado defensor de deportación lo ayudará a decidir qué hacer a continuación.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Las razones más comunes por las que una persona es deportada<br></strong>En general, hay cinco razones por las que el gobierno estadounidense podría creer que un ciudadano no estadounidense debería ser deportado:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Si un ciudadano no estadounidense viene a los EE. UU. sin obtener primero el permiso del gobierno, como con una visa.</li>\n\n\n\n<li>Si un ciudadano no estadounidense obtiene permiso antes de visitar, pero infringe las reglas de la visita. Por ejemplo, conseguir un trabajo sin permiso o quedarse más tiempo del que el gobierno considera aceptable. Esto se llama &#8220;violación de estado&#8221;.</li>\n\n\n\n<li>Si un ciudadano no estadounidense es declarado culpable de violar una ley o pertenecer a un grupo u organización que el gobierno de los Estados Unidos no permite.</li>\n\n\n\n<li>Si un ciudadano no estadounidense ha solicitado asilo, pero el gobierno de los Estados Unidos dice no a la solicitud.</li>\n\n\n\n<li>Si un ciudadano no estadounidense se convierte en una carga pública dentro de los cinco años de haber llegado al país.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Los pasos del proceso de deportación<br></strong>Si el gobierno de los Estados Unidos cree que alguien podría necesitar ser deportado, comienza el proceso de deportación o procedimiento de deportación. Hay cinco partes generales del proceso de deportación:</p>\n\n\n\n<ol class=\"wp-block-list\">\n<li>El ciudadano no estadounidense es arrestado por un miembro del Servicio de Inmigración y Control de Aduanas de Estados Unidos, conocido a menudo como ICE.</li>\n\n\n\n<li>Poco después de ser arrestada, la persona recibe un documento llamado Aviso de Comparecencia. El Aviso de comparecencia le dice a la persona por qué el gobierno cree que no se le debe permitir permanecer en los Estados Unidos.</li>\n\n\n\n<li>Un funcionario de ICE decide si a la persona se le permite pagar una fianza y regresar a casa o si tiene que permanecer en la cárcel hasta las audiencias de deportación (reuniones con un juez de inmigración).</li>\n\n\n\n<li>En las audiencias de deportación un juez de inmigración decide si la persona debe ser deportada o no.</li>\n\n\n\n<li>Si el juez de inmigración decide que la persona debe ser deportada, tiene 30 días para pedir una segunda opinión sobre la decisión, lo que se denomina presentar una apelación. Todas las apelaciones son leídas por la Junta de Apelaciones de Inmigración. La Junta lee un documento que les cuenta cada palabra hablada en las audiencias de deportación para que sepan lo que sucedió, aunque no estuvieran allí. Un abogado puede escribir a la Junta explicando por qué no está de acuerdo con la persona que está siendo deportada (lo que se denomina escrito legal), pero a la persona no se le permite hablar con la Junta en la reunión de apelaciones.</li>\n</ol>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>El Centro de Servicios de Inmigración de EE. UU. puede ayudarle<br></strong>Sabemos que es aterrador y estresante enfrentar un proceso de deportación. Cada uno de los abogados defensores de deportación del Centro de Servicios de Inmigración de EE. UU. ha pasado por el proceso de inmigración personalmente o ha ayudado a un amigo o familiar a hacerlo.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Es por eso que nos tomamos el tiempo para escuchar tus inquietudes y responder todas las preguntas que tengas para que comprendas cada parte del proceso. Creemos que la mejor respuesta al miedo es el conocimiento y estamos a su lado para asegurarnos de que comprenda todo lo que necesita saber.</p>\n\n\n\n<p class=\"wp-block-paragraph\">El primer paso que damos con usted es darle nuestra opinión honesta sobre su caso. Si creemos que no hay pruebas suficientes para demostrar que debería abandonar el país, le ayudaremos a prepararse para las audiencias de deportación escuchando sus inquietudes, respondiendo todas sus preguntas y creando los documentos que necesite.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>¿Qué pasa si tengo que salir del país?<br></strong>Si creemos que hay suficiente evidencia para hacer probable la deportación, le explicaremos las opciones que aún tiene. Por ejemplo, podemos ayudarlo a decidir si debe solicitar asilo, estatus de residencia permanente o una exención según la Ley de Inmigración y Nacionalidad.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Haremos todo lo que esté a nuestro alcance para evitar la deportación, pero a veces todavía sucede. Si es así, te ayudaremos a comprender el proceso y te daremos consejos sobre qué hacer.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Por ejemplo, podemos ayudarle a abandonar el país voluntariamente en lugar de que el gobierno lo obligue a hacerlo. Esto es importante porque es posible que pueda regresar a los EE. UU. en el futuro si sale voluntariamente.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Defensa contra la deportación - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/defensa-contra-la-deportacion/",
+          "openGraphTitle": "Defensa contra la deportación - OC Law Group",
+          "openGraphDescription": "¿Qué es un abogado defensor de deportación?Muchas personas en todo el mundo quieren vivir en los Estados Unidos, pero el simple hecho de mudarse a los EE. UU. no significa que se les permita quedarse. Si no sigue las reglas correctas, el gobierno de los Estados Unidos puede decidir deportarlo. Eso significa que te obligan [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1114,
+        "url": "https://www.oclaw.us/practice-areas/consular-processing/",
+        "slug": "consular-processing",
+        "title": "Consular Processing",
+        "excerptHtml": "<p>Consular processing is one of the pathways to permanent resident status (obtaining a green card). When an individual outside of the United States has an approved immigrant petition and an immigrant visa number immediately available, he or she may apply at a U.S. Department of State consulate abroad for an immigrant visa in order to come to the United States and be admitted [&hellip;]</p>\n",
+        "contentHtml": "<p><strong>Consular processing</strong> is one of the pathways to permanent resident status (obtaining a green card). When an individual outside of the United States has an approved immigrant petition and an immigrant visa number immediately available, he or she may apply at a U.S. Department of State consulate abroad for an immigrant visa in order to come to the United States and be admitted as a permanent resident.</p>\n<p>The first step in <em>consular processing</em> is to figure out which immigrant category you fit into. There are many different ways to attain permanent residence status, including through family, a job or refugee or asylee status. Once you determine which category applies to your situation, an immigrant petition needs to be filed on your behalf. For example, if you are seeking a green card through family, a U.S. citizen or permanent resident relative must file a Petition for Alien Relative for you. If you have a job lined up, the U.S. employer files a Petition for Alien Worker for you. Each immigration category has its own forms and requirements. If the petition is denied, reasons will be given in the notice along with any information about rights to appeal the decision.</p>\n<p>If U.S. Citizenship and Immigration Services (USCIS) approves the petition, it is sent to the Department of State’s National Visa Center (NVC), where it waits for an immigrant visa number. The NVC is responsible for collecting visa application fees and supporting documentation; they will notify you and the petitioner when your approved petition is received, and again when an immigrant visa number is about to become available. It is important to notify the NVC if there is a change in your personal situation, such as a change of address or marital status.</p>\n<p>The Immigration and Nationality Act (INA) sets the number of immigrant visas that may be issued each year. In certain categories, the demand is higher than the supply of visas, and there is a waiting list. The length of your wait for a visa depends on this demand and supply, as well as limitations on how many visas per country and category. Immigrant visas available to immediate relatives of U.S. citizens (parents, spouses and unmarried children of U.S. citizens) are unlimited, so these are always available.</p>\n<p>Once a visa is available, the consular office will schedule an interview for the applicant and complete the processing of the case. If the consular office decides that you are eligible for an immigrant visa, you are given a packet of information called a “Visa Packet.” You should not open this packet. Instead, you give the Visa Packet to the Customs and Border Protection officer upon your arrival to the United States. If you are found admissible after inspection by the officer, you will be admitted as a permanent resident of the United States and your green card will be mailed to you.</p>\n<p>If you are considering <u>consular processing</u> as a pathway to permanent resident status (a green card), you should discuss your situation with an experienced immigration attorney. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Consular Processing - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/consular-processing/",
+          "openGraphTitle": "Consular Processing - OC Law Group",
+          "openGraphDescription": "Consular processing is one of the pathways to permanent resident status (obtaining a green card). When an individual outside of the United States has an approved immigrant petition and an immigrant visa number immediately available, he or she may apply at a U.S. Department of State consulate abroad for an immigrant visa in order to come to the United States and be admitted [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2269,
+        "url": "https://www.oclaw.us/es/areas-de-practica/procesamiento-consular/",
+        "slug": "procesamiento-consular",
+        "title": "Procesamiento Consular",
+        "excerptHtml": "<p>El procesamiento consular es uno de los caminos hacia el estatus de residente permanente (obtención de una tarjeta verde). Cuando una persona fuera de los Estados Unidos tiene una petición de inmigrante aprobada y un número de visa de inmigrante inmediatamente disponible, él o ella puede solicitar en un consulado del Departamento de Estado de [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\">El procesamiento consular es uno de los caminos hacia el estatus de residente permanente (obtención de una tarjeta verde). Cuando una persona fuera de los Estados Unidos tiene una petición de inmigrante aprobada y un número de visa de inmigrante inmediatamente disponible, él o ella puede solicitar en un consulado del Departamento de Estado de los EE. UU. en el extranjero una visa de inmigrante para poder venir a los Estados Unidos y ser admitido como un residente permanente.</p>\n\n\n\n<p class=\"wp-block-paragraph\">El primer paso en el procesamiento consular es determinar en qué categoría de inmigrante encaja. Hay muchas formas diferentes de obtener el estatus de residencia permanente, incluso a través de la familia, un trabajo o el estatus de refugiado o asilado. Una vez que determine qué categoría se aplica a su situación, se debe presentar una petición de inmigrante en su nombre. Por ejemplo, si está buscando una tarjeta de residencia a través de un familiar, un ciudadano estadounidense o un pariente residente permanente debe presentar una Petición de familiar extranjero por usted. Si tiene un trabajo disponible, el empleador estadounidense presenta una Petición de trabajador extranjero por usted. Cada categoría de inmigración tiene sus propios formularios y requisitos. Si se rechaza la petición, se darán los motivos en el aviso junto con cualquier información sobre los derechos para apelar la decisión.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Si el Servicio de Ciudadanía e Inmigración de los Estados Unidos (USCIS) aprueba la petición, se envía al Centro Nacional de Visas (NVC) del Departamento de Estado, donde espera un número de visa de inmigrante. El NVC es responsable de cobrar las tarifas de solicitud de visa y la documentación de respaldo; ellos le notificarán a usted y al peticionario cuando se reciba su petición aprobada, y nuevamente cuando un número de visa de inmigrante esté a punto de estar disponible. Es importante notificar al NVC si hay un cambio en su situación personal, como un cambio de dirección o estado civil.</p>\n\n\n\n<p class=\"wp-block-paragraph\">La Ley de Inmigración y Nacionalidad (INA) establece la cantidad de visas de inmigrante que se pueden emitir cada año. En determinadas categorías, la demanda es mayor que la oferta de visas y hay lista de espera. La duración de la espera para obtener una visa depende de esta oferta y demanda, así como de las limitaciones sobre la cantidad de visas por país y categoría. Las visas de inmigrante disponibles para familiares inmediatos de ciudadanos estadounidenses (padres, cónyuges e hijos solteros de ciudadanos estadounidenses) son ilimitadas, por lo que siempre están disponibles.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Una vez que la visa esté disponible, la oficina consular programará una entrevista para el solicitante y completará el procesamiento del caso. Si la oficina consular decide que usted es elegible para una visa de inmigrante, se le entrega un paquete de información llamado &#8220;Paquete de Visa&#8221;. No debes abrir este paquete. En su lugar, entrega el paquete de visa al oficial de Aduanas y Protección Fronteriza a su llegada a los Estados Unidos. Si usted es declarado admisible después de una inspección por parte del oficial, será admitido como residente permanente de los Estados Unidos y se le enviará su tarjeta de residencia por correo.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Si está considerando el procesamiento consular como un camino hacia el estatus de residente permanente (una tarjeta verde), debe discutir su situación con un abogado de inmigración con experiencia. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Procesamiento Consular - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/procesamiento-consular/",
+          "openGraphTitle": "Procesamiento Consular - OC Law Group",
+          "openGraphDescription": "El procesamiento consular es uno de los caminos hacia el estatus de residente permanente (obtención de una tarjeta verde). Cuando una persona fuera de los Estados Unidos tiene una petición de inmigrante aprobada y un número de visa de inmigrante inmediatamente disponible, él o ella puede solicitar en un consulado del Departamento de Estado de [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1104,
+        "url": "https://www.oclaw.us/practice-areas/permanent-residency-status/",
+        "slug": "permanent-residency-status",
+        "title": "Permanent Resident Status",
+        "excerptHtml": "<p>The benefits of Permanent Resident Status A person who has Permanent Resident Status has permission to live and work in the U.S. for as long as they want to. A Permanent Resident Card is what many people call a “green card,” but the official name is a Permanent Residency Card. This card is proof that [&hellip;]</p>\n",
+        "contentHtml": "<p><strong>The benefits of Permanent Resident Status</strong><br />\nA person who has Permanent Resident Status has permission to live and work in the U.S. for as long as they want to. A Permanent Resident Card is what many people call a “green card,” but the official name is a Permanent Residency Card. This card is proof that the person is a Permanent Resident.</p>\n<p>Becoming a Permanent Resident is good if you want to become a U.S. citizen someday. One of the things you need to do to become a U.S. citizen is to be a Permanent Resident for five years or more, or three years or more for people who got their green card through marriage.</p>\n<p><strong>Why is it called a “green card”?</strong><br />\nIt’s called a green card because the card used to be the color green. Many people say they are “getting a green card,” which means they are applying for Permanent Residency Status.</p>\n<p><strong>Five ways to become a Permanent Resident</strong><br />\nThere are five general ways a person can become a Permanent Resident. You can click on the terms below for more information:</p>\n<ul>\n<li> Employment sponsorship</li>\n<li> Family sponsorship</li>\n<li> Annual diversity lottery</li>\n<li> Qualified investment</li>\n<li>Political asylum or refugee status</li>\n</ul>\n<p><strong>Permanent Residency Status is different than a visa</strong><br />\nA visa has rules about how long a person can live in the U.S., but Permanent Residency does not.</p>\n<p><strong>Contact us</strong><br />\nIf you are ready to apply for Permanent Residency Status or have questions. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n<section class=\"col s8\">\n<div class=\"content clr\"></div>\n</section>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Permanent Resident Status - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/permanent-residency-status/",
+          "openGraphTitle": "Permanent Resident Status - OC Law Group",
+          "openGraphDescription": "The benefits of Permanent Resident Status A person who has Permanent Resident Status has permission to live and work in the U.S. for as long as they want to. A Permanent Resident Card is what many people call a “green card,” but the official name is a Permanent Residency Card. This card is proof that [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2283,
+        "url": "https://www.oclaw.us/es/areas-de-practica/estatus-de-residente-permanente/",
+        "slug": "estatus-de-residente-permanente",
+        "title": "Estatus de residente permanente",
+        "excerptHtml": "<p>Los beneficios del estatus de residente permanenteUna persona que tiene el estatus de residente permanente tiene permiso para vivir y trabajar en los EE. UU. durante el tiempo que desee. Una Tarjeta de Residente Permanente es lo que mucha gente llama “tarjeta verde”, pero el nombre oficial es Tarjeta de Residencia Permanente. Esta tarjeta es [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\"><strong>Los beneficios del estatus de residente permanente<br></strong>Una persona que tiene el estatus de residente permanente tiene permiso para vivir y trabajar en los EE. UU. durante el tiempo que desee. Una Tarjeta de Residente Permanente es lo que mucha gente llama “tarjeta verde”, pero el nombre oficial es Tarjeta de Residencia Permanente. Esta tarjeta es prueba de que la persona es Residente Permanente.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Convertirse en residente permanente es bueno si algún día desea convertirse en ciudadano estadounidense. Una de las cosas que debe hacer para convertirse en ciudadano estadounidense es ser residente permanente durante cinco años o más, o tres años o más para las personas que obtuvieron su tarjeta de residencia a través del matrimonio.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>¿Por qué se llama “tarjeta verde”?<br></strong>Se llama tarjeta verde porque la tarjeta solía ser de color verde. Muchas personas dicen que están “obteniendo una tarjeta verde”, lo que significa que están solicitando el Estatus de Residencia Permanente.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Cinco formas de convertirse en residente permanente<br></strong>Hay cinco formas generales en que una persona puede convertirse en Residente Permanente. Puede hacer clic en los términos a continuación para obtener más información:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Patrocinio de empleo</li>\n\n\n\n<li>El patrocinio de la familia</li>\n\n\n\n<li>Lotería anual de diversidad</li>\n\n\n\n<li>Inversión calificada</li>\n\n\n\n<li>Asilo político o estatus de refugiado</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>El estatus de residencia permanente es diferente a una visa<br></strong>Una visa tiene reglas sobre cuánto tiempo una persona puede vivir en los EE. UU., pero la residencia permanente no.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Contáctenos<br></strong>Si está listo para solicitar el estatus de residencia permanente o tiene preguntas. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Estatus de residente permanente - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/estatus-de-residente-permanente/",
+          "openGraphTitle": "Estatus de residente permanente - OC Law Group",
+          "openGraphDescription": "Los beneficios del estatus de residente permanenteUna persona que tiene el estatus de residente permanente tiene permiso para vivir y trabajar en los EE. UU. durante el tiempo que desee. Una Tarjeta de Residente Permanente es lo que mucha gente llama “tarjeta verde”, pero el nombre oficial es Tarjeta de Residencia Permanente. Esta tarjeta es [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1109,
+        "url": "https://www.oclaw.us/practice-areas/u-s-citizenship-through-naturalization/",
+        "slug": "u-s-citizenship-through-naturalization",
+        "title": "U.S. Citizenship Through Naturalization",
+        "excerptHtml": "<p>The benefits of U.S. citizenship Citizens of the U.S. can have a job and live in the country as long as they want to. They can also use programs the government runs, like Social Security, Medicaid, and Medicare. A U.S. citizen is protected from deportation. How to become a U.S. citizen The most common way a person becomes a U.S. [&hellip;]</p>\n",
+        "contentHtml": "<p><strong>The benefits of U.S. citizenship</strong><br />\nCitizens of the U.S. can have a job and live in the country as long as they want to. They can also use programs the government runs, like Social Security, Medicaid, and Medicare. A U.S. citizen is protected from deportation.</p>\n<p><strong>How to become a U.S. citizen</strong><br />\nThe most common way a person becomes a U.S. citizen is by being born in the country. If you were born in another country, you can still become a citizen. The process of becoming a citizen is called naturalization. There are rules a non-U.S. citizen must follow:</p>\n<ul>\n<li>You must be a Permanent Resident for at least five years. If you are married to a U.S. citizen, you have to be a Permanent Resident for three years.</li>\n<li>While you are a Permanent Resident, you have to live in the U.S. for more than half of the five years. If you are a Permanent Resident and married to a U.S. citizen, you have to live in the U.S. for more than half of the three years.</li>\n<li>You have to follow the laws of the U.S. This is called having “good moral character.” A person can still become a citizen if they break the law, but it depends on what law they broke. You can read more here. A lawyer can help you understand this rule.</li>\n<li>You have to go to an interview at the U.S. Citizenship and Immigration Services (USCIS). An interview means a person(s) asks you questions, and you have to answer as honestly as you can. The questions generally test U.S. civic and English language knowledge. A lawyer can help you prepare for the interview.</li>\n</ul>\n<p>It is not always easy to become a U.S. citizen. Answering all the questions on the applications can be confusing and take a lot of time. The interview process can too. But it is possible!</p>\n<p><strong>Contact us</strong><br />\nWe know how the process works and will guide you through it. We’ll make sure you know what to do and when to do it so you can become a U.S. citizen.</p>\n<p>Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "U.S. Citizenship Through Naturalization - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/u-s-citizenship-through-naturalization/",
+          "openGraphTitle": "U.S. Citizenship Through Naturalization - OC Law Group",
+          "openGraphDescription": "The benefits of U.S. citizenship Citizens of the U.S. can have a job and live in the country as long as they want to. They can also use programs the government runs, like Social Security, Medicaid, and Medicare. A U.S. citizen is protected from deportation. How to become a U.S. citizen The most common way a person becomes a U.S. [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2293,
+        "url": "https://www.oclaw.us/es/areas-de-practica/ciudadania-estadounidense-a-traves-de-la-naturalizacion/",
+        "slug": "ciudadania-estadounidense-a-traves-de-la-naturalizacion",
+        "title": "Ciudadanía estadounidense a través de la naturalización",
+        "excerptHtml": "<p>Los beneficios de la ciudadanía estadounidenseLos ciudadanos de Estados Unidos pueden tener un trabajo y vivir en el país todo el tiempo que quieran. También pueden utilizar programas administrados por el gobierno, como el Seguro Social, Medicaid y Medicare. Un ciudadano estadounidense está protegido de la deportación. Cómo convertirse en ciudadano estadounidenseLa forma más común [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\"><strong>Los beneficios de la ciudadanía estadounidense<br></strong>Los ciudadanos de Estados Unidos pueden tener un trabajo y vivir en el país todo el tiempo que quieran. También pueden utilizar programas administrados por el gobierno, como el Seguro Social, Medicaid y Medicare. Un ciudadano estadounidense está protegido de la deportación.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Cómo convertirse en ciudadano estadounidense<br></strong>La forma más común en que una persona se convierte en ciudadano estadounidense es naciendo en el país. Si naciste en otro país, aún puedes convertirte en ciudadano. El proceso de convertirse en ciudadano se llama naturalización. Hay reglas que un ciudadano no estadounidense debe seguir:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Debe ser Residente Permanente durante al menos cinco años. Si está casado con un ciudadano estadounidense, debe ser residente permanente durante tres años.</li>\n\n\n\n<li>Mientras sea residente permanente, deberá vivir en los EE. UU. durante más de la mitad de los cinco años. Si es residente permanente y está casado con un ciudadano estadounidense, debe vivir en los EE. UU. durante más de la mitad de los tres años.</li>\n\n\n\n<li>Tienes que seguir las leyes de los EE. UU. A esto se le llama tener “buen carácter moral”. Una persona aún puede convertirse en ciudadano si infringe la ley, pero depende de qué ley infringió. Puede leer más aquí. Un abogado puede ayudarle a comprender esta regla.</li>\n\n\n\n<li>Tienes que acudir a una entrevista en el Servicio de Ciudadanía e Inmigración de Estados Unidos (USCIS). Una entrevista significa que una persona le hace preguntas y usted debe responder con la mayor honestidad posible. Las preguntas generalmente evalúan el conocimiento cívico y del idioma inglés de los EE. UU. Un abogado puede ayudarle a prepararse para la entrevista.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\">No siempre es fácil convertirse en ciudadano estadounidense. Responder todas las preguntas de las solicitudes puede resultar confuso y llevar mucho tiempo. El proceso de entrevista también puede hacerlo. ¡Pero es posible!</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Contáctenos<br></strong>Sabemos cómo funciona el proceso y lo guiaremos a través de él. Nos aseguraremos de que sepa qué hacer y cuándo hacerlo para que pueda convertirse en ciudadano estadounidense.</p>\n\n\n\n<p class=\"wp-block-paragraph\">Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Ciudadanía estadounidense a través de la naturalización - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/ciudadania-estadounidense-a-traves-de-la-naturalizacion/",
+          "openGraphTitle": "Ciudadanía estadounidense a través de la naturalización - OC Law Group",
+          "openGraphDescription": "Los beneficios de la ciudadanía estadounidenseLos ciudadanos de Estados Unidos pueden tener un trabajo y vivir en el país todo el tiempo que quieran. También pueden utilizar programas administrados por el gobierno, como el Seguro Social, Medicaid y Medicare. Un ciudadano estadounidense está protegido de la deportación. Cómo convertirse en ciudadano estadounidenseLa forma más común [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1174,
+        "url": "https://www.oclaw.us/practice-areas/fiancee-k-1-visa/",
+        "slug": "fiancee-k-1-visa",
+        "title": "Fiancé(e) (K-1) Visa",
+        "excerptHtml": "<p>Fiancé(e) K-1 Visa A K-1 Visa or Fiancé(e) Visa is a nonimmigrant visa that begins the process of obtaining permanent residency. It allows a fiancé(e) of a U.S. citizen to enter the United States for the purpose of marriage within 90 days of entry A K-1 Visa begins with the U.S. Citizen fiancé(e) filing a [&hellip;]</p>\n",
+        "contentHtml": "<p><strong>Fiancé(e) K-1 Visa</strong><br />\nA K-1 Visa or Fiancé(e) Visa is a nonimmigrant visa that begins the process of obtaining permanent residency. It allows a fiancé(e) of a U.S. citizen to enter the United States for the purpose of marriage within 90 days of entry A K-1 Visa begins with the U.S. Citizen fiancé(e) filing a petition and upon approval the foreign national interviews at the consulate for a nonimmigrant visa. A K-1 visa is ideal for couples who wish to get married in the United States.</p>\n<p><strong>What are the requirements of K-1 fiancé(e) Visa?</strong><br />\n• One person in the couple must be a U.S. citizen<br />\n• Both the foreign national fiancé(e) (the K-1 beneficiary) and the petitioner must be free to marry &#8211; all prior marriages must have been terminated through death, divorce, or annulment.<br />\n• Both K-1 petitioner and the beneficiary must have met in person within the last two (2) years unless meeting would create an extreme hardship or other exceptions apply.<br />\n• K-1 visa fiancé(e) wants to enter solely to marry his/her K-1 petitioner for bona fide purposes.<br />\n• Marriage must take place within 90 days after entry to the U.S. on the K visa.</p>\n<p><strong>K-1 Fiancé(e) Visa Application Process</strong><br />\n• The U.S. citizen fiancé(e) must start a K-1 Visa in the U.S. on behalf of the foreign fiancé(e). A decision on the petition will be made in the U.S.<br />\n• Once the initial filing is approved, the K-1 petition will be forwarded to the National Visa Center and the overseas consulate post where the foreign fiancé(e) resides.<br />\n• A fiancé(e) visa interview will be scheduled. The general purpose of the K-1 interview is to ascertain that the fiancé(e) relationship is genuine, and the overseas fiancé is admissible.<br />\n• Once the K-1 visa is approved, the K-1 visa holder has generally six months to enter the U.S. before the expiration of the visa.<br />\n• Upon entering the U.S. on the K-1 fiancé(e) visa, the foreign national fiancé(e) must marry the U.S. citizen fiancé(e) within ninety (90) days.<br />\n• WARNING: after marriage, the foreign national fiancé(e) must file to adjust status to that of a permanent resident. We also provide services for this step.<br />\nContact us<br />\nYou are more likely to be approved for a Fiancé(e) visa if you work with a lawyer. We have the necessary experience and can give you advice on how to complete the application.<br />\nWe can also give you advice on what evidence to include in your application. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Fiancé(e) (K-1) Visa - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/fiancee-k-1-visa/",
+          "openGraphTitle": "Fiancé(e) (K-1) Visa - OC Law Group",
+          "openGraphDescription": "Fiancé(e) K-1 Visa A K-1 Visa or Fiancé(e) Visa is a nonimmigrant visa that begins the process of obtaining permanent residency. It allows a fiancé(e) of a U.S. citizen to enter the United States for the purpose of marriage within 90 days of entry A K-1 Visa begins with the U.S. Citizen fiancé(e) filing a [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2279,
+        "url": "https://www.oclaw.us/es/areas-de-practica/visa-de-prometidoa-k-1/",
+        "slug": "visa-de-prometidoa-k-1",
+        "title": "Visa de prometido(a) (K-1)",
+        "excerptHtml": "<p>Prometido(a) Visa K-1Una Visa K-1 o Visa de Prometido(a) es una visa de no inmigrante que inicia el proceso de obtención de la residencia permanente. Permite que el prometido(a) de un ciudadano estadounidense ingrese a los Estados Unidos con fines de matrimonio dentro de los 90 días posteriores a la entrada. Una visa K-1 comienza [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\"><strong>Prometido(a) Visa K-1<br></strong>Una Visa K-1 o Visa de Prometido(a) es una visa de no inmigrante que inicia el proceso de obtención de la residencia permanente. Permite que el prometido(a) de un ciudadano estadounidense ingrese a los Estados Unidos con fines de matrimonio dentro de los 90 días posteriores a la entrada. Una visa K-1 comienza cuando el prometido(a) ciudadano estadounidense presenta una petición y, una vez aprobada, las entrevistas con ciudadanos extranjeros. en el consulado para obtener una visa de no inmigrante. Una visa K-1 es ideal para parejas que desean casarse en los Estados Unidos.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>¿Cuáles son los requisitos de la Visa K-1 para prometido(a)?</strong></p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Una persona de la pareja debe ser ciudadana estadounidense.</li>\n\n\n\n<li>Tanto el prometido(a) extranjero (el beneficiario K-1) como el peticionario deben tener libertad para casarse; todos los matrimonios anteriores deben haber terminado por muerte, divorcio o anulación.</li>\n\n\n\n<li>Tanto el peticionario K-1 como el beneficiario deben haberse conocido en persona dentro de los últimos dos (2) años, a menos que la reunión creara una dificultad extrema o se apliquen otras excepciones.</li>\n\n\n\n<li>El prometido(a) con visa K-1 desea ingresar únicamente para casarse con su peticionario K-1 para propósitos de buena fe.</li>\n\n\n\n<li>El matrimonio debe realizarse dentro de los 90 días posteriores a la entrada a los EE. UU. con la visa K.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>K-1 Fiancé(e) Visa Application Process</strong></p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>El prometido(a) ciudadano estadounidense debe iniciar una Visa K-1 en los EE.UU. en nombre del prometido(a) extranjero. La decisión sobre la petición se tomará en los EE. UU.</li>\n\n\n\n<li>Una vez que se apruebe la presentación inicial, la petición K-1 se enviará al Centro Nacional de Visas y al consulado en el extranjero donde reside el prometido(a) extranjero.</li>\n\n\n\n<li>Se programará una entrevista para la visa de prometido(a). El propósito general de la entrevista K-1 es determinar que la relación del prometido(a) es genuina y que el prometido en el extranjero es admisible.</li>\n\n\n\n<li>Una vez que se aprueba la visa K-1, el titular de la visa K-1 generalmente tiene seis meses para ingresar a los EE. UU. antes de que expire la visa.</li>\n\n\n\n<li>Al ingresar a los EE. UU. con la visa de prometido(a) K-1, el prometido(a) extranjero debe casarse con el prometido(a) ciudadano estadounidense dentro de los noventa (90) días.</li>\n\n\n\n<li>ADVERTENCIA: después del matrimonio, el prometido(a) extranjero debe presentar una solicitud para ajustar su estatus al de residente permanente. También brindamos servicios para este paso.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Contáctenos<br></strong>Es más probable que le aprueben una visa de prometido(a) si trabaja con un abogado. Tenemos la experiencia necesaria y podemos asesorarle sobre cómo completar la solicitud.<br>También podemos asesorarle sobre qué pruebas incluir en su solicitud. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "Visa de prometido(a) (K-1) - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/visa-de-prometidoa-k-1/",
+          "openGraphTitle": "Visa de prometido(a) (K-1) - OC Law Group",
+          "openGraphDescription": "Prometido(a) Visa K-1Una Visa K-1 o Visa de Prometido(a) es una visa de no inmigrante que inicia el proceso de obtención de la residencia permanente. Permite que el prometido(a) de un ciudadano estadounidense ingrese a los Estados Unidos con fines de matrimonio dentro de los 90 días posteriores a la entrada. Una visa K-1 comienza [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    },
+    {
+      "english": {
+        "wordpressId": 1322,
+        "url": "https://www.oclaw.us/practice-areas/daca/",
+        "slug": "daca",
+        "title": "DACA",
+        "excerptHtml": "<p>Deferred Action for Childhood Arrivals (&#8220;DACA&#8221;) is a policy created by former President Barack Obama in 2012. DACA allows certain individuals who entered the United States as children to receive certain benefits. DACA requirements To apply for DACA, the following must be true: Born June 16, 1981 or later; Have unlawful presence in the United [&hellip;]</p>\n",
+        "contentHtml": "<p>Deferred Action for Childhood Arrivals (&#8220;DACA&#8221;) is a policy created by former President Barack Obama in 2012. DACA allows certain individuals who entered the United States as children to receive certain benefits.</p>\n<p><strong>DACA requirements</strong><br />\nTo apply for DACA, the following must be true:</p>\n<ul>\n<li>Born June 16, 1981 or later;</li>\n<li>Have unlawful presence in the United States before the age of 16;</li>\n<li>Lived continuously in the United States since June 15, 2007;</li>\n<li>Physical presence in the United States on June 15, 2012, and at the time of filing;</li>\n<li>No lawful status on June 15, 2012;</li>\n<li>Have graduated high school, have a G.E.D.,be currently enrolled in school or have an honorable discharge from the armed forces; and</li>\n<li>No felonies, limited misdemeanors (consult an attorney to evaluate what qualifies), and not a public safety nor national security threat.</li>\n</ul>\n<p><strong>Contact us</strong><br />\nThe process of applying for DACA can be complicated and takes a lot of time. It is a stressful situation, so you shouldn’t have to do it alone. We can help you better understand what to do. Call us today at 847-258-9954 , or email us at info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "DACA - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/practice-areas/daca/",
+          "openGraphTitle": "DACA - OC Law Group",
+          "openGraphDescription": "Deferred Action for Childhood Arrivals (&#8220;DACA&#8221;) is a policy created by former President Barack Obama in 2012. DACA allows certain individuals who entered the United States as children to receive certain benefits. DACA requirements To apply for DACA, the following must be true: Born June 16, 1981 or later; Have unlawful presence in the United [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "spanish": {
+        "wordpressId": 2271,
+        "url": "https://www.oclaw.us/es/areas-de-practica/daca/",
+        "slug": "daca",
+        "title": "DACA",
+        "excerptHtml": "<p>La Acción Diferida para los Llegados en la Infancia (“DACA”) es una política creada por el expresidente Barack Obama en 2012. DACA permite que ciertas personas que ingresaron a los Estados Unidos cuando eran niños reciban ciertos beneficios. Requisitos DACAPara solicitar DACA, lo siguiente debe ser cierto: ContáctenosEl proceso de solicitud de DACA puede ser [&hellip;]</p>\n",
+        "contentHtml": "\n<p class=\"wp-block-paragraph\">La Acción Diferida para los Llegados en la Infancia (“DACA”) es una política creada por el expresidente Barack Obama en 2012. DACA permite que ciertas personas que ingresaron a los Estados Unidos cuando eran niños reciban ciertos beneficios.</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Requisitos DACA<br></strong>Para solicitar DACA, lo siguiente debe ser cierto:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Nacido el 16 de junio de 1981 o después;</li>\n\n\n\n<li>Tener presencia ilegal en los Estados Unidos antes de los 16 años;</li>\n\n\n\n<li>Vivió continuamente en los Estados Unidos desde el 15 de junio de 2007;</li>\n\n\n\n<li>Presencia física en los Estados Unidos el 15 de junio de 2012 y al momento de la presentación;</li>\n\n\n\n<li>Sin estatus legal el 15 de junio de 2012;</li>\n\n\n\n<li>Haber graduado de la escuela secundaria, tener un G.E.D., estar actualmente matriculado en la escuela o tener una baja honorable de las fuerzas armadas; y</li>\n\n\n\n<li>Sin delitos graves, delitos menores limitados (consulte a un abogado para evaluar qué califica) y no es una amenaza para la seguridad pública ni la seguridad nacional.</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>Contáctenos<br></strong>El proceso de solicitud de DACA puede ser complicado y lleva mucho tiempo. Es una situación estresante, por lo que no deberías tener que hacerlo solo. Podemos ayudarle a comprender mejor qué hacer. Llámenos hoy al 847-258-9954 o envíenos un correo electrónico a info@oclaw.us.</p>\n",
+        "images": [],
+        "featuredMediaId": null,
+        "seo": {
+          "title": "DACA - OC Law Group",
+          "description": null,
+          "canonical": "https://www.oclaw.us/es/areas-de-practica/daca/",
+          "openGraphTitle": "DACA - OC Law Group",
+          "openGraphDescription": "La Acción Diferida para los Llegados en la Infancia (“DACA”) es una política creada por el expresidente Barack Obama en 2012. DACA permite que ciertas personas que ingresaron a los Estados Unidos cuando eran niños reciban ciertos beneficios. Requisitos DACAPara solicitar DACA, lo siguiente debe ser cierto: ContáctenosEl proceso de solicitud de DACA puede ser [&hellip;]",
+          "openGraphImages": []
+        },
+        "attorneyAssociations": null
+      },
+      "translationPairing": "proposed by matching page titles and topics; verify in WordPress before import"
+    }
+  ],
+  "mapping": {
+    "title": "practiceArea.title",
+    "slug": "practiceArea.slug.current (preserve per locale)",
+    "excerptHtml": "practiceArea.shortDescription after editorial review",
+    "contentHtml": "practiceArea.body / sections after HTML-to-Portable-Text conversion",
+    "images": "practiceArea.mainImage and optional icon after licensing and alt-text review",
+    "seo": "practiceArea.seo",
+    "translationPairing": "translation.metadata",
+    "attorneyAssociations": "attorney.practiceAreas after human verification"
+  }
+}

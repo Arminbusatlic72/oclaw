@@ -67,6 +67,7 @@ export const footerContact = defineType({
   icon: EnvelopeIcon,
   fields: [
     defineField({name: 'heading', title: 'Heading', type: 'string'}),
+    defineField({name: 'offices', title: 'Office records', description: 'Use office records for contact details. Existing manual fields remain for legacy content.', type: 'array', of: [{type: 'reference', to: [{type: 'office'}], options: {filter: ({document}) => ({filter: 'language == $language', params: {language: document?.language || 'en'}})}}], validation: (rule) => rule.unique()}),
     footerEmail,
     defineField({name: 'phones', title: 'Phone numbers', type: 'array', of: [footerPhone]}),
     defineField({name: 'addresses', title: 'Addresses', type: 'array', of: [footerAddress]}),
@@ -74,9 +75,9 @@ export const footerContact = defineType({
   validation: (rule) =>
     rule.custom((value) => {
       const contact = value as
-        | {email?: {address?: string}; phones?: unknown[]; addresses?: unknown[]}
+        | {email?: {address?: string}; phones?: unknown[]; addresses?: unknown[]; offices?: unknown[]}
         | undefined
-      if (contact?.email?.address || contact?.phones?.length || contact?.addresses?.length) return true
+      if (contact?.email?.address || contact?.phones?.length || contact?.addresses?.length || contact?.offices?.length) return true
       return 'Add an email, phone number, or address'
     }),
   preview: {

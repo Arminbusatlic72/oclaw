@@ -1,0 +1,28 @@
+{
+  "projectId": "ewrcmuk0",
+  "dataset": "production",
+  "inventorySha256": "2e0b70e8562d086c195b3b2757accdbeba867af4427a12863da85faca21a3126",
+  "backupSha256": "03c2ad6736a53227c589ffcd24b87a53a92ebaca671ffa4b3550632cd7eef212",
+  "pair": "family-sponsorship",
+  "status": "applied",
+  "plannedCreates": [
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1067"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2277"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1067"
+    }
+  ],
+  "createdDocumentIds": [
+    "drafts.practiceArea.wp.1067",
+    "drafts.practiceArea.wp.2277",
+    "i18n.practiceArea.practiceArea.wp.1067"
+  ],
+  "published": false
+}

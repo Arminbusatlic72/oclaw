@@ -7,6 +7,7 @@ export const footerQuery = defineQuery(`
     ...,
     blocks[]{
       ...,
+      _type == "footerContact" => {..., offices[]->{_id, name, language, "slug": slug.current, streetAddress, addressLine2, city, state, postalCode, country, phone, email}},
       _type == "footerLinkGroup" => {..., links[]{..., ${footerLinkFields}}}
     },
     bottomLinks[]{..., ${footerLinkFields}},
@@ -106,3 +107,17 @@ export const blogSitemapQuery = defineQuery(`
     "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "post": value->{_id, language, "slug": slug.current, publishedAt, seo}}
   }
 `)
+
+// Public collection queries always use the published perspective at the call site.
+export const practiceAreasQuery = defineQuery(`*[_type == "practiceArea" && language == $language && defined(slug.current)] | order(displayOrder asc, title asc){_id, title, "slug": slug.current, language, shortDescription, icon, mainImage, featuredOnHomepage, displayOrder, seo, _updatedAt}`)
+export const practiceAreaQuery = defineQuery(`*[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, seo, _updatedAt}`)
+export const attorneyListQuery = defineQuery(`*[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, seo, _updatedAt}`)
+export const attorneyQuery = defineQuery(`*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, biography, email, phone, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}`)
+export const officeListQuery = defineQuery(`*[_type == "office" && language == $language && defined(slug.current)] | order(displayOrder asc, name asc){_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, image, openingHours, seo, _updatedAt}`)
+export const officeQuery = defineQuery(`*[_type == "office" && language == $language && slug.current == $slug][0]{_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, coordinates, image, openingHours, seo, _updatedAt}`)
+export const attorneysForPracticeQuery = defineQuery(`*[_type == "attorney" && language == $language && defined(slug.current) && $id in practiceAreas[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography, "officeIds": offices[]._ref}`)
+export const attorneysForOfficeQuery = defineQuery(`*[_type == "attorney" && language == $language && defined(slug.current) && $id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography}`)
+export const practiceAreaArchiveQuery = defineQuery(`*[_type == "practiceAreaArchive" && _id == $id][0]`)
+export const collectionTranslationQuery = defineQuery(`*[_type == "translation.metadata" && references($id)][0].translations[]{language,"target":value->{_id,_type,language,"slug":slug.current,"noIndex":seo.noIndex}}`)
+export const practiceSelectionTranslationsQuery = defineQuery(`*[_type == "translation.metadata" && references($ids)]{translations[]{language,"target":value->{_id,_type,language,"slug":slug.current}}}`)
+export const collectionSitemapQuery = defineQuery(`*[_type in ["practiceArea", "attorney", "office"] && language in ["en", "es"] && defined(slug.current)]{_id,_type,language,"slug":slug.current,_updatedAt,seo,"translations":*[_type == "translation.metadata" && references(^._id)][0].translations[]{language,"target":value->{_id,_type,language,"slug":slug.current,"noIndex":seo.noIndex}}}`)

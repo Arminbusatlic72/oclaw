@@ -73,4 +73,4 @@ function localizedSingletonGroups(S: StructureBuilder) {
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Website Content')
-    .items([pagesByLanguage(S), S.listItem().title('Blog posts').icon(DocumentIcon).child(S.documentTypeList('blogPost').title('Blog posts')), ...localizedSingletonGroups(S)])
+    .items([pagesByLanguage(S), S.listItem().title('Practice areas').icon(DocumentIcon).child(S.documentTypeList('practiceArea')), S.listItem().title('Attorneys').icon(DocumentIcon).child(S.documentTypeList('attorney')), S.listItem().title('Offices').icon(DocumentIcon).child(S.documentTypeList('office')), S.listItem().title('Blog posts').icon(DocumentIcon).child(S.documentTypeList('blogPost').title('Blog posts')), ...localizedSingletonGroups(S)])

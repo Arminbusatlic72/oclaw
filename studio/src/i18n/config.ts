@@ -9,9 +9,13 @@ export const supportedLanguages = [
 
 export type SupportedLanguage = (typeof supportedLanguages)[number]['id']
 
-export const translatedSchemaTypes = ['page', 'blogPost', 'navigation', 'settings', 'footer']
+export const translatedSchemaTypes = ['page', 'blogPost', 'navigation', 'settings', 'footer', 'practiceArea', 'attorney', 'office']
 
 export const localizedSingletons = [
+  {
+    schemaType: 'practiceAreaArchive', title: 'Practice areas archive',
+    documents: {en: 'practiceAreaArchive-en', es: 'practiceAreaArchive-es'},
+  },
   {
     schemaType: 'blogArchive', title: 'Blog archive',
     documents: {en: 'blogArchive-en', es: 'blogArchive-es'},

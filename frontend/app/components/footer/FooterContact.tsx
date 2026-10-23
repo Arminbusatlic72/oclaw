@@ -1,12 +1,14 @@
 import type {FooterContactBlock} from './types'
+import type {Locale} from '@/lib/i18n'
 
 function phoneHref(number: string) {
   const normalized = number.replace(/[^\d+*#,;]/g, '')
   return normalized ? `tel:${normalized}` : null
 }
 
-export default function FooterContact({block}: {block: FooterContactBlock}) {
-  const hasContent = block.email?.address || block.phones?.length || block.addresses?.length
+export default function FooterContact({block, locale}: {block: FooterContactBlock; locale: Locale}) {
+  const offices = block.offices?.filter((office) => office && office.language === locale) || []
+  const hasContent = offices.length || block.email?.address || block.phones?.length || block.addresses?.length
   if (!hasContent) return null
 
   return (
@@ -17,6 +19,7 @@ export default function FooterContact({block}: {block: FooterContactBlock}) {
         </h2>
       )}
       <div className={block.heading ? 'mt-4 space-y-4' : 'space-y-4'}>
+        {offices.length > 0 ? offices.map((office) => <div key={office._id} className="text-sm leading-6"><p className="font-semibold">{office.name}</p><address className="not-italic">{[office.streetAddress, office.addressLine2, [office.city, office.state, office.postalCode].filter(Boolean).join(', '), office.country].filter(Boolean).map((line, index) => <span key={index}>{line}<br /></span>)}</address>{office.phone && <a href={phoneHref(office.phone) || undefined}>{office.phone}</a>}{office.email && <p><a href={`mailto:${office.email}`}>{office.email}</a></p>}</div>) : <>
         {block.email?.address && (
           <div>
             {block.email.label && (
@@ -66,6 +69,7 @@ export default function FooterContact({block}: {block: FooterContactBlock}) {
             </address>
           </div>
         ))}
+        </>}
       </div>
     </section>
   )

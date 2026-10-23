@@ -1,0 +1,1170 @@
+{
+  "mode": "apply",
+  "selection": "remaining-13",
+  "projectId": "ewrcmuk0",
+  "dataset": "production",
+  "inventorySha256": "2e0b70e8562d086c195b3b2757accdbeba867af4427a12863da85faca21a3126",
+  "source": "https://www.oclaw.us/wp-json/wp/v2/pages?per_page=100",
+  "counts": {
+    "records": 28,
+    "pairs": 14,
+    "verifiedPairs": 14,
+    "eligibleForDraftStaging": 26,
+    "selectedPairs": 13,
+    "skippedPairs": 0,
+    "urlConflicts": 0,
+    "blockingConflicts": 0,
+    "unsupportedContent": 0,
+    "recordsWithoutSourceImages": 28,
+    "recordsMissingSeoDescriptions": 28,
+    "proposedDraftCreates": 26,
+    "proposedMetadataCreates": 13
+  },
+  "findings": [
+    {
+      "wordpressId": 1061,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/investor-business/",
+      "slug": "investor-business",
+      "sourcePublishedAt": "2020-05-02T09:00:57Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 11,
+      "sourceWords": 282,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2281,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/inversor-y-negocios/",
+      "slug": "inversor-y-negocios",
+      "sourcePublishedAt": "2024-06-02T20:47:53Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 11,
+      "sourceWords": 282,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1067,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/family-sponsorship/",
+      "slug": "family-sponsorship",
+      "sourcePublishedAt": "2020-05-02T10:29:53Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 23,
+      "sourceWords": 347,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": true
+    },
+    {
+      "wordpressId": 2277,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/el-patrocinio-de-la-familia/",
+      "slug": "el-patrocinio-de-la-familia",
+      "sourcePublishedAt": "2024-06-02T20:39:46Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 23,
+      "sourceWords": 385,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": true
+    },
+    {
+      "wordpressId": 1072,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/violence-against-women-act-vawa/",
+      "slug": "violence-against-women-act-vawa",
+      "sourcePublishedAt": "2020-05-02T10:33:18Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 18,
+      "sourceWords": 319,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2295,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/ley-de-violencia-contra-la-mujer-vawa/",
+      "slug": "ley-de-violencia-contra-la-mujer-vawa",
+      "sourcePublishedAt": "2024-06-02T21:08:04Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 18,
+      "sourceWords": 309,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1076,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/u-visas-for-victims-of-crime/",
+      "slug": "u-visas-for-victims-of-crime",
+      "sourcePublishedAt": "2020-05-02T10:36:04Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 11,
+      "sourceWords": 221,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2291,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/visas-u-para-victimas-de-delitos/",
+      "slug": "visas-u-para-victimas-de-delitos",
+      "sourcePublishedAt": "2024-06-02T21:02:10Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 11,
+      "sourceWords": 213,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1080,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/t-visas-for-victims-of-human-trafficking/",
+      "slug": "t-visas-for-victims-of-human-trafficking",
+      "sourcePublishedAt": "2020-05-02T10:37:49Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 12,
+      "sourceWords": 310,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2287,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/visas-t-para-victimas-de-trata-de-personas/",
+      "slug": "visas-t-para-victimas-de-trata-de-personas",
+      "sourcePublishedAt": "2024-06-02T20:55:03Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 12,
+      "sourceWords": 313,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1083,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/political-asylum-or-refugee-status/",
+      "slug": "political-asylum-or-refugee-status",
+      "sourcePublishedAt": "2020-05-02T10:40:27Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 11,
+      "sourceWords": 350,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2285,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/asilo-politico-o-estatus-de-refugiado/",
+      "slug": "asilo-politico-o-estatus-de-refugiado",
+      "sourcePublishedAt": "2024-06-02T20:52:49Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 11,
+      "sourceWords": 337,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1092,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/employment-sponsorship/",
+      "slug": "employment-sponsorship",
+      "sourcePublishedAt": "2020-05-02T11:07:20Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 11,
+      "sourceWords": 229,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2275,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/patrocinio-de-empleo/",
+      "slug": "patrocinio-de-empleo",
+      "sourcePublishedAt": "2024-06-02T20:35:41Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 11,
+      "sourceWords": 224,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1096,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/waivers-of-inadmissibility/",
+      "slug": "waivers-of-inadmissibility",
+      "sourcePublishedAt": "2020-05-02T11:14:47Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 16,
+      "sourceWords": 537,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2297,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/exenciones-de-inadmisibilidad/",
+      "slug": "exenciones-de-inadmisibilidad",
+      "sourcePublishedAt": "2024-06-02T21:11:17Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 16,
+      "sourceWords": 523,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1100,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/deportation-defense/",
+      "slug": "deportation-defense",
+      "sourcePublishedAt": "2020-05-02T11:36:35Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 26,
+      "sourceWords": 823,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2273,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/defensa-contra-la-deportacion/",
+      "slug": "defensa-contra-la-deportacion",
+      "sourcePublishedAt": "2024-06-02T20:33:14Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 26,
+      "sourceWords": 859,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1114,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/consular-processing/",
+      "slug": "consular-processing",
+      "sourcePublishedAt": "2020-05-02T12:15:20Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 6,
+      "sourceWords": 526,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2269,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/procesamiento-consular/",
+      "slug": "procesamiento-consular",
+      "sourcePublishedAt": "2024-06-02T20:22:44Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 6,
+      "sourceWords": 566,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1104,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/permanent-residency-status/",
+      "slug": "permanent-residency-status",
+      "sourcePublishedAt": "2020-05-02T11:42:54Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 16,
+      "sourceWords": 257,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2283,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/estatus-de-residente-permanente/",
+      "slug": "estatus-de-residente-permanente",
+      "sourcePublishedAt": "2024-06-02T20:50:35Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 16,
+      "sourceWords": 266,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1109,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/u-s-citizenship-through-naturalization/",
+      "slug": "u-s-citizenship-through-naturalization",
+      "sourcePublishedAt": "2020-05-02T11:46:33Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 12,
+      "sourceWords": 377,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2293,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/ciudadania-estadounidense-a-traves-de-la-naturalizacion/",
+      "slug": "ciudadania-estadounidense-a-traves-de-la-naturalizacion",
+      "sourcePublishedAt": "2024-06-02T21:04:57Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 12,
+      "sourceWords": 350,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1174,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/fiancee-k-1-visa/",
+      "slug": "fiancee-k-1-visa",
+      "sourcePublishedAt": "2020-07-06T14:17:32Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 18,
+      "sourceWords": 462,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2279,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/visa-de-prometidoa-k-1/",
+      "slug": "visa-de-prometidoa-k-1",
+      "sourcePublishedAt": "2024-06-02T20:46:06Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 18,
+      "sourceWords": 483,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 1322,
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/daca/",
+      "slug": "daca",
+      "sourcePublishedAt": "2021-01-14T18:42:32Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 12,
+      "sourceWords": 192,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    },
+    {
+      "wordpressId": 2271,
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/daca/",
+      "slug": "daca",
+      "sourcePublishedAt": "2024-06-02T20:27:31Z",
+      "sourceVerified": true,
+      "portableTextBlocks": 12,
+      "sourceWords": 212,
+      "conversionIssues": [],
+      "images": 0,
+      "hasSeoTitle": true,
+      "hasSeoDescription": false,
+      "canonicalMatches": true,
+      "existingDraft": false,
+      "existingPublished": false
+    }
+  ],
+  "translationPairs": [
+    {
+      "englishId": 1061,
+      "englishUrl": "https://www.oclaw.us/practice-areas/investor-business/",
+      "spanishId": 2281,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/inversor-y-negocios/",
+      "verified": true
+    },
+    {
+      "englishId": 1067,
+      "englishUrl": "https://www.oclaw.us/practice-areas/family-sponsorship/",
+      "spanishId": 2277,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/el-patrocinio-de-la-familia/",
+      "verified": true
+    },
+    {
+      "englishId": 1072,
+      "englishUrl": "https://www.oclaw.us/practice-areas/violence-against-women-act-vawa/",
+      "spanishId": 2295,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/ley-de-violencia-contra-la-mujer-vawa/",
+      "verified": true
+    },
+    {
+      "englishId": 1076,
+      "englishUrl": "https://www.oclaw.us/practice-areas/u-visas-for-victims-of-crime/",
+      "spanishId": 2291,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/visas-u-para-victimas-de-delitos/",
+      "verified": true
+    },
+    {
+      "englishId": 1080,
+      "englishUrl": "https://www.oclaw.us/practice-areas/t-visas-for-victims-of-human-trafficking/",
+      "spanishId": 2287,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/visas-t-para-victimas-de-trata-de-personas/",
+      "verified": true
+    },
+    {
+      "englishId": 1083,
+      "englishUrl": "https://www.oclaw.us/practice-areas/political-asylum-or-refugee-status/",
+      "spanishId": 2285,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/asilo-politico-o-estatus-de-refugiado/",
+      "verified": true
+    },
+    {
+      "englishId": 1092,
+      "englishUrl": "https://www.oclaw.us/practice-areas/employment-sponsorship/",
+      "spanishId": 2275,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/patrocinio-de-empleo/",
+      "verified": true
+    },
+    {
+      "englishId": 1096,
+      "englishUrl": "https://www.oclaw.us/practice-areas/waivers-of-inadmissibility/",
+      "spanishId": 2297,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/exenciones-de-inadmisibilidad/",
+      "verified": true
+    },
+    {
+      "englishId": 1100,
+      "englishUrl": "https://www.oclaw.us/practice-areas/deportation-defense/",
+      "spanishId": 2273,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/defensa-contra-la-deportacion/",
+      "verified": true
+    },
+    {
+      "englishId": 1114,
+      "englishUrl": "https://www.oclaw.us/practice-areas/consular-processing/",
+      "spanishId": 2269,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/procesamiento-consular/",
+      "verified": true
+    },
+    {
+      "englishId": 1104,
+      "englishUrl": "https://www.oclaw.us/practice-areas/permanent-residency-status/",
+      "spanishId": 2283,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/estatus-de-residente-permanente/",
+      "verified": true
+    },
+    {
+      "englishId": 1109,
+      "englishUrl": "https://www.oclaw.us/practice-areas/u-s-citizenship-through-naturalization/",
+      "spanishId": 2293,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/ciudadania-estadounidense-a-traves-de-la-naturalizacion/",
+      "verified": true
+    },
+    {
+      "englishId": 1174,
+      "englishUrl": "https://www.oclaw.us/practice-areas/fiancee-k-1-visa/",
+      "spanishId": 2279,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/visa-de-prometidoa-k-1/",
+      "verified": true
+    },
+    {
+      "englishId": 1322,
+      "englishUrl": "https://www.oclaw.us/practice-areas/daca/",
+      "spanishId": 2271,
+      "spanishUrl": "https://www.oclaw.us/es/areas-de-practica/daca/",
+      "verified": true
+    }
+  ],
+  "conflicts": [],
+  "skippedPairs": [],
+  "editorialReview": [
+    {
+      "wordpressId": 1061,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1061,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1061,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1061,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1061,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2281,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2281,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2281,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2281,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2281,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1067,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1067,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1067,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1067,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1067,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2277,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2277,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2277,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2277,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2277,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1072,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1072,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1072,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1072,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1072,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2295,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2295,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2295,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2295,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2295,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1076,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1076,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1076,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1076,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1076,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2291,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2291,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2291,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2291,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2291,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1080,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1080,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1080,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1080,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1080,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2287,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2287,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2287,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2287,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2287,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1083,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1083,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1083,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1083,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1083,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2285,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2285,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2285,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2285,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2285,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1092,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1092,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1092,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1092,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1092,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2275,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2275,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2275,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2275,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2275,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1096,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1096,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1096,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1096,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1096,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2297,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2297,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2297,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2297,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2297,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1100,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1100,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1100,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1100,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1100,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2273,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2273,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2273,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2273,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2273,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1114,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1114,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1114,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1114,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1114,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2269,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2269,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2269,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2269,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2269,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1104,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1104,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1104,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1104,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1104,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2283,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2283,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2283,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2283,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2283,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1109,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1109,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1109,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1109,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1109,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2293,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2293,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2293,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2293,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2293,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1174,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1174,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1174,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1174,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1174,
+      "issue": "hand-typed bullet lines were converted to list items; verify their boundaries"
+    },
+    {
+      "wordpressId": 1174,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2279,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2279,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2279,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2279,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2279,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 1322,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 1322,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 1322,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 1322,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 1322,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    },
+    {
+      "wordpressId": 2271,
+      "issue": "Yoast meta description missing"
+    },
+    {
+      "wordpressId": 2271,
+      "issue": "WordPress excerpt is truncated; write a reviewed short description"
+    },
+    {
+      "wordpressId": 2271,
+      "issue": "no source image or alt text for the requested card and hero design"
+    },
+    {
+      "wordpressId": 2271,
+      "issue": "embedded contact details should be checked against office records before publication"
+    },
+    {
+      "wordpressId": 2271,
+      "issue": "immigration-law content needs current legal and translation review before publication"
+    }
+  ],
+  "readiness": "ready for guarded draft staging; editorial review is required before publication"
+}

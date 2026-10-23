@@ -1,0 +1,47 @@
+{
+  "status": "verified",
+  "projectId": "ewrcmuk0",
+  "dataset": "production",
+  "backupSha256": "03c2ad6736a53227c589ffcd24b87a53a92ebaca671ffa4b3550632cd7eef212",
+  "createdIds": [
+    "drafts.practiceArea.wp.1067",
+    "drafts.practiceArea.wp.2277",
+    "i18n.practiceArea.practiceArea.wp.1067"
+  ],
+  "publishedPracticeAreas": 0,
+  "existingDocumentsUnchanged": true,
+  "unexpectedCreatedDocuments": 0,
+  "translationMetadataId": "i18n.practiceArea.practiceArea.wp.1067",
+  "translationRelationshipVerified": true,
+  "details": [
+    {
+      "wordpressId": 1067,
+      "draftId": "drafts.practiceArea.wp.1067",
+      "language": "en",
+      "url": "https://www.oclaw.us/practice-areas/family-sponsorship/",
+      "slug": "family-sponsorship",
+      "sourcePublishedAt": "2020-05-02T10:29:53Z",
+      "portableTextBlocks": 23,
+      "sourceWords": 347,
+      "portableTextMatchesSourceConversion": true,
+      "seoTitlePreserved": true
+    },
+    {
+      "wordpressId": 2277,
+      "draftId": "drafts.practiceArea.wp.2277",
+      "language": "es",
+      "url": "https://www.oclaw.us/es/areas-de-practica/el-patrocinio-de-la-familia/",
+      "slug": "el-patrocinio-de-la-familia",
+      "sourcePublishedAt": "2024-06-02T20:39:46Z",
+      "portableTextBlocks": 23,
+      "sourceWords": 385,
+      "portableTextMatchesSourceConversion": true,
+      "seoTitlePreserved": true
+    }
+  ],
+  "warnings": [
+    "No source images or alt text",
+    "No source SEO descriptions",
+    "Editorial legal and translation review required before publication"
+  ]
+}

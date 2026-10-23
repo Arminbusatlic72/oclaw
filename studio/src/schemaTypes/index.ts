@@ -24,6 +24,11 @@ import {footerLink} from './footer/footerLink'
 import {footerLinkGroup} from './footer/footerLinkGroup'
 import {footerSocial} from './footer/footerSocial'
 import {footerWorkingHours} from './footer/footerWorkingHours'
+import {practiceArea} from './documents/practiceArea'
+import {attorney} from './documents/attorney'
+import {office} from './documents/office'
+import {practiceAreaArchive} from './singletons/practiceAreaArchive'
+import {practiceAreasSection} from './blocks/practiceAreasSection'
 
 // Export an array of all the schema types.  This is used in the Sanity Studio configuration. https://www.sanity.io/docs/studio/schema-types
 
@@ -31,9 +36,13 @@ export const schemaTypes = [
   // Singletons
   settings,
   blogArchive,
+  practiceAreaArchive,
   // Documents
   page,
   blogPost,
+  practiceArea,
+  attorney,
+  office,
   navigation,
   footer,
   // Objects
@@ -55,6 +64,7 @@ export const schemaTypes = [
   processSteps,
   parallaxFeatures,
   whyChooseUs,
+  practiceAreasSection,
   link,
   seo,
 ]

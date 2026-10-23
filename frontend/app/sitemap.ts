@@ -5,6 +5,8 @@ import {sanityFetch} from '@/sanity/lib/live'
 import {homePageQuery, sitemapData} from '@/sanity/lib/queries'
 import {blogSitemapQuery, blogArchiveQuery} from '@/sanity/lib/queries'
 import {archiveId, archivePath, postPath} from '@/lib/blog'
+import {collectionPath, archiveId as practiceArchiveId, type Collection} from '@/lib/collections'
+import {collectionSitemapQuery, practiceAreaArchiveQuery} from '@/sanity/lib/queries'
 
 export const dynamic = 'force-dynamic'
 
@@ -92,7 +94,7 @@ export function buildSitemap(
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [{data: pages}, {data: englishHome}, {data: spanishHome}, {data: posts}, {data: englishArchive}, {data: spanishArchive}] = await Promise.all([
+  const [{data: pages}, {data: englishHome}, {data: spanishHome}, {data: posts}, {data: englishArchive}, {data: spanishArchive}, {data: collections}, {data: practiceEn}, {data: practiceEs}] = await Promise.all([
     sanityFetch({query: sitemapData, perspective: 'published', stega: false}),
     sanityFetch({
       query: homePageQuery,
@@ -109,6 +111,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sanityFetch({query: blogSitemapQuery, perspective: 'published', stega: false}),
     sanityFetch({query: blogArchiveQuery, params: {id: archiveId('en')}, perspective: 'published', stega: false}),
     sanityFetch({query: blogArchiveQuery, params: {id: archiveId('es')}, perspective: 'published', stega: false}),
+    sanityFetch({query: collectionSitemapQuery, perspective: 'published', stega: false}),
+    sanityFetch({query: practiceAreaArchiveQuery, params: {id: practiceArchiveId('en')}, perspective: 'published', stega: false}),
+    sanityFetch({query: practiceAreaArchiveQuery, params: {id: practiceArchiveId('es')}, perspective: 'published', stega: false}),
   ])
   const linkedHomes = Boolean(
     englishHome?._id &&
@@ -146,6 +151,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (paths.en) {languages.en = absoluteUrl(paths.en); languages['x-default'] = absoluteUrl(paths.en)}
     if (paths.es) languages.es = absoluteUrl(paths.es)
     result.push({url: absoluteUrl(postPath(locale, post.slug)), lastModified: post.updatedAt || post._updatedAt, alternates: Object.keys(languages).length > 1 ? {languages} : undefined})
+  }
+  for (const type of ['practiceArea', 'attorney', 'office'] as Collection[]) {
+    for (const locale of ['en', 'es'] as Locale[]) {
+      if (type === 'practiceArea' && (locale === 'en' ? practiceEn : practiceEs)?.seo?.noIndex) continue
+      result.push({url: absoluteUrl(collectionPath(type, locale)), alternates: {languages: {en: absoluteUrl(collectionPath(type, 'en')), es: absoluteUrl(collectionPath(type, 'es')), 'x-default': absoluteUrl(collectionPath(type, 'en'))}}})
+    }
+  }
+  const publishedCollections = new Map(collections.map((item) => [item._id, item]))
+  for (const item of collections) {
+    if (item.seo?.noIndex) continue
+    const type = item._type as Collection
+    const locale = item.language as Locale
+    const paths: Partial<Record<Locale, string>> = {[locale]: collectionPath(type, locale, item.slug)}
+    for (const entry of item.translations || []) {
+      const target = entry.target
+      if ((entry.language === 'en' || entry.language === 'es') && target?._type === type && target.language === entry.language && target.slug && !target.noIndex && publishedCollections.has(target._id)) paths[entry.language] = collectionPath(type, entry.language, target.slug)
+    }
+    const languages: Record<string, string> = {}
+    if (paths.en) {languages.en = absoluteUrl(paths.en); languages['x-default'] = absoluteUrl(paths.en)}
+    if (paths.es) languages.es = absoluteUrl(paths.es)
+    result.push({url: absoluteUrl(collectionPath(type, locale, item.slug)), lastModified: item._updatedAt, alternates: Object.keys(languages).length > 1 ? {languages} : undefined})
   }
   const urls = new Set<string>()
   for (const entry of result) {if (urls.has(entry.url)) throw new Error(`Sitemap URL collision: ${entry.url}`); urls.add(entry.url)}

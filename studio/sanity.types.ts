@@ -99,6 +99,60 @@ export type Link = {
   openInNewTab?: boolean
 }
 
+export type PracticeAreaReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'practiceArea'
+}
+
+export type PracticeAreasSection = {
+  _type: 'practiceAreasSection'
+  subtitle?: string
+  heading: string
+  description?: string
+  theme?: 'dark' | 'light'
+  selectionMode?: 'automatic' | 'manual'
+  practiceAreas?: Array<
+    {
+      _key: string
+    } & PracticeAreaReference
+  >
+  maximumItems?: number
+  viewAllLabel?: string
+  anchor?: Slug
+}
+
+export type WhyChooseUs = {
+  _type: 'whyChooseUs'
+  heading: string
+  anchorId?: string
+  backgroundTheme: 'navy' | 'light'
+  variant: 'standard' | 'compact'
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    caption?: string
+    _type: 'image'
+  }
+  specializationHeading: string
+  highlights: Array<{
+    icon: 'award' | 'briefcase' | 'scale' | 'shield' | 'people' | 'star'
+    value: string
+    label: string
+    description?: string
+    _type: 'whyChooseUsHighlight'
+    _key: string
+  }>
+  contentHeading: string
+  body: BlockContent
+  ctaLabel?: string
+  ctaLink?: Link
+}
+
 export type ParallaxFeatures = {
   _type: 'parallaxFeatures'
   heading: string
@@ -342,9 +396,21 @@ export type FooterLink = {
   link: Link
 }
 
+export type OfficeReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'office'
+}
+
 export type FooterContact = {
   _type: 'footerContact'
   heading?: string
+  offices?: Array<
+    {
+      _key: string
+    } & OfficeReference
+  >
   email?: FooterContactEmail
   phones?: Array<{
     label?: string
@@ -372,6 +438,20 @@ export type FooterBrand = {
   }
   linkToHomepage?: boolean
   supportingText?: string
+}
+
+export type PracticeAreaArchive = {
+  _id: string
+  _type: 'practiceAreaArchive'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  heading?: string
+  description?: string
+  introduction?: BlockContentTextOnly
+  emptyMessage?: string
+  seo?: Seo
 }
 
 export type BlogArchive = {
@@ -565,6 +645,13 @@ export type FooterReference = {
   [internalGroqTypeReferenceTo]?: 'footer'
 }
 
+export type AttorneyReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'attorney'
+}
+
 export type InternationalizedArrayReferenceValue = {
   _type: 'internationalizedArrayReferenceValue'
   value?:
@@ -573,7 +660,152 @@ export type InternationalizedArrayReferenceValue = {
     | NavigationReference
     | SettingsReference
     | FooterReference
+    | PracticeAreaReference
+    | AttorneyReference
+    | OfficeReference
   language: string
+}
+
+export type Office = {
+  _id: string
+  _type: 'office'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  name: string
+  slug: Slug
+  streetAddress?: string
+  addressLine2?: string
+  city?: string
+  state?: string
+  postalCode?: string
+  country?: string
+  phone?: string
+  email?: string
+  mapUrl?: string
+  coordinates?: Geopoint
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+  }
+  openingHours?: Array<{
+    days?: string
+    hours?: string
+    _type: 'officeHours'
+    _key: string
+  }>
+  displayOrder?: number
+  seo?: Seo
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
+
+export type Geopoint = {
+  _type: 'geopoint'
+  lat?: number
+  lng?: number
+  alt?: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
+}
+
+export type Attorney = {
+  _id: string
+  _type: 'attorney'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  fullName: string
+  slug: Slug
+  professionalTitle?: string
+  profileImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+  }
+  shortBiography?: string
+  biography?: BlockContent
+  email?: string
+  phone?: string
+  practiceAreas?: Array<
+    {
+      _key: string
+    } & PracticeAreaReference
+  >
+  offices?: Array<
+    {
+      _key: string
+    } & OfficeReference
+  >
+  displayOrder?: number
+  seo?: Seo
+}
+
+export type PracticeArea = {
+  _id: string
+  _type: 'practiceArea'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  title: string
+  slug: Slug
+  shortDescription?: string
+  mainImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+  }
+  icon?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  body?: BlockContent
+  sourcePublishedAt?: string
+  sections?: Array<{
+    heading?: string
+    body?: BlockContent
+    _type: 'practiceAreaContentSection'
+    _key: string
+  }>
+  displayOrder?: number
+  featuredOnHomepage?: boolean
+  consultationLabel?: string
+  seo?: Seo
 }
 
 export type Footer = {
@@ -615,22 +847,6 @@ export type Footer = {
       _key: string
     } & FooterLink
   >
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
 }
 
 export type Settings = {
@@ -742,12 +958,6 @@ export type BlogPost = {
   seo?: Seo
 }
 
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
-}
-
 export type Page = {
   _id: string
   _type: 'page'
@@ -774,10 +984,16 @@ export type Page = {
       } & ParallaxFeatures)
     | ({
         _key: string
+      } & WhyChooseUs)
+    | ({
+        _key: string
       } & CallToAction)
     | ({
         _key: string
       } & InfoSection)
+    | ({
+        _key: string
+      } & PracticeAreasSection)
   >
   seo?: Seo
 }
@@ -872,13 +1088,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData
 }
 
-export type Geopoint = {
-  _type: 'geopoint'
-  lat?: number
-  lng?: number
-  alt?: number
-}
-
 export type AllSanitySchemaTypes =
   | Cta
   | FooterContactEmail
@@ -891,6 +1100,9 @@ export type AllSanitySchemaTypes =
   | Seo
   | PageReference
   | Link
+  | PracticeAreaReference
+  | PracticeAreasSection
+  | WhyChooseUs
   | ParallaxFeatures
   | ProcessSteps
   | CardGrid
@@ -907,8 +1119,10 @@ export type AllSanitySchemaTypes =
   | FooterSocial
   | FooterLinkGroup
   | FooterLink
+  | OfficeReference
   | FooterContact
   | FooterBrand
+  | PracticeAreaArchive
   | BlogArchive
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
@@ -928,14 +1142,19 @@ export type AllSanitySchemaTypes =
   | NavigationReference
   | SettingsReference
   | FooterReference
+  | AttorneyReference
   | InternationalizedArrayReferenceValue
-  | Footer
+  | Office
   | SanityImageCrop
   | SanityImageHotspot
+  | Geopoint
+  | Slug
+  | Attorney
+  | PracticeArea
+  | Footer
   | Settings
   | Navigation
   | BlogPost
-  | Slug
   | Page
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -944,4 +1163,3 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
-  | Geopoint

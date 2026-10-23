@@ -40,6 +40,12 @@ function resolveHref(documentType?: string, slug?: string, language = 'en'): str
     case 'blogPost':
       if (!slug) return language === 'es' ? '/es/' : '/'
       return language === 'es' ? `/es/${slug}/` : `/${slug}/`
+    case 'practiceArea':
+      return slug ? `${language === 'es' ? '/es/areas-de-practica' : '/practice-areas'}/${slug}/` : undefined
+    case 'attorney':
+      return slug ? `${language === 'es' ? '/es/abogados' : '/attorneys'}/${slug}/` : undefined
+    case 'office':
+      return slug ? `${language === 'es' ? '/es/oficinas' : '/offices'}/${slug}/` : undefined
     default:
       console.warn('Invalid document type:', documentType)
       return undefined
@@ -92,9 +98,18 @@ export default defineConfig({
             route: '/:slug',
             filter: `_type in ["page", "blogPost"] && coalesce(language, "en") == "en" && slug.current == $slug`,
           },
+          {route: '/practice-areas/:slug', filter: `_type == "practiceArea" && language == "en" && slug.current == $slug`},
+          {route: '/es/areas-de-practica/:slug', filter: `_type == "practiceArea" && language == "es" && slug.current == $slug`},
+          {route: '/attorneys/:slug', filter: `_type == "attorney" && language == "en" && slug.current == $slug`},
+          {route: '/es/abogados/:slug', filter: `_type == "attorney" && language == "es" && slug.current == $slug`},
+          {route: '/offices/:slug', filter: `_type == "office" && language == "en" && slug.current == $slug`},
+          {route: '/es/oficinas/:slug', filter: `_type == "office" && language == "es" && slug.current == $slug`},
         ]),
         // Locations Resolver API allows you to define where data is being used in your application. https://www.sanity.io/docs/visual-editing/presentation-resolver-api#8d8bca7bfcd7
         locations: {
+          practiceArea: defineLocations({select: {title: 'title', slug: 'slug.current', language: 'language'}, resolve: (doc) => ({locations: doc?.slug ? [{title: doc.title || 'Practice area', href: resolveHref('practiceArea', doc.slug, doc.language)!}] : []})}),
+          attorney: defineLocations({select: {title: 'fullName', slug: 'slug.current', language: 'language'}, resolve: (doc) => ({locations: doc?.slug ? [{title: doc.title || 'Attorney', href: resolveHref('attorney', doc.slug, doc.language)!}] : []})}),
+          office: defineLocations({select: {title: 'name', slug: 'slug.current', language: 'language'}, resolve: (doc) => ({locations: doc?.slug ? [{title: doc.title || 'Office', href: resolveHref('office', doc.slug, doc.language)!}] : []})}),
           blogPost: defineLocations({
             select: {title: 'title', slug: 'slug.current', language: 'language'},
             resolve: (doc) => ({locations: doc?.slug ? [{title: doc.title || 'Article', href: resolveHref('blogPost', doc.slug, doc.language)!}] : []}),

@@ -1,0 +1,209 @@
+{
+  "projectId": "ewrcmuk0",
+  "dataset": "production",
+  "inventorySha256": "2e0b70e8562d086c195b3b2757accdbeba867af4427a12863da85faca21a3126",
+  "backupSha256": "3883c5a9dec44bbb4a3f391241d77a6ce67a8c20d424810ac4d3c3d51b91cfb7",
+  "selection": "remaining-13",
+  "status": "applied",
+  "skippedPairs": [],
+  "plannedCreates": [
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1061"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2281"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1072"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2295"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1076"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2291"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1080"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2287"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1083"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2285"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1092"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2275"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1096"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2297"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1100"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2273"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1114"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2269"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1104"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2283"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1109"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2293"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1174"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2279"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.1322"
+    },
+    {
+      "kind": "draft",
+      "id": "drafts.practiceArea.wp.2271"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1061"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1072"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1076"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1080"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1083"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1092"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1096"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1100"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1114"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1104"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1109"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1174"
+    },
+    {
+      "kind": "metadata",
+      "id": "i18n.practiceArea.practiceArea.wp.1322"
+    }
+  ],
+  "createdDocumentIds": [
+    "drafts.practiceArea.wp.1061",
+    "drafts.practiceArea.wp.2281",
+    "drafts.practiceArea.wp.1072",
+    "drafts.practiceArea.wp.2295",
+    "drafts.practiceArea.wp.1076",
+    "drafts.practiceArea.wp.2291",
+    "drafts.practiceArea.wp.1080",
+    "drafts.practiceArea.wp.2287",
+    "drafts.practiceArea.wp.1083",
+    "drafts.practiceArea.wp.2285",
+    "drafts.practiceArea.wp.1092",
+    "drafts.practiceArea.wp.2275",
+    "drafts.practiceArea.wp.1096",
+    "drafts.practiceArea.wp.2297",
+    "drafts.practiceArea.wp.1100",
+    "drafts.practiceArea.wp.2273",
+    "drafts.practiceArea.wp.1114",
+    "drafts.practiceArea.wp.2269",
+    "drafts.practiceArea.wp.1104",
+    "drafts.practiceArea.wp.2283",
+    "drafts.practiceArea.wp.1109",
+    "drafts.practiceArea.wp.2293",
+    "drafts.practiceArea.wp.1174",
+    "drafts.practiceArea.wp.2279",
+    "drafts.practiceArea.wp.1322",
+    "drafts.practiceArea.wp.2271",
+    "i18n.practiceArea.practiceArea.wp.1061",
+    "i18n.practiceArea.practiceArea.wp.1072",
+    "i18n.practiceArea.practiceArea.wp.1076",
+    "i18n.practiceArea.practiceArea.wp.1080",
+    "i18n.practiceArea.practiceArea.wp.1083",
+    "i18n.practiceArea.practiceArea.wp.1092",
+    "i18n.practiceArea.practiceArea.wp.1096",
+    "i18n.practiceArea.practiceArea.wp.1100",
+    "i18n.practiceArea.practiceArea.wp.1114",
+    "i18n.practiceArea.practiceArea.wp.1104",
+    "i18n.practiceArea.practiceArea.wp.1109",
+    "i18n.practiceArea.practiceArea.wp.1174",
+    "i18n.practiceArea.practiceArea.wp.1322"
+  ],
+  "published": false
+}
