@@ -2,8 +2,11 @@ import Link from 'next/link'
 import {notFound} from 'next/navigation'
 import type {PortableTextBlock} from 'next-sanity'
 import CustomPortableText from '@/app/components/PortableText'
+import ArchiveHero from '@/app/components/ArchiveHero'
 import Image from '@/app/components/SanityImage'
 import PracticeAreaCard from './PracticeAreaCard'
+import AttorneyCard, {type AttorneyCardData} from './AttorneyCard'
+import AttorneyProfile from './AttorneyProfile'
 import {archiveId, breadcrumbs, collectionPath, type Collection} from '@/lib/collections'
 import {absoluteUrl, type Locale} from '@/lib/i18n'
 import {sanityFetch} from '@/sanity/lib/live'
@@ -14,7 +17,7 @@ function Breadcrumbs({items}: {items: Array<{name: string; path: string}>}) {ret
 function home(locale: Locale) {return {name: locale === 'es' ? 'Inicio' : 'Home', path: locale === 'es' ? '/es/' : '/'}}
 function titleFor(type: Collection, locale: Locale) {return ({practiceArea: locale === 'es' ? 'Áreas de práctica' : 'Practice Areas', attorney: locale === 'es' ? 'Abogados' : 'Attorneys', office: locale === 'es' ? 'Oficinas' : 'Offices'})[type]}
 function image(ref?: string | null, alt?: string | null, className?: string) {return ref ? <Image id={ref} alt={alt || ''} width={1200} className={className || 'collection-feature-image'} /> : null}
-function PersonCard({person, locale}: {person: {_id: string; fullName: string | null; slug: string | null; professionalTitle?: string | null; profileImage?: {asset?: {_ref?: string} | null; alt?: string | null} | null; shortBiography?: string | null}; locale: Locale}) {return person.slug ? <Link className="collection-person-card" href={collectionPath('attorney', locale, person.slug)}>{image(person.profileImage?.asset?._ref, person.profileImage?.alt, 'collection-person-photo')}<span><strong>{person.fullName}</strong>{person.professionalTitle && <small>{person.professionalTitle}</small>}{person.shortBiography && <p>{person.shortBiography}</p>}</span></Link> : null}
+function PersonCard({person, locale}: {person: AttorneyCardData; locale: Locale}) {return <AttorneyCard person={person} locale={locale} />}
 function OfficeInfo({office, locale, link = false}: {office: {name: string | null; slug?: string | null; streetAddress?: string | null; addressLine2?: string | null; city?: string | null; state?: string | null; postalCode?: string | null; country?: string | null; phone?: string | null; email?: string | null; mapUrl?: string | null; openingHours?: Array<{_key: string; days?: string | null; hours?: string | null}> | null}; locale: Locale; link?: boolean}) {const address = [office.streetAddress, office.addressLine2, [office.city, office.state, office.postalCode].filter(Boolean).join(', '), office.country].filter(Boolean); return <section className="collection-office-card"><h2>{link && office.slug ? <Link href={collectionPath('office', locale, office.slug)}>{office.name}</Link> : office.name}</h2>{address.length > 0 && <address>{address.map((line, i) => <span key={i}>{line}<br /></span>)}</address>}{office.phone && <p><a href={`tel:${office.phone.replace(/[^\d+]/g, '')}`}>{office.phone}</a></p>}{office.email && <p><a href={`mailto:${office.email}`}>{office.email}</a></p>}{office.openingHours?.length ? <div className="collection-hours"><h3>{locale === 'es' ? 'Horario' : 'Hours'}</h3>{office.openingHours.map((row) => <p key={row._key}>{row.days}: {row.hours}</p>)}</div> : null}{office.mapUrl && <p><a href={office.mapUrl} target="_blank" rel="noopener noreferrer">{locale === 'es' ? 'Ver mapa' : 'View map'}</a></p>}</section>}
 
 export async function CollectionArchive({type, locale}: {type: Collection; locale: Locale}) {
@@ -24,11 +27,13 @@ export async function CollectionArchive({type, locale}: {type: Collection; local
   const offices = type === 'office' ? (await sanityFetch({query: officeListQuery, params: {language: locale}, perspective: 'published', stega: false})).data : []
   const archive = type === 'practiceArea' ? (await sanityFetch({query: practiceAreaArchiveQuery, params: {id: archiveId(locale)}, perspective: 'published', stega: false})).data : null
   const crumbs = [home(locale), {name: label, path: collectionPath(type, locale)}]
-  return <div className="collection-page container"><Breadcrumbs items={crumbs} /><header className="collection-heading"><p className="practice-eyebrow">OC Law Group</p><h1>{archive?.heading || label}</h1>{archive?.description && <p>{archive.description}</p>}{archive?.introduction && <CustomPortableText value={archive.introduction as PortableTextBlock[]} />}</header>
+  const title = archive?.heading || label
+  const isPracticeArchive = type === 'practiceArea'
+  return <>{isPracticeArchive && <ArchiveHero locale={locale} title={title} path={collectionPath(type, locale)} />}<main className="collection-page container">{!isPracticeArchive && <Breadcrumbs items={crumbs} />}{isPracticeArchive ? ((archive?.description || archive?.introduction) && <div className="archive-introduction">{archive?.description && <p>{archive.description}</p>}{archive?.introduction && <CustomPortableText value={archive.introduction as PortableTextBlock[]} />}</div>) : <header className="collection-heading"><p className="practice-eyebrow">OC Law Group</p><h1>{title}</h1>{archive?.description && <p>{archive.description}</p>}{archive?.introduction && <CustomPortableText value={archive.introduction as PortableTextBlock[]} />}</header>}
     {type === 'practiceArea' && (items.length ? <div className="practice-card-grid practice-archive-grid">{items.map((area) => <PracticeAreaCard key={area._id} area={area} locale={locale} />)}</div> : <p role="status">{archive?.emptyMessage || (locale === 'es' ? 'Aún no hay áreas de práctica publicadas.' : 'No practice areas have been published yet.')}</p>)}
     {type === 'attorney' && (attorneys.length ? <div className="collection-people-grid">{attorneys.map((person) => <PersonCard key={person._id} person={person} locale={locale} />)}</div> : <p role="status">{locale === 'es' ? 'Aún no hay perfiles publicados.' : 'No attorney profiles have been published yet.'}</p>)}
     {type === 'office' && (offices.length ? <div className="collection-people-grid">{offices.map((office) => <OfficeInfo key={office._id} office={office} locale={locale} link />)}</div> : <p role="status">{locale === 'es' ? 'Aún no hay oficinas publicadas.' : 'No offices have been published yet.'}</p>)}
-  </div>
+  </main></>
 }
 
 export async function CollectionDetail({type, locale, slug}: {type: Collection; locale: Locale; slug: string}) {
@@ -50,8 +55,7 @@ export async function CollectionDetail({type, locale, slug}: {type: Collection; 
   if (type === 'attorney') {
     const {data: person} = await sanityFetch({query: attorneyQuery, params: {language: locale, slug}, perspective: 'published', stega: false})
     if (!person) notFound()
-    const crumbs = [home(locale), {name: label, path: archive}, {name: person.fullName || '', path: collectionPath(type, locale, slug)}]
-    return <div className="collection-page container"><Breadcrumbs items={crumbs} /><article className="attorney-detail">{image(person.profileImage?.asset?._ref, person.profileImage?.alt, 'attorney-photo')}<div><h1>{person.fullName}</h1>{person.professionalTitle && <p className="practice-eyebrow">{person.professionalTitle}</p>}{person.shortBiography && <p className="practice-lead">{person.shortBiography}</p>}{person.biography && <CustomPortableText value={person.biography as PortableTextBlock[]} />}{person.email && <p><a href={`mailto:${person.email}`}>{person.email}</a></p>}{person.phone && <p><a href={`tel:${person.phone.replace(/[^\d+]/g, '')}`}>{person.phone}</a></p>}{person.practiceAreas?.length ? <section className="practice-related"><h2>{titleFor('practiceArea', locale)}</h2><ul>{person.practiceAreas.map((area) => area.slug && <li key={area._id}><Link href={collectionPath('practiceArea', locale, area.slug)}>{area.title}</Link></li>)}</ul></section> : null}{person.offices?.length ? <section className="practice-related"><h2>{titleFor('office', locale)}</h2><ul>{person.offices.map((office) => office.slug && <li key={office._id}><Link href={collectionPath('office', locale, office.slug)}>{office.name}</Link></li>)}</ul></section> : null}</div></article><JsonLd value={{'@context': 'https://schema.org', '@type': 'Person', name: person.fullName, jobTitle: person.professionalTitle || undefined, url: absoluteUrl(collectionPath(type, locale, slug))}} /></div>
+    return <AttorneyProfile person={person} locale={locale} slug={slug} />
   }
   const {data: office} = await sanityFetch({query: officeQuery, params: {language: locale, slug}, perspective: 'published', stega: false})
   if (!office) notFound()

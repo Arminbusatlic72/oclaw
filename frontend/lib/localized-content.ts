@@ -1,6 +1,7 @@
 import {sanityFetch} from '@/sanity/lib/live'
 import {homePageIdsQuery, translationQuery} from '@/sanity/lib/queries'
 import {
+  archivePath,
   linkedTranslationPaths,
   localePath,
   mapContentLinks,
@@ -26,6 +27,11 @@ export async function translationPaths(
 }
 
 async function resolvePageTarget(target: PageTarget, locale: Locale) {
+  if (target.language !== locale && !(locale === 'en' && !target.language)) return null
+
+  const resolvedArchivePath = archivePath(target, locale)
+  if (resolvedArchivePath) return resolvedArchivePath
+
   const {data: homes} = await sanityFetch({query: homePageIdsQuery, stega: false})
   const home = homes.find(
     (item) => item._id === (locale === 'es' ? 'siteSettings-es' : 'siteSettings'),

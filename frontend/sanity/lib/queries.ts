@@ -1,7 +1,7 @@
 import {defineQuery} from 'next-sanity'
 
 export const settingsQuery = defineQuery(`*[_type == "settings" && _id == $id][0]`)
-const footerLinkFields = /* groq */ `link{..., page->{_id, language, "slug": slug.current}}`
+const footerLinkFields = /* groq */ `link{..., page->{_id, _type, language, "slug": slug.current}}`
 export const footerQuery = defineQuery(`
   *[_type == "footer" && _id == $id][0]{
     ...,
@@ -19,26 +19,28 @@ export const navigationQuery = defineQuery(`
   *[_type == "navigation" && _id == $id][0]{
     logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},
     navItems[]{title, href, externalUrl, isButton,
-      link{..., page->{_id,language,"slug":slug.current}},
-      children[]{title,href,link{...,page->{_id,language,"slug":slug.current}}}
+      link{..., page->{_id,_type,language,"slug":slug.current}},
+      children[]{title,href,link{...,page->{_id,_type,language,"slug":slug.current}}}
     },
-    ctaLabel, ctaHref, ctaLink{...,page->{_id,language,"slug":slug.current}}
+    ctaLabel, ctaHref, ctaLink{...,page->{_id,_type,language,"slug":slug.current}}
   }
 `)
 
-const linkFields = /* groq */ `link{..., page->{_id, language, "slug": slug.current}}`
+const linkFields = /* groq */ `link{..., page->{_id, _type, language, "slug": slug.current}}`
 
 const pageFields = /* groq */ `
   _id, _type, language, name, slug, heading, subheading, seo,
   "pageBuilder": pageBuilder[]{
     ...,
     _type == "callToAction" => {..., button{..., ${linkFields}}},
-    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., ${linkFields}}, secondaryCta{..., ${linkFields}}}},
+    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, ${linkFields}}, cta{..., ${linkFields}}, secondaryCta{..., ${linkFields}}}},
     _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., ${linkFields}}}},
     _type == "processSteps" => {..., button{..., ${linkFields}}},
     _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., ${linkFields}}}},
     _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},
-    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}
+    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},
+    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},
+    _type == "ctaBanner" => {..., button{..., ${linkFields}}}
   }
 `
 
@@ -111,11 +113,11 @@ export const blogSitemapQuery = defineQuery(`
 // Public collection queries always use the published perspective at the call site.
 export const practiceAreasQuery = defineQuery(`*[_type == "practiceArea" && language == $language && defined(slug.current)] | order(displayOrder asc, title asc){_id, title, "slug": slug.current, language, shortDescription, icon, mainImage, featuredOnHomepage, displayOrder, seo, _updatedAt}`)
 export const practiceAreaQuery = defineQuery(`*[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, seo, _updatedAt}`)
-export const attorneyListQuery = defineQuery(`*[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, seo, _updatedAt}`)
-export const attorneyQuery = defineQuery(`*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, biography, email, phone, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}`)
+export const attorneyListQuery = defineQuery(`*[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, socialLinks, seo, _updatedAt}`)
+export const attorneyQuery = defineQuery(`*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}`)
 export const officeListQuery = defineQuery(`*[_type == "office" && language == $language && defined(slug.current)] | order(displayOrder asc, name asc){_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, image, openingHours, seo, _updatedAt}`)
 export const officeQuery = defineQuery(`*[_type == "office" && language == $language && slug.current == $slug][0]{_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, coordinates, image, openingHours, seo, _updatedAt}`)
-export const attorneysForPracticeQuery = defineQuery(`*[_type == "attorney" && language == $language && defined(slug.current) && $id in practiceAreas[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography, "officeIds": offices[]._ref}`)
+export const attorneysForPracticeQuery = defineQuery(`*[_type == "attorney" && language == $language && defined(slug.current) && $id in practiceAreas[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography, socialLinks, "officeIds": offices[]._ref}`)
 export const attorneysForOfficeQuery = defineQuery(`*[_type == "attorney" && language == $language && defined(slug.current) && $id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography}`)
 export const practiceAreaArchiveQuery = defineQuery(`*[_type == "practiceAreaArchive" && _id == $id][0]`)
 export const collectionTranslationQuery = defineQuery(`*[_type == "translation.metadata" && references($id)][0].translations[]{language,"target":value->{_id,_type,language,"slug":slug.current,"noIndex":seo.noIndex}}`)

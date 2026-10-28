@@ -8,6 +8,10 @@ import Cta from '@/app/components/Cta'
 import Info from '@/app/components/InfoSection'
 import WhyChooseUs from '@/app/components/blocks/WhyChooseUs'
 import PracticeAreasSection from '@/app/components/blocks/PracticeAreasSection'
+import AttorneysSection from '@/app/components/blocks/AttorneysSection'
+import PageHero from '@/app/components/blocks/PageHero'
+import EditorialSection from '@/app/components/blocks/EditorialSection'
+import CtaBanner from '@/app/components/blocks/CtaBanner'
 import type {Locale} from '@/lib/i18n'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
@@ -32,6 +36,9 @@ const Blocks = {
   callToAction: Cta,
   infoSection: Info,
   whyChooseUs: WhyChooseUs,
+  pageHero: PageHero,
+  editorialSection: EditorialSection,
+  ctaBanner: CtaBanner,
 } as BlocksType
 
 /**
@@ -39,6 +46,7 @@ const Blocks = {
  */
 export default function BlockRenderer({block, index, pageId, pageType, locale = 'en'}: BlockProps) {
   if (block._type === 'practiceAreasSection') return <div data-sanity={dataAttr({id: pageId, type: pageType, path: `pageBuilder[_key=="${block._key}"]`}).toString()}><PracticeAreasSection block={block} locale={locale} /></div>
+  if (block._type === 'attorneysSection') return <div data-sanity={dataAttr({id: pageId, type: pageType, path: `pageBuilder[_key=="${block._key}"]`}).toString()}><AttorneysSection block={block} locale={locale} /></div>
   // Block does exist
   if (typeof Blocks[block._type] !== 'undefined') {
     return (
@@ -56,6 +64,7 @@ export default function BlockRenderer({block, index, pageId, pageType, locale = 
           index: index,
           pageId: pageId,
           pageType: pageType,
+          locale: locale,
         })}
       </div>
     )

@@ -42,6 +42,16 @@ export type HeroSliderSlideImage = {
   _type: 'image'
 }
 
+export type AwardBadge = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "awardBadge.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt: string
+  link?: Link
+  _type: 'image'
+}
+
 export type HeroSliderSlideCta = {
   label?: string
   url?: string
@@ -91,12 +101,50 @@ export type PageReference = {
   [internalGroqTypeReferenceTo]?: 'page'
 }
 
+export type PracticeAreaArchiveReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'practiceAreaArchive'
+}
+
+export type BlogArchiveReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'blogArchive'
+}
+
 export type Link = {
   _type: 'link'
-  linkType?: 'href' | 'page'
+  linkType?: 'href' | 'page' | 'route'
   href?: string
-  page?: PageReference
+  page?: PageReference | PracticeAreaArchiveReference | BlogArchiveReference
+  route?: 'attorneys' | 'offices'
   openInNewTab?: boolean
+}
+
+export type AttorneyReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'attorney'
+}
+
+export type AttorneysSection = {
+  _type: 'attorneysSection'
+  subtitle?: string
+  heading: string
+  selectionMode?: 'automatic' | 'manual'
+  attorneys?: Array<
+    {
+      _key: string
+    } & AttorneyReference
+  >
+  maximumItems?: number
+  showSocialLinks?: boolean
+  viewAllLabel?: string
+  anchor?: Slug
 }
 
 export type PracticeAreaReference = {
@@ -216,16 +264,31 @@ export type Card = {
 
 export type HeroSlider = {
   _type: 'heroSlider'
+  layout?: 'classic' | 'immigration'
   slides?: Array<{
     title?: string
     subtitle?: string
     description?: string
     image?: HeroSliderSlideImage
+    awardBadge?: AwardBadge
+    multilingualInfo?: string
+    services?: Array<string>
     cta?: HeroSliderSlideCta
     secondaryCta?: SecondaryCta
     _type: 'heroSliderSlide'
     _key: string
   }>
+  enhancedClassic?: boolean
+  showAwardBadge?: boolean
+  showPracticeAreas?: boolean
+  practiceAreasHeading?: string
+  practiceAreasSelectionMode?: 'manual' | 'automatic'
+  practiceAreas?: Array<
+    {
+      _key: string
+    } & PracticeAreaReference
+  >
+  maximumPracticeAreas?: number
   autoplay?: boolean
   autoplayInterval?: number
   showDots?: boolean
@@ -645,13 +708,6 @@ export type FooterReference = {
   [internalGroqTypeReferenceTo]?: 'footer'
 }
 
-export type AttorneyReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'attorney'
-}
-
 export type InternationalizedArrayReferenceValue = {
   _type: 'internationalizedArrayReferenceValue'
   value?:
@@ -742,6 +798,8 @@ export type Attorney = {
   fullName: string
   slug: Slug
   professionalTitle?: string
+  yearsOfExperience?: string
+  practiceAddress?: string
   profileImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -752,8 +810,34 @@ export type Attorney = {
   }
   shortBiography?: string
   biography?: BlockContent
+  experience?: BlockContent
+  education?: Array<string>
+  skills?: Array<{
+    label: string
+    level: number
+    _type: 'skill'
+    _key: string
+  }>
+  achievements?: Array<string>
+  certificates?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+    _key: string
+  }>
+  barAdmissions?: Array<string>
+  professionalMemberships?: Array<string>
+  languagesSpoken?: Array<string>
   email?: string
   phone?: string
+  socialLinks?: Array<{
+    label: string
+    url: string
+    _key: string
+  }>
   practiceAreas?: Array<
     {
       _key: string
@@ -994,6 +1078,9 @@ export type Page = {
     | ({
         _key: string
       } & PracticeAreasSection)
+    | ({
+        _key: string
+      } & AttorneysSection)
   >
   seo?: Seo
 }
@@ -1093,13 +1180,18 @@ export type AllSanitySchemaTypes =
   | FooterContactEmail
   | SanityImageAssetReference
   | HeroSliderSlideImage
+  | AwardBadge
   | HeroSliderSlideCta
   | SecondaryCta
   | ParallaxFeatureItemImage
   | ParallaxFeatureItemCta
   | Seo
   | PageReference
+  | PracticeAreaArchiveReference
+  | BlogArchiveReference
   | Link
+  | AttorneyReference
+  | AttorneysSection
   | PracticeAreaReference
   | PracticeAreasSection
   | WhyChooseUs
@@ -1142,7 +1234,6 @@ export type AllSanitySchemaTypes =
   | NavigationReference
   | SettingsReference
   | FooterReference
-  | AttorneyReference
   | InternationalizedArrayReferenceValue
   | Office
   | SanityImageCrop

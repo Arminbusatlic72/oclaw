@@ -43,7 +43,7 @@ function chooseLink(
 ) {
   if (link) {
     const resolved = link.linkType === 'page' ? link.page : link.href
-    return typeof resolved === 'string' ? resolved : null
+    if (typeof resolved === 'string' && resolved.trim()) return safeLegacyUrl(resolved, locale)
   }
   return safeLegacyUrl(fallback, locale)
 }

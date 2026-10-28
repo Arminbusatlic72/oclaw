@@ -24,6 +24,9 @@
 .collection-heading {max-width: 52rem; margin-bottom: 3.5rem;}
 .collection-detail-title {font-family: var(--font-dm-serif-text), Georgia, serif; font-size: clamp(2.5rem, 4vw, 4.5rem); margin-bottom: 2rem;}
 .collection-heading > p {font-size: 1.15rem; margin-top: 1rem; line-height: 1.7;}
+.archive-introduction {max-width: 52rem; margin-bottom: 3.5rem; color: var(--color-muted);}
+.archive-introduction > p:first-child {font-size: clamp(1.05rem, 1.4vw, 1.2rem); line-height: 1.8;}
+.archive-introduction .prose {margin-top: 1.5rem; color: inherit;}
 .practice-archive-grid .practice-card {background: #1e2e3e; color: white;}
 .practice-detail {display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: clamp(2rem, 5vw, 5rem); align-items: start;}
 .practice-article {grid-column: 1; grid-row: 1; min-width: 0;}
@@ -143,6 +146,21 @@
 
 .site-section-title {
   font-size: var(--site-heading-md);
+}
+
+.site-block-heading {
+  font-family: var(--font-dm-serif-text), Georgia, serif;
+  font-size: clamp(2.5rem, 4vw, 4.5rem);
+  line-height: 1.12;
+}
+
+.site-block-eyebrow,
+.site-block-subheading {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+}
+
+.site-block-subheading {
+  line-height: 1.7;
 }
 
 .why-choose-us-section {
@@ -431,6 +449,96 @@
   padding-inline: 1.5rem;
 }
 
+.site-hero-enhanced-classic .site-hero-image {
+  inset: 0 0 0 40%;
+}
+.site-hero-enhanced-classic .site-hero-image img {
+  object-position: center top;
+}
+.site-hero-enhanced-classic .site-hero-shade {
+  background: linear-gradient(90deg, var(--color-ink) 0%, var(--color-ink) 37%, rgb(30 46 62 / 0%) 60%);
+}
+.site-hero-enhanced-content {
+  max-width: 1440px;
+  padding-block: clamp(6rem, 9vw, 9rem);
+}
+.site-hero-enhanced-content > * {max-width: none; min-width: 0;}
+.site-hero-enhanced-main {display: flex; max-width: 720px; flex-direction: column; align-items: flex-start;}
+.site-hero-enhanced-classic .site-hero-title {max-width: 14ch; line-height: 1.1;}
+.site-hero-enhanced-main > p {max-width: 38rem; color: #e2e7ec; line-height: 1.75;}
+.site-hero-enhanced-classic .site-hero-actions {margin-top: 2.5rem;}
+.site-hero-practice-areas {display: grid; grid-template-columns: minmax(10rem, .28fr) minmax(0, 1fr); align-items: center; gap: clamp(1.5rem, 4vw, 4rem); width: 100%; padding-block: clamp(1.25rem, 2vw, 1.75rem); padding-inline: max(clamp(1.5rem, 5vw, 5rem), calc((100vw - 1440px) / 2 + 2.5rem)); border-block: 1px solid rgb(205 176 145 / 48%); background: var(--color-ink-deep); box-shadow: 0 -12px 35px rgb(0 0 0 / 12%);}
+.site-hero-practice-areas h3 {color: var(--color-brand); font-size: clamp(1.35rem, 2vw, 1.75rem); letter-spacing: 0;}
+.site-hero-practice-areas ul {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 3vw, 2.5rem);}
+.site-hero-practice-areas li {display: flex; align-items: baseline; gap: 1rem; border-bottom: 1px solid rgb(255 255 255 / 14%); color: #f3f5f7; line-height: 1.45;}
+.site-hero-practice-areas li:last-child {border-bottom: 0;}
+.site-hero-practice-areas li > span {flex: none; color: var(--color-brand); font-size: .95rem; font-weight: 700;}
+.site-hero-practice-areas a {display: block; width: 100%; padding-block: .75rem; color: inherit; transition: color 200ms ease;}
+.site-hero-practice-areas a:hover {color: var(--color-brand-hover);}
+.site-hero-practice-areas a:focus-visible {outline: 2px solid var(--color-brand); outline-offset: 3px;}
+
+.site-hero-immigration .site-hero-slide {
+  min-height: clamp(720px, 100svh, 1080px);
+}
+.site-hero-immigration .site-hero-image {inset: 0;}
+.site-hero-immigration .site-hero-image img {object-position: center center;}
+.site-hero-immigration .site-hero-shade {
+  background: linear-gradient(90deg, rgb(14 27 40 / 96%) 0%, rgb(19 35 50 / 90%) 48%, rgb(14 27 40 / 72%) 100%);
+}
+.site-hero-immigration-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(17rem, .7fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 6rem);
+  max-width: 1440px;
+  padding-block: clamp(7rem, 10vw, 10rem);
+}
+.site-hero-immigration-content > * {max-width: none; min-width: 0;}
+.site-hero-immigration-main {display: flex; flex-direction: column; align-items: flex-start;}
+.site-hero-classic-main {display: flex; max-width: 720px; flex-direction: column; gap: 1rem;}
+.site-hero-badge-link {display: inline-flex; max-width: 100%; margin-bottom: 1.5rem;}
+.site-hero-badge-link:focus-visible {outline: 2px solid var(--color-brand); outline-offset: 5px;}
+.site-hero-badge {display: block; width: min(100px, 30vw); height: auto; object-fit: contain; object-position: left center; margin-bottom: 1.5rem;}
+.site-hero-badge-link .site-hero-badge {margin-bottom: 0;}
+.site-hero-immigration .site-eyebrow {margin-bottom: 1rem;}
+.site-hero-immigration .site-hero-title {max-width: 13ch; font-size: clamp(3.25rem, 6vw, 6rem); line-height: 1.06; letter-spacing: -.035em;}
+.site-hero-divider {display: block; width: 5rem; height: 2px; background: var(--color-brand); margin-block: 1.75rem;}
+.site-hero-immigration-main > p:not(.site-hero-language) {max-width: 38rem; color: #e2e7ec; font-size: clamp(1rem, 1.35vw, 1.2rem); line-height: 1.75;}
+.site-hero-immigration .site-hero-actions {margin-top: 2.5rem;}
+.site-hero-immigration .site-hero-cta:first-child {background: var(--color-brand); color: var(--color-ink-deep);}
+.site-hero-immigration .site-hero-cta:first-child:hover {background: var(--color-brand-hover);}
+.site-hero-immigration .site-hero-cta[aria-disabled='true']:first-child {background: transparent; color: var(--color-brand);}
+.site-hero-language {margin-top: 1.75rem; color: #e2e7ec; font-size: .95rem; line-height: 1.6;}
+.site-hero-services {padding: clamp(1.5rem, 3vw, 2.5rem); border: 1px solid rgb(205 176 145 / 48%); background: rgb(14 27 40 / 68%); box-shadow: 0 24px 50px rgb(0 0 0 / 16%);}
+.site-hero-services ul {display: grid; gap: 0;}
+.site-hero-services li {display: flex; align-items: baseline; gap: 1rem; padding-block: .75rem; border-bottom: 1px solid rgb(255 255 255 / 14%); color: #f3f5f7; font-size: clamp(.95rem, 1.15vw, 1.08rem); line-height: 1.45;}
+.site-hero-services li:last-child {border-bottom: 0;}
+.site-hero-services li span {flex: none; color: var(--color-brand); font-size: .95rem; font-weight: 700;}
+@media (max-width: 899px) {
+  .site-hero-enhanced-content {padding-block: 5rem 6rem; text-align: left;}
+  .site-hero-enhanced-content > * {margin-inline: 0;}
+  .site-hero-enhanced-classic .site-hero-actions {justify-content: flex-start;}
+  .site-hero-practice-areas {grid-template-columns: 1fr; gap: 1rem; width: 100%;}
+  .site-hero-practice-areas ul {grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.5rem;}
+  .site-hero-immigration-content {grid-template-columns: 1fr; gap: 3rem; padding-block: 5rem 6rem; text-align: left;}
+  .site-hero-immigration-content > * {margin-inline: 0;}
+  .site-hero-immigration .site-hero-title {font-size: clamp(2.75rem, 7vw, 4.75rem);}
+  .site-hero-immigration .site-hero-actions {justify-content: flex-start;}
+  .site-hero-services {width: 100%; max-width: 38rem;}
+}
+@media (max-width: 599px) {
+  .site-hero-enhanced-content {padding: 3.5rem 1.5rem 5rem;}
+  .site-hero-enhanced-classic .site-hero-actions {gap: 1rem;}
+  .site-hero-enhanced-classic .site-hero-cta {width: 100%;}
+  .site-hero-practice-areas {padding-inline: 1.25rem;}
+  .site-hero-practice-areas ul {grid-template-columns: 1fr;}
+  .site-hero-immigration-content {padding: 3.5rem 1.5rem 5rem; gap: 2.5rem;}
+  .site-hero-immigration .site-hero-title {font-size: clamp(2.6rem, 10vw, 4rem);}
+  .site-hero-immigration .site-hero-actions {gap: 1rem;}
+  .site-hero-immigration .site-hero-cta {width: 100%;}
+  .site-hero-badge {width: min(88px, 30vw);}
+}
+
 .site-footer {
   margin-top: var(--site-section-space);
   background: var(--color-ink);
@@ -586,3 +694,160 @@
     transition: none;
   }
 }
+
+@media (max-width: 1279px) {
+  .site-hero .site-hero-enhanced-content {text-align: left;}
+  .site-hero .site-hero-enhanced-content > * {margin-inline: 0;}
+  .site-hero-enhanced-classic .site-hero-practice-areas {margin-inline: 0;}
+  .site-hero .site-hero-immigration-content {text-align: left;}
+  .site-hero .site-hero-immigration-content > * {margin-inline: 0;}
+  .site-hero-immigration .site-hero-services {margin-inline: 0;}
+}
+
+@media (max-width: 599px) {
+  .site-hero .site-hero-enhanced-content {padding: 3.5rem 1.5rem 5rem;}
+  .site-hero .site-hero-immigration-content {padding: 3.5rem 1.5rem 5rem;}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-hero .transition-transform,
+  .site-hero-practice-areas a {transition: none;}
+}
+
+.about-hero {position: relative; overflow: hidden; background: var(--color-ink-deep); color: white;}
+.about-hero::after {position: absolute; inset: 0 0 0 55%; border-left: 1px solid rgb(205 176 145 / 26%); background: linear-gradient(135deg, transparent, rgb(205 176 145 / 8%)); content: ''; pointer-events: none;}
+.about-hero-inner {position: relative; z-index: 1; padding-block: clamp(5rem, 9vw, 9rem);}
+.about-hero h1 {max-width: 14ch; font-size: clamp(3.5rem, 8vw, 7.5rem); line-height: 1.05;}
+.about-breadcrumb {display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; margin-top: 2.25rem; color: #e3e8ec; font-size: .95rem;}
+.about-breadcrumb a:hover {color: var(--color-brand);}
+.about-breadcrumb span[aria-current] {color: var(--color-brand);}
+.about-intro-grid {display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(2.5rem, 6vw, 6rem);}
+.about-intro-copy h2, .about-memberships h2, .about-attorneys h2, .about-cta h2 {font-size: clamp(2.35rem, 4vw, 4.25rem);}
+.about-intro-copy > p:last-child, .about-memberships-inner > p:last-child {max-width: 42rem; color: var(--color-muted); font-size: clamp(1.05rem, 1.4vw, 1.2rem); line-height: 1.9;}
+.about-accent {display: block; width: 5rem; height: 2px; margin-block: 1.75rem 2rem; background: var(--color-brand);}
+.about-intro-image {position: relative; min-width: 0; border: 1px solid var(--color-border); padding: .65rem; box-shadow: var(--site-shadow);}
+.about-intro-image::before {position: absolute; z-index: -1; inset: 1.4rem -1.4rem -1.4rem 1.4rem; border: 1px solid var(--color-brand); content: '';}
+.about-intro-image img {display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover;}
+.about-memberships {background: var(--color-surface-soft);}
+.about-memberships-inner {max-width: 62rem;}
+.about-attorneys {background: white;}
+.editorial-section {background: white;}
+.editorial-section-soft {background: var(--color-surface-soft);}
+.editorial-section-grid {display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(2.5rem, 6vw, 6rem);}
+.editorial-section-contained {max-width: 62rem; margin-inline: auto;}
+.editorial-section-copy h2 {font-size: clamp(2.35rem, 4vw, 4.25rem);}
+.editorial-section-body {color: var(--color-muted); font-size: clamp(1.05rem, 1.4vw, 1.2rem);}
+.editorial-section-body > div > :first-child {margin-top: 0;}
+.editorial-section-body > div > :last-child {margin-bottom: 0;}
+.editorial-section-image {position: relative; min-width: 0; border: 1px solid var(--color-border); padding: .65rem; box-shadow: var(--site-shadow);}
+.editorial-section-image::before {position: absolute; z-index: -1; inset: 1.4rem -1.4rem -1.4rem 1.4rem; border: 1px solid var(--color-brand); content: '';}
+.editorial-section-image img {display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover;}
+.editorial-section-copy-last {order: 2;}
+.editorial-section-image-first {order: 1;}
+.about-section-heading {max-width: 45rem; margin-bottom: 3rem;}
+.about-attorney-grid {display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.4rem;}
+.attorneys-showcase {padding-block: clamp(5rem, 8vw, 8rem); color: white; background: var(--color-ink-deep);}
+.attorneys-showcase-header {max-width: 48rem; margin: 0 auto clamp(3rem, 5vw, 5rem); text-align: center;}
+.attorneys-showcase-header > p {margin-bottom: .45rem; color: var(--color-brand);}
+.attorneys-showcase-header h2 {color: white;}
+.attorneys-showcase-header > span {display: block; width: 5.5rem; height: 1px; margin: 1.8rem auto 0; background: var(--color-brand);}
+.attorneys-showcase-grid {display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.75rem);}
+.attorneys-showcase-card {position: relative; min-width: 0; overflow: hidden; background: #26394b; box-shadow: inset 0 0 0 var(--color-brand); isolation: isolate; transition: box-shadow 240ms ease;}
+.attorneys-showcase-photo-link {display: block;}
+.attorneys-showcase-photo, .attorneys-showcase-photo-empty {display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; transition: transform 350ms ease;}
+.attorneys-showcase-photo-empty {background: linear-gradient(145deg, #30485d, var(--color-ink-deep));}
+.attorneys-showcase-overlay {position: absolute; z-index: 1; inset: 0; background: linear-gradient(to bottom, rgb(10 25 39 / 4%) 28%, rgb(10 25 39 / 50%) 65%, rgb(10 25 39 / 96%) 100%); pointer-events: none; transition: background 240ms ease;}
+.attorneys-showcase-content {position: absolute; z-index: 2; inset: auto 1.5rem 1.7rem; text-align: center;}
+.attorneys-showcase-content h3 {color: white; font-size: clamp(1.7rem, 2.4vw, 2.45rem); line-height: 1.1;}
+.attorneys-showcase-content h3 a {transition: color 180ms ease;}
+.attorneys-showcase-content h3 a:hover {color: var(--color-brand);}
+.attorneys-showcase-content > p {margin-top: .5rem; color: var(--color-brand); font-size: clamp(.95rem, 1.25vw, 1.12rem); line-height: 1.35;}
+.attorneys-showcase-social {display: flex; max-height: 0; flex-wrap: wrap; justify-content: center; gap: .65rem; margin-top: 0; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(.75rem); transition: max-height 280ms ease, margin-top 280ms ease, opacity 200ms ease, transform 280ms ease, visibility 0s linear 280ms;}
+.attorneys-showcase-social a {display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border-radius: 50%; color: white; background: rgb(39 65 86 / 92%); transition: color 180ms ease, background 180ms ease, transform 180ms ease;}
+.attorneys-showcase-social svg {width: 1.1rem; height: 1.1rem; stroke-width: 2;}
+.attorneys-showcase-social a:hover {color: var(--color-ink-deep); background: var(--color-brand); transform: translateY(-2px);}
+.attorneys-showcase-card:hover, .attorneys-showcase-card:focus-within {box-shadow: inset 0 -4px 0 var(--color-brand);}
+.attorneys-showcase-card:hover .attorneys-showcase-photo, .attorneys-showcase-card:focus-within .attorneys-showcase-photo {transform: scale(1.035);}
+.attorneys-showcase-card:hover .attorneys-showcase-overlay, .attorneys-showcase-card:focus-within .attorneys-showcase-overlay {background: linear-gradient(to bottom, rgb(10 25 39 / 8%) 20%, rgb(10 25 39 / 52%) 58%, rgb(10 25 39 / 98%) 100%);}
+.attorneys-showcase-card:hover .attorneys-showcase-social, .attorneys-showcase-card:focus-within .attorneys-showcase-social {max-height: 4rem; margin-top: 1.15rem; opacity: 1; visibility: visible; transform: translateY(0); transition-delay: 0s;}
+.attorneys-showcase-view-all {margin-top: 3rem; text-align: center;}
+.attorneys-showcase-view-all a {display: inline-flex; min-height: 3.25rem; align-items: center; padding: .75rem 1.5rem; color: var(--color-ink-deep); background: var(--color-brand); font-weight: 700;}
+.attorneys-showcase-view-all a:hover {background: var(--color-brand-hover);}
+.attorneys-showcase-empty {text-align: center; color: #d9e0e6;}
+.attorneys-showcase-light {color: var(--color-ink); background: white;}
+.attorneys-showcase-light .attorneys-showcase-header > p {color: #956e4b;}
+.attorneys-showcase-light .attorneys-showcase-header h2 {color: var(--color-ink);}
+.attorneys-showcase-light .attorneys-showcase-empty {color: var(--color-muted);}
+.about-empty {max-width: 40rem; border-left: 2px solid var(--color-brand); padding: 1rem 1.5rem; color: var(--color-muted);}
+.attorney-card {min-width: 0; border: 1px solid var(--color-border); background: white; transition: transform 200ms ease, box-shadow 200ms ease;}
+.attorney-card:hover {transform: translateY(-4px); box-shadow: var(--site-shadow);}
+.attorney-card-portrait {display: block; overflow: hidden; background: var(--color-ink-deep);}
+.attorney-card-photo, .attorney-card-photo-empty {display: block; width: 100%; height: auto; aspect-ratio: 4 / 4.6; object-fit: cover;}
+.attorney-card-photo-empty {background: linear-gradient(145deg, var(--color-ink-deep), #324a5e);}
+.attorney-card-content {padding: 1.55rem;}
+.attorney-card-role {margin-bottom: .6rem; color: #956e4b; font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;}
+.attorney-card h3 {font-size: clamp(1.45rem, 1.9vw, 2rem); line-height: 1.2;}
+.attorney-card h3 a:hover, .attorney-card-social a:hover {color: #956e4b;}
+.attorney-card-intro {margin-top: .8rem; color: var(--color-muted); line-height: 1.65;}
+.attorney-card-social {display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; color: var(--color-ink); font-size: .85rem;}
+.collection-people-grid .attorney-card {width: 100%;}
+.about-cta {background: var(--color-ink-deep); color: white;}
+.about-cta-inner {display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-block: clamp(3.5rem, 6vw, 6rem);}
+.about-cta h2 {max-width: 17ch;}
+.about-cta-link {display: inline-flex; align-items: center; justify-content: center; min-height: 3.5rem; flex: none; border: 1px solid var(--color-brand); padding: .8rem 1.5rem; color: var(--color-ink-deep); background: var(--color-brand); font-weight: 700;}
+.about-cta-link:hover {background: var(--color-brand-hover);}
+/* Single attorney page */
+.attorney-single {background: var(--color-surface);}
+.attorney-hero {position: relative; overflow: hidden; color: white; background: radial-gradient(120% 140% at 85% 15%, #2a4358 0%, var(--color-ink) 45%, var(--color-ink-deep) 100%);}
+.attorney-hero::after {position: absolute; inset: 0 0 0 50%; background: linear-gradient(120deg, transparent, rgb(205 176 145 / 14%)); content: ''; pointer-events: none;}
+.attorney-hero-inner {position: relative; z-index: 1; padding-block: clamp(4.5rem, 9vw, 8.5rem);}
+.attorney-hero h1 {font-size: clamp(3rem, 7vw, 6rem); line-height: 1.02;}
+.attorney-hero-breadcrumb {display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-top: 1.6rem; color: #d7dee4; font-size: .98rem;}
+.attorney-hero-breadcrumb a:hover {color: var(--color-brand);}
+.attorney-hero-breadcrumb span[aria-current] {color: var(--color-brand);}
+.attorney-intro {padding-bottom: clamp(3rem, 6vw, 5rem); background: #f3f4f6;}
+.attorney-profile-card {position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); margin-top: clamp(-6rem, -6vw, -4rem); padding: clamp(1.75rem, 4vw, 3rem); background: white; box-shadow: var(--site-shadow);}
+.attorney-profile-photo {min-width: 0;}
+.attorney-profile-photo img, .attorney-profile-photo-empty {display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover;}
+.attorney-profile-photo-empty {background: linear-gradient(145deg, var(--color-ink-deep), #324a5e);}
+.attorney-profile-info {min-width: 0;}
+.attorney-profile-info h2 {margin-bottom: 1.5rem; font-size: clamp(2.2rem, 4vw, 3.4rem);}
+.attorney-facts {display: grid; gap: 1.1rem;}
+.attorney-fact {display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem;}
+.attorney-fact dt {min-width: 7rem; color: var(--color-ink); font-family: var(--font-dm-serif-text), Georgia, serif; font-size: 1.2rem;}
+.attorney-fact dd {color: var(--color-muted);}
+.attorney-fact dd a:hover {color: #956e4b;}
+.attorney-certificates {margin-top: 2.25rem;}
+.attorney-certificates h3 {margin-bottom: 1.1rem; font-size: 1.7rem;}
+.attorney-certificates ul {display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem;}
+.attorney-certificates li {padding: .4rem; background: white; border: 1px solid var(--color-border);}
+.attorney-certificates img {display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain;}
+.attorney-columns {padding-block: clamp(3rem, 6vw, 5.5rem); background: white; border-top: 1px solid var(--color-border);}
+.attorney-columns-alt {background: #f3f4f6;}
+.attorney-columns-grid {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2.5rem, 6vw, 6rem);}
+.attorney-col {min-width: 0;}
+.attorney-col h2 {margin-bottom: 1.5rem; font-size: clamp(2rem, 3.2vw, 2.9rem);}
+.attorney-col > p {color: var(--color-muted); line-height: 1.9;}
+.attorney-col .prose {color: var(--color-muted);}
+.attorney-marker-list {display: grid; gap: 1.1rem;}
+.attorney-marker-list li {display: flex; align-items: baseline; gap: .8rem; color: var(--color-muted); line-height: 1.7;}
+.attorney-marker-list li span {color: var(--color-brand); font-weight: 700;}
+.attorney-skill-list {display: grid; gap: 1.5rem;}
+.attorney-skill-head {display: flex; justify-content: space-between; margin-bottom: .5rem; color: var(--color-ink);}
+.attorney-skill-bar {height: 4px; overflow: hidden; background: var(--color-gray-200);}
+.attorney-skill-bar span {display: block; height: 100%; background: var(--color-brand);}
+.attorney-footer-band {padding-block: clamp(2.5rem, 5vw, 4rem); background: var(--color-ink-deep); color: white;}
+.attorney-footer-band-inner {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 5rem);}
+.attorney-footer-band h2 {margin-bottom: 1.1rem; color: white; font-size: 1.6rem;}
+.attorney-chip-list {display: flex; flex-wrap: wrap; gap: .7rem;}
+.attorney-chip-list a {display: inline-block; padding: .5rem 1rem; color: #e7ded1; border: 1px solid rgb(205 176 145 / 50%); font-size: .92rem;}
+.attorney-chip-list a:hover {color: var(--color-brand); border-color: var(--color-brand);}
+@media (max-width: 1100px) {.about-attorney-grid {grid-template-columns: repeat(3, minmax(0, 1fr));}}
+@media (max-width: 1100px) {.attorneys-showcase-grid {grid-template-columns: repeat(2, minmax(0, 1fr));}}
+@media (max-width: 900px) {.about-attorney-grid {grid-template-columns: repeat(2, minmax(0, 1fr));}.attorney-profile-card {grid-template-columns: minmax(0, 280px) minmax(0, 1fr);}.attorney-columns-grid, .attorney-footer-band-inner {gap: 2.5rem;}}
+@media (max-width: 767px) {.about-intro-grid, .editorial-section-grid {grid-template-columns: 1fr;}.about-intro-image, .editorial-section-image {margin: 0 1rem 1rem 0;}.editorial-section-copy-last, .editorial-section-image-first {order: initial;}.about-cta-inner {align-items: flex-start; flex-direction: column;}.attorney-profile-card {grid-template-columns: 1fr; margin-top: -4rem;}.attorney-profile-photo {max-width: 20rem;}.attorney-columns-grid, .attorney-footer-band-inner {grid-template-columns: 1fr;}}
+@media (max-width: 599px) {.about-attorney-grid {grid-template-columns: 1fr;}.about-hero-inner {padding-block: 4rem 5rem;}.attorney-card-photo, .attorney-card-photo-empty {aspect-ratio: 4 / 3;}.attorney-certificates ul {grid-template-columns: repeat(2, minmax(0, 1fr));}}
+@media (max-width: 599px) {.attorneys-showcase-grid {grid-template-columns: 1fr;}.attorneys-showcase-card {max-width: 27rem; margin-inline: auto; width: 100%;}}
+@media (hover: none) {.attorneys-showcase-card {box-shadow: inset 0 -4px 0 var(--color-brand);}.attorneys-showcase-social {max-height: 4rem; margin-top: 1.15rem; opacity: 1; visibility: visible; transform: none;}}
+@media (prefers-reduced-motion: reduce) {.attorney-card {transition: none;}}
+@media (prefers-reduced-motion: reduce) {.attorneys-showcase-card, .attorneys-showcase-photo, .attorneys-showcase-overlay, .attorneys-showcase-social, .attorneys-showcase-social a {transition: none;}}

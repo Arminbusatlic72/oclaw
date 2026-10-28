@@ -44,6 +44,12 @@ export function footerId(locale: Locale) {
   return locale === 'es' ? 'siteFooter-es' : 'siteFooter'
 }
 
+export function siteRoutePath(route: string | null | undefined, locale: Locale) {
+  if (route === 'attorneys') return locale === 'es' ? '/es/abogados/' : '/attorneys/'
+  if (route === 'offices') return locale === 'es' ? '/es/oficinas/' : '/offices/'
+  return null
+}
+
 export function safeLegacyUrl(value: string | null | undefined, locale: Locale) {
   if (!value) return null
   if (/^(https?:|mailto:|tel:|#)/i.test(value)) return value
@@ -63,7 +69,23 @@ export function safeLegacyUrl(value: string | null | undefined, locale: Locale) 
   return `${path}${parsed.search}${parsed.hash}`
 }
 
-export type PageTarget = {_id: string; language?: string | null; slug?: string | null}
+export type PageTarget = {
+  _id: string
+  _type?: 'page' | 'practiceAreaArchive' | 'blogArchive' | string
+  language?: string | null
+  slug?: string | null
+}
+
+export function archivePath(target: PageTarget, locale: Locale) {
+  if (target.language !== locale && !(locale === 'en' && !target.language)) return null
+  if (target._type === 'practiceAreaArchive') {
+    return locale === 'es' ? '/es/areas-de-practica/' : '/practice-areas/'
+  }
+  if (target._type === 'blogArchive') {
+    return locale === 'es' ? '/es/blog-espanol/' : '/blog/'
+  }
+  return null
+}
 
 export function linkedTranslationPaths(
   locale: Locale,
@@ -117,6 +139,8 @@ export async function mapContentLinks<T>(
         target && typeof target === 'object' && '_id' in target
           ? await resolvePage(target as PageTarget, locale)
           : null
+    } else if (value.linkType === 'route') {
+      output.href = siteRoutePath(value.route as string | null | undefined, locale)
     } else {
       output.href = safeLegacyUrl(value.href as string | null | undefined, locale)
     }

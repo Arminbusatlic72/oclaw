@@ -1,6 +1,7 @@
 import {MenuIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {createLanguageField} from '../../i18n/config'
+import {hasUsableLink} from '../../lib/hasUsableLink'
 
 const navChildItem = defineArrayMember({
   name: 'navChildItem',
@@ -21,7 +22,7 @@ const navChildItem = defineArrayMember({
       validation: (rule) =>
         rule.custom((value, context) => {
           const parent = context.parent as {link?: unknown}
-          if (parent?.link) return true
+          if (hasUsableLink(parent?.link)) return true
           if (!value) return 'A referenced link or legacy internal path is required'
           if (!value.startsWith('/')) return 'Internal path must start with /'
           return true
@@ -61,7 +62,7 @@ const navItem = defineArrayMember({
           }
           if (
             parent?.externalUrl ||
-            parent?.link ||
+            hasUsableLink(parent?.link) ||
             (parent?.children && parent.children.length > 0)
           ) {
             return true
@@ -142,7 +143,7 @@ export const navigation = defineType({
         rule.custom((value, context) => {
           const parent = context.parent as {ctaLabel?: string; ctaLink?: unknown}
           if (!parent?.ctaLabel) return true
-          if (parent?.ctaLink) return true
+          if (hasUsableLink(parent?.ctaLink)) return true
           if (!value) return 'A referenced link or legacy CTA path is required when a label is set'
           if (!value.startsWith('/')) return 'CTA path must start with /'
           return true
@@ -153,6 +154,7 @@ export const navigation = defineType({
       title: 'CTA referenced link',
       description: 'Preferred for new links. The legacy CTA path remains supported.',
       type: 'link',
+      hidden: ({document}) => !document?.ctaLabel,
     }),
   ],
   preview: {

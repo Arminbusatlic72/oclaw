@@ -57,6 +57,10 @@ export const page = defineType({
         {type: 'callToAction'},
         {type: 'infoSection'},
         {type: 'practiceAreasSection'},
+        {type: 'attorneysSection'},
+        {type: 'pageHero'},
+        {type: 'editorialSection'},
+        {type: 'ctaBanner'},
       ],
       options: {
         insertMenu: {

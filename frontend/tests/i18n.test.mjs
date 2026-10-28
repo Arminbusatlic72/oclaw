@@ -2,10 +2,12 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import {
+  archivePath,
   absoluteUrl,
   englishCanonicalPath,
   localePath,
   safeLegacyUrl,
+  siteRoutePath,
   settingsId,
   navigationId,
   footerId,
@@ -34,6 +36,27 @@ test('/en paths have one canonical unprefixed destination', () => {
   assert.equal(url.toString(), 'https://www.oclaw.us/about-us/?campaign=1')
 })
 
+test('collection archive references resolve to their localized routes', () => {
+  assert.equal(
+    archivePath(
+      {_id: 'practiceAreaArchive-en', _type: 'practiceAreaArchive', language: 'en'},
+      'en',
+    ),
+    '/practice-areas/',
+  )
+  assert.equal(
+    archivePath(
+      {_id: 'practiceAreaArchive-es', _type: 'practiceAreaArchive', language: 'es'},
+      'es',
+    ),
+    '/es/areas-de-practica/',
+  )
+  assert.equal(
+    archivePath({_id: 'practiceAreaArchive-es', _type: 'practiceAreaArchive', language: 'es'}, 'en'),
+    null,
+  )
+})
+
 test('localized singleton IDs stay distinct', () => {
   assert.equal(settingsId('en'), 'siteSettings')
   assert.equal(settingsId('es'), 'siteSettings-es')
@@ -41,6 +64,15 @@ test('localized singleton IDs stay distinct', () => {
   assert.equal(navigationId('es'), 'siteNavigation-es')
   assert.equal(footerId('en'), 'siteFooter')
   assert.equal(footerId('es'), 'siteFooter-es')
+})
+
+test('built-in listing routes are selectable in either language', async () => {
+  assert.equal(siteRoutePath('attorneys', 'en'), '/attorneys/')
+  assert.equal(siteRoutePath('attorneys', 'es'), '/es/abogados/')
+  assert.equal(siteRoutePath('offices', 'en'), '/offices/')
+  assert.equal(siteRoutePath('unknown', 'en'), null)
+  const link = {_type: 'link', linkType: 'route', route: 'attorneys'}
+  assert.equal((await mapContentLinks(link, 'es', async () => null)).href, '/es/abogados/')
 })
 
 test('legacy links cannot cross languages accidentally', () => {

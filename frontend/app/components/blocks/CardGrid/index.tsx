@@ -48,11 +48,11 @@ export default function CardGrid({block}: CardGridProps) {
       {heading || subheading ? (
         <ScrollReveal direction="up" className={`mb-10 flex flex-col gap-3 ${textAlignment}`}>
           {heading && (
-            <h2 id={headingId} className="text-3xl font-semibold text-gray-900 md:text-4xl">
+            <h2 id={headingId} className="site-block-heading text-gray-900">
               {heading}
             </h2>
           )}
-          {subheading && <p className="max-w-3xl text-base text-gray-600">{subheading}</p>}
+          {subheading && <p className="site-block-subheading max-w-3xl text-gray-600">{subheading}</p>}
         </ScrollReveal>
       ) : (
         <h2 id={headingId} className="sr-only">

@@ -18,7 +18,8 @@ export async function contentMetadata(slug: string, locale: Locale): Promise<Met
     return post ? postMetadata(post, locale) : {}
   }
   const {data: page} = await sanityFetch({query: getPageQuery, params: {slug, language: locale}, perspective: 'published', stega: false})
-  return page ? pageMetadata(page, locale, slug) : {}
+  if (!page) return {}
+  return pageMetadata(page, locale, slug)
 }
 
 export default async function ContentRoute({slug, locale}: {slug: string; locale: Locale}) {

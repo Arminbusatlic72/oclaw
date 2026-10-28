@@ -1,0 +1,143 @@
+{
+  "mode": "dry-run",
+  "projectId": "ewrcmuk0",
+  "dataset": "production",
+  "productionWrites": 0,
+  "counts": {
+    "sourcePages": 2,
+    "sourcePeople": 4,
+    "proposedBilingualPairs": 4,
+    "proposedDrafts": 8,
+    "existingSanityAttorneys": 0,
+    "blockingSourceOrSlugIssues": 0
+  },
+  "pageChecks": [
+    {
+      "locale": "en",
+      "wordpressId": 9,
+      "url": "https://www.oclaw.us/about-us/",
+      "canonical": "https://www.oclaw.us/about-us/",
+      "seoTitle": "About Us - OC Law Group",
+      "verified": true
+    },
+    {
+      "locale": "es",
+      "wordpressId": 2176,
+      "url": "https://www.oclaw.us/es/sobre-nosotros/",
+      "canonical": "https://www.oclaw.us/es/sobre-nosotros/",
+      "seoTitle": "Sobre nosotros - OC Law Group",
+      "verified": true
+    }
+  ],
+  "proposedPairs": [
+    {
+      "name": "Theresia Ortiz",
+      "proposedSlug": "theresia-ortiz",
+      "sourceVerified": true,
+      "proposedDraftIds": [
+        "drafts.attorney.about.theresia-ortiz.en",
+        "drafts.attorney.about.theresia-ortiz.es"
+      ],
+      "proposedMetadataId": "i18n.attorney.about.theresia-ortiz",
+      "sourceTitles": {
+        "en": "Immigration Attorney",
+        "es": "Abogado de inmigración"
+      },
+      "portrait": {
+        "sourceUrl": "https://www.oclaw.us/wp-content/uploads/elementor/thumbs/viber_image_2020-10-23_11-27-57-p1d54ptfacon67y5hovjzv5y9s7c6gviygxe2ixtiw.jpg",
+        "sourceAlt": "Theresia"
+      },
+      "crossCollectionSameSlug": [],
+      "practiceAreaAssignments": [],
+      "officeAssignments": [],
+      "biographyAvailable": false,
+      "educationAvailable": false,
+      "barAdmissionsAvailable": false,
+      "editorialFlags": [
+        "Portrait alt text names only Theresia; confirm full descriptive alt text",
+        "Membership claims require current verification"
+      ]
+    },
+    {
+      "name": "Filip Chichevaliev",
+      "proposedSlug": "filip-chichevaliev",
+      "sourceVerified": true,
+      "proposedDraftIds": [
+        "drafts.attorney.about.filip-chichevaliev.en",
+        "drafts.attorney.about.filip-chichevaliev.es"
+      ],
+      "proposedMetadataId": "i18n.attorney.about.filip-chichevaliev",
+      "sourceTitles": {
+        "en": "Immigration Attorney",
+        "es": "Abogado de inmigración"
+      },
+      "portrait": {
+        "sourceUrl": "https://www.oclaw.us/wp-content/uploads/elementor/thumbs/viber_image_2021-01-12_14-37-48-p1cza35dtucjjvwef585rimi6gdcc5ouzy7fnd8ptk.jpg",
+        "sourceAlt": "Filip Chichevaliev"
+      },
+      "crossCollectionSameSlug": [],
+      "practiceAreaAssignments": [],
+      "officeAssignments": [],
+      "biographyAvailable": false,
+      "educationAvailable": false,
+      "barAdmissionsAvailable": false,
+      "editorialFlags": [
+        "Membership claims require current verification"
+      ]
+    },
+    {
+      "name": "Ivana Dimitrovska Rajchevska",
+      "proposedSlug": "ivana-dimitrovska-rajchevska",
+      "sourceVerified": true,
+      "proposedDraftIds": [
+        "drafts.attorney.about.ivana-dimitrovska-rajchevska.en",
+        "drafts.attorney.about.ivana-dimitrovska-rajchevska.es"
+      ],
+      "proposedMetadataId": "i18n.attorney.about.ivana-dimitrovska-rajchevska",
+      "sourceTitles": {
+        "en": "Immigration Attorney",
+        "es": "Abogado de inmigración"
+      },
+      "portrait": {
+        "sourceUrl": "https://www.oclaw.us/wp-content/uploads/elementor/thumbs/Ivana-Dimitrovska-Rajchevska-e1738619619352-r0zbwy1z84lys0gk2xgyabe0t2y54i7mtij488c5a0.jpg",
+        "sourceAlt": "Ivana Dimitrovska Rajchevska"
+      },
+      "crossCollectionSameSlug": [],
+      "practiceAreaAssignments": [],
+      "officeAssignments": [],
+      "biographyAvailable": false,
+      "educationAvailable": false,
+      "barAdmissionsAvailable": false,
+      "editorialFlags": []
+    },
+    {
+      "name": "Viktoriia Chernova",
+      "proposedSlug": "viktoriia-chernova",
+      "sourceVerified": true,
+      "proposedDraftIds": [
+        "drafts.attorney.about.viktoriia-chernova.en",
+        "drafts.attorney.about.viktoriia-chernova.es"
+      ],
+      "proposedMetadataId": "i18n.attorney.about.viktoriia-chernova",
+      "sourceTitles": {
+        "en": "Of Counsel Attorney",
+        "es": "Abogado asociado"
+      },
+      "portrait": {
+        "sourceUrl": "https://www.oclaw.us/wp-content/uploads/elementor/thumbs/Viktoriia-Chernova-riku750r0pknjg3sriogwpsa3zceqyaefvi7cym6rc.jpg",
+        "sourceAlt": "Viktoriia Chernova"
+      },
+      "crossCollectionSameSlug": [],
+      "practiceAreaAssignments": [],
+      "officeAssignments": [],
+      "biographyAvailable": false,
+      "educationAvailable": false,
+      "barAdmissionsAvailable": false,
+      "editorialFlags": [
+        "English and Spanish professional roles do not match in meaning; obtain approved wording"
+      ]
+    }
+  ],
+  "issues": [],
+  "readiness": "source verified; editorial approval, portrait asset staging and separate import authorization required"
+}

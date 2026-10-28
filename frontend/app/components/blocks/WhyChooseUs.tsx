@@ -58,7 +58,7 @@ export default function WhyChooseUs({block}: {block: WhyChooseUsBlock}) {
           <div className="why-choose-us-title mb-10 text-center sm:mb-14">
             <h2
               id={anchorId ? `${anchorId}-heading` : undefined}
-              className="font-serif text-3xl leading-tight sm:text-4xl lg:text-5xl"
+              className="site-block-heading"
             >
               {heading}
             </h2>

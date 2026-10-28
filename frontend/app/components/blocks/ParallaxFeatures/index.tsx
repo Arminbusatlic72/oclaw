@@ -55,12 +55,12 @@ export default function ParallaxFeatures({block}: ParallaxFeaturesProps) {
           {heading && (
             <h2
               id={sectionId}
-              className={`text-3xl font-semibold md:text-4xl lg:text-5xl ${headingClass}`}
+              className={`site-block-heading ${headingClass}`}
             >
               {heading}
             </h2>
           )}
-          {subheading && <p className={`mt-4 text-base leading-7 ${mutedClass}`}>{subheading}</p>}
+          {subheading && <p className={`site-block-subheading mt-4 ${mutedClass}`}>{subheading}</p>}
         </ScrollReveal>
 
         <div className={`mt-14 grid gap-8 sm:gap-10 ${gridColumnsClass}`}>

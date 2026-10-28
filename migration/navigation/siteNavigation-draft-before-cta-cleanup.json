@@ -1,0 +1,91 @@
+{
+  "_createdAt": "2026-10-13T09:50:52Z",
+  "_id": "drafts.siteNavigation",
+  "_rev": "af2ae731-6f36-4f1b-8ca4-c6ab6f94ec36",
+  "_system": {
+    "base": {
+      "id": "siteNavigation",
+      "rev": "8bjEr1uZJYOAbqQdI15oHc"
+    }
+  },
+  "_type": "navigation",
+  "_updatedAt": "2026-10-27T14:52:49Z",
+  "ctaLink": {
+    "_type": "link",
+    "linkType": "page"
+  },
+  "logo": {
+    "_type": "image",
+    "alt": "oc law logo",
+    "asset": {
+      "_ref": "image-fc43f18332cca0098dc32efe0f0d7133b94e8c9b-250x176-webp",
+      "_type": "reference"
+    }
+  },
+  "navItems": [
+    {
+      "_key": "c5c31f87bb19",
+      "_type": "navItem",
+      "href": "/",
+      "isButton": false,
+      "title": "Home"
+    },
+    {
+      "_key": "745ff026491a",
+      "_type": "navItem",
+      "href": "/about-us",
+      "isButton": false,
+      "link": {
+        "_type": "link",
+        "linkType": "page",
+        "page": {
+          "_ref": "b6c94469-f8ea-405c-b0b1-c7b9cacbd5a2",
+          "_type": "reference"
+        }
+      },
+      "title": "About US"
+    },
+    {
+      "_key": "29dfed6463cb",
+      "_type": "navItem",
+      "isButton": false,
+      "link": {
+        "_type": "link",
+        "linkType": "page",
+        "openInNewTab": false,
+        "page": {
+          "_ref": "practiceAreaArchive-en",
+          "_type": "reference"
+        }
+      },
+      "title": "Pratice"
+    },
+    {
+      "_key": "ce66a69bb596",
+      "_type": "navItem",
+      "isButton": false,
+      "link": {
+        "_type": "link",
+        "linkType": "page",
+        "openInNewTab": false,
+        "page": {
+          "_ref": "blogArchive-en",
+          "_type": "reference"
+        }
+      },
+      "title": "Blog"
+    },
+    {
+      "_key": "bd3fc55ee091",
+      "_type": "navItem",
+      "href": "/attorneys/",
+      "isButton": false,
+      "link": {
+        "_type": "link",
+        "linkType": "page",
+        "openInNewTab": false
+      },
+      "title": "Attorneys"
+    }
+  ]
+}

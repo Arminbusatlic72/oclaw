@@ -11,9 +11,11 @@ export default function DynamicPage({page, isHomepage = false}: {page: NonNullab
     )
   }
 
+  const hasPageHero = page.pageBuilder?.[0]?._type === 'pageHero'
+
   return (
-    <div className="my-10 lg:my-16">
-      <section>
+    <main className={hasPageHero ? undefined : 'my-10 lg:my-16'}>
+      {!hasPageHero && <section>
         <div className="container">
           <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
             <div className="max-w-3xl">
@@ -28,8 +30,8 @@ export default function DynamicPage({page, isHomepage = false}: {page: NonNullab
             </div>
           </div>
         </div>
-      </section>
+      </section>}
       <PageBuilderPage page={page} />
-    </div>
+    </main>
   )
 }

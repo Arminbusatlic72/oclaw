@@ -3,6 +3,7 @@ import {notFound} from 'next/navigation'
 import CustomPortableText from './PortableText'
 import type {PortableTextBlock} from 'next-sanity'
 import Image from './SanityImage'
+import ArchiveHero from './ArchiveHero'
 import {archiveId, archivePath, postPath} from '@/lib/blog'
 import {archiveMetadata} from '@/lib/blog-metadata'
 import type {Locale} from '@/lib/i18n'
@@ -41,12 +42,12 @@ export default async function BlogArchive({locale, rawPage}: {locale: Locale; ra
   const pageNumbers = [...new Set([1, pages, page - 1, page, page + 1].filter((number) => number >= 1 && number <= pages))].sort((a, b) => a - b)
   const title = archive?.heading || (locale === 'es' ? 'Blog en Español' : 'Blog')
   const pageHref = (number: number) => number === 1 ? archivePath(locale) : `${archivePath(locale)}?page=${number}`
-  return <div className="container mx-auto px-4 py-12 sm:py-16">
-    <header className="mb-10 max-w-3xl"><h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1>
-      {archive?.description && <p className="mt-5 text-lg text-slate-600">{archive.description}</p>}
+  return <><ArchiveHero locale={locale} title={title} path={archivePath(locale)} /><main className="container mx-auto px-4 py-12 sm:py-16">
+    {(archive?.description || archive?.introduction || (archive?.ctaLabel && archive.ctaHref)) && <header className="archive-introduction">
+      {archive?.description && <p>{archive.description}</p>}
       {archive?.introduction && <CustomPortableText className="mt-6" value={archive.introduction as PortableTextBlock[]} />}
       {archive?.ctaLabel && archive.ctaHref && <Link className="mt-5 inline-block underline" href={archive.ctaHref}>{archive.ctaLabel}</Link>}
-    </header>
+    </header>}
     {posts.length ? <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">{posts.map((post) => <article key={post._id} className="overflow-hidden rounded-xl border border-slate-200">
       <Link href={postPath(locale, post.slug!)} className="block focus-visible:outline-2 focus-visible:outline-offset-2">
         {post.featuredImage?.asset?._ref && <Image id={post.featuredImage.asset._ref} alt={post.featuredImage.alt || ''} width={800} className="aspect-[16/10] w-full object-cover" />}
@@ -58,5 +59,5 @@ export default async function BlogArchive({locale, rawPage}: {locale: Locale; ra
       {pageNumbers.map((number, index) => <span key={number} className="inline-flex items-center gap-3">{index > 0 && number > pageNumbers[index - 1] + 1 && <span aria-hidden="true">…</span>}<Link href={pageHref(number)} aria-current={number === page ? 'page' : undefined} className="rounded border px-4 py-2" aria-label={`${locale === 'es' ? 'Página' : 'Page'} ${number}`}>{number}</Link></span>)}
       {page < pages && <Link rel="next" href={pageHref(page + 1)} className="rounded border px-4 py-2">{locale === 'es' ? 'Siguiente' : 'Next'}</Link>}
     </nav>}
-  </div>
+  </main></>
 }

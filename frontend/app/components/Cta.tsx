@@ -39,7 +39,7 @@ export default function CTA({block}: CtaProps) {
                 </span>
               )}
               {heading && (
-                <h2 className="mt-4 text-3xl leading-tight md:text-4xl lg:text-5xl">{heading}</h2>
+                <h2 className="site-block-heading mt-4">{heading}</h2>
               )}
               {body && (
                 <div className={`${bodyToneClass} mt-4 lg:text-left`}>

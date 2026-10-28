@@ -61,12 +61,12 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
             {heading && (
               <h2
                 id={sectionId}
-                className="mt-5 text-3xl font-semibold tracking-tight md:text-4xl lg:text-5xl"
+                className="site-block-heading mt-5 tracking-tight"
               >
                 {heading}
               </h2>
             )}
-            {subheading && <p className={`mt-4 text-base leading-7 ${mutedClass}`}>{subheading}</p>}
+            {subheading && <p className={`site-block-subheading mt-4 ${mutedClass}`}>{subheading}</p>}
           </ScrollReveal>
 
           <div className="mt-10 sm:mt-14">

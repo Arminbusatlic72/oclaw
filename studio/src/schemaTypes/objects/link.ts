@@ -18,11 +18,12 @@ export const link = defineType({
       name: 'linkType',
       title: 'Link Type',
       type: 'string',
-      initialValue: 'url',
+      initialValue: 'href',
       options: {
         list: [
           {title: 'URL', value: 'href'},
           {title: 'Page', value: 'page'},
+          {title: 'Site route', value: 'route'},
         ],
         layout: 'radio',
       },
@@ -46,7 +47,8 @@ export const link = defineType({
       name: 'page',
       title: 'Page',
       type: 'reference',
-      to: [{type: 'page'}],
+      description: 'Select a standard page or a collection archive page.',
+      to: [{type: 'page'}, {type: 'practiceAreaArchive'}, {type: 'blogArchive'}],
       hidden: ({parent}) => parent?.linkType !== 'page',
       validation: (Rule) =>
         // Custom validation to ensure page reference is provided if the link type is 'page'
@@ -55,6 +57,25 @@ export const link = defineType({
           if (parent?.linkType === 'page' && !value) {
             return 'Page reference is required when Link Type is Page'
           }
+          return true
+        }),
+    }),
+    defineField({
+      name: 'route',
+      title: 'Site route',
+      type: 'string',
+      description: 'Built-in listing pages are selected here instead of the Page reference picker.',
+      options: {
+        list: [
+          {title: 'Attorneys', value: 'attorneys'},
+          {title: 'Offices', value: 'offices'},
+        ],
+      },
+      hidden: ({parent}) => parent?.linkType !== 'route',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as {linkType?: string}
+          if (parent?.linkType === 'route' && !value) return 'Select a site route'
           return true
         }),
     }),

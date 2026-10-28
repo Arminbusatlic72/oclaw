@@ -42,6 +42,16 @@ export type HeroSliderSlideImage = {
   _type: 'image'
 }
 
+export type AwardBadge = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "awardBadge.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt: string
+  link?: Link
+  _type: 'image'
+}
+
 export type HeroSliderSlideCta = {
   label?: string
   url?: string
@@ -91,12 +101,84 @@ export type PageReference = {
   [internalGroqTypeReferenceTo]?: 'page'
 }
 
+export type PracticeAreaArchiveReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'practiceAreaArchive'
+}
+
+export type BlogArchiveReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'blogArchive'
+}
+
 export type Link = {
   _type: 'link'
-  linkType?: 'href' | 'page'
+  linkType?: 'href' | 'page' | 'route'
   href?: string
-  page?: PageReference
+  page?: PageReference | PracticeAreaArchiveReference | BlogArchiveReference
+  route?: 'attorneys' | 'offices'
   openInNewTab?: boolean
+}
+
+export type CtaBanner = {
+  _type: 'ctaBanner'
+  eyebrow?: string
+  heading: string
+  button?: Button
+}
+
+export type EditorialSection = {
+  _type: 'editorialSection'
+  eyebrow?: string
+  heading: string
+  body: BlockContent
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  layout: 'contained' | 'split'
+  imagePosition?: 'right' | 'left'
+  theme: 'white' | 'soft'
+  anchor?: Slug
+}
+
+export type PageHero = {
+  _type: 'pageHero'
+  eyebrow?: string
+  heading: string
+  showBreadcrumb?: boolean
+}
+
+export type AttorneyReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'attorney'
+}
+
+export type AttorneysSection = {
+  _type: 'attorneysSection'
+  subtitle?: string
+  heading: string
+  selectionMode?: 'automatic' | 'manual'
+  attorneys?: Array<
+    {
+      _key: string
+    } & AttorneyReference
+  >
+  maximumItems?: number
+  showSocialLinks?: boolean
+  viewAllLabel?: string
+  theme: 'dark' | 'light'
+  anchor?: Slug
 }
 
 export type PracticeAreaReference = {
@@ -216,16 +298,31 @@ export type Card = {
 
 export type HeroSlider = {
   _type: 'heroSlider'
+  layout?: 'classic' | 'immigration'
   slides?: Array<{
     title?: string
     subtitle?: string
     description?: string
     image?: HeroSliderSlideImage
+    awardBadge?: AwardBadge
+    multilingualInfo?: string
+    services?: Array<string>
     cta?: HeroSliderSlideCta
     secondaryCta?: SecondaryCta
     _type: 'heroSliderSlide'
     _key: string
   }>
+  enhancedClassic?: boolean
+  showAwardBadge?: boolean
+  showPracticeAreas?: boolean
+  practiceAreasHeading?: string
+  practiceAreasSelectionMode?: 'manual' | 'automatic'
+  practiceAreas?: Array<
+    {
+      _key: string
+    } & PracticeAreaReference
+  >
+  maximumPracticeAreas?: number
   autoplay?: boolean
   autoplayInterval?: number
   showDots?: boolean
@@ -645,13 +742,6 @@ export type FooterReference = {
   [internalGroqTypeReferenceTo]?: 'footer'
 }
 
-export type AttorneyReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'attorney'
-}
-
 export type InternationalizedArrayReferenceValue = {
   _type: 'internationalizedArrayReferenceValue'
   value?:
@@ -742,6 +832,8 @@ export type Attorney = {
   fullName: string
   slug: Slug
   professionalTitle?: string
+  yearsOfExperience?: string
+  practiceAddress?: string
   profileImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -752,8 +844,34 @@ export type Attorney = {
   }
   shortBiography?: string
   biography?: BlockContent
+  experience?: BlockContent
+  education?: Array<string>
+  skills?: Array<{
+    label: string
+    level: number
+    _type: 'skill'
+    _key: string
+  }>
+  achievements?: Array<string>
+  certificates?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+    _key: string
+  }>
+  barAdmissions?: Array<string>
+  professionalMemberships?: Array<string>
+  languagesSpoken?: Array<string>
   email?: string
   phone?: string
+  socialLinks?: Array<{
+    label: string
+    url: string
+    _key: string
+  }>
   practiceAreas?: Array<
     {
       _key: string
@@ -994,6 +1112,18 @@ export type Page = {
     | ({
         _key: string
       } & PracticeAreasSection)
+    | ({
+        _key: string
+      } & AttorneysSection)
+    | ({
+        _key: string
+      } & PageHero)
+    | ({
+        _key: string
+      } & EditorialSection)
+    | ({
+        _key: string
+      } & CtaBanner)
   >
   seo?: Seo
 }
@@ -1093,13 +1223,21 @@ export type AllSanitySchemaTypes =
   | FooterContactEmail
   | SanityImageAssetReference
   | HeroSliderSlideImage
+  | AwardBadge
   | HeroSliderSlideCta
   | SecondaryCta
   | ParallaxFeatureItemImage
   | ParallaxFeatureItemCta
   | Seo
   | PageReference
+  | PracticeAreaArchiveReference
+  | BlogArchiveReference
   | Link
+  | CtaBanner
+  | EditorialSection
+  | PageHero
+  | AttorneyReference
+  | AttorneysSection
   | PracticeAreaReference
   | PracticeAreasSection
   | WhyChooseUs
@@ -1142,7 +1280,6 @@ export type AllSanitySchemaTypes =
   | NavigationReference
   | SettingsReference
   | FooterReference
-  | AttorneyReference
   | InternationalizedArrayReferenceValue
   | Office
   | SanityImageCrop
@@ -1210,7 +1347,7 @@ export type SettingsQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: footerQuery
-// Query: *[_type == "footer" && _id == $id][0]{    ...,    blocks[]{      ...,      _type == "footerContact" => {..., offices[]->{_id, name, language, "slug": slug.current, streetAddress, addressLine2, city, state, postalCode, country, phone, email}},      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, language, "slug": slug.current}}}}    },    bottomLinks[]{..., link{..., page->{_id, language, "slug": slug.current}}},    links[]{..., link{..., page->{_id, language, "slug": slug.current}}}  }
+// Query: *[_type == "footer" && _id == $id][0]{    ...,    blocks[]{      ...,      _type == "footerContact" => {..., offices[]->{_id, name, language, "slug": slug.current, streetAddress, addressLine2, city, state, postalCode, country, phone, email}},      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}    },    bottomLinks[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}},    links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}}  }
 export type FooterQueryResult = {
   _id: string
   _type: 'footer'
@@ -1275,13 +1412,29 @@ export type FooterQueryResult = {
           label: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page'
+            linkType?: 'href' | 'page' | 'route'
             href?: string
-            page: {
-              _id: string
-              language: 'en' | 'es' | null
-              slug: string
-            } | null
+            page:
+              | {
+                  _id: string
+                  _type: 'blogArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | {
+                  _id: string
+                  _type: 'page'
+                  language: 'en' | 'es' | null
+                  slug: string
+                }
+              | {
+                  _id: string
+                  _type: 'practiceAreaArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | null
+            route?: 'attorneys' | 'offices'
             openInNewTab?: boolean
           }
         }>
@@ -1322,13 +1475,29 @@ export type FooterQueryResult = {
     label: string
     link: {
       _type: 'link'
-      linkType?: 'href' | 'page'
+      linkType?: 'href' | 'page' | 'route'
       href?: string
-      page: {
-        _id: string
-        language: 'en' | 'es' | null
-        slug: string
-      } | null
+      page:
+        | {
+            _id: string
+            _type: 'blogArchive'
+            language: 'en' | 'es' | null
+            slug: null
+          }
+        | {
+            _id: string
+            _type: 'page'
+            language: 'en' | 'es' | null
+            slug: string
+          }
+        | {
+            _id: string
+            _type: 'practiceAreaArchive'
+            language: 'en' | 'es' | null
+            slug: null
+          }
+        | null
+      route?: 'attorneys' | 'offices'
       openInNewTab?: boolean
     }
   }> | null
@@ -1341,13 +1510,29 @@ export type FooterQueryResult = {
     label: string
     link: {
       _type: 'link'
-      linkType?: 'href' | 'page'
+      linkType?: 'href' | 'page' | 'route'
       href?: string
-      page: {
-        _id: string
-        language: 'en' | 'es' | null
-        slug: string
-      } | null
+      page:
+        | {
+            _id: string
+            _type: 'blogArchive'
+            language: 'en' | 'es' | null
+            slug: null
+          }
+        | {
+            _id: string
+            _type: 'page'
+            language: 'en' | 'es' | null
+            slug: string
+          }
+        | {
+            _id: string
+            _type: 'practiceAreaArchive'
+            language: 'en' | 'es' | null
+            slug: null
+          }
+        | null
+      route?: 'attorneys' | 'offices'
       openInNewTab?: boolean
     }
   }> | null
@@ -1355,7 +1540,7 @@ export type FooterQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: navigationQuery
-// Query: *[_type == "navigation" && _id == $id][0]{    logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},    navItems[]{title, href, externalUrl, isButton,      link{..., page->{_id,language,"slug":slug.current}},      children[]{title,href,link{...,page->{_id,language,"slug":slug.current}}}    },    ctaLabel, ctaHref, ctaLink{...,page->{_id,language,"slug":slug.current}}  }
+// Query: *[_type == "navigation" && _id == $id][0]{    logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},    navItems[]{title, href, externalUrl, isButton,      link{..., page->{_id,_type,language,"slug":slug.current}},      children[]{title,href,link{...,page->{_id,_type,language,"slug":slug.current}}}    },    ctaLabel, ctaHref, ctaLink{...,page->{_id,_type,language,"slug":slug.current}}  }
 export type NavigationQueryResult = {
   logo: {
     alt: string | null
@@ -1375,13 +1560,29 @@ export type NavigationQueryResult = {
     isButton: boolean | null
     link: {
       _type: 'link'
-      linkType?: 'href' | 'page'
+      linkType?: 'href' | 'page' | 'route'
       href?: string
-      page: {
-        _id: string
-        language: 'en' | 'es' | null
-        slug: string
-      } | null
+      page:
+        | {
+            _id: string
+            _type: 'blogArchive'
+            language: 'en' | 'es' | null
+            slug: null
+          }
+        | {
+            _id: string
+            _type: 'page'
+            language: 'en' | 'es' | null
+            slug: string
+          }
+        | {
+            _id: string
+            _type: 'practiceAreaArchive'
+            language: 'en' | 'es' | null
+            slug: null
+          }
+        | null
+      route?: 'attorneys' | 'offices'
       openInNewTab?: boolean
     } | null
     children: Array<{
@@ -1389,13 +1590,29 @@ export type NavigationQueryResult = {
       href: string | null
       link: {
         _type: 'link'
-        linkType?: 'href' | 'page'
+        linkType?: 'href' | 'page' | 'route'
         href?: string
-        page: {
-          _id: string
-          language: 'en' | 'es' | null
-          slug: string
-        } | null
+        page:
+          | {
+              _id: string
+              _type: 'blogArchive'
+              language: 'en' | 'es' | null
+              slug: null
+            }
+          | {
+              _id: string
+              _type: 'page'
+              language: 'en' | 'es' | null
+              slug: string
+            }
+          | {
+              _id: string
+              _type: 'practiceAreaArchive'
+              language: 'en' | 'es' | null
+              slug: null
+            }
+          | null
+        route?: 'attorneys' | 'offices'
         openInNewTab?: boolean
       } | null
     }> | null
@@ -1404,20 +1621,36 @@ export type NavigationQueryResult = {
   ctaHref: string | null
   ctaLink: {
     _type: 'link'
-    linkType?: 'href' | 'page'
+    linkType?: 'href' | 'page' | 'route'
     href?: string
-    page: {
-      _id: string
-      language: 'en' | 'es' | null
-      slug: string
-    } | null
+    page:
+      | {
+          _id: string
+          _type: 'blogArchive'
+          language: 'en' | 'es' | null
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'page'
+          language: 'en' | 'es' | null
+          slug: string
+        }
+      | {
+          _id: string
+          _type: 'practiceAreaArchive'
+          language: 'en' | 'es' | null
+          slug: null
+        }
+      | null
+    route?: 'attorneys' | 'offices'
     openInNewTab?: boolean
   } | null
 } | null
 
 // Source: sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type == "page" && slug.current == $slug &&    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}  }}
+// Query: *[_type == "page" && slug.current == $slug &&    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}    ,_type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}    ,_type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}  }}
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
@@ -1430,6 +1663,23 @@ export type GetPageQueryResult = {
   pageBuilder: Array<
     | {
         _key: string
+        _type: 'attorneysSection'
+        subtitle?: string
+        heading: string
+        selectionMode?: 'automatic' | 'manual'
+        attorneys?: Array<
+          {
+            _key: string
+          } & AttorneyReference
+        >
+        maximumItems?: number
+        showSocialLinks?: boolean
+        viewAllLabel?: string
+        theme: 'dark' | 'light'
+        anchor?: Slug
+      }
+    | {
+        _key: string
         _type: 'callToAction'
         eyebrow?: string
         heading: string
@@ -1439,13 +1689,29 @@ export type GetPageQueryResult = {
           buttonText?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page'
+            linkType?: 'href' | 'page' | 'route'
             href?: string
-            page: {
-              _id: string
-              language: 'en' | 'es' | null
-              slug: string
-            } | null
+            page:
+              | {
+                  _id: string
+                  _type: 'blogArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | {
+                  _id: string
+                  _type: 'page'
+                  language: 'en' | 'es' | null
+                  slug: string
+                }
+              | {
+                  _id: string
+                  _type: 'practiceAreaArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | null
+            route?: 'attorneys' | 'offices'
             openInNewTab?: boolean
           } | null
         } | null
@@ -1486,13 +1752,29 @@ export type GetPageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page'
+              linkType?: 'href' | 'page' | 'route'
               href?: string
-              page: {
-                _id: string
-                language: 'en' | 'es' | null
-                slug: string
-              } | null
+              page:
+                | {
+                    _id: string
+                    _type: 'blogArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | {
+                    _id: string
+                    _type: 'page'
+                    language: 'en' | 'es' | null
+                    slug: string
+                  }
+                | {
+                    _id: string
+                    _type: 'practiceAreaArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | null
+              route?: 'attorneys' | 'offices'
               openInNewTab?: boolean
             } | null
           } | null
@@ -1502,7 +1784,102 @@ export type GetPageQueryResult = {
       }
     | {
         _key: string
+        _type: 'ctaBanner'
+        eyebrow?: string
+        heading: string
+        button: {
+          _type: 'button'
+          buttonText?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'route'
+            href?: string
+            page:
+              | {
+                  _id: string
+                  _type: 'blogArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | {
+                  _id: string
+                  _type: 'page'
+                  language: 'en' | 'es' | null
+                  slug: string
+                }
+              | {
+                  _id: string
+                  _type: 'practiceAreaArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | null
+            route?: 'attorneys' | 'offices'
+            openInNewTab?: boolean
+          } | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'editorialSection'
+        eyebrow?: string
+        heading: string
+        body: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<{
+                linkType?: 'href' | 'page'
+                href?: string
+                page: {
+                  _id: string
+                  language: 'en' | 'es' | null
+                  slug: string
+                } | null
+                openInNewTab?: boolean
+                _type: 'link'
+                _key: string
+              }> | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+              _key: string
+              markDefs: null
+            }
+        >
+        image: {
+          asset: {
+            _id: string
+            url: string
+          } | null
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          alt?: string
+          _type: 'image'
+        } | null
+        layout: 'contained' | 'split'
+        imagePosition?: 'left' | 'right'
+        theme: 'soft' | 'white'
+        anchor?: Slug
+      }
+    | {
+        _key: string
         _type: 'heroSlider'
+        layout?: 'classic' | 'immigration'
         slides: Array<{
           title?: string
           subtitle?: string
@@ -1523,18 +1900,79 @@ export type GetPageQueryResult = {
             alt?: string
             _type: 'image'
           } | null
+          awardBadge: {
+            asset: {
+              _id: string
+              metadata: {
+                dimensions: {
+                  width: number
+                  height: number
+                } | null
+              } | null
+            } | null
+            media?: unknown // Unable to locate the referenced type "awardBadge.media" in schema
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            alt: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page' | 'route'
+              href?: string
+              page:
+                | {
+                    _id: string
+                    _type: 'blogArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | {
+                    _id: string
+                    _type: 'page'
+                    language: 'en' | 'es' | null
+                    slug: string
+                  }
+                | {
+                    _id: string
+                    _type: 'practiceAreaArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | null
+              route?: 'attorneys' | 'offices'
+              openInNewTab?: boolean
+            } | null
+            _type: 'image'
+          } | null
+          multilingualInfo?: string
+          services?: Array<string>
           cta: {
             label?: string
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page'
+              linkType?: 'href' | 'page' | 'route'
               href?: string
-              page: {
-                _id: string
-                language: 'en' | 'es' | null
-                slug: string
-              } | null
+              page:
+                | {
+                    _id: string
+                    _type: 'blogArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | {
+                    _id: string
+                    _type: 'page'
+                    language: 'en' | 'es' | null
+                    slug: string
+                  }
+                | {
+                    _id: string
+                    _type: 'practiceAreaArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | null
+              route?: 'attorneys' | 'offices'
               openInNewTab?: boolean
             } | null
           } | null
@@ -1543,19 +1981,46 @@ export type GetPageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page'
+              linkType?: 'href' | 'page' | 'route'
               href?: string
-              page: {
-                _id: string
-                language: 'en' | 'es' | null
-                slug: string
-              } | null
+              page:
+                | {
+                    _id: string
+                    _type: 'blogArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | {
+                    _id: string
+                    _type: 'page'
+                    language: 'en' | 'es' | null
+                    slug: string
+                  }
+                | {
+                    _id: string
+                    _type: 'practiceAreaArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | null
+              route?: 'attorneys' | 'offices'
               openInNewTab?: boolean
             } | null
           } | null
           _type: 'heroSliderSlide'
           _key: string
         }> | null
+        enhancedClassic?: boolean
+        showAwardBadge?: boolean
+        showPracticeAreas?: boolean
+        practiceAreasHeading?: string
+        practiceAreasSelectionMode?: 'automatic' | 'manual'
+        practiceAreas?: Array<
+          {
+            _key: string
+          } & PracticeAreaReference
+        >
+        maximumPracticeAreas?: number
         autoplay?: boolean
         autoplayInterval?: number
         showDots?: boolean
@@ -1605,6 +2070,13 @@ export type GetPageQueryResult = {
       }
     | {
         _key: string
+        _type: 'pageHero'
+        eyebrow?: string
+        heading: string
+        showBreadcrumb?: boolean
+      }
+    | {
+        _key: string
         _type: 'parallaxFeatures'
         heading: string
         subheading?: string
@@ -1628,13 +2100,29 @@ export type GetPageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page'
+              linkType?: 'href' | 'page' | 'route'
               href?: string
-              page: {
-                _id: string
-                language: 'en' | 'es' | null
-                slug: string
-              } | null
+              page:
+                | {
+                    _id: string
+                    _type: 'blogArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | {
+                    _id: string
+                    _type: 'page'
+                    language: 'en' | 'es' | null
+                    slug: string
+                  }
+                | {
+                    _id: string
+                    _type: 'practiceAreaArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | null
+              route?: 'attorneys' | 'offices'
               openInNewTab?: boolean
             } | null
           } | null
@@ -1679,13 +2167,29 @@ export type GetPageQueryResult = {
           buttonText?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page'
+            linkType?: 'href' | 'page' | 'route'
             href?: string
-            page: {
-              _id: string
-              language: 'en' | 'es' | null
-              slug: string
-            } | null
+            page:
+              | {
+                  _id: string
+                  _type: 'blogArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | {
+                  _id: string
+                  _type: 'page'
+                  language: 'en' | 'es' | null
+                  slug: string
+                }
+              | {
+                  _id: string
+                  _type: 'practiceAreaArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | null
+            route?: 'attorneys' | 'offices'
             openInNewTab?: boolean
           } | null
         } | null
@@ -1759,13 +2263,21 @@ export type GetPageQueryResult = {
         ctaLabel?: string
         ctaLink: {
           _type: 'link'
-          linkType?: 'href' | 'page'
+          linkType?: 'href' | 'page' | 'route'
           href?: string
-          page: {
-            _id: string
-            language: 'en' | 'es' | null
-            slug: string
-          } | null
+          page:
+            | {
+                _id: string
+                language: 'en' | 'es' | null
+                slug: null
+              }
+            | {
+                _id: string
+                language: 'en' | 'es' | null
+                slug: string
+              }
+            | null
+          route?: 'attorneys' | 'offices'
           openInNewTab?: boolean
         } | null
       }
@@ -1774,7 +2286,7 @@ export type GetPageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: homePageQuery
-// Query: *[_type == "settings" && _id == $id][0].homePage->{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}  }}
+// Query: *[_type == "settings" && _id == $id][0].homePage->{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}    ,_type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}    ,_type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}  }}
 export type HomePageQueryResult = {
   _id: string
   _type: 'page'
@@ -1787,6 +2299,23 @@ export type HomePageQueryResult = {
   pageBuilder: Array<
     | {
         _key: string
+        _type: 'attorneysSection'
+        subtitle?: string
+        heading: string
+        selectionMode?: 'automatic' | 'manual'
+        attorneys?: Array<
+          {
+            _key: string
+          } & AttorneyReference
+        >
+        maximumItems?: number
+        showSocialLinks?: boolean
+        viewAllLabel?: string
+        theme: 'dark' | 'light'
+        anchor?: Slug
+      }
+    | {
+        _key: string
         _type: 'callToAction'
         eyebrow?: string
         heading: string
@@ -1796,13 +2325,29 @@ export type HomePageQueryResult = {
           buttonText?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page'
+            linkType?: 'href' | 'page' | 'route'
             href?: string
-            page: {
-              _id: string
-              language: 'en' | 'es' | null
-              slug: string
-            } | null
+            page:
+              | {
+                  _id: string
+                  _type: 'blogArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | {
+                  _id: string
+                  _type: 'page'
+                  language: 'en' | 'es' | null
+                  slug: string
+                }
+              | {
+                  _id: string
+                  _type: 'practiceAreaArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | null
+            route?: 'attorneys' | 'offices'
             openInNewTab?: boolean
           } | null
         } | null
@@ -1843,13 +2388,29 @@ export type HomePageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page'
+              linkType?: 'href' | 'page' | 'route'
               href?: string
-              page: {
-                _id: string
-                language: 'en' | 'es' | null
-                slug: string
-              } | null
+              page:
+                | {
+                    _id: string
+                    _type: 'blogArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | {
+                    _id: string
+                    _type: 'page'
+                    language: 'en' | 'es' | null
+                    slug: string
+                  }
+                | {
+                    _id: string
+                    _type: 'practiceAreaArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | null
+              route?: 'attorneys' | 'offices'
               openInNewTab?: boolean
             } | null
           } | null
@@ -1859,7 +2420,102 @@ export type HomePageQueryResult = {
       }
     | {
         _key: string
+        _type: 'ctaBanner'
+        eyebrow?: string
+        heading: string
+        button: {
+          _type: 'button'
+          buttonText?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'route'
+            href?: string
+            page:
+              | {
+                  _id: string
+                  _type: 'blogArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | {
+                  _id: string
+                  _type: 'page'
+                  language: 'en' | 'es' | null
+                  slug: string
+                }
+              | {
+                  _id: string
+                  _type: 'practiceAreaArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | null
+            route?: 'attorneys' | 'offices'
+            openInNewTab?: boolean
+          } | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'editorialSection'
+        eyebrow?: string
+        heading: string
+        body: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<{
+                linkType?: 'href' | 'page'
+                href?: string
+                page: {
+                  _id: string
+                  language: 'en' | 'es' | null
+                  slug: string
+                } | null
+                openInNewTab?: boolean
+                _type: 'link'
+                _key: string
+              }> | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+              _key: string
+              markDefs: null
+            }
+        >
+        image: {
+          asset: {
+            _id: string
+            url: string
+          } | null
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          alt?: string
+          _type: 'image'
+        } | null
+        layout: 'contained' | 'split'
+        imagePosition?: 'left' | 'right'
+        theme: 'soft' | 'white'
+        anchor?: Slug
+      }
+    | {
+        _key: string
         _type: 'heroSlider'
+        layout?: 'classic' | 'immigration'
         slides: Array<{
           title?: string
           subtitle?: string
@@ -1880,18 +2536,79 @@ export type HomePageQueryResult = {
             alt?: string
             _type: 'image'
           } | null
+          awardBadge: {
+            asset: {
+              _id: string
+              metadata: {
+                dimensions: {
+                  width: number
+                  height: number
+                } | null
+              } | null
+            } | null
+            media?: unknown // Unable to locate the referenced type "awardBadge.media" in schema
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            alt: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page' | 'route'
+              href?: string
+              page:
+                | {
+                    _id: string
+                    _type: 'blogArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | {
+                    _id: string
+                    _type: 'page'
+                    language: 'en' | 'es' | null
+                    slug: string
+                  }
+                | {
+                    _id: string
+                    _type: 'practiceAreaArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | null
+              route?: 'attorneys' | 'offices'
+              openInNewTab?: boolean
+            } | null
+            _type: 'image'
+          } | null
+          multilingualInfo?: string
+          services?: Array<string>
           cta: {
             label?: string
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page'
+              linkType?: 'href' | 'page' | 'route'
               href?: string
-              page: {
-                _id: string
-                language: 'en' | 'es' | null
-                slug: string
-              } | null
+              page:
+                | {
+                    _id: string
+                    _type: 'blogArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | {
+                    _id: string
+                    _type: 'page'
+                    language: 'en' | 'es' | null
+                    slug: string
+                  }
+                | {
+                    _id: string
+                    _type: 'practiceAreaArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | null
+              route?: 'attorneys' | 'offices'
               openInNewTab?: boolean
             } | null
           } | null
@@ -1900,19 +2617,46 @@ export type HomePageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page'
+              linkType?: 'href' | 'page' | 'route'
               href?: string
-              page: {
-                _id: string
-                language: 'en' | 'es' | null
-                slug: string
-              } | null
+              page:
+                | {
+                    _id: string
+                    _type: 'blogArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | {
+                    _id: string
+                    _type: 'page'
+                    language: 'en' | 'es' | null
+                    slug: string
+                  }
+                | {
+                    _id: string
+                    _type: 'practiceAreaArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | null
+              route?: 'attorneys' | 'offices'
               openInNewTab?: boolean
             } | null
           } | null
           _type: 'heroSliderSlide'
           _key: string
         }> | null
+        enhancedClassic?: boolean
+        showAwardBadge?: boolean
+        showPracticeAreas?: boolean
+        practiceAreasHeading?: string
+        practiceAreasSelectionMode?: 'automatic' | 'manual'
+        practiceAreas?: Array<
+          {
+            _key: string
+          } & PracticeAreaReference
+        >
+        maximumPracticeAreas?: number
         autoplay?: boolean
         autoplayInterval?: number
         showDots?: boolean
@@ -1962,6 +2706,13 @@ export type HomePageQueryResult = {
       }
     | {
         _key: string
+        _type: 'pageHero'
+        eyebrow?: string
+        heading: string
+        showBreadcrumb?: boolean
+      }
+    | {
+        _key: string
         _type: 'parallaxFeatures'
         heading: string
         subheading?: string
@@ -1985,13 +2736,29 @@ export type HomePageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page'
+              linkType?: 'href' | 'page' | 'route'
               href?: string
-              page: {
-                _id: string
-                language: 'en' | 'es' | null
-                slug: string
-              } | null
+              page:
+                | {
+                    _id: string
+                    _type: 'blogArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | {
+                    _id: string
+                    _type: 'page'
+                    language: 'en' | 'es' | null
+                    slug: string
+                  }
+                | {
+                    _id: string
+                    _type: 'practiceAreaArchive'
+                    language: 'en' | 'es' | null
+                    slug: null
+                  }
+                | null
+              route?: 'attorneys' | 'offices'
               openInNewTab?: boolean
             } | null
           } | null
@@ -2036,13 +2803,29 @@ export type HomePageQueryResult = {
           buttonText?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page'
+            linkType?: 'href' | 'page' | 'route'
             href?: string
-            page: {
-              _id: string
-              language: 'en' | 'es' | null
-              slug: string
-            } | null
+            page:
+              | {
+                  _id: string
+                  _type: 'blogArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | {
+                  _id: string
+                  _type: 'page'
+                  language: 'en' | 'es' | null
+                  slug: string
+                }
+              | {
+                  _id: string
+                  _type: 'practiceAreaArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | null
+            route?: 'attorneys' | 'offices'
             openInNewTab?: boolean
           } | null
         } | null
@@ -2116,13 +2899,21 @@ export type HomePageQueryResult = {
         ctaLabel?: string
         ctaLink: {
           _type: 'link'
-          linkType?: 'href' | 'page'
+          linkType?: 'href' | 'page' | 'route'
           href?: string
-          page: {
-            _id: string
-            language: 'en' | 'es' | null
-            slug: string
-          } | null
+          page:
+            | {
+                _id: string
+                language: 'en' | 'es' | null
+                slug: null
+              }
+            | {
+                _id: string
+                language: 'en' | 'es' | null
+                slug: string
+              }
+            | null
+          route?: 'attorneys' | 'offices'
           openInNewTab?: boolean
         } | null
       }
@@ -2543,7 +3334,7 @@ export type PracticeAreaQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: attorneyListQuery
-// Query: *[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, seo, _updatedAt}
+// Query: *[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, socialLinks, seo, _updatedAt}
 export type AttorneyListQueryResult = Array<{
   _id: string
   fullName: string
@@ -2559,19 +3350,26 @@ export type AttorneyListQueryResult = Array<{
     _type: 'image'
   } | null
   shortBiography: string | null
+  socialLinks: Array<{
+    label: string
+    url: string
+    _key: string
+  }> | null
   seo: Seo | null
   _updatedAt: string
 }>
 
 // Source: sanity/lib/queries.ts
 // Variable: attorneyQuery
-// Query: *[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, biography, email, phone, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}
+// Query: *[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}
 export type AttorneyQueryResult = {
   _id: string
   fullName: string
   slug: string
   language: 'en' | 'es' | null
   professionalTitle: string | null
+  yearsOfExperience: string | null
+  practiceAddress: string | null
   profileImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -2582,8 +3380,32 @@ export type AttorneyQueryResult = {
   } | null
   shortBiography: string | null
   biography: BlockContent | null
+  experience: BlockContent | null
+  education: Array<string> | null
+  skills: Array<{
+    label: string
+    level: number
+  }> | null
+  achievements: Array<string> | null
+  certificates: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+    _key: string
+  }> | null
+  barAdmissions: Array<string> | null
+  professionalMemberships: Array<string> | null
+  languagesSpoken: Array<string> | null
   email: string | null
   phone: string | null
+  socialLinks: Array<{
+    label: string
+    url: string
+    _key: string
+  }> | null
   seo: Seo | null
   _updatedAt: string
   practiceAreas: Array<{
@@ -2672,7 +3494,7 @@ export type OfficeQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: attorneysForPracticeQuery
-// Query: *[_type == "attorney" && language == $language && defined(slug.current) && $id in practiceAreas[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography, "officeIds": offices[]._ref}
+// Query: *[_type == "attorney" && language == $language && defined(slug.current) && $id in practiceAreas[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography, socialLinks, "officeIds": offices[]._ref}
 export type AttorneysForPracticeQueryResult = Array<{
   _id: string
   fullName: string
@@ -2687,6 +3509,11 @@ export type AttorneysForPracticeQueryResult = Array<{
     _type: 'image'
   } | null
   shortBiography: string | null
+  socialLinks: Array<{
+    label: string
+    url: string
+    _key: string
+  }> | null
   officeIds: Array<string> | null
 }>
 
@@ -3068,10 +3895,10 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "settings" && _id == $id][0]': SettingsQueryResult
-    '\n  *[_type == "footer" && _id == $id][0]{\n    ...,\n    blocks[]{\n      ...,\n      _type == "footerContact" => {..., offices[]->{_id, name, language, "slug": slug.current, streetAddress, addressLine2, city, state, postalCode, country, phone, email}},\n      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, language, "slug": slug.current}}}}\n    },\n    bottomLinks[]{..., link{..., page->{_id, language, "slug": slug.current}}},\n    links[]{..., link{..., page->{_id, language, "slug": slug.current}}}\n  }\n': FooterQueryResult
-    '\n  *[_type == "navigation" && _id == $id][0]{\n    logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},\n    navItems[]{title, href, externalUrl, isButton,\n      link{..., page->{_id,language,"slug":slug.current}},\n      children[]{title,href,link{...,page->{_id,language,"slug":slug.current}}}\n    },\n    ctaLabel, ctaHref, ctaLink{...,page->{_id,language,"slug":slug.current}}\n  }\n': NavigationQueryResult
-    '\n  *[_type == "page" && slug.current == $slug &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n  }\n}\n': GetPageQueryResult
-    '\n  *[_type == "settings" && _id == $id][0].homePage->{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n  }\n}\n': HomePageQueryResult
+    '\n  *[_type == "footer" && _id == $id][0]{\n    ...,\n    blocks[]{\n      ...,\n      _type == "footerContact" => {..., offices[]->{_id, name, language, "slug": slug.current, streetAddress, addressLine2, city, state, postalCode, country, phone, email}},\n      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}\n    },\n    bottomLinks[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}},\n    links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}}\n  }\n': FooterQueryResult
+    '\n  *[_type == "navigation" && _id == $id][0]{\n    logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},\n    navItems[]{title, href, externalUrl, isButton,\n      link{..., page->{_id,_type,language,"slug":slug.current}},\n      children[]{title,href,link{...,page->{_id,_type,language,"slug":slug.current}}}\n    },\n    ctaLabel, ctaHref, ctaLink{...,page->{_id,_type,language,"slug":slug.current}}\n  }\n': NavigationQueryResult
+    '\n  *[_type == "page" && slug.current == $slug &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n    ,_type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n    ,_type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}\n  }\n}\n': GetPageQueryResult
+    '\n  *[_type == "settings" && _id == $id][0].homePage->{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n    ,_type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n    ,_type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}\n  }\n}\n': HomePageQueryResult
     '\n  *[_type == "settings" && _id in ["siteSettings", "siteSettings-es"]]{_id, "pageId": homePage._ref}\n': HomePageIdsQueryResult
     '\n  *[_type == "translation.metadata" && references($id)][0]{\n    translations[]{language, "page": value->{_id, language, "slug": slug.current, "noIndex": seo.noIndex}}\n  }\n': TranslationQueryResult
     '\n  *[_type == "page" && defined(slug.current) && (coalesce(language, "en") == "en" || language == "es")] {\n    _id, language, "slug": slug.current, _updatedAt, seo,\n    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "page": value->{_id, language, "slug": slug.current}}\n  }\n': SitemapDataResult
@@ -3088,11 +3915,11 @@ declare module '@sanity/client' {
     '\n  *[_type == "blogPost" && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && language in ["en", "es"]]{\n    _id, language, "slug": slug.current, publishedAt, updatedAt, _updatedAt, seo,\n    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "post": value->{_id, language, "slug": slug.current, publishedAt, seo}}\n  }\n': BlogSitemapQueryResult
     '*[_type == "practiceArea" && language == $language && defined(slug.current)] | order(displayOrder asc, title asc){_id, title, "slug": slug.current, language, shortDescription, icon, mainImage, featuredOnHomepage, displayOrder, seo, _updatedAt}': PracticeAreasQueryResult
     '*[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, seo, _updatedAt}': PracticeAreaQueryResult
-    '*[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, seo, _updatedAt}': AttorneyListQueryResult
-    '*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, biography, email, phone, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}': AttorneyQueryResult
+    '*[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, socialLinks, seo, _updatedAt}': AttorneyListQueryResult
+    '*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}': AttorneyQueryResult
     '*[_type == "office" && language == $language && defined(slug.current)] | order(displayOrder asc, name asc){_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, image, openingHours, seo, _updatedAt}': OfficeListQueryResult
     '*[_type == "office" && language == $language && slug.current == $slug][0]{_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, coordinates, image, openingHours, seo, _updatedAt}': OfficeQueryResult
-    '*[_type == "attorney" && language == $language && defined(slug.current) && $id in practiceAreas[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography, "officeIds": offices[]._ref}': AttorneysForPracticeQueryResult
+    '*[_type == "attorney" && language == $language && defined(slug.current) && $id in practiceAreas[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography, socialLinks, "officeIds": offices[]._ref}': AttorneysForPracticeQueryResult
     '*[_type == "attorney" && language == $language && defined(slug.current) && $id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography}': AttorneysForOfficeQueryResult
     '*[_type == "practiceAreaArchive" && _id == $id][0]': PracticeAreaArchiveQueryResult
     '*[_type == "translation.metadata" && references($id)][0].translations[]{language,"target":value->{_id,_type,language,"slug":slug.current,"noIndex":seo.noIndex}}': CollectionTranslationQueryResult

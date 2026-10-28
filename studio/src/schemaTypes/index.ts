@@ -29,6 +29,10 @@ import {attorney} from './documents/attorney'
 import {office} from './documents/office'
 import {practiceAreaArchive} from './singletons/practiceAreaArchive'
 import {practiceAreasSection} from './blocks/practiceAreasSection'
+import {attorneysSection} from './blocks/attorneysSection'
+import {pageHero} from './blocks/pageHero'
+import {editorialSection} from './blocks/editorialSection'
+import {ctaBanner} from './blocks/ctaBanner'
 
 // Export an array of all the schema types.  This is used in the Sanity Studio configuration. https://www.sanity.io/docs/studio/schema-types
 
@@ -65,6 +69,10 @@ export const schemaTypes = [
   parallaxFeatures,
   whyChooseUs,
   practiceAreasSection,
+  attorneysSection,
+  pageHero,
+  editorialSection,
+  ctaBanner,
   link,
   seo,
 ]
