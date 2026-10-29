@@ -125,7 +125,12 @@ export default async function AttorneysSection({block, locale}: {block: Block; l
 
         {block.viewAllLabel && (
           <div className="attorneys-showcase-view-all">
-            <Link href={collectionPath('attorney', locale)}>{block.viewAllLabel}</Link>
+            <Link
+              className="site-button-outline site-hero-cta"
+              href={collectionPath('attorney', locale)}
+            >
+              {block.viewAllLabel}
+            </Link>
           </div>
         )}
       </div>

@@ -124,6 +124,18 @@ export type Link = {
   openInNewTab?: boolean
 }
 
+export type StatisticsSection = {
+  _type: 'statisticsSection'
+  items: Array<{
+    value: number
+    suffix?: string
+    label: string
+    icon?: 'none' | 'briefcase' | 'people' | 'building' | 'scales' | 'trophy' | 'location'
+    _type: 'statistic'
+    _key: string
+  }>
+}
+
 export type OfficeReference = {
   _ref: string
   _type: 'reference'
@@ -1149,6 +1161,9 @@ export type Page = {
     | ({
         _key: string
       } & OfficesSection)
+    | ({
+        _key: string
+      } & StatisticsSection)
   >
   seo?: Seo
 }
@@ -1302,6 +1317,7 @@ export type AllSanitySchemaTypes =
   | PracticeAreaArchiveReference
   | BlogArchiveReference
   | Link
+  | StatisticsSection
   | OfficeReference
   | OfficesSection
   | LocationMap
@@ -2411,6 +2427,18 @@ export type GetPageQueryResult = {
       }
     | {
         _key: string
+        _type: 'statisticsSection'
+        items: Array<{
+          value: number
+          suffix?: string
+          label: string
+          icon?: 'briefcase' | 'building' | 'location' | 'none' | 'people' | 'scales' | 'trophy'
+          _type: 'statistic'
+          _key: string
+        }>
+      }
+    | {
+        _key: string
         _type: 'whyChooseUs'
         heading: string
         anchorId?: string
@@ -3185,6 +3213,18 @@ export type HomePageQueryResult = {
           } | null
         } | null
         theme?: 'dark' | 'light'
+      }
+    | {
+        _key: string
+        _type: 'statisticsSection'
+        items: Array<{
+          value: number
+          suffix?: string
+          label: string
+          icon?: 'briefcase' | 'building' | 'location' | 'none' | 'people' | 'scales' | 'trophy'
+          _type: 'statistic'
+          _key: string
+        }>
       }
     | {
         _key: string

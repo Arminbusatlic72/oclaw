@@ -915,8 +915,6 @@
 .attorneys-showcase-card:hover .attorneys-showcase-overlay, .attorneys-showcase-card:focus-within .attorneys-showcase-overlay {background: linear-gradient(to bottom, rgb(10 25 39 / 8%) 20%, rgb(10 25 39 / 52%) 58%, rgb(10 25 39 / 98%) 100%);}
 .attorneys-showcase-card:hover .attorneys-showcase-social, .attorneys-showcase-card:focus-within .attorneys-showcase-social {max-height: 4rem; margin-top: 1.15rem; opacity: 1; visibility: visible; transform: translateY(0); transition-delay: 0s;}
 .attorneys-showcase-view-all {margin-top: 3rem; text-align: center;}
-.attorneys-showcase-view-all a {display: inline-flex; min-height: 3.25rem; align-items: center; padding: .75rem 1.5rem; color: var(--color-ink-deep); background: var(--color-brand); font-weight: 700;}
-.attorneys-showcase-view-all a:hover {background: var(--color-brand-hover);}
 .attorneys-showcase-empty {text-align: center; color: #d9e0e6;}
 .attorneys-showcase-light {color: var(--color-ink); background: white;}
 .attorneys-showcase-light .attorneys-showcase-header > p {color: #956e4b;}
