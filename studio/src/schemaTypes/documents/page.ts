@@ -61,6 +61,11 @@ export const page = defineType({
         {type: 'pageHero'},
         {type: 'editorialSection'},
         {type: 'ctaBanner'},
+        {type: 'contactInfoCards'},
+        {type: 'contactForm'},
+        {type: 'locationMap'},
+        {type: 'officesSection'},
+        {type: 'statisticsSection'},
       ],
       options: {
         insertMenu: {

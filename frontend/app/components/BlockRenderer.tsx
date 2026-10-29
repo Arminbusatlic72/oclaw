@@ -12,6 +12,11 @@ import AttorneysSection from '@/app/components/blocks/AttorneysSection'
 import PageHero from '@/app/components/blocks/PageHero'
 import EditorialSection from '@/app/components/blocks/EditorialSection'
 import CtaBanner from '@/app/components/blocks/CtaBanner'
+import ContactInfoCards from '@/app/components/blocks/ContactInfoCards'
+import ContactForm from '@/app/components/blocks/ContactForm'
+import LocationMap from '@/app/components/blocks/LocationMap'
+import OfficesSection from '@/app/components/blocks/OfficesSection'
+import StatisticsSection from '@/app/components/blocks/StatisticsSection'
 import type {Locale} from '@/lib/i18n'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
@@ -39,6 +44,9 @@ const Blocks = {
   pageHero: PageHero,
   editorialSection: EditorialSection,
   ctaBanner: CtaBanner,
+  contactInfoCards: ContactInfoCards,
+  locationMap: LocationMap,
+  statisticsSection: StatisticsSection,
 } as BlocksType
 
 /**
@@ -47,6 +55,8 @@ const Blocks = {
 export default function BlockRenderer({block, index, pageId, pageType, locale = 'en'}: BlockProps) {
   if (block._type === 'practiceAreasSection') return <div data-sanity={dataAttr({id: pageId, type: pageType, path: `pageBuilder[_key=="${block._key}"]`}).toString()}><PracticeAreasSection block={block} locale={locale} /></div>
   if (block._type === 'attorneysSection') return <div data-sanity={dataAttr({id: pageId, type: pageType, path: `pageBuilder[_key=="${block._key}"]`}).toString()}><AttorneysSection block={block} locale={locale} /></div>
+  if (block._type === 'contactForm') return <div data-sanity={dataAttr({id: pageId, type: pageType, path: `pageBuilder[_key=="${block._key}"]`}).toString()}><ContactForm block={block} locale={locale} /></div>
+  if (block._type === 'officesSection') return <div data-sanity={dataAttr({id: pageId, type: pageType, path: `pageBuilder[_key=="${block._key}"]`}).toString()}><OfficesSection block={block} locale={locale} /></div>
   // Block does exist
   if (typeof Blocks[block._type] !== 'undefined') {
     return (

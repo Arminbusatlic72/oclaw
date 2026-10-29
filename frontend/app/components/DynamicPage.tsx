@@ -1,4 +1,5 @@
 import PageBuilderPage from '@/app/components/PageBuilder'
+import Link from 'next/link'
 import type {GetPageQueryResult} from '@/sanity.types'
 
 export default function DynamicPage({page, isHomepage = false}: {page: NonNullable<GetPageQueryResult>; isHomepage?: boolean}) {
@@ -12,25 +13,23 @@ export default function DynamicPage({page, isHomepage = false}: {page: NonNullab
   }
 
   const hasPageHero = page.pageBuilder?.[0]?._type === 'pageHero'
+  const locale = page.language === 'es' ? 'es' : 'en'
+  const homePath = locale === 'es' ? '/es/' : '/'
+  const homeLabel = locale === 'es' ? 'Inicio' : 'Home'
 
   return (
-    <main className={hasPageHero ? undefined : 'my-10 lg:my-16'}>
-      {!hasPageHero && <section>
-        <div className="container">
-          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
-            <div className="max-w-3xl">
-              <h1 className="text-4xl text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100">
-                {page.heading}
-              </h1>
-              {page.subheading && (
-                <p className="mt-4 text-sm uppercase tracking-[0.12em] text-slate-600 dark:text-slate-300">
-                  {page.subheading}
-                </p>
-              )}
-            </div>
-          </div>
+    <main>
+      {!hasPageHero && <header className="about-hero">
+        <div className="container about-hero-inner">
+          {page.subheading && <p className="site-eyebrow">{page.subheading}</p>}
+          <h1>{page.heading}</h1>
+          <nav aria-label="Breadcrumb" className="about-breadcrumb">
+            <Link href={homePath}>{homeLabel}</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{page.heading}</span>
+          </nav>
         </div>
-      </section>}
+      </header>}
       <PageBuilderPage page={page} />
     </main>
   )

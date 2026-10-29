@@ -124,6 +124,70 @@ export type Link = {
   openInNewTab?: boolean
 }
 
+export type OfficeReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'office'
+}
+
+export type OfficesSection = {
+  _type: 'officesSection'
+  subtitle?: string
+  heading: string
+  description?: string
+  theme?: 'dark' | 'light'
+  selectionMode?: 'automatic' | 'manual'
+  offices?: Array<
+    {
+      _key: string
+    } & OfficeReference
+  >
+  maximumItems?: number
+  showAttorneys?: boolean
+  viewAllLabel?: string
+  anchor?: Slug
+}
+
+export type LocationMap = {
+  _type: 'locationMap'
+  heading?: string
+  offices: Array<
+    {
+      _key: string
+    } & OfficeReference
+  >
+  embedUrl?: string
+  mapHeight?: number
+  mapLinkLabel?: string
+}
+
+export type ContactForm = {
+  _type: 'contactForm'
+  heading: string
+  description?: string
+  formMode: 'generalInquiry' | 'appointmentRequest'
+  submitButtonLabel: string
+  successMessage: string
+  errorMessage: string
+  privacyPolicyLink: Link
+}
+
+export type ContactInfoCards = {
+  _type: 'contactInfoCards'
+  heading?: string
+  cards: Array<{
+    icon: 'address' | 'email' | 'phone'
+    title: string
+    office?: OfficeReference
+    content?: Array<string>
+    linkLabel?: string
+    link?: Link
+    _type: 'contactInfoCard'
+    _key: string
+  }>
+}
+
 export type CtaBanner = {
   _type: 'ctaBanner'
   eyebrow?: string
@@ -493,13 +557,6 @@ export type FooterLink = {
   link: Link
 }
 
-export type OfficeReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'office'
-}
-
 export type FooterContact = {
   _type: 'footerContact'
   heading?: string
@@ -756,72 +813,6 @@ export type InternationalizedArrayReferenceValue = {
   language: string
 }
 
-export type Office = {
-  _id: string
-  _type: 'office'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  language?: 'en' | 'es'
-  name: string
-  slug: Slug
-  streetAddress?: string
-  addressLine2?: string
-  city?: string
-  state?: string
-  postalCode?: string
-  country?: string
-  phone?: string
-  email?: string
-  mapUrl?: string
-  coordinates?: Geopoint
-  image?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt: string
-    _type: 'image'
-  }
-  openingHours?: Array<{
-    days?: string
-    hours?: string
-    _type: 'officeHours'
-    _key: string
-  }>
-  displayOrder?: number
-  seo?: Seo
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
-}
-
-export type Geopoint = {
-  _type: 'geopoint'
-  lat?: number
-  lng?: number
-  alt?: number
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
-}
-
 export type Attorney = {
   _id: string
   _type: 'attorney'
@@ -884,6 +875,28 @@ export type Attorney = {
   >
   displayOrder?: number
   seo?: Seo
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
 }
 
 export type PracticeArea = {
@@ -1124,8 +1137,64 @@ export type Page = {
     | ({
         _key: string
       } & CtaBanner)
+    | ({
+        _key: string
+      } & ContactInfoCards)
+    | ({
+        _key: string
+      } & ContactForm)
+    | ({
+        _key: string
+      } & LocationMap)
+    | ({
+        _key: string
+      } & OfficesSection)
   >
   seo?: Seo
+}
+
+export type Office = {
+  _id: string
+  _type: 'office'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  name: string
+  slug: Slug
+  streetAddress?: string
+  addressLine2?: string
+  city?: string
+  state?: string
+  postalCode?: string
+  country?: string
+  phone?: string
+  email?: string
+  mapUrl?: string
+  coordinates?: Geopoint
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+  }
+  openingHours?: Array<{
+    days?: string
+    hours?: string
+    _type: 'officeHours'
+    _key: string
+  }>
+  displayOrder?: number
+  seo?: Seo
+}
+
+export type Geopoint = {
+  _type: 'geopoint'
+  lat?: number
+  lng?: number
+  alt?: number
 }
 
 export type SanityImagePaletteSwatch = {
@@ -1233,6 +1302,11 @@ export type AllSanitySchemaTypes =
   | PracticeAreaArchiveReference
   | BlogArchiveReference
   | Link
+  | OfficeReference
+  | OfficesSection
+  | LocationMap
+  | ContactForm
+  | ContactInfoCards
   | CtaBanner
   | EditorialSection
   | PageHero
@@ -1257,7 +1331,6 @@ export type AllSanitySchemaTypes =
   | FooterSocial
   | FooterLinkGroup
   | FooterLink
-  | OfficeReference
   | FooterContact
   | FooterBrand
   | PracticeAreaArchive
@@ -1281,18 +1354,18 @@ export type AllSanitySchemaTypes =
   | SettingsReference
   | FooterReference
   | InternationalizedArrayReferenceValue
-  | Office
+  | Attorney
   | SanityImageCrop
   | SanityImageHotspot
-  | Geopoint
   | Slug
-  | Attorney
   | PracticeArea
   | Footer
   | Settings
   | Navigation
   | BlogPost
   | Page
+  | Office
+  | Geopoint
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -1650,7 +1723,7 @@ export type NavigationQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type == "page" && slug.current == $slug &&    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}    ,_type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}    ,_type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}  }}
+// Query: *[_type == "page" && slug.current == $slug &&    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}}  }}
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
@@ -1781,6 +1854,102 @@ export type GetPageQueryResult = {
         }> | null
         columns?: 2 | 3 | 4
         alignment?: 'center' | 'left'
+      }
+    | {
+        _key: string
+        _type: 'contactForm'
+        heading: string
+        description?: string
+        formMode: 'appointmentRequest' | 'generalInquiry'
+        submitButtonLabel: string
+        successMessage: string
+        errorMessage: string
+        privacyPolicyLink: {
+          _type: 'link'
+          linkType?: 'href' | 'page' | 'route'
+          href?: string
+          page:
+            | {
+                _id: string
+                _type: 'blogArchive'
+                language: 'en' | 'es' | null
+                slug: null
+              }
+            | {
+                _id: string
+                _type: 'page'
+                language: 'en' | 'es' | null
+                slug: string
+              }
+            | {
+                _id: string
+                _type: 'practiceAreaArchive'
+                language: 'en' | 'es' | null
+                slug: null
+              }
+            | null
+          route?: 'attorneys' | 'offices'
+          openInNewTab?: boolean
+        }
+      }
+    | {
+        _key: string
+        _type: 'contactInfoCards'
+        heading?: string
+        cards: Array<{
+          icon: 'address' | 'email' | 'phone'
+          title: string
+          office: {
+            _id: string
+            name: string
+            language: 'en' | 'es' | null
+            streetAddress: string | null
+            addressLine2: string | null
+            city: string | null
+            state: string | null
+            postalCode: string | null
+            country: string | null
+            phone: string | null
+            email: string | null
+            mapUrl: string | null
+            attorneys: Array<{
+              _id: string
+              fullName: string
+              slug: string
+            }>
+          } | null
+          content?: Array<string>
+          linkLabel?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'route'
+            href?: string
+            page:
+              | {
+                  _id: string
+                  _type: 'blogArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | {
+                  _id: string
+                  _type: 'page'
+                  language: 'en' | 'es' | null
+                  slug: string
+                }
+              | {
+                  _id: string
+                  _type: 'practiceAreaArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | null
+            route?: 'attorneys' | 'offices'
+            openInNewTab?: boolean
+          } | null
+          _type: 'contactInfoCard'
+          _key: string
+        }>
       }
     | {
         _key: string
@@ -2067,6 +2236,51 @@ export type GetPageQueryResult = {
               markDefs: null
             }
         > | null
+      }
+    | {
+        _key: string
+        _type: 'locationMap'
+        heading?: string
+        offices: Array<{
+          _id: string
+          name: string
+          language: 'en' | 'es' | null
+          streetAddress: string | null
+          addressLine2: string | null
+          city: string | null
+          state: string | null
+          postalCode: string | null
+          country: string | null
+          phone: string | null
+          mapUrl: string | null
+          coordinates: Geopoint | null
+          attorneys: Array<{
+            _id: string
+            fullName: string
+            slug: string
+          }>
+        }>
+        embedUrl?: string
+        mapHeight?: number
+        mapLinkLabel?: string
+      }
+    | {
+        _key: string
+        _type: 'officesSection'
+        subtitle?: string
+        heading: string
+        description?: string
+        theme?: 'dark' | 'light'
+        selectionMode?: 'automatic' | 'manual'
+        offices?: Array<
+          {
+            _key: string
+          } & OfficeReference
+        >
+        maximumItems?: number
+        showAttorneys?: boolean
+        viewAllLabel?: string
+        anchor?: Slug
       }
     | {
         _key: string
@@ -2286,7 +2500,7 @@ export type GetPageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: homePageQuery
-// Query: *[_type == "settings" && _id == $id][0].homePage->{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}    ,_type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}    ,_type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}  }}
+// Query: *[_type == "settings" && _id == $id][0].homePage->{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}}  }}
 export type HomePageQueryResult = {
   _id: string
   _type: 'page'
@@ -2417,6 +2631,102 @@ export type HomePageQueryResult = {
         }> | null
         columns?: 2 | 3 | 4
         alignment?: 'center' | 'left'
+      }
+    | {
+        _key: string
+        _type: 'contactForm'
+        heading: string
+        description?: string
+        formMode: 'appointmentRequest' | 'generalInquiry'
+        submitButtonLabel: string
+        successMessage: string
+        errorMessage: string
+        privacyPolicyLink: {
+          _type: 'link'
+          linkType?: 'href' | 'page' | 'route'
+          href?: string
+          page:
+            | {
+                _id: string
+                _type: 'blogArchive'
+                language: 'en' | 'es' | null
+                slug: null
+              }
+            | {
+                _id: string
+                _type: 'page'
+                language: 'en' | 'es' | null
+                slug: string
+              }
+            | {
+                _id: string
+                _type: 'practiceAreaArchive'
+                language: 'en' | 'es' | null
+                slug: null
+              }
+            | null
+          route?: 'attorneys' | 'offices'
+          openInNewTab?: boolean
+        }
+      }
+    | {
+        _key: string
+        _type: 'contactInfoCards'
+        heading?: string
+        cards: Array<{
+          icon: 'address' | 'email' | 'phone'
+          title: string
+          office: {
+            _id: string
+            name: string
+            language: 'en' | 'es' | null
+            streetAddress: string | null
+            addressLine2: string | null
+            city: string | null
+            state: string | null
+            postalCode: string | null
+            country: string | null
+            phone: string | null
+            email: string | null
+            mapUrl: string | null
+            attorneys: Array<{
+              _id: string
+              fullName: string
+              slug: string
+            }>
+          } | null
+          content?: Array<string>
+          linkLabel?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'route'
+            href?: string
+            page:
+              | {
+                  _id: string
+                  _type: 'blogArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | {
+                  _id: string
+                  _type: 'page'
+                  language: 'en' | 'es' | null
+                  slug: string
+                }
+              | {
+                  _id: string
+                  _type: 'practiceAreaArchive'
+                  language: 'en' | 'es' | null
+                  slug: null
+                }
+              | null
+            route?: 'attorneys' | 'offices'
+            openInNewTab?: boolean
+          } | null
+          _type: 'contactInfoCard'
+          _key: string
+        }>
       }
     | {
         _key: string
@@ -2703,6 +3013,51 @@ export type HomePageQueryResult = {
               markDefs: null
             }
         > | null
+      }
+    | {
+        _key: string
+        _type: 'locationMap'
+        heading?: string
+        offices: Array<{
+          _id: string
+          name: string
+          language: 'en' | 'es' | null
+          streetAddress: string | null
+          addressLine2: string | null
+          city: string | null
+          state: string | null
+          postalCode: string | null
+          country: string | null
+          phone: string | null
+          mapUrl: string | null
+          coordinates: Geopoint | null
+          attorneys: Array<{
+            _id: string
+            fullName: string
+            slug: string
+          }>
+        }>
+        embedUrl?: string
+        mapHeight?: number
+        mapLinkLabel?: string
+      }
+    | {
+        _key: string
+        _type: 'officesSection'
+        subtitle?: string
+        heading: string
+        description?: string
+        theme?: 'dark' | 'light'
+        selectionMode?: 'automatic' | 'manual'
+        offices?: Array<
+          {
+            _key: string
+          } & OfficeReference
+        >
+        maximumItems?: number
+        showAttorneys?: boolean
+        viewAllLabel?: string
+        anchor?: Slug
       }
     | {
         _key: string
@@ -3423,7 +3778,7 @@ export type AttorneyQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: officeListQuery
-// Query: *[_type == "office" && language == $language && defined(slug.current)] | order(displayOrder asc, name asc){_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, image, openingHours, seo, _updatedAt}
+// Query: *[_type == "office" && language == $language && defined(slug.current)] | order(displayOrder asc, name asc){_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, image, openingHours, seo, _updatedAt, "attorneys": *[_type == "attorney" && language == $language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}
 export type OfficeListQueryResult = Array<{
   _id: string
   name: string
@@ -3454,11 +3809,16 @@ export type OfficeListQueryResult = Array<{
   }> | null
   seo: Seo | null
   _updatedAt: string
+  attorneys: Array<{
+    _id: string
+    fullName: string
+    slug: string
+  }>
 }>
 
 // Source: sanity/lib/queries.ts
 // Variable: officeQuery
-// Query: *[_type == "office" && language == $language && slug.current == $slug][0]{_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, coordinates, image, openingHours, seo, _updatedAt}
+// Query: *[_type == "office" && language == $language && slug.current == $slug][0]{_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, coordinates, image, openingHours, seo, _updatedAt, "attorneys": *[_type == "attorney" && language == $language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}
 export type OfficeQueryResult = {
   _id: string
   name: string
@@ -3490,6 +3850,11 @@ export type OfficeQueryResult = {
   }> | null
   seo: Seo | null
   _updatedAt: string
+  attorneys: Array<{
+    _id: string
+    fullName: string
+    slug: string
+  }>
 } | null
 
 // Source: sanity/lib/queries.ts
@@ -3897,8 +4262,8 @@ declare module '@sanity/client' {
     '*[_type == "settings" && _id == $id][0]': SettingsQueryResult
     '\n  *[_type == "footer" && _id == $id][0]{\n    ...,\n    blocks[]{\n      ...,\n      _type == "footerContact" => {..., offices[]->{_id, name, language, "slug": slug.current, streetAddress, addressLine2, city, state, postalCode, country, phone, email}},\n      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}\n    },\n    bottomLinks[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}},\n    links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}}\n  }\n': FooterQueryResult
     '\n  *[_type == "navigation" && _id == $id][0]{\n    logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},\n    navItems[]{title, href, externalUrl, isButton,\n      link{..., page->{_id,_type,language,"slug":slug.current}},\n      children[]{title,href,link{...,page->{_id,_type,language,"slug":slug.current}}}\n    },\n    ctaLabel, ctaHref, ctaLink{...,page->{_id,_type,language,"slug":slug.current}}\n  }\n': NavigationQueryResult
-    '\n  *[_type == "page" && slug.current == $slug &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n    ,_type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n    ,_type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}\n  }\n}\n': GetPageQueryResult
-    '\n  *[_type == "settings" && _id == $id][0].homePage->{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n    ,_type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}}\n    ,_type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}\n  }\n}\n': HomePageQueryResult
+    '\n  *[_type == "page" && slug.current == $slug &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},\n    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}}\n  }\n}\n': GetPageQueryResult
+    '\n  *[_type == "settings" && _id == $id][0].homePage->{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},\n    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}}\n  }\n}\n': HomePageQueryResult
     '\n  *[_type == "settings" && _id in ["siteSettings", "siteSettings-es"]]{_id, "pageId": homePage._ref}\n': HomePageIdsQueryResult
     '\n  *[_type == "translation.metadata" && references($id)][0]{\n    translations[]{language, "page": value->{_id, language, "slug": slug.current, "noIndex": seo.noIndex}}\n  }\n': TranslationQueryResult
     '\n  *[_type == "page" && defined(slug.current) && (coalesce(language, "en") == "en" || language == "es")] {\n    _id, language, "slug": slug.current, _updatedAt, seo,\n    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "page": value->{_id, language, "slug": slug.current}}\n  }\n': SitemapDataResult
@@ -3917,8 +4282,8 @@ declare module '@sanity/client' {
     '*[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, seo, _updatedAt}': PracticeAreaQueryResult
     '*[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, socialLinks, seo, _updatedAt}': AttorneyListQueryResult
     '*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}': AttorneyQueryResult
-    '*[_type == "office" && language == $language && defined(slug.current)] | order(displayOrder asc, name asc){_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, image, openingHours, seo, _updatedAt}': OfficeListQueryResult
-    '*[_type == "office" && language == $language && slug.current == $slug][0]{_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, coordinates, image, openingHours, seo, _updatedAt}': OfficeQueryResult
+    '*[_type == "office" && language == $language && defined(slug.current)] | order(displayOrder asc, name asc){_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, image, openingHours, seo, _updatedAt, "attorneys": *[_type == "attorney" && language == $language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}': OfficeListQueryResult
+    '*[_type == "office" && language == $language && slug.current == $slug][0]{_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, coordinates, image, openingHours, seo, _updatedAt, "attorneys": *[_type == "attorney" && language == $language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}': OfficeQueryResult
     '*[_type == "attorney" && language == $language && defined(slug.current) && $id in practiceAreas[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography, socialLinks, "officeIds": offices[]._ref}': AttorneysForPracticeQueryResult
     '*[_type == "attorney" && language == $language && defined(slug.current) && $id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography}': AttorneysForOfficeQueryResult
     '*[_type == "practiceAreaArchive" && _id == $id][0]': PracticeAreaArchiveQueryResult

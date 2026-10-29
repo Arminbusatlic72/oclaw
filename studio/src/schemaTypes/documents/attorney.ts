@@ -26,7 +26,7 @@ export const attorney = defineType({
     defineField({name: 'phone', type: 'string'}),
     defineField({name: 'socialLinks', title: 'Public social links', type: 'array', of: [{type: 'object', fields: [defineField({name: 'label', type: 'string', validation: (Rule) => Rule.required()}), defineField({name: 'url', type: 'url', validation: (Rule) => Rule.required().uri({scheme: ['https']})})]}]}),
     defineField({name: 'practiceAreas', type: 'array', of: [{type: 'reference', to: [{type: 'practiceArea'}], options: {filter: ({document}) => ({filter: 'language == $language', params: {language: document?.language || 'en'}})}}], validation: (Rule) => Rule.unique()}),
-    defineField({name: 'offices', type: 'array', of: [{type: 'reference', to: [{type: 'office'}], options: {filter: ({document}) => ({filter: 'language == $language', params: {language: document?.language || 'en'}})}}], validation: (Rule) => Rule.unique()}),
+    defineField({name: 'offices', title: 'Assigned offices', description: 'Select every office where this attorney should be displayed. Office cards and pages update automatically.', type: 'array', of: [{type: 'reference', to: [{type: 'office'}], options: {filter: ({document}) => ({filter: 'language == $language', params: {language: document?.language || 'en'}})}}], validation: (Rule) => Rule.unique()}),
     defineField({name: 'displayOrder', type: 'number', initialValue: 100, validation: (Rule) => Rule.integer()}),
     defineField({name: 'seo', type: 'seo'}),
   ],

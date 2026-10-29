@@ -124,6 +124,103 @@ export type Link = {
   openInNewTab?: boolean
 }
 
+export type OfficeReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'office'
+}
+
+export type OfficesSection = {
+  _type: 'officesSection'
+  subtitle?: string
+  heading: string
+  description?: string
+  theme?: 'dark' | 'light'
+  selectionMode?: 'automatic' | 'manual'
+  offices?: Array<
+    {
+      _key: string
+    } & OfficeReference
+  >
+  maximumItems?: number
+  showAttorneys?: boolean
+  viewAllLabel?: string
+  anchor?: Slug
+}
+
+export type LocationMap = {
+  _type: 'locationMap'
+  heading?: string
+  offices: Array<
+    {
+      _key: string
+    } & OfficeReference
+  >
+  embedUrl?: string
+  mapHeight?: number
+  mapLinkLabel?: string
+}
+
+export type ContactForm = {
+  _type: 'contactForm'
+  heading: string
+  description?: string
+  formMode: 'generalInquiry' | 'appointmentRequest'
+  submitButtonLabel: string
+  successMessage: string
+  errorMessage: string
+  privacyPolicyLink: Link
+}
+
+export type ContactInfoCards = {
+  _type: 'contactInfoCards'
+  heading?: string
+  cards: Array<{
+    icon: 'address' | 'email' | 'phone'
+    title: string
+    office?: OfficeReference
+    content?: Array<string>
+    linkLabel?: string
+    link?: Link
+    _type: 'contactInfoCard'
+    _key: string
+  }>
+}
+
+export type CtaBanner = {
+  _type: 'ctaBanner'
+  eyebrow?: string
+  heading: string
+  button?: Button
+}
+
+export type EditorialSection = {
+  _type: 'editorialSection'
+  eyebrow?: string
+  heading: string
+  body: BlockContent
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  layout: 'contained' | 'split'
+  imagePosition?: 'right' | 'left'
+  theme: 'white' | 'soft'
+  anchor?: Slug
+}
+
+export type PageHero = {
+  _type: 'pageHero'
+  eyebrow?: string
+  heading: string
+  showBreadcrumb?: boolean
+}
+
 export type AttorneyReference = {
   _ref: string
   _type: 'reference'
@@ -144,6 +241,7 @@ export type AttorneysSection = {
   maximumItems?: number
   showSocialLinks?: boolean
   viewAllLabel?: string
+  theme: 'dark' | 'light'
   anchor?: Slug
 }
 
@@ -459,13 +557,6 @@ export type FooterLink = {
   link: Link
 }
 
-export type OfficeReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'office'
-}
-
 export type FooterContact = {
   _type: 'footerContact'
   heading?: string
@@ -722,72 +813,6 @@ export type InternationalizedArrayReferenceValue = {
   language: string
 }
 
-export type Office = {
-  _id: string
-  _type: 'office'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  language?: 'en' | 'es'
-  name: string
-  slug: Slug
-  streetAddress?: string
-  addressLine2?: string
-  city?: string
-  state?: string
-  postalCode?: string
-  country?: string
-  phone?: string
-  email?: string
-  mapUrl?: string
-  coordinates?: Geopoint
-  image?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt: string
-    _type: 'image'
-  }
-  openingHours?: Array<{
-    days?: string
-    hours?: string
-    _type: 'officeHours'
-    _key: string
-  }>
-  displayOrder?: number
-  seo?: Seo
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
-}
-
-export type Geopoint = {
-  _type: 'geopoint'
-  lat?: number
-  lng?: number
-  alt?: number
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
-}
-
 export type Attorney = {
   _id: string
   _type: 'attorney'
@@ -850,6 +875,28 @@ export type Attorney = {
   >
   displayOrder?: number
   seo?: Seo
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
 }
 
 export type PracticeArea = {
@@ -1081,8 +1128,73 @@ export type Page = {
     | ({
         _key: string
       } & AttorneysSection)
+    | ({
+        _key: string
+      } & PageHero)
+    | ({
+        _key: string
+      } & EditorialSection)
+    | ({
+        _key: string
+      } & CtaBanner)
+    | ({
+        _key: string
+      } & ContactInfoCards)
+    | ({
+        _key: string
+      } & ContactForm)
+    | ({
+        _key: string
+      } & LocationMap)
+    | ({
+        _key: string
+      } & OfficesSection)
   >
   seo?: Seo
+}
+
+export type Office = {
+  _id: string
+  _type: 'office'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  language?: 'en' | 'es'
+  name: string
+  slug: Slug
+  streetAddress?: string
+  addressLine2?: string
+  city?: string
+  state?: string
+  postalCode?: string
+  country?: string
+  phone?: string
+  email?: string
+  mapUrl?: string
+  coordinates?: Geopoint
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt: string
+    _type: 'image'
+  }
+  openingHours?: Array<{
+    days?: string
+    hours?: string
+    _type: 'officeHours'
+    _key: string
+  }>
+  displayOrder?: number
+  seo?: Seo
+}
+
+export type Geopoint = {
+  _type: 'geopoint'
+  lat?: number
+  lng?: number
+  alt?: number
 }
 
 export type SanityImagePaletteSwatch = {
@@ -1190,6 +1302,14 @@ export type AllSanitySchemaTypes =
   | PracticeAreaArchiveReference
   | BlogArchiveReference
   | Link
+  | OfficeReference
+  | OfficesSection
+  | LocationMap
+  | ContactForm
+  | ContactInfoCards
+  | CtaBanner
+  | EditorialSection
+  | PageHero
   | AttorneyReference
   | AttorneysSection
   | PracticeAreaReference
@@ -1211,7 +1331,6 @@ export type AllSanitySchemaTypes =
   | FooterSocial
   | FooterLinkGroup
   | FooterLink
-  | OfficeReference
   | FooterContact
   | FooterBrand
   | PracticeAreaArchive
@@ -1235,18 +1354,18 @@ export type AllSanitySchemaTypes =
   | SettingsReference
   | FooterReference
   | InternationalizedArrayReferenceValue
-  | Office
+  | Attorney
   | SanityImageCrop
   | SanityImageHotspot
-  | Geopoint
   | Slug
-  | Attorney
   | PracticeArea
   | Footer
   | Settings
   | Navigation
   | BlogPost
   | Page
+  | Office
+  | Geopoint
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
