@@ -17,6 +17,8 @@ import ContactForm from '@/app/components/blocks/ContactForm'
 import LocationMap from '@/app/components/blocks/LocationMap'
 import OfficesSection from '@/app/components/blocks/OfficesSection'
 import StatisticsSection from '@/app/components/blocks/StatisticsSection'
+import YoutubeVideos from '@/app/components/blocks/YoutubeVideos'
+import TestimonialsSection from '@/app/components/blocks/TestimonialsSection'
 import type {Locale} from '@/lib/i18n'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
@@ -47,6 +49,8 @@ const Blocks = {
   contactInfoCards: ContactInfoCards,
   locationMap: LocationMap,
   statisticsSection: StatisticsSection,
+  youtubeVideos: YoutubeVideos,
+  testimonialsSection: TestimonialsSection,
 } as BlocksType
 
 /**

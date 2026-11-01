@@ -15,7 +15,7 @@ export default async function PracticeAreasSection({block, locale}: {block: Bloc
     <div className="container">
       <header className="practice-section-header">{block.subtitle && <p className="practice-eyebrow site-block-eyebrow">{block.subtitle}</p>}<h2 className="site-block-heading">{block.heading}</h2><span className="practice-divider" aria-hidden="true" />{block.description && <p className="site-block-subheading">{block.description}</p>}</header>
       {areas.length ? <div className="practice-card-grid">{areas.map((area) => <PracticeAreaCard key={area._id} area={area} locale={locale} />)}</div> : <p className="practice-empty">{locale === 'es' ? 'Próximamente publicaremos nuestras áreas de práctica.' : 'Practice areas will be published soon.'}</p>}
-      {block.viewAllLabel && <div className="practice-view-all"><Link href={collectionPath('practiceArea', locale)}>{block.viewAllLabel}</Link></div>}
+      {block.viewAllLabel && <div className="practice-view-all"><Link className="site-button-outline site-hero-cta" href={collectionPath('practiceArea', locale)}>{block.viewAllLabel}</Link></div>}
     </div>
   </section>
 }

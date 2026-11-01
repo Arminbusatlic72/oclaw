@@ -43,7 +43,9 @@ const pageFields = /* groq */ `
     _type == "ctaBanner" => {..., button{..., ${linkFields}}},
     _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, ${linkFields}}},
     _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},
-    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}}
+    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}},
+    _type == "youtubeVideos" => {..., videos[]{_key, _type, title, url}},
+    _type == "testimonialsSection" => {..., backgroundImage{..., asset->{_id}}, testimonials[]{..., photo{..., asset->{_id}}}}
   }
 `
 
@@ -94,9 +96,22 @@ export const blogPostByIdQuery = defineQuery(`
 `)
 export const blogArchiveQuery = defineQuery(`*[_type == "blogArchive" && _id == $id][0]`)
 export const blogPostsQuery = defineQuery(`
-  *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc, _id asc)[$start...$end]{_id, title, "slug": slug.current, excerpt, featuredImage, publishedAt, language}
+  *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()
+    && ($search == "" || title match $searchPattern || excerpt match $searchPattern || author match $searchPattern)
+    && ($category == "" || $category in categories)
+    && ($tag == "" || $tag in tags)
+  ] | order(publishedAt desc, _id asc)[$start...$end]{_id, title, "slug": slug.current, excerpt, featuredImage, author, publishedAt, language, categories, tags}
 `)
-export const blogCountQuery = defineQuery(`count(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()])`)
+export const blogCountQuery = defineQuery(`count(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()
+  && ($search == "" || title match $searchPattern || excerpt match $searchPattern || author match $searchPattern)
+  && ($category == "" || $category in categories)
+  && ($tag == "" || $tag in tags)
+])`)
+export const blogArchiveFacetsQuery = defineQuery(`{
+  "categories": array::unique(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()].categories[]),
+  "tags": array::unique(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()].tags[]),
+  "recent": *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc, _id asc)[0...3]{_id, title, "slug": slug.current, featuredImage, publishedAt}
+}`)
 export const newerBlogPostQuery = defineQuery(`
   *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && (publishedAt > $date || publishedAt == $date && _id < $id)] | order(publishedAt asc, _id desc)[0]{_id, title, "slug": slug.current}
 `)

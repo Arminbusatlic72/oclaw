@@ -66,6 +66,8 @@ export const page = defineType({
         {type: 'locationMap'},
         {type: 'officesSection'},
         {type: 'statisticsSection'},
+        {type: 'youtubeVideos'},
+        {type: 'testimonialsSection'},
       ],
       options: {
         insertMenu: {

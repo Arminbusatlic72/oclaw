@@ -12,7 +12,7 @@ export const locationMap = defineType({
       name: 'offices',
       title: 'Office records',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'office'}]}],
+      of: [{type: 'reference', to: [{type: 'office'}], options: {filter: ({document}) => ({filter: '($language == "en" && coalesce(language, "en") == "en") || language == $language', params: {language: document?.language || 'en'}})}}],
       validation: (Rule) => Rule.required().min(1).unique(),
     }),
     defineField({

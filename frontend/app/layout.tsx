@@ -9,6 +9,7 @@ import {VisualEditing} from 'next-sanity/visual-editing'
 import {Toaster} from 'sonner'
 
 import DraftModeToast from '@/app/components/DraftModeToast'
+import BackToTopButton from '@/app/components/BackToTopButton'
 import Footer from '@/app/components/Footer'
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider'
 import NavbarWrapper from '@/components/NavbarWrapper'
@@ -89,6 +90,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
             <NavbarWrapper locale={locale} />
             <main className="">{children}</main>
             <Footer locale={locale} />
+            <BackToTopButton locale={locale} />
           </section>
         </SmoothScrollProvider>
         <SpeedInsights />

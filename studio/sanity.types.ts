@@ -124,6 +124,35 @@ export type Link = {
   openInNewTab?: boolean
 }
 
+export type YoutubeVideos = {
+  _type: 'youtubeVideos'
+  eyebrow?: string
+  heading: string
+  description?: string
+  videos: Array<{
+    title: string
+    url: string
+    _type: 'youtubeVideo'
+    _key: string
+  }>
+  buttonLabel: string
+  channelUrl: string
+  theme: 'light' | 'dark'
+  anchor?: Slug
+}
+
+export type StatisticsSection = {
+  _type: 'statisticsSection'
+  items: Array<{
+    value: number
+    suffix?: string
+    label: string
+    icon?: 'none' | 'briefcase' | 'people' | 'building' | 'scales' | 'trophy' | 'location'
+    _type: 'statistic'
+    _key: string
+  }>
+}
+
 export type OfficeReference = {
   _ref: string
   _type: 'reference'
@@ -1149,6 +1178,12 @@ export type Page = {
     | ({
         _key: string
       } & OfficesSection)
+    | ({
+        _key: string
+      } & StatisticsSection)
+    | ({
+        _key: string
+      } & YoutubeVideos)
   >
   seo?: Seo
 }
@@ -1302,6 +1337,8 @@ export type AllSanitySchemaTypes =
   | PracticeAreaArchiveReference
   | BlogArchiveReference
   | Link
+  | YoutubeVideos
+  | StatisticsSection
   | OfficeReference
   | OfficesSection
   | LocationMap

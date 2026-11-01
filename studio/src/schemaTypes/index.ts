@@ -38,6 +38,8 @@ import {contactForm} from './blocks/contactForm'
 import {locationMap} from './blocks/locationMap'
 import {officesSection} from './blocks/officesSection'
 import {statisticsSection} from './blocks/statisticsSection'
+import {youtubeVideos} from './blocks/youtubeVideos'
+import {testimonialsSection} from './blocks/testimonialsSection'
 
 // Export an array of all the schema types.  This is used in the Sanity Studio configuration. https://www.sanity.io/docs/studio/schema-types
 
@@ -83,6 +85,8 @@ export const schemaTypes = [
   locationMap,
   officesSection,
   statisticsSection,
+  youtubeVideos,
+  testimonialsSection,
   link,
   seo,
 ]

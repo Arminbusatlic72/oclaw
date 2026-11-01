@@ -1,5 +1,97 @@
 @import 'tailwindcss';
 
+/* Full-bleed testimonial carousel with optional Google Reviews data */
+.testimonials-section {padding: clamp(1.5rem,3vw,3rem); background: var(--color-ink-deep,#1e2e3e); color: #fff;}
+.testimonials-frame {position: relative; isolation: isolate; display: grid; min-height: clamp(36rem,63vw,46rem); overflow: hidden; place-items: center; background-image: url('/images/testimonial-lady-justice.png'); background-position: center; background-size: cover;}
+.testimonials-background {position: absolute; z-index: -3; inset: 0; width: 100%; height: 100%; object-fit: cover;}
+.testimonials-shade {position: absolute; z-index: -2; inset: 0; background: linear-gradient(90deg,rgb(7 13 19 / 90%) 0%,rgb(14 26 37 / 70%) 48%,rgb(18 41 59 / 34%) 100%),linear-gradient(180deg,rgb(5 12 18 / 15%),rgb(5 12 18 / 46%));}
+.testimonials-content {display: flex; width: min(100% - 2rem,58rem); flex-direction: column; align-items: center; justify-content: center; padding: clamp(2rem,4vw,3.5rem) 0; text-align: center;}
+.testimonials-slides {display: grid; width: 100%; align-items: center;}
+.testimonial-slide {grid-area: 1/1; display: flex; width: 100%; flex-direction: column; align-items: center; opacity: 0; pointer-events: none; transform: translate3d(0,.75rem,0); transition: opacity 500ms ease,transform 650ms cubic-bezier(.22,1,.36,1),visibility 0s linear 650ms; visibility: hidden; will-change: opacity,transform;}
+.testimonial-slide.is-active {opacity: 1; pointer-events: auto; transform: translate3d(0,0,0); transition-delay: 100ms,0ms,0ms; visibility: visible;}
+.testimonials-stars {display: flex; gap: .25rem; justify-content: center; margin-bottom: 1.35rem; color: var(--color-brand,#cdb091);}
+.testimonials-content blockquote {width: 100%; max-width: 54rem; padding: .35rem 1rem; color: #fff; font-family: var(--font-mulish),Arial,sans-serif; font-size: clamp(1.25rem,2.1vw,1.75rem); font-weight: 500; line-height: 1.75; text-wrap: balance;}
+.testimonials-content blockquote:focus-visible {border-radius: .25rem; outline: 1px solid rgb(205 176 145 / 72%); outline-offset: .25rem;}
+.testimonial-author {display: flex; flex-direction: column; align-items: center; margin-top: clamp(1.75rem,4vw,2.75rem);}
+.testimonial-author > img,.testimonial-initials {display: grid; width: 5.5rem; height: 5.5rem; place-items: center; overflow: hidden; border: 3px solid var(--color-brand,#cdb091); border-radius: 50%; background: #fff; color: var(--color-ink-deep,#1e2e3e); box-shadow: 0 12px 30px rgb(0 0 0 / 22%); font-family: var(--font-dm-serif-text),Georgia,serif; font-size: 1.35rem; object-fit: cover;}
+.testimonial-author > div {margin-top: 1rem;}
+.testimonial-author strong,.testimonial-author a {display: inline-block; color: #fff; font-family: var(--font-dm-serif-text),Georgia,serif; font-size: clamp(1.35rem,2vw,1.75rem); line-height: 1.2; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .2em;}
+.testimonial-author a:hover {text-decoration-color: var(--color-brand,#cdb091);}
+.testimonial-author p {margin-top: .45rem; color: #e4e8eb; font-size: .95rem;}
+.testimonial-source-link {display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem; color: #f0d3b4; font-size: .78rem; font-weight: 700; text-decoration: underline; text-decoration-color: rgb(240 211 180 / 45%); text-underline-offset: .25em;}
+.testimonial-source-link:hover {text-decoration-color: currentColor;}
+.testimonials-controls {display: flex; align-items: center; justify-content: center; gap: .8rem; margin-top: 1.8rem;}
+.testimonials-controls > button {display: grid; width: 2.25rem; height: 2.25rem; place-items: center; border: 1px solid rgb(255 255 255 / 20%); border-radius: 50%; color: rgb(255 255 255 / 72%); transition: border-color 180ms ease,color 180ms ease,background-color 180ms ease;}
+.testimonials-controls > button:hover,.testimonials-controls > button:focus-visible {border-color: var(--color-brand,#cdb091); background: rgb(205 176 145 / 12%); color: #fff; outline: none;}
+.testimonials-controls svg {width: 1rem; height: 1rem;}
+.testimonials-dots {display: flex; align-items: center; gap: .65rem; padding: 0 .2rem;}
+.testimonials-dots button {width: .68rem; height: .68rem; border: 1px solid rgb(255 255 255 / 38%); border-radius: 50%; background: rgb(255 255 255 / 24%); transition: background-color 180ms ease,border-color 180ms ease,transform 180ms ease;}
+.testimonials-dots button.is-active {border-color: var(--color-brand,#cdb091); background: var(--color-brand,#cdb091); transform: scale(1.12);}
+.testimonials-dots button:focus-visible {outline: 2px solid #fff; outline-offset: 4px;}
+.testimonials-google-attribution {display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .4rem .75rem; margin-top: 1.25rem; color: rgb(255 255 255 / 62%);}
+.testimonials-google-attribution span {font-size: .75rem; font-weight: 800; letter-spacing: .04em;}
+.testimonials-google-attribution small {font-size: .67rem;}
+
+@media (max-width: 650px) {
+  .testimonials-section {padding: .75rem;}
+  .testimonials-frame {min-height: 42rem;}
+  .testimonials-content {width: min(100% - 2rem,58rem); padding-block: 3rem;}
+  .testimonials-content blockquote {padding-inline: .35rem; font-size: 1.1rem; line-height: 1.65;}
+  .testimonial-author > img,.testimonial-initials {width: 4.75rem; height: 4.75rem;}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-slide,.testimonials-controls button,.testimonials-dots button {transition: none;}
+  .testimonial-slide {transform: none;}
+}
+
+/* Reusable, click-to-load YouTube PageBuilder block */
+.youtube-videos-section {position: relative; overflow: hidden; padding: var(--site-section-space) 0;}
+.youtube-videos-light {background: var(--color-surface-soft); color: var(--color-ink-deep);}
+.youtube-videos-dark {background: var(--color-ink-deep); color: #fff;}
+.youtube-videos-section::before {position: absolute; inset: 0; background: radial-gradient(circle at 92% 4%,rgb(205 176 145 / 14%),transparent 28rem); content: ''; pointer-events: none;}
+.youtube-videos-section > .container {position: relative; z-index: 1;}
+.youtube-videos-header {display: grid; grid-template-columns: minmax(0,1fr) minmax(18rem,.65fr); align-items: end; gap: clamp(2rem,7vw,7rem); margin-bottom: clamp(2.5rem,5vw,4.5rem);}
+.youtube-videos-header h2 {max-width: 14ch; margin-top: .65rem;}
+.youtube-videos-header > p {max-width: 38rem; padding-left: clamp(1.25rem,3vw,2.5rem); border-left: 1px solid var(--color-brand); line-height: 1.8;}
+.youtube-videos-dark .youtube-videos-header > p {color: #dce2e7;}
+.youtube-videos-light .youtube-videos-header > p {color: var(--color-muted);}
+.youtube-videos-grid {display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(1rem,2vw,1.75rem);}
+.youtube-video-card {min-width: 0; border-bottom: 1px solid rgb(205 176 145 / 45%); padding-bottom: 1.5rem;}
+.youtube-video-poster,.youtube-video-iframe {display: block; width: 100%; aspect-ratio: 16/9; border: 0;}
+.youtube-video-poster {position: relative; overflow: hidden; padding: 0; background: #101b25; cursor: pointer;}
+.youtube-video-poster img {width: 100%; height: 100%; object-fit: cover; transform: scale(1.012); transition: transform 500ms ease,filter 300ms ease;}
+.youtube-video-shade {position: absolute; inset: 0; background: linear-gradient(180deg,transparent 45%,rgb(4 14 23 / 50%)); transition: background-color 250ms ease;}
+.youtube-video-play {position: absolute; top: 50%; left: 50%; display: grid; width: 4.5rem; height: 4.5rem; place-items: center; border: 1px solid rgb(255 255 255 / 72%); border-radius: 50%; background: rgb(23 37 51 / 88%); color: var(--color-brand); box-shadow: 0 12px 32px rgb(0 0 0 / 24%); transform: translate(-50%,-50%); transition: background-color 200ms ease,color 200ms ease,transform 200ms ease;}
+.youtube-video-poster:hover img {filter: saturate(1.08); transform: scale(1.045);}
+.youtube-video-poster:hover .youtube-video-play {background: var(--color-brand); color: var(--color-ink-deep); transform: translate(-50%,-50%) scale(1.06);}
+.youtube-video-poster:focus-visible {outline: 3px solid var(--color-brand); outline-offset: 4px;}
+.youtube-video-title {display: grid; grid-template-columns: auto minmax(0,1fr); align-items: start; gap: 1rem; padding-top: 1.35rem;}
+.youtube-video-title > span {padding-top: .2rem; color: #9b7042; font-size: .72rem; font-weight: 800; letter-spacing: .08em;}
+.youtube-videos-dark .youtube-video-title > span {color: var(--color-brand);}
+.youtube-video-title h3 {font-size: clamp(1.25rem,1.8vw,1.65rem); line-height: 1.3;}
+.youtube-videos-cta {display: flex; justify-content: center; margin-top: clamp(2.75rem,5vw,4.25rem);}
+.youtube-videos-cta .site-button-outline {gap: .65rem;}
+.youtube-videos-light .youtube-videos-cta .site-button-outline {color: #8b6338;}
+
+@media (max-width: 900px) {
+  .youtube-videos-grid {grid-template-columns: repeat(2,minmax(0,1fr));}
+  .youtube-video-card:last-child {grid-column: 1/-1; width: calc(50% - .5rem); justify-self: center;}
+}
+
+@media (max-width: 650px) {
+  .youtube-videos-header {grid-template-columns: 1fr; gap: 1.5rem;}
+  .youtube-videos-header > p {padding: 1.25rem 0 0; border-top: 1px solid var(--color-brand); border-left: 0;}
+  .youtube-videos-grid {grid-template-columns: 1fr;}
+  .youtube-video-card:last-child {grid-column: auto; width: auto;}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .youtube-video-poster img,.youtube-video-play {transition: none;}
+  .youtube-video-poster:hover img,.youtube-video-poster:hover .youtube-video-play {transform: none;}
+  .youtube-video-poster:hover .youtube-video-play {transform: translate(-50%,-50%);}
+}
+
 .practice-section {padding: clamp(5rem, 8vw, 9rem) 0;}
 .practice-section-dark {background: #1e2e3e; color: #fff;}
 .practice-section-light {background: #f7f5f2; color: #1e2e3e;}
@@ -16,7 +108,7 @@
 .practice-card h3 {font-family: var(--font-dm-serif-text), Georgia, serif; font-size: clamp(1.8rem, 2.3vw, 2.7rem); line-height: 1.2;}
 .practice-card p {font-size: 1rem; line-height: 1.7; margin-top: 1.4rem;}
 .practice-view-all {text-align: center; margin-top: 3rem;}
-.practice-view-all a, .practice-cta {display: inline-block; background: #cdb091; color: #1e2e3e; padding: .9rem 1.8rem; font-weight: 700;}
+.practice-cta {display: inline-block; background: #cdb091; color: #1e2e3e; padding: .9rem 1.8rem; font-weight: 700;}
 .practice-empty {text-align: center;}
 .collection-page {padding-top: 3rem; padding-bottom: 5rem;}
 .collection-breadcrumbs {font-size: .85rem; color: #66727d; margin-bottom: 3rem;}
@@ -89,7 +181,7 @@
 .contact-card-attorneys > span:first-child {width: 100%; color: var(--color-ink-deep); font-size: .72rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;}
 .contact-card-attorneys a {color: #8b6338; text-decoration: underline; text-underline-offset: .2em;}
 
-.contact-form-section {position: relative; z-index: 2; padding: clamp(5rem, 8vw, 8rem) 0 0; background: linear-gradient(180deg,#fff 0%,#fff 78%,var(--color-surface-soft) 100%);}
+.contact-form-section {position: relative; z-index: 2; padding: clamp(5rem, 8vw, 8rem) 0 8rem; background: linear-gradient(180deg,#fff 0%,#fff 78%,var(--color-surface-soft) 100%);}
 .contact-form-heading {max-width: 48rem; margin: 0 auto clamp(3rem, 5vw, 5rem); text-align: center;}
 .contact-form-heading h2 {position: relative; padding-bottom: 1.4rem; color: var(--color-ink-deep); font-size: var(--site-heading-md);}
 .contact-form-heading h2::after {position: absolute; bottom: 0; left: 50%; width: 5rem; height: 1px; background: var(--color-brand); content: ''; transform: translateX(-50%);}
@@ -144,6 +236,7 @@
   .contact-info-card {min-height: 0; padding: 2rem 1.5rem;}
   .contact-form-grid {grid-template-columns: 1fr;}
   .contact-form-shell {margin-inline: -.25rem; margin-bottom: -4rem; padding: 1.5rem;}
+  .contact-form-section {padding-bottom: 4rem;}
   .contact-form-meta {align-items: flex-start; flex-direction: column; margin: -1.5rem -1.5rem 2rem; padding: 1rem 1.5rem;}
   .contact-submit {justify-content: stretch; padding-right: 0;}
   .contact-submit button {width: 100%;}
@@ -435,9 +528,63 @@
 .site-button-secondary:focus-visible,
 .site-header a:focus-visible,
 .site-header button:focus-visible,
-.site-footer a:focus-visible {
+.site-footer a:focus-visible,
+.back-to-top:focus-visible {
   outline: 2px solid var(--color-brand);
   outline-offset: 4px;
+}
+
+.back-to-top {
+  position: fixed;
+  right: max(1.5rem, env(safe-area-inset-right));
+  bottom: max(2rem, env(safe-area-inset-bottom));
+  z-index: 40;
+  display: grid;
+  width: 4.25rem;
+  height: 4.25rem;
+  place-items: center;
+  border: 3px solid #e3bd7d;
+  border-radius: 50%;
+  background: #b79a72;
+  color: #fff;
+  box-shadow: 0 10px 24px rgb(5 17 29 / 24%);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 1rem, 0);
+  transition: opacity 220ms ease, transform 300ms cubic-bezier(.22,1,.36,1), background-color 180ms ease, color 180ms ease;
+}
+
+.back-to-top[data-visible='true'] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+}
+
+.back-to-top:hover {
+  border-color: #efd29f;
+  background: #a8875f;
+  color: #fff;
+  transform: translate3d(0, -.2rem, 0);
+}
+
+.back-to-top svg {
+  width: 2rem;
+  height: 2rem;
+  stroke-width: 1.5;
+}
+
+@media (max-width: 650px) {
+  .back-to-top {
+    right: max(.85rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {transition: none;}
 }
 
 .site-header {
@@ -684,7 +831,6 @@
 }
 
 .site-footer {
-  margin-top: var(--site-section-space);
   background: var(--color-ink);
   color: rgb(255 255 255 / 76%);
 }
