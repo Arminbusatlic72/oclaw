@@ -3683,7 +3683,7 @@ export type BlogArchiveQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: blogPostsQuery
-// Query: *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc, _id asc)[$start...$end]{_id, title, "slug": slug.current, excerpt, featuredImage, publishedAt, language}
+// Query: *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()    && ($search == "" || title match $searchPattern || excerpt match $searchPattern || author match $searchPattern)    && ($category == "" || $category in categories)    && ($tag == "" || $tag in tags)  ] | order(publishedAt desc, _id asc)[$start...$end]{_id, title, "slug": slug.current, excerpt, featuredImage, author, publishedAt, language, categories, tags}
 export type BlogPostsQueryResult = Array<{
   _id: string
   title: string
@@ -3697,14 +3697,39 @@ export type BlogPostsQueryResult = Array<{
     alt: string
     _type: 'image'
   } | null
+  author: string | null
   publishedAt: string
   language: 'en' | 'es' | null
+  categories: Array<string> | null
+  tags: Array<string> | null
 }>
 
 // Source: sanity/lib/queries.ts
 // Variable: blogCountQuery
-// Query: count(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()])
+// Query: count(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()  && ($search == "" || title match $searchPattern || excerpt match $searchPattern || author match $searchPattern)  && ($category == "" || $category in categories)  && ($tag == "" || $tag in tags)])
 export type BlogCountQueryResult = number
+
+// Source: sanity/lib/queries.ts
+// Variable: blogArchiveFacetsQuery
+// Query: {  "categories": array::unique(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()].categories[]),  "tags": array::unique(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()].tags[]),  "recent": *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc, _id asc)[0...3]{_id, title, "slug": slug.current, featuredImage, publishedAt}}
+export type BlogArchiveFacetsQueryResult = {
+  categories: Array<string | null>
+  tags: Array<string | null>
+  recent: Array<{
+    _id: string
+    title: string
+    slug: string
+    featuredImage: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt: string
+      _type: 'image'
+    } | null
+    publishedAt: string
+  }>
+}
 
 // Source: sanity/lib/queries.ts
 // Variable: newerBlogPostQuery
@@ -4481,8 +4506,9 @@ declare module '@sanity/client' {
     '\n  *[_type == "blogPost" && slug.current == $slug && language == $language && defined(publishedAt) && publishedAt <= now()][0]{_id, _type, title, "slug": slug.current, language, excerpt, featuredImage, author, publishedAt, updatedAt, body[]{..., markDefs[]{..., page->{_id, _type, language, "slug": slug.current}}}, categories, tags, seo,\n  relatedPosts[]->{_id, title, "slug": slug.current, language, publishedAt, featuredImage, excerpt}}\n': BlogPostQueryResult
     '\n  *[_type == "blogPost" && _id == $id && defined(publishedAt) && publishedAt <= now()][0]{_id, title, "slug": slug.current, language, seo}\n': BlogPostByIdQueryResult
     '*[_type == "blogArchive" && _id == $id][0]': BlogArchiveQueryResult
-    '\n  *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc, _id asc)[$start...$end]{_id, title, "slug": slug.current, excerpt, featuredImage, publishedAt, language}\n': BlogPostsQueryResult
-    'count(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()])': BlogCountQueryResult
+    '\n  *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()\n    && ($search == "" || title match $searchPattern || excerpt match $searchPattern || author match $searchPattern)\n    && ($category == "" || $category in categories)\n    && ($tag == "" || $tag in tags)\n  ] | order(publishedAt desc, _id asc)[$start...$end]{_id, title, "slug": slug.current, excerpt, featuredImage, author, publishedAt, language, categories, tags}\n': BlogPostsQueryResult
+    'count(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()\n  && ($search == "" || title match $searchPattern || excerpt match $searchPattern || author match $searchPattern)\n  && ($category == "" || $category in categories)\n  && ($tag == "" || $tag in tags)\n])': BlogCountQueryResult
+    '{\n  "categories": array::unique(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()].categories[]),\n  "tags": array::unique(*[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()].tags[]),\n  "recent": *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc, _id asc)[0...3]{_id, title, "slug": slug.current, featuredImage, publishedAt}\n}': BlogArchiveFacetsQueryResult
     '\n  *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && (publishedAt > $date || publishedAt == $date && _id < $id)] | order(publishedAt asc, _id desc)[0]{_id, title, "slug": slug.current}\n': NewerBlogPostQueryResult
     '\n  *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && (publishedAt < $date || publishedAt == $date && _id > $id)] | order(publishedAt desc, _id asc)[0]{_id, title, "slug": slug.current}\n': OlderBlogPostQueryResult
     '\n  *[_type == "translation.metadata" && references($id)][0].translations[]{language, "post": value->{_id, _type, language, "slug": slug.current, publishedAt, seo}}\n': BlogTranslationQueryResult
