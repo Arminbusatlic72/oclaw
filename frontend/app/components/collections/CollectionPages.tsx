@@ -40,11 +40,19 @@ export async function CollectionArchive({type, locale}: {type: Collection; local
   const crumbs = [home(locale), {name: label, path: collectionPath(type, locale)}]
   const title = archive?.heading || label
   const isPracticeArchive = type === 'practiceArea'
-  return <>{isPracticeArchive && <ArchiveHero locale={locale} title={title} path={collectionPath(type, locale)} />}<main className="collection-page container">{!isPracticeArchive && <Breadcrumbs items={crumbs} />}{isPracticeArchive ? ((archive?.description || archive?.introduction) && <div className="archive-introduction">{archive?.description && <p>{archive.description}</p>}{archive?.introduction && <CustomPortableText value={archive.introduction as PortableTextBlock[]} />}</div>) : <header className="collection-heading"><p className="practice-eyebrow">OC Law Group</p><h1>{title}</h1>{archive?.description && <p>{archive.description}</p>}{archive?.introduction && <CustomPortableText value={archive.introduction as PortableTextBlock[]} />}</header>}
+  const archiveTheme = archive?.theme === 'dark' ? 'dark' : 'light'
+  const content = <>
+    {isPracticeArchive && <ArchiveHero locale={locale} title={title} path={collectionPath(type, locale)} />}
+    <main className="collection-page container">
+      {!isPracticeArchive && <Breadcrumbs items={crumbs} />}
+      {isPracticeArchive ? ((archive?.description || archive?.introduction) && <div className="archive-introduction">{archive?.description && <p>{archive.description}</p>}{archive?.introduction && <CustomPortableText value={archive.introduction as PortableTextBlock[]} />}</div>) : <header className="collection-heading"><p className="practice-eyebrow">OC Law Group</p><h1>{title}</h1>{archive?.description && <p>{archive.description}</p>}{archive?.introduction && <CustomPortableText value={archive.introduction as PortableTextBlock[]} />}</header>}
+    {type === 'practiceArea' && archive?.cardsHeading && <header className="practice-section-header"><h2 className="site-block-heading">{archive.cardsHeading}</h2><span className="practice-divider" aria-hidden="true" /></header>}
     {type === 'practiceArea' && (items.length ? <div className="practice-card-grid practice-archive-grid">{items.map((area) => <PracticeAreaCard key={area._id} area={area} locale={locale} />)}</div> : <p role="status">{archive?.emptyMessage || (locale === 'es' ? 'Aún no hay áreas de práctica publicadas.' : 'No practice areas have been published yet.')}</p>)}
     {type === 'attorney' && (attorneys.length ? <div className="collection-people-grid">{attorneys.map((person) => <PersonCard key={person._id} person={person} locale={locale} />)}</div> : <p role="status">{locale === 'es' ? 'Aún no hay perfiles publicados.' : 'No attorney profiles have been published yet.'}</p>)}
     {type === 'office' && (offices.length ? <div className="collection-people-grid">{offices.map((office) => <OfficeInfo key={office._id} office={office} locale={locale} link />)}</div> : <p role="status">{locale === 'es' ? 'Aún no hay oficinas publicadas.' : 'No offices have been published yet.'}</p>)}
-  </main></>
+    </main>
+  </>
+  return isPracticeArchive ? <div className={`practice-archive-page practice-archive-${archiveTheme}`}>{content}</div> : content
 }
 
 export async function CollectionDetail({type, locale, slug}: {type: Collection; locale: Locale; slug: string}) {

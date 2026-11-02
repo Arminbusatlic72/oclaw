@@ -682,6 +682,8 @@ export type PracticeAreaArchive = {
   language?: 'en' | 'es'
   heading?: string
   description?: string
+  cardsHeading?: string
+  theme?: 'light' | 'dark'
   introduction?: BlockContentTextOnly
   emptyMessage?: string
   seo?: Seo
@@ -996,6 +998,39 @@ export type PracticeArea = {
     alt: string
     _type: 'image'
   }
+  iconName?:
+    | 'briefcase'
+    | 'people'
+    | 'family'
+    | 'shield'
+    | 'globe'
+    | 'plane'
+    | 'home'
+    | 'landmark'
+    | 'document'
+    | 'helpingHand'
+    | 'person'
+    | 'scales'
+    | 'building'
+    | 'badge'
+    | 'stamp'
+    | 'fingerprint'
+    | 'idCard'
+    | 'gavel'
+    | 'education'
+    | 'child'
+    | 'humanRights'
+    | 'investment'
+    | 'map'
+    | 'personCheck'
+    | 'community'
+    | 'languages'
+    | 'wallet'
+    | 'scrollText'
+    | 'legalGuide'
+    | 'key'
+    | 'relief'
+    | 'familyPetition'
   icon?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -3912,13 +3947,47 @@ export type BlogSitemapQueryResult = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: practiceAreasQuery
-// Query: *[_type == "practiceArea" && language == $language && defined(slug.current)] | order(displayOrder asc, title asc){_id, title, "slug": slug.current, language, shortDescription, icon, mainImage, featuredOnHomepage, displayOrder, seo, _updatedAt}
+// Query: *[_type == "practiceArea" && language == $language && defined(slug.current)] | order(displayOrder asc, title asc){_id, title, "slug": slug.current, language, "shortDescription": coalesce(shortDescription, pt::text(body[_type == "block" && style == "normal"][0])), iconName, icon, mainImage, featuredOnHomepage, displayOrder, seo, _updatedAt}
 export type PracticeAreasQueryResult = Array<{
   _id: string
   title: string
   slug: string
   language: 'en' | 'es' | null
-  shortDescription: string | null
+  shortDescription: string
+  iconName:
+    | 'badge'
+    | 'briefcase'
+    | 'building'
+    | 'child'
+    | 'community'
+    | 'document'
+    | 'education'
+    | 'family'
+    | 'familyPetition'
+    | 'fingerprint'
+    | 'gavel'
+    | 'globe'
+    | 'helpingHand'
+    | 'home'
+    | 'humanRights'
+    | 'idCard'
+    | 'investment'
+    | 'key'
+    | 'landmark'
+    | 'languages'
+    | 'legalGuide'
+    | 'map'
+    | 'people'
+    | 'person'
+    | 'personCheck'
+    | 'plane'
+    | 'relief'
+    | 'scales'
+    | 'scrollText'
+    | 'shield'
+    | 'stamp'
+    | 'wallet'
+    | null
   icon: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -4196,6 +4265,8 @@ export type PracticeAreaArchiveQueryResult = {
   language?: 'en' | 'es'
   heading?: string
   description?: string
+  cardsHeading?: string
+  theme?: 'dark' | 'light'
   introduction?: BlockContentTextOnly
   emptyMessage?: string
   seo?: Seo
@@ -4562,7 +4633,7 @@ declare module '@sanity/client' {
     '\n  *[_type == "blogPost" && language == $language && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && (publishedAt < $date || publishedAt == $date && _id > $id)] | order(publishedAt desc, _id asc)[0]{_id, title, "slug": slug.current}\n': OlderBlogPostQueryResult
     '\n  *[_type == "translation.metadata" && references($id)][0].translations[]{language, "post": value->{_id, _type, language, "slug": slug.current, publishedAt, seo}}\n': BlogTranslationQueryResult
     '\n  *[_type == "blogPost" && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && language in ["en", "es"]]{\n    _id, language, "slug": slug.current, publishedAt, updatedAt, _updatedAt, seo,\n    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "post": value->{_id, language, "slug": slug.current, publishedAt, seo}}\n  }\n': BlogSitemapQueryResult
-    '*[_type == "practiceArea" && language == $language && defined(slug.current)] | order(displayOrder asc, title asc){_id, title, "slug": slug.current, language, shortDescription, icon, mainImage, featuredOnHomepage, displayOrder, seo, _updatedAt}': PracticeAreasQueryResult
+    '*[_type == "practiceArea" && language == $language && defined(slug.current)] | order(displayOrder asc, title asc){_id, title, "slug": slug.current, language, "shortDescription": coalesce(shortDescription, pt::text(body[_type == "block" && style == "normal"][0])), iconName, icon, mainImage, featuredOnHomepage, displayOrder, seo, _updatedAt}': PracticeAreasQueryResult
     '*[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, seo, _updatedAt}': PracticeAreaQueryResult
     '*[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, socialLinks, seo, _updatedAt}': AttorneyListQueryResult
     '*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}': AttorneyQueryResult

@@ -4539,6 +4539,30 @@
         },
         "optional": true
       },
+      "cardsHeading": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "theme": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "light"
+            },
+            {
+              "type": "string",
+              "value": "dark"
+            }
+          ]
+        },
+        "optional": true
+      },
       "introduction": {
         "type": "objectAttribute",
         "value": {
@@ -6333,6 +6357,143 @@
               }
             }
           }
+        },
+        "optional": true
+      },
+      "iconName": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "briefcase"
+            },
+            {
+              "type": "string",
+              "value": "people"
+            },
+            {
+              "type": "string",
+              "value": "family"
+            },
+            {
+              "type": "string",
+              "value": "shield"
+            },
+            {
+              "type": "string",
+              "value": "globe"
+            },
+            {
+              "type": "string",
+              "value": "plane"
+            },
+            {
+              "type": "string",
+              "value": "home"
+            },
+            {
+              "type": "string",
+              "value": "landmark"
+            },
+            {
+              "type": "string",
+              "value": "document"
+            },
+            {
+              "type": "string",
+              "value": "helpingHand"
+            },
+            {
+              "type": "string",
+              "value": "person"
+            },
+            {
+              "type": "string",
+              "value": "scales"
+            },
+            {
+              "type": "string",
+              "value": "building"
+            },
+            {
+              "type": "string",
+              "value": "badge"
+            },
+            {
+              "type": "string",
+              "value": "stamp"
+            },
+            {
+              "type": "string",
+              "value": "fingerprint"
+            },
+            {
+              "type": "string",
+              "value": "idCard"
+            },
+            {
+              "type": "string",
+              "value": "gavel"
+            },
+            {
+              "type": "string",
+              "value": "education"
+            },
+            {
+              "type": "string",
+              "value": "child"
+            },
+            {
+              "type": "string",
+              "value": "humanRights"
+            },
+            {
+              "type": "string",
+              "value": "investment"
+            },
+            {
+              "type": "string",
+              "value": "map"
+            },
+            {
+              "type": "string",
+              "value": "personCheck"
+            },
+            {
+              "type": "string",
+              "value": "community"
+            },
+            {
+              "type": "string",
+              "value": "languages"
+            },
+            {
+              "type": "string",
+              "value": "wallet"
+            },
+            {
+              "type": "string",
+              "value": "scrollText"
+            },
+            {
+              "type": "string",
+              "value": "legalGuide"
+            },
+            {
+              "type": "string",
+              "value": "key"
+            },
+            {
+              "type": "string",
+              "value": "relief"
+            },
+            {
+              "type": "string",
+              "value": "familyPetition"
+            }
+          ]
         },
         "optional": true
       },
