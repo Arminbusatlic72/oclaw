@@ -82,7 +82,7 @@ export type DereferencedLink = {
   _type: 'link'
   linkType?: 'href' | 'page' | 'route'
   href?: string
-  route?: 'attorneys' | 'offices'
+  route?: 'attorneys' | 'offices' | 'resources' | 'privacyPolicy'
   page?:
     | string
     | {

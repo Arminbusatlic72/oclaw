@@ -129,7 +129,7 @@ export type Link = {
   linkType?: 'href' | 'page' | 'route'
   href?: string
   page?: PageReference | PracticeAreaArchiveReference | BlogArchiveReference
-  route?: 'attorneys' | 'offices'
+  route?: 'attorneys' | 'offices' | 'resources' | 'privacyPolicy'
   openInNewTab?: boolean
 }
 
@@ -1584,7 +1584,7 @@ export type FooterQueryResult = {
                   slug: null
                 }
               | null
-            route?: 'attorneys' | 'offices'
+            route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
           }
         }>
@@ -1647,7 +1647,7 @@ export type FooterQueryResult = {
             slug: null
           }
         | null
-      route?: 'attorneys' | 'offices'
+      route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
       openInNewTab?: boolean
     }
   }> | null
@@ -1682,7 +1682,7 @@ export type FooterQueryResult = {
             slug: null
           }
         | null
-      route?: 'attorneys' | 'offices'
+      route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
       openInNewTab?: boolean
     }
   }> | null
@@ -1732,7 +1732,7 @@ export type NavigationQueryResult = {
             slug: null
           }
         | null
-      route?: 'attorneys' | 'offices'
+      route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
       openInNewTab?: boolean
     } | null
     children: Array<{
@@ -1762,7 +1762,7 @@ export type NavigationQueryResult = {
               slug: null
             }
           | null
-        route?: 'attorneys' | 'offices'
+        route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
         openInNewTab?: boolean
       } | null
     }> | null
@@ -1793,7 +1793,7 @@ export type NavigationQueryResult = {
           slug: null
         }
       | null
-    route?: 'attorneys' | 'offices'
+    route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
     openInNewTab?: boolean
   } | null
 } | null
@@ -1861,7 +1861,7 @@ export type GetPageQueryResult = {
                   slug: null
                 }
               | null
-            route?: 'attorneys' | 'offices'
+            route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
           } | null
         } | null
@@ -1924,7 +1924,7 @@ export type GetPageQueryResult = {
                     slug: null
                   }
                 | null
-              route?: 'attorneys' | 'offices'
+              route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
             } | null
           } | null
@@ -1965,7 +1965,7 @@ export type GetPageQueryResult = {
                 slug: null
               }
             | null
-          route?: 'attorneys' | 'offices'
+          route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
           openInNewTab?: boolean
         }
       }
@@ -2021,7 +2021,7 @@ export type GetPageQueryResult = {
                   slug: null
                 }
               | null
-            route?: 'attorneys' | 'offices'
+            route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
           } | null
           _type: 'contactInfoCard'
@@ -2060,7 +2060,7 @@ export type GetPageQueryResult = {
                   slug: null
                 }
               | null
-            route?: 'attorneys' | 'offices'
+            route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
           } | null
         } | null
@@ -2184,7 +2184,7 @@ export type GetPageQueryResult = {
                     slug: null
                   }
                 | null
-              route?: 'attorneys' | 'offices'
+              route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
             } | null
             _type: 'image'
@@ -2218,7 +2218,7 @@ export type GetPageQueryResult = {
                     slug: null
                   }
                 | null
-              route?: 'attorneys' | 'offices'
+              route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
             } | null
           } | null
@@ -2249,7 +2249,7 @@ export type GetPageQueryResult = {
                     slug: null
                   }
                 | null
-              route?: 'attorneys' | 'offices'
+              route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
             } | null
           } | null
@@ -2413,7 +2413,7 @@ export type GetPageQueryResult = {
                     slug: null
                   }
                 | null
-              route?: 'attorneys' | 'offices'
+              route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
             } | null
           } | null
@@ -2480,7 +2480,7 @@ export type GetPageQueryResult = {
                   slug: null
                 }
               | null
-            route?: 'attorneys' | 'offices'
+            route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
           } | null
         } | null
@@ -2617,7 +2617,7 @@ export type GetPageQueryResult = {
                 slug: string
               }
             | null
-          route?: 'attorneys' | 'offices'
+          route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
           openInNewTab?: boolean
         } | null
       }
@@ -2704,7 +2704,7 @@ export type HomePageQueryResult = {
                   slug: null
                 }
               | null
-            route?: 'attorneys' | 'offices'
+            route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
           } | null
         } | null
@@ -2767,7 +2767,7 @@ export type HomePageQueryResult = {
                     slug: null
                   }
                 | null
-              route?: 'attorneys' | 'offices'
+              route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
             } | null
           } | null
@@ -2808,7 +2808,7 @@ export type HomePageQueryResult = {
                 slug: null
               }
             | null
-          route?: 'attorneys' | 'offices'
+          route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
           openInNewTab?: boolean
         }
       }
@@ -2864,7 +2864,7 @@ export type HomePageQueryResult = {
                   slug: null
                 }
               | null
-            route?: 'attorneys' | 'offices'
+            route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
           } | null
           _type: 'contactInfoCard'
@@ -2903,7 +2903,7 @@ export type HomePageQueryResult = {
                   slug: null
                 }
               | null
-            route?: 'attorneys' | 'offices'
+            route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
           } | null
         } | null
@@ -3027,7 +3027,7 @@ export type HomePageQueryResult = {
                     slug: null
                   }
                 | null
-              route?: 'attorneys' | 'offices'
+              route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
             } | null
             _type: 'image'
@@ -3061,7 +3061,7 @@ export type HomePageQueryResult = {
                     slug: null
                   }
                 | null
-              route?: 'attorneys' | 'offices'
+              route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
             } | null
           } | null
@@ -3092,7 +3092,7 @@ export type HomePageQueryResult = {
                     slug: null
                   }
                 | null
-              route?: 'attorneys' | 'offices'
+              route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
             } | null
           } | null
@@ -3256,7 +3256,7 @@ export type HomePageQueryResult = {
                     slug: null
                   }
                 | null
-              route?: 'attorneys' | 'offices'
+              route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
             } | null
           } | null
@@ -3323,7 +3323,7 @@ export type HomePageQueryResult = {
                   slug: null
                 }
               | null
-            route?: 'attorneys' | 'offices'
+            route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
           } | null
         } | null
@@ -3460,7 +3460,7 @@ export type HomePageQueryResult = {
                 slug: string
               }
             | null
-          route?: 'attorneys' | 'offices'
+          route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
           openInNewTab?: boolean
         } | null
       }

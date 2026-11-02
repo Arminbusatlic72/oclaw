@@ -158,6 +158,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       result.push({url: absoluteUrl(collectionPath(type, locale)), alternates: {languages: {en: absoluteUrl(collectionPath(type, 'en')), es: absoluteUrl(collectionPath(type, 'es')), 'x-default': absoluteUrl(collectionPath(type, 'en'))}}})
     }
   }
+  const resourceLanguages = {en: absoluteUrl('/resources/'), es: absoluteUrl('/es/recursos/'), 'x-default': absoluteUrl('/resources/')}
+  result.push({url: absoluteUrl('/resources/'), priority: 0.8, changeFrequency: 'monthly', alternates: {languages: resourceLanguages}})
+  result.push({url: absoluteUrl('/es/recursos/'), priority: 0.8, changeFrequency: 'monthly', alternates: {languages: resourceLanguages}})
+  result.push({url: absoluteUrl('/privacy-policy/'), priority: 0.5, changeFrequency: 'yearly'})
   const publishedCollections = new Map(collections.map((item) => [item._id, item]))
   for (const item of collections) {
     if (item.seo?.noIndex) continue

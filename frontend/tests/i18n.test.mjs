@@ -70,6 +70,10 @@ test('built-in listing routes are selectable in either language', async () => {
   assert.equal(siteRoutePath('attorneys', 'en'), '/attorneys/')
   assert.equal(siteRoutePath('attorneys', 'es'), '/es/abogados/')
   assert.equal(siteRoutePath('offices', 'en'), '/offices/')
+  assert.equal(siteRoutePath('resources', 'en'), '/resources/')
+  assert.equal(siteRoutePath('resources', 'es'), '/es/recursos/')
+  assert.equal(siteRoutePath('privacyPolicy', 'en'), '/privacy-policy/')
+  assert.equal(siteRoutePath('privacyPolicy', 'es'), null)
   assert.equal(siteRoutePath('unknown', 'en'), null)
   const link = {_type: 'link', linkType: 'route', route: 'attorneys'}
   assert.equal((await mapContentLinks(link, 'es', async () => null)).href, '/es/abogados/')

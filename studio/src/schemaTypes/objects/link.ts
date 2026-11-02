@@ -69,6 +69,8 @@ export const link = defineType({
         list: [
           {title: 'Attorneys', value: 'attorneys'},
           {title: 'Offices', value: 'offices'},
+          {title: 'Resources', value: 'resources'},
+          {title: 'Privacy Policy', value: 'privacyPolicy'},
         ],
       },
       hidden: ({parent}) => parent?.linkType !== 'route',

@@ -79,6 +79,15 @@ export type ParallaxFeatureItemCta = {
   link?: Link
 }
 
+export type Photo = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "photo.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt?: string
+  _type: 'image'
+}
+
 export type Seo = {
   _type: 'seo'
   title?: string
@@ -120,8 +129,34 @@ export type Link = {
   linkType?: 'href' | 'page' | 'route'
   href?: string
   page?: PageReference | PracticeAreaArchiveReference | BlogArchiveReference
-  route?: 'attorneys' | 'offices'
+  route?: 'attorneys' | 'offices' | 'resources' | 'privacyPolicy'
   openInNewTab?: boolean
+}
+
+export type TestimonialsSection = {
+  _type: 'testimonialsSection'
+  accessibleLabel: string
+  source: 'manual' | 'google'
+  backgroundImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  testimonials?: Array<{
+    quote: string
+    name: string
+    role?: string
+    rating: number
+    photo?: Photo
+    sourceUrl?: string
+    _type: 'testimonial'
+    _key: string
+  }>
+  autoplay?: boolean
+  autoplayInterval?: number
 }
 
 export type YoutubeVideos = {
@@ -1184,6 +1219,9 @@ export type Page = {
     | ({
         _key: string
       } & YoutubeVideos)
+    | ({
+        _key: string
+      } & TestimonialsSection)
   >
   seo?: Seo
 }
@@ -1332,11 +1370,13 @@ export type AllSanitySchemaTypes =
   | SecondaryCta
   | ParallaxFeatureItemImage
   | ParallaxFeatureItemCta
+  | Photo
   | Seo
   | PageReference
   | PracticeAreaArchiveReference
   | BlogArchiveReference
   | Link
+  | TestimonialsSection
   | YoutubeVideos
   | StatisticsSection
   | OfficeReference

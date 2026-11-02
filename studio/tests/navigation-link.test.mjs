@@ -10,6 +10,8 @@ test('new link objects start with a supported type', () => {
   assert.ok(type.options.list.some((option) => option.value === 'route'))
   const route = link.fields.find((field) => field.name === 'route')
   assert.ok(route.options.list.some((option) => option.value === 'attorneys'))
+  assert.ok(route.options.list.some((option) => option.value === 'resources'))
+  assert.ok(route.options.list.some((option) => option.value === 'privacyPolicy'))
 })
 
 test('empty or invalid link objects do not satisfy a navigation destination', () => {
@@ -21,4 +23,6 @@ test('empty or invalid link objects do not satisfy a navigation destination', ()
   assert.equal(hasUsableLink({_type: 'link', linkType: 'route'}), false)
   assert.equal(hasUsableLink({_type: 'link', linkType: 'route', route: 'attorneys'}), true)
   assert.equal(hasUsableLink({_type: 'link', linkType: 'route', route: 'offices'}), true)
+  assert.equal(hasUsableLink({_type: 'link', linkType: 'route', route: 'resources'}), true)
+  assert.equal(hasUsableLink({_type: 'link', linkType: 'route', route: 'privacyPolicy'}), true)
 })

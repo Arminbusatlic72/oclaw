@@ -659,6 +659,14 @@
               {
                 "type": "string",
                 "value": "offices"
+              },
+              {
+                "type": "string",
+                "value": "resources"
+              },
+              {
+                "type": "string",
+                "value": "privacyPolicy"
               }
             ]
           },

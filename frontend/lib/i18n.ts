@@ -47,6 +47,8 @@ export function footerId(locale: Locale) {
 export function siteRoutePath(route: string | null | undefined, locale: Locale) {
   if (route === 'attorneys') return locale === 'es' ? '/es/abogados/' : '/attorneys/'
   if (route === 'offices') return locale === 'es' ? '/es/oficinas/' : '/offices/'
+  if (route === 'resources') return locale === 'es' ? '/es/recursos/' : '/resources/'
+  if (route === 'privacyPolicy') return locale === 'en' ? '/privacy-policy/' : null
   return null
 }
 
