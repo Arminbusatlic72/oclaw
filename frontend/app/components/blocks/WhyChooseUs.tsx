@@ -21,13 +21,15 @@ const highlightIcons = {
 }
 
 const sectionPadding = {
-  standard: 'py-16 sm:py-20 lg:py-24',
-  compact: 'py-12 sm:py-16 lg:py-18',
+  standard: 'py-10 sm:py-12 lg:py-9',
+  compact: 'py-8 sm:py-10 lg:py-8',
 }
 
 export default function WhyChooseUs({block}: {block: WhyChooseUsBlock}) {
   const {
+    subtitle,
     heading,
+    description,
     anchorId,
     backgroundTheme = 'navy',
     variant = 'standard',
@@ -55,17 +57,20 @@ export default function WhyChooseUs({block}: {block: WhyChooseUsBlock}) {
     >
       <div className="container">
         {heading && (
-          <div className="why-choose-us-title mb-10 text-center sm:mb-14">
+          <header className="practice-section-header">
+            {subtitle && <p className="practice-eyebrow site-block-eyebrow">{subtitle}</p>}
             <h2
               id={anchorId ? `${anchorId}-heading` : undefined}
               className="site-block-heading"
             >
               {heading}
             </h2>
-          </div>
+            <span className="practice-divider" aria-hidden="true" />
+            {description && <p className="site-block-subheading">{description}</p>}
+          </header>
         )}
 
-        <div className="grid gap-9 md:grid-cols-2 md:gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,0.85fr)_minmax(0,1.5fr)] lg:gap-8">
+        <div className="grid gap-9 md:grid-cols-2 md:gap-10 lg:grid-cols-[minmax(0,1.9fr)_minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-12">
           <figure className="min-w-0">
             {imageAssetId && (
               <div className="overflow-hidden border border-[#c5a47b]/70 p-5">
@@ -96,7 +101,7 @@ export default function WhyChooseUs({block}: {block: WhyChooseUsBlock}) {
               </h3>
             )}
             {highlights && highlights.length > 0 && (
-              <ul className="mt-7 divide-y divide-[#819cb0]/30">
+              <ul className="mt-12">
                 {highlights.map((highlight: Highlight) => (
                   <HighlightItem
                     key={highlight._key}
@@ -108,7 +113,7 @@ export default function WhyChooseUs({block}: {block: WhyChooseUsBlock}) {
             )}
           </div>
 
-          <div className={`min-w-0 border-t pt-8 md:col-span-2 lg:col-span-1 lg:border-l lg:border-t-0 lg:pt-0 lg:pl-8 ${separatorClass}`}>
+          <div className={`min-w-0 border-t pt-8 md:col-span-2 lg:col-span-1 lg:border-l lg:border-t-0 lg:pt-0 lg:pl-12 ${separatorClass}`}>
             {contentHeading && (
               <h3 className="font-serif text-3xl leading-tight sm:text-4xl lg:text-[2.6rem]">
                 {contentHeading}
@@ -148,13 +153,13 @@ function HighlightItem({
   const Icon = highlightIcons[iconName] || Award
 
   return (
-    <li className="flex gap-4 py-5 first:pt-0 last:pb-0">
-      <span className="mt-1 flex size-10 shrink-0 items-center justify-center text-[#c5a47b]">
+    <li className="flex gap-4 py-8 first:pt-0 last:pb-0">
+      <span className="flex w-12 shrink-0 items-center justify-center self-stretch border-r border-[#819cb0]/50 pr-4 text-[#c5a47b]">
         <Icon aria-hidden="true" size={25} strokeWidth={1.5} />
       </span>
       <div className="min-w-0">
-        <p className="font-serif text-2xl leading-none sm:text-3xl">{highlight.value}</p>
-        <h4 className="mt-2 text-sm font-semibold text-[#c5a47b]">{highlight.label}</h4>
+        <p className="text-xl leading-tight text-[#819cb0]">{highlight.value}</p>
+        <h4 className="mt-2 font-serif text-xl font-semibold leading-tight sm:text-2xl">{highlight.label}</h4>
         {highlight.description && (
           <p className={`mt-1 text-sm leading-6 ${mutedClass}`}>{highlight.description}</p>
         )}

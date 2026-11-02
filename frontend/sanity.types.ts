@@ -350,7 +350,9 @@ export type PracticeAreasSection = {
 
 export type WhyChooseUs = {
   _type: 'whyChooseUs'
+  subtitle?: string
   heading: string
+  description?: string
   anchorId?: string
   backgroundTheme: 'navy' | 'light'
   variant: 'standard' | 'compact'
@@ -2607,7 +2609,9 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'whyChooseUs'
+        subtitle?: string
         heading: string
+        description?: string
         anchorId?: string
         backgroundTheme: 'light' | 'navy'
         variant: 'compact' | 'standard'
@@ -3465,7 +3469,9 @@ export type HomePageQueryResult = {
     | {
         _key: string
         _type: 'whyChooseUs'
+        subtitle?: string
         heading: string
+        description?: string
         anchorId?: string
         backgroundTheme: 'light' | 'navy'
         variant: 'compact' | 'standard'

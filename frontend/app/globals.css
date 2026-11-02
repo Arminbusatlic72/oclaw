@@ -512,22 +512,6 @@
   padding-inline: 0;
 }
 
-.why-choose-us-title {
-  position: relative;
-  padding-bottom: 21px;
-}
-
-.why-choose-us-title::before {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 80px;
-  height: 1px;
-  background: #cdb091;
-  content: '';
-  transform: translateX(-50%);
-}
-
 .why-choose-us-body[data-theme='dark'] .prose :is(p, li, strong, code, blockquote, h1, h2, h3, h4) {
   color: #fff;
 }

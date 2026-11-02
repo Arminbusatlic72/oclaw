@@ -66,11 +66,23 @@ export const whyChooseUs = defineType({
   ],
   fields: [
     defineField({
+      name: 'subtitle',
+      title: 'Eyebrow',
+      type: 'string',
+      fieldset: 'section',
+    }),
+    defineField({
       name: 'heading',
       title: 'Section heading',
       type: 'string',
       fieldset: 'section',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      fieldset: 'section',
     }),
     defineField({
       name: 'anchorId',
