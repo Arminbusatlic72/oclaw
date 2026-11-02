@@ -237,6 +237,21 @@ export type ContactForm = {
   privacyPolicyLink: Link
 }
 
+export type ContactDetailsCards = {
+  _type: 'contactDetailsCards'
+  heading: string
+  emailTitle: string
+  emailAddress: string
+  phoneTitle: string
+  phoneNumbers: Array<{
+    label: string
+    number: string
+    _key: string
+  }>
+  hoursTitle: string
+  hours: Array<string>
+}
+
 export type ContactInfoCards = {
   _type: 'contactInfoCards'
   heading?: string
@@ -1206,6 +1221,9 @@ export type Page = {
       } & ContactInfoCards)
     | ({
         _key: string
+      } & ContactDetailsCards)
+    | ({
+        _key: string
       } & ContactForm)
     | ({
         _key: string
@@ -1383,6 +1401,7 @@ export type AllSanitySchemaTypes =
   | OfficesSection
   | LocationMap
   | ContactForm
+  | ContactDetailsCards
   | ContactInfoCards
   | CtaBanner
   | EditorialSection
@@ -1931,6 +1950,21 @@ export type GetPageQueryResult = {
         }> | null
         columns?: 2 | 3 | 4
         alignment?: 'center' | 'left'
+      }
+    | {
+        _key: string
+        _type: 'contactDetailsCards'
+        heading: string
+        emailTitle: string
+        emailAddress: string
+        phoneTitle: string
+        phoneNumbers: Array<{
+          label: string
+          number: string
+          _key: string
+        }>
+        hoursTitle: string
+        hours: Array<string>
       }
     | {
         _key: string
@@ -2774,6 +2808,21 @@ export type HomePageQueryResult = {
         }> | null
         columns?: 2 | 3 | 4
         alignment?: 'center' | 'left'
+      }
+    | {
+        _key: string
+        _type: 'contactDetailsCards'
+        heading: string
+        emailTitle: string
+        emailAddress: string
+        phoneTitle: string
+        phoneNumbers: Array<{
+          label: string
+          number: string
+          _key: string
+        }>
+        hoursTitle: string
+        hours: Array<string>
       }
     | {
         _key: string

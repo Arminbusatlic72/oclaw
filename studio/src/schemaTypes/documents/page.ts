@@ -62,6 +62,7 @@ export const page = defineType({
         {type: 'editorialSection'},
         {type: 'ctaBanner'},
         {type: 'contactInfoCards'},
+        {type: 'contactDetailsCards'},
         {type: 'contactForm'},
         {type: 'locationMap'},
         {type: 'officesSection'},

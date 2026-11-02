@@ -22,6 +22,7 @@ export default async function NavbarWrapper({locale}: {locale: Locale}) {
   const staticRoute = ['resources', 'privacyPolicy'].find(
     (route) => siteRoutePath(route, locale) === path,
   )
+  const isContactRoute = (locale === 'en' && slug === 'contact') || (locale === 'es' && slug === 'contacto')
   const collection = (
     [
       {type: 'practiceArea', en: '/practice-areas/', es: '/es/areas-de-practica/'},
@@ -29,7 +30,9 @@ export default async function NavbarWrapper({locale}: {locale: Locale}) {
       {type: 'office', en: '/offices/', es: '/es/oficinas/'},
     ] as const
   ).find((item) => path === item[locale] || path.startsWith(item[locale]))
-  if (staticRoute) {
+  if (isContactRoute) {
+    available = {en: '/contact/', es: '/es/contacto/'}
+  } else if (staticRoute) {
     available = {
       en: siteRoutePath(staticRoute, 'en') || undefined,
       es: siteRoutePath(staticRoute, 'es') || undefined,

@@ -1,4 +1,5 @@
 import PageBuilderPage from '@/app/components/PageBuilder'
+import ContactDetailsCards, {englishContactDetailsBlock} from '@/app/components/blocks/ContactDetailsCards'
 import Link from 'next/link'
 import type {GetPageQueryResult} from '@/sanity.types'
 
@@ -30,6 +31,7 @@ export default function DynamicPage({page, isHomepage = false}: {page: NonNullab
           </nav>
         </div>
       </header>}
+      {locale === 'en' && page.slug.current === 'contact' && !page.pageBuilder?.some((block) => block._type === 'contactDetailsCards') && <ContactDetailsCards block={englishContactDetailsBlock} />}
       <PageBuilderPage page={page} />
     </main>
   )

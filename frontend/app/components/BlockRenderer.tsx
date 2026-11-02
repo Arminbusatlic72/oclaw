@@ -13,6 +13,7 @@ import PageHero from '@/app/components/blocks/PageHero'
 import EditorialSection from '@/app/components/blocks/EditorialSection'
 import CtaBanner from '@/app/components/blocks/CtaBanner'
 import ContactInfoCards from '@/app/components/blocks/ContactInfoCards'
+import ContactDetailsCards from '@/app/components/blocks/ContactDetailsCards'
 import ContactForm from '@/app/components/blocks/ContactForm'
 import LocationMap from '@/app/components/blocks/LocationMap'
 import OfficesSection from '@/app/components/blocks/OfficesSection'
@@ -47,6 +48,7 @@ const Blocks = {
   editorialSection: EditorialSection,
   ctaBanner: CtaBanner,
   contactInfoCards: ContactInfoCards,
+  contactDetailsCards: ContactDetailsCards,
   locationMap: LocationMap,
   statisticsSection: StatisticsSection,
   youtubeVideos: YoutubeVideos,

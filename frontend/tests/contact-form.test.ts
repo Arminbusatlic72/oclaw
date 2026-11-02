@@ -12,8 +12,9 @@ const base = {
   name: 'Jane Client',
   email: 'jane@example.com',
   phone: '+1 312 555 0123',
-  practiceAreaId: 'practice-1',
-  message: 'I would like to discuss my legal matter.',
+  officeId: 'office-1',
+  preferredDate: '2026-11-05',
+  preferredTime: '14:30',
   privacyAccepted: true,
 }
 
@@ -22,8 +23,8 @@ test('accepts a valid general inquiry', () => {
   assert.equal(result.ok, true)
 })
 
-test('requires appointment preferences and an office', () => {
-  const result = validateContactSubmission({...base, mode: 'appointmentRequest', practiceAreaId: undefined}, now)
+test('allows an optional case description and requires appointment details', () => {
+  const result = validateContactSubmission({...base, officeId: undefined, preferredDate: undefined, preferredTime: undefined}, now)
   assert.equal(result.ok, false)
   if (!result.ok) assert.deepEqual(Object.keys(result.errors).sort(), ['officeId', 'preferredDate', 'preferredTime'])
 })

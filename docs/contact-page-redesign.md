@@ -36,9 +36,10 @@ Submissions post to `/api/contact`, which performs same-origin, timing, honeypot
 
 - `CONTACT_FORM_WEBHOOK_URL`
 - `CONTACT_FORM_WEBHOOK_TOKEN`
+- `CONTACT_FORM_UPLOADS_ENABLED=true` (only after the receiving service is approved for confidential legal documents)
 
-The webhook receives an `Authorization: Bearer …` header and the submission UUID as `Idempotency-Key`. It must return a 2xx response only after durable delivery/queueing. Until both variables are configured, the UI returns a configuration error and never displays a success state.
+The webhook receives an `Authorization: Bearer …` header and the submission UUID as `Idempotency-Key`. Submissions without files use JSON. Appointment requests with files use multipart form data containing a `submission` JSON field and repeated `documents` fields. It must return a 2xx response only after durable delivery/queueing. Until the variables are configured, the UI returns a configuration error and never displays a success state.
 
 In-memory throttling and idempotency provide immediate protection per running instance. The receiving provider should enforce the same idempotency key and an organization-wide rate limit for multi-instance production deployments.
 
-Supporting document upload remains disabled. Enable it only after approving private storage, MIME/size scanning, access control, retention, and deletion policies. Do not store client documents in public Sanity assets.
+Supporting documents support PDF, DOC, DOCX, JPG, and PNG files, with at most five files, 15 MB per file, and 25 MB combined. The app checks extensions and file signatures, sanitizes filenames, and forwards files directly to the approved HTTPS webhook without storing them in Sanity. Keep `CONTACT_FORM_UPLOADS_ENABLED=false` until the receiving service has approved malware scanning, private storage/delivery, access controls, retention, and deletion policies.

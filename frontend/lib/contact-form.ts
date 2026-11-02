@@ -53,13 +53,10 @@ export function validateContactSubmission(value: unknown, now = Date.now()): Val
   if (data.name.length < 2 || data.name.length > 120) errors.name = required
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) || data.email.length > 254) errors.email = locale === 'es' ? 'Ingrese un correo electrónico válido.' : 'Enter a valid email address.'
   if (!/^[+()\d\s.-]{7,30}$/.test(data.phone)) errors.phone = locale === 'es' ? 'Ingrese un número de teléfono válido.' : 'Enter a valid phone number.'
-  if (data.message.length < 10 || data.message.length > 5000) errors.message = locale === 'es' ? 'Escriba entre 10 y 5000 caracteres.' : 'Enter between 10 and 5000 characters.'
+  if (data.message.length > 5000) errors.message = locale === 'es' ? 'El mensaje no puede superar los 5000 caracteres.' : 'The message must be no more than 5000 characters.'
   if (!data.privacyAccepted) errors.privacyAccepted = required
-  if (data.mode === 'generalInquiry' && !data.practiceAreaId) errors.practiceAreaId = required
-  if (data.mode === 'appointmentRequest') {
-    if (!data.officeId) errors.officeId = required
-    if (!data.preferredDate || !/^\d{4}-\d{2}-\d{2}$/.test(data.preferredDate)) errors.preferredDate = required
-    if (!data.preferredTime || !/^\d{2}:\d{2}$/.test(data.preferredTime)) errors.preferredTime = required
-  }
+  if (!data.officeId) errors.officeId = required
+  if (!data.preferredDate || !/^\d{4}-\d{2}-\d{2}$/.test(data.preferredDate)) errors.preferredDate = required
+  if (!data.preferredTime || !/^\d{2}:\d{2}$/.test(data.preferredTime)) errors.preferredTime = required
   return Object.keys(errors).length ? {ok: false, errors} : {ok: true, data}
 }

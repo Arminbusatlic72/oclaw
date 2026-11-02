@@ -2,6 +2,7 @@ import type {Metadata} from 'next'
 import {notFound, permanentRedirect} from 'next/navigation'
 import DynamicPage from './DynamicPage'
 import BlogArticle from './BlogArticle'
+import ContactPageFallback, {contactFallbackMetadata} from './ContactPageFallback'
 import {getPublishedPost, resolveContentRoute} from '@/lib/blog'
 import {postMetadata} from '@/lib/blog-metadata'
 import {type Locale} from '@/lib/i18n'
@@ -12,6 +13,7 @@ import {getPageQuery, homePageIdsQuery} from '@/sanity/lib/queries'
 
 export async function contentMetadata(slug: string, locale: Locale): Promise<Metadata> {
   const route = await resolveContentRoute(slug, locale)
+  if (!route && ((locale === 'en' && slug === 'contact') || (locale === 'es' && slug === 'contacto'))) return contactFallbackMetadata(locale)
   if (!route) return {}
   if (route._type === 'blogPost') {
     const post = await getPublishedPost(slug, locale)
@@ -24,7 +26,10 @@ export async function contentMetadata(slug: string, locale: Locale): Promise<Met
 
 export default async function ContentRoute({slug, locale}: {slug: string; locale: Locale}) {
   const route = await resolveContentRoute(slug, locale)
-  if (!route) notFound()
+  if (!route) {
+    if ((locale === 'en' && slug === 'contact') || (locale === 'es' && slug === 'contacto')) return <ContactPageFallback locale={locale} />
+    notFound()
+  }
   if (route._type === 'blogPost') {
     const post = await getPublishedPost(slug, locale)
     if (!post) notFound()

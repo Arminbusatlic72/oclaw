@@ -34,6 +34,7 @@ import {pageHero} from './blocks/pageHero'
 import {editorialSection} from './blocks/editorialSection'
 import {ctaBanner} from './blocks/ctaBanner'
 import {contactInfoCards} from './blocks/contactInfoCards'
+import {contactDetailsCards} from './blocks/contactDetailsCards'
 import {contactForm} from './blocks/contactForm'
 import {locationMap} from './blocks/locationMap'
 import {officesSection} from './blocks/officesSection'
@@ -81,6 +82,7 @@ export const schemaTypes = [
   editorialSection,
   ctaBanner,
   contactInfoCards,
+  contactDetailsCards,
   contactForm,
   locationMap,
   officesSection,
