@@ -2,10 +2,12 @@ import {navigationId, safeLegacyUrl, type Locale} from '@/lib/i18n'
 import {localizeContent} from '@/lib/localized-content'
 import {sanityFetch} from '@/sanity/lib/live'
 import {navigationQuery} from '@/sanity/lib/queries'
+import type {DereferencedLink} from '@/sanity/lib/types'
 
 export interface NavChild {
   title: string
-  href: string
+  href?: string
+  link?: DereferencedLink
 }
 
 export interface NavItem {
@@ -14,6 +16,7 @@ export interface NavItem {
   externalUrl?: string
   isButton?: boolean
   children?: NavChild[]
+  link?: DereferencedLink
 }
 
 export interface NavigationData {
@@ -27,9 +30,10 @@ export interface NavigationData {
   navItems: NavItem[]
   ctaLabel?: string
   ctaHref?: string
+  ctaLink?: DereferencedLink
 }
 
-type LinkInput = {linkType?: string; page?: string | null; href?: string | null}
+type LinkInput = DereferencedLink
 type RawChild = {title?: string | null; href?: string | null; link?: LinkInput | null}
 type RawItem = RawChild & {
   externalUrl?: string | null
@@ -70,11 +74,13 @@ export async function getNavigation(locale: Locale): Promise<NavigationData> {
       if (!item?.title) return []
       const children = (item.children ?? []).flatMap((child: RawChild) => {
         const href = chooseLink(child.link, child.href, locale)
-        return child.title && href ? [{title: child.title, href}] : []
+        return child.title && (href || child.link?.linkType === 'calendly')
+          ? [{title: child.title, href: href || '#', link: child.link as DereferencedLink}]
+          : []
       })
       const href = chooseLink(item.link, item.href, locale)
       const externalUrl = item.externalUrl ?? undefined
-      if (!href && !externalUrl && children.length === 0) return []
+      if (!href && !externalUrl && item.link?.linkType !== 'calendly' && children.length === 0) return []
       return [
         {
           title: item.title,
@@ -82,10 +88,12 @@ export async function getNavigation(locale: Locale): Promise<NavigationData> {
           externalUrl,
           isButton: item.isButton ?? false,
           children,
+          link: item.link as DereferencedLink | undefined,
         },
       ]
     }),
     ctaLabel: localized.ctaLabel ?? undefined,
     ctaHref: chooseLink(localized.ctaLink, localized.ctaHref, locale) ?? undefined,
+    ctaLink: localized.ctaLink as DereferencedLink | undefined,
   }
 }

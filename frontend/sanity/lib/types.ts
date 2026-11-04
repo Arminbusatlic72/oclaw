@@ -80,7 +80,7 @@ export type ExtractPageBuilderType<T extends PageBuilderSection['_type']> = Extr
 // Represents a link after GROQ dereferencing.
 export type DereferencedLink = {
   _type: 'link'
-  linkType?: 'href' | 'page' | 'route'
+  linkType?: 'href' | 'page' | 'route' | 'calendly'
   href?: string
   route?: 'attorneys' | 'offices' | 'resources' | 'privacyPolicy'
   page?:
@@ -93,4 +93,12 @@ export type DereferencedLink = {
       }
     | null
   openInNewTab?: boolean
+  calendlyEventUrl?: string | null
+  calendlyOfficeBookingOptions?: Array<{
+    _key?: string
+    eventUrl?: string | null
+    office?: {_id: string; name?: string | null; language?: string | null} | null
+  }> | null
+  calendlyPrivacyNotice?: string | null
+  calendlyFallbackLinkLabel?: string | null
 }

@@ -20,6 +20,7 @@ import OfficesSection from '@/app/components/blocks/OfficesSection'
 import StatisticsSection from '@/app/components/blocks/StatisticsSection'
 import YoutubeVideos from '@/app/components/blocks/YoutubeVideos'
 import TestimonialsSection from '@/app/components/blocks/TestimonialsSection'
+import CalendlyBooking from '@/app/components/blocks/CalendlyBooking'
 import type {Locale} from '@/lib/i18n'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
@@ -53,6 +54,7 @@ const Blocks = {
   statisticsSection: StatisticsSection,
   youtubeVideos: YoutubeVideos,
   testimonialsSection: TestimonialsSection,
+  calendlyBooking: CalendlyBooking,
 } as BlocksType
 
 /**

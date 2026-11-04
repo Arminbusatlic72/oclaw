@@ -6,6 +6,8 @@ export function hasUsableLink(value: unknown): boolean {
     href?: unknown
     page?: {_ref?: unknown} | null
     route?: unknown
+    calendlyEventUrl?: unknown
+    calendlyOfficeBookingOptions?: Array<{eventUrl?: unknown}> | null
   }
   if (link.linkType === 'href') return typeof link.href === 'string' && link.href.trim().length > 0
   if (link.linkType === 'page')
@@ -16,6 +18,15 @@ export function hasUsableLink(value: unknown): boolean {
       link.route === 'offices' ||
       link.route === 'resources' ||
       link.route === 'privacyPolicy'
+    )
+  if (link.linkType === 'calendly')
+    return (
+      (typeof link.calendlyEventUrl === 'string' && link.calendlyEventUrl.trim().length > 0) ||
+      Boolean(
+        link.calendlyOfficeBookingOptions?.some(
+          (option) => typeof option.eventUrl === 'string' && option.eventUrl.trim().length > 0,
+        ),
+      )
     )
   return false
 }

@@ -64,6 +64,7 @@ export const page = defineType({
         {type: 'contactInfoCards'},
         {type: 'contactDetailsCards'},
         {type: 'contactForm'},
+        {type: 'calendlyBooking'},
         {type: 'locationMap'},
         {type: 'officesSection'},
         {type: 'statisticsSection'},

@@ -124,13 +124,47 @@ export type BlogArchiveReference = {
   [internalGroqTypeReferenceTo]?: 'blogArchive'
 }
 
+export type OfficeReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'office'
+}
+
 export type Link = {
   _type: 'link'
-  linkType?: 'href' | 'page' | 'route'
+  linkType?: 'href' | 'page' | 'route' | 'calendly'
   href?: string
   page?: PageReference | PracticeAreaArchiveReference | BlogArchiveReference
   route?: 'attorneys' | 'offices' | 'resources' | 'privacyPolicy'
   openInNewTab?: boolean
+  calendlyEventUrl?: string
+  calendlyOfficeBookingOptions?: Array<{
+    office: OfficeReference
+    eventUrl?: string
+    _type: 'officeBookingOption'
+    _key: string
+  }>
+  calendlyPrivacyNotice?: string
+  calendlyFallbackLinkLabel?: string
+}
+
+export type CalendlyBooking = {
+  _type: 'calendlyBooking'
+  heading: string
+  description?: string
+  displayMode: 'inline' | 'popup'
+  eventUrl?: string
+  buttonLabel?: string
+  officeBookingOptions?: Array<{
+    office: OfficeReference
+    eventUrl?: string
+    _type: 'officeBookingOption'
+    _key: string
+  }>
+  embedHeight?: number
+  privacyNotice?: string
+  fallbackLinkLabel?: string
 }
 
 export type TestimonialsSection = {
@@ -188,13 +222,6 @@ export type StatisticsSection = {
   }>
 }
 
-export type OfficeReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'office'
-}
-
 export type OfficesSection = {
   _type: 'officesSection'
   subtitle?: string
@@ -235,6 +262,21 @@ export type ContactForm = {
   successMessage: string
   errorMessage: string
   privacyPolicyLink: Link
+}
+
+export type ContactDetailsCards = {
+  _type: 'contactDetailsCards'
+  heading: string
+  emailTitle: string
+  emailAddress: string
+  phoneTitle: string
+  phoneNumbers: Array<{
+    label: string
+    number: string
+    _key: string
+  }>
+  hoursTitle: string
+  hours: Array<string>
 }
 
 export type ContactInfoCards = {
@@ -335,7 +377,9 @@ export type PracticeAreasSection = {
 
 export type WhyChooseUs = {
   _type: 'whyChooseUs'
+  subtitle?: string
   heading: string
+  description?: string
   anchorId?: string
   backgroundTheme: 'navy' | 'light'
   variant: 'standard' | 'compact'
@@ -667,6 +711,8 @@ export type PracticeAreaArchive = {
   language?: 'en' | 'es'
   heading?: string
   description?: string
+  cardsHeading?: string
+  theme?: 'light' | 'dark'
   introduction?: BlockContentTextOnly
   emptyMessage?: string
   seo?: Seo
@@ -981,6 +1027,39 @@ export type PracticeArea = {
     alt: string
     _type: 'image'
   }
+  iconName?:
+    | 'briefcase'
+    | 'people'
+    | 'family'
+    | 'shield'
+    | 'globe'
+    | 'plane'
+    | 'home'
+    | 'landmark'
+    | 'document'
+    | 'helpingHand'
+    | 'person'
+    | 'scales'
+    | 'building'
+    | 'badge'
+    | 'stamp'
+    | 'fingerprint'
+    | 'idCard'
+    | 'gavel'
+    | 'education'
+    | 'child'
+    | 'humanRights'
+    | 'investment'
+    | 'map'
+    | 'personCheck'
+    | 'community'
+    | 'languages'
+    | 'wallet'
+    | 'scrollText'
+    | 'legalGuide'
+    | 'key'
+    | 'relief'
+    | 'familyPetition'
   icon?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -1000,6 +1079,7 @@ export type PracticeArea = {
   displayOrder?: number
   featuredOnHomepage?: boolean
   consultationLabel?: string
+  consultationLink?: Link
   seo?: Seo
 }
 
@@ -1206,7 +1286,13 @@ export type Page = {
       } & ContactInfoCards)
     | ({
         _key: string
+      } & ContactDetailsCards)
+    | ({
+        _key: string
       } & ContactForm)
+    | ({
+        _key: string
+      } & CalendlyBooking)
     | ({
         _key: string
       } & LocationMap)
@@ -1375,14 +1461,16 @@ export type AllSanitySchemaTypes =
   | PageReference
   | PracticeAreaArchiveReference
   | BlogArchiveReference
+  | OfficeReference
   | Link
+  | CalendlyBooking
   | TestimonialsSection
   | YoutubeVideos
   | StatisticsSection
-  | OfficeReference
   | OfficesSection
   | LocationMap
   | ContactForm
+  | ContactDetailsCards
   | ContactInfoCards
   | CtaBanner
   | EditorialSection

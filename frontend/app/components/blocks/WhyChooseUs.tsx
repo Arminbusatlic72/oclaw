@@ -7,6 +7,7 @@ import Image from '@/app/components/SanityImage'
 import {ExtractPageBuilderType} from '@/sanity/lib/types'
 import {linkResolver} from '@/sanity/lib/utils'
 import {stegaClean} from '@sanity/client/stega'
+import type {Locale} from '@/lib/i18n'
 
 type WhyChooseUsBlock = ExtractPageBuilderType<'whyChooseUs'>
 type Highlight = NonNullable<WhyChooseUsBlock['highlights']>[number]
@@ -25,7 +26,7 @@ const sectionPadding = {
   compact: 'py-8 sm:py-10 lg:py-8',
 }
 
-export default function WhyChooseUs({block}: {block: WhyChooseUsBlock}) {
+export default function WhyChooseUs({block, locale = 'en'}: {block: WhyChooseUsBlock; locale?: Locale}) {
   const {
     subtitle,
     heading,
@@ -46,7 +47,7 @@ export default function WhyChooseUs({block}: {block: WhyChooseUsBlock}) {
   const mutedClass = isLight ? 'text-[#536575]' : 'text-[#c5d0d8]'
   const separatorClass = isLight ? 'border-[#cdb091]' : 'border-[#819cb0]/40'
   const spacingClass = sectionPadding[stegaClean(variant) === 'compact' ? 'compact' : 'standard']
-  const hasCta = Boolean(ctaLabel && ctaLink && linkResolver(ctaLink))
+  const hasCta = Boolean(ctaLabel && ctaLink && (ctaLink.linkType === 'calendly' || linkResolver(ctaLink)))
   const imageAssetId = image?.asset?._id
 
   return (
@@ -130,7 +131,7 @@ export default function WhyChooseUs({block}: {block: WhyChooseUsBlock}) {
             )}
             {hasCta && ctaLink && ctaLabel && (
               <div className="mt-7">
-                <ResolvedLink link={ctaLink} className="site-button-outline site-hero-cta">
+                <ResolvedLink link={ctaLink} locale={locale} className="site-button-outline site-hero-cta">
                   {ctaLabel}
                 </ResolvedLink>
               </div>

@@ -17,6 +17,7 @@ import {
 import {Sheet, SheetContent, SheetTrigger} from '@/components/ui/sheet'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import {dictionary, localePath, type Locale} from '@/lib/i18n'
+import ResolvedLink from '@/app/components/ResolvedLink'
 
 type NavbarProps = {
   data: NavigationData
@@ -25,8 +26,11 @@ type NavbarProps = {
   availableLanguages: Partial<Record<Locale, string>>
 }
 
-function NavLink({item, onNavigate}: {item: NavItem; onNavigate?: () => void}) {
+function NavLink({item, locale, onNavigate}: {item: NavItem; locale: Locale; onNavigate?: () => void}) {
   const className = 'site-header-link inline-flex items-center py-2'
+  if (item.link?.linkType === 'calendly') {
+    return <ResolvedLink link={item.link} locale={locale} className={className}>{item.title}</ResolvedLink>
+  }
   if (item.externalUrl) {
     return (
       <a
@@ -48,7 +52,7 @@ function NavLink({item, onNavigate}: {item: NavItem; onNavigate?: () => void}) {
   )
 }
 
-function MobileNavItem({item, onNavigate}: {item: NavItem; onNavigate: () => void}) {
+function MobileNavItem({item, locale, onNavigate}: {item: NavItem; locale: Locale; onNavigate: () => void}) {
   if (item.children?.length) {
     return (
       <details className="border-b border-white/20 py-3">
@@ -59,9 +63,9 @@ function MobileNavItem({item, onNavigate}: {item: NavItem; onNavigate: () => voi
         <ul className="mt-3 space-y-3 pl-4">
           {item.children.map((child) => (
             <li key={`${item.title}-${child.title}`}>
-              <Link href={child.href} onClick={onNavigate} className="text-sm text-white/75 hover:text-brand">
+              {child.link?.linkType === 'calendly' ? <ResolvedLink link={child.link} locale={locale} className="text-sm text-white/75 hover:text-brand">{child.title}</ResolvedLink> : <Link href={child.href || '#'} onClick={onNavigate} className="text-sm text-white/75 hover:text-brand">
                 {child.title}
-              </Link>
+              </Link>}
             </li>
           ))}
         </ul>
@@ -70,6 +74,9 @@ function MobileNavItem({item, onNavigate}: {item: NavItem; onNavigate: () => voi
   }
 
   if (item.isButton) {
+    if (item.link?.linkType === 'calendly') {
+      return <ResolvedLink link={item.link} locale={locale} className="site-button-outline my-2 w-full">{item.title}</ResolvedLink>
+    }
     return (
       <a
         href={item.externalUrl || item.href || '#'}
@@ -85,7 +92,7 @@ function MobileNavItem({item, onNavigate}: {item: NavItem; onNavigate: () => voi
 
   return (
     <div className="border-b border-white/20 py-2">
-      <NavLink item={item} onNavigate={onNavigate} />
+      <NavLink item={item} locale={locale} onNavigate={onNavigate} />
     </div>
   )
 }
@@ -156,8 +163,8 @@ export default function Navbar({
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
                     {item.children.map((child) => (
-                      <DropdownMenuItem key={`${item.title}-${child.title}`} asChild>
-                        <Link href={child.href}>{child.title}</Link>
+                      <DropdownMenuItem key={`${item.title}-${child.title}`} asChild onSelect={child.link?.linkType === 'calendly' ? (event) => event.preventDefault() : undefined}>
+                        {child.link?.linkType === 'calendly' ? <ResolvedLink link={child.link} locale={locale}>{child.title}</ResolvedLink> : <Link href={child.href || '#'}>{child.title}</Link>}
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
@@ -165,6 +172,9 @@ export default function Navbar({
               )
             }
             if (item.isButton) {
+              if (item.link?.linkType === 'calendly') {
+                return <ResolvedLink key={item.title} link={item.link} locale={locale} className="site-header-link inline-flex items-center py-2">{item.title}</ResolvedLink>
+              }
               return (
                 <a
                   key={item.title}
@@ -177,13 +187,9 @@ export default function Navbar({
                 </a>
               )
             }
-            return <NavLink key={item.title} item={item} />
+            return <NavLink key={item.title} item={item} locale={locale} />
           })}
-          {data.ctaLabel && data.ctaHref && !ctaAlreadyInNavigation && (
-            <Link href={data.ctaHref} className="site-header-link inline-flex items-center py-2">
-              {data.ctaLabel}
-            </Link>
-          )}
+          {data.ctaLabel && data.ctaLink?.linkType === 'calendly' && !ctaAlreadyInNavigation ? <ResolvedLink link={data.ctaLink} locale={locale} className="site-header-link inline-flex items-center py-2">{data.ctaLabel}</ResolvedLink> : data.ctaLabel && data.ctaHref && !ctaAlreadyInNavigation ? <Link href={data.ctaHref} className="site-header-link inline-flex items-center py-2">{data.ctaLabel}</Link> : null}
         </nav>
 
         <div className="site-header-actions site-header-actions-desktop">
@@ -211,11 +217,14 @@ export default function Navbar({
                     <MobileNavItem
                       key={item.title}
                       item={item}
+                      locale={locale}
                       onNavigate={() => setMobileOpen(false)}
                     />
                   ))}
                 </nav>
-                {data.ctaLabel && data.ctaHref && (
+                {data.ctaLabel && data.ctaLink?.linkType === 'calendly' ? (
+                  <ResolvedLink link={data.ctaLink} locale={locale} className="site-button-outline mt-8">{data.ctaLabel}</ResolvedLink>
+                ) : data.ctaLabel && data.ctaHref ? (
                   <Link
                     href={data.ctaHref}
                     className="site-button-outline mt-8"
@@ -223,7 +232,7 @@ export default function Navbar({
                   >
                     {data.ctaLabel}
                   </Link>
-                )}
+                ) : null}
               </div>
             </SheetContent>
           </Sheet>

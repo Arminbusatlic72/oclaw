@@ -6,6 +6,7 @@ import Image from 'next/image'
 import type {Locale} from '@/lib/i18n'
 import {HeroSliderSlide, type HeroPracticeArea} from '@/sanity/lib/types'
 import {linkResolver, urlForImage} from '@/sanity/lib/utils'
+import ResolvedLink from '@/app/components/ResolvedLink'
 
 type HeroSliderClientProps = {
   slides: HeroSliderSlide[]
@@ -203,7 +204,15 @@ export default function HeroSliderClient({
                     {(slide.cta?.label || slide.secondaryCta?.label) && (
                       <div className="site-hero-actions">
                         {slide.cta?.label &&
-                          (ctaHref ? (
+                          (slide.cta.link ? (
+                            <ResolvedLink
+                              link={slide.cta.link}
+                              locale={locale}
+                              className="site-button-outline site-hero-cta"
+                            >
+                              {slide.cta.label}
+                            </ResolvedLink>
+                          ) : ctaHref ? (
                             <a
                               href={ctaHref}
                               target={isExternalCta ? '_blank' : undefined}
@@ -221,7 +230,15 @@ export default function HeroSliderClient({
                             </span>
                           ))}
                         {slide.secondaryCta?.label &&
-                          (secondaryCtaHref ? (
+                          (slide.secondaryCta.link ? (
+                            <ResolvedLink
+                              link={slide.secondaryCta.link}
+                              locale={locale}
+                              className="site-button-outline site-button-secondary site-hero-cta"
+                            >
+                              {slide.secondaryCta.label}
+                            </ResolvedLink>
+                          ) : secondaryCtaHref ? (
                             <a
                               href={secondaryCtaHref}
                               target={isExternalSecondaryCta ? '_blank' : undefined}

@@ -260,6 +260,56 @@
 @media (max-width: 650px) {.practice-card-grid,.collection-people-grid,.practice-detail,.attorney-detail {grid-template-columns: 1fr;}.practice-card-link {min-height: 21rem;}.practice-article {grid-row: 1;}.practice-sidebar {grid-column: 1;grid-row: 2;}.collection-person-card {flex-direction: column;}.collection-person-photo {width: 100%;height: 15rem;}}
 
 /* Reusable contact PageBuilder blocks */
+.calendly-booking-section {position: relative; overflow: hidden; padding: clamp(4.5rem,8vw,8rem) 0 clamp(5rem,9vw,9rem); background:linear-gradient(180deg,#1b2a3a,var(--color-ink-deep) 55%,#131f2c); color: white;}
+.calendly-booking-section::before {position: absolute; inset: 0; background:radial-gradient(circle at 12% -8%,rgb(205 176 145 / 22%),transparent 34rem),radial-gradient(circle at 92% 110%,rgb(205 176 145 / 12%),transparent 30rem); content: ''; pointer-events: none;}
+.calendly-booking-section::after {position: absolute; top: 0; left: 0; width: 100%; height: 1px; background:linear-gradient(90deg,transparent,rgb(205 176 145 / 85%),transparent); content: '';}
+.calendly-booking-section > .container {position: relative; z-index: 1;}
+.calendly-booking-grid {display: grid; grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr); align-items: center; gap: clamp(2.5rem,6vw,6rem);}
+.calendly-booking-intro {max-width: 34rem;}
+.calendly-booking-intro h2 {position: relative; padding-bottom: 1.25rem; color: inherit; font-size: var(--site-heading-md);}
+.calendly-booking-intro h2::after {position: absolute; bottom: 0; left: 0; width: 5rem; height: 2px; background: var(--color-brand); content: '';}
+.calendly-eyebrow {margin-bottom: 1.1rem; color: var(--color-brand); font-size: .82rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;}
+.calendly-booking-intro > p:not(.calendly-eyebrow) {margin-top: 1.2rem; color: #d3dae1; font-size: clamp(1rem,1.35vw,1.15rem); line-height: 1.8;}
+.calendly-benefits {display: grid; gap: 1rem; margin-top: clamp(1.75rem,3vw,2.5rem); padding: 0; list-style: none;}
+.calendly-benefits li {display: flex; align-items: center; gap: .9rem; color: #e6ebee; font-size: 1.02rem; font-weight: 600;}
+.calendly-benefit-icon {display: grid; width: 2.5rem; height: 2.5rem; flex: none; place-items: center; border: 1px solid rgb(205 176 145 / 45%); border-radius: 50%; background: rgb(205 176 145 / 12%); color: var(--color-brand);}
+.calendly-booking-panel {min-width: 0; border: 1px solid rgb(205 176 145 / 40%); border-radius: var(--site-radius); padding: clamp(1.25rem,2.5vw,2rem); background: rgb(255 255 255 / 6%); box-shadow: 0 30px 70px rgb(4 12 20 / 45%); backdrop-filter: blur(6px);}
+.calendly-booking-intro--center {max-width: 48rem; margin-inline: auto; text-align: center;}
+.calendly-booking-intro--center h2::after {left: 50%; transform: translateX(-50%);}
+.calendly-booking-popup-section .calendly-booking-intro--center {margin-bottom: 0;}
+.calendly-booking-popup-section button {margin-top: 1.75rem;}
+.calendly-booking-content {min-width: 0;}
+.calendly-office-picker {margin-bottom: 1.5rem;}
+.calendly-office-picker-label {display: block; margin-bottom: .7rem; color: #cbd5dd; font-size: .76rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;}
+.calendly-office-pills {display: flex; flex-wrap: wrap; gap: .6rem;}
+.calendly-office-pill {position: relative; cursor: pointer;}
+.calendly-office-pill input {position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;}
+.calendly-office-pill span {display: inline-flex; align-items: center; min-height: 2.9rem; border: 1px solid rgb(205 176 145 / 45%); border-radius: 999px; padding: 0 1.25rem; color: #e6ebee; font-size: .92rem; font-weight: 700; transition:background-color 180ms ease,border-color 180ms ease,color 180ms ease;}
+.calendly-office-pill:hover span {border-color: var(--color-brand);}
+.calendly-office-pill input:checked + span {border-color: var(--color-brand); background: var(--color-brand); color: var(--color-ink-deep);}
+.calendly-office-pill input:focus-visible + span {outline: 2px solid var(--color-brand); outline-offset: 3px;}
+.calendly-consent {display: grid; min-height: 24rem; place-items: center; align-content: center; gap: 1.5rem; border: 1px dashed rgb(205 176 145 / 45%); border-radius: var(--site-radius); padding: clamp(2rem,5vw,3.5rem); background: rgb(255 255 255 / 4%); text-align: center;}
+.calendly-consent-badge {display: grid; width: 4.75rem; height: 4.75rem; place-items: center; border: 1px solid rgb(205 176 145 / 50%); border-radius: 50%; background: rgb(205 176 145 / 14%); color: var(--color-brand);}
+.calendly-consent p {max-width: 40rem; color: #d3dae1; line-height: 1.75;}
+.calendly-consent-button {margin-top: .35rem;}
+.calendly-frame-shell {position: relative; min-height: 600px; overflow: hidden; border: 1px solid rgb(205 176 145 / 45%); border-radius: var(--site-radius); background: white;}
+.calendly-frame {display: block; width: 100%; border: 0; background: white;}
+.calendly-frame-status {position: absolute; z-index: 1; inset: 0; display: flex; align-items: center; justify-content: center; gap: .8rem; background: white; color: var(--color-ink-deep);}
+.calendly-spinner {width: 1.2rem; height: 1.2rem; border: 2px solid rgb(30 46 62 / 18%); border-top-color: var(--color-brand); border-radius: 50%; animation: calendly-spin 800ms linear infinite;}
+@keyframes calendly-spin {to {transform: rotate(360deg);}}
+.calendly-fallback-link {display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.35rem; color: var(--color-brand); font-weight: 700; text-decoration: underline; text-underline-offset: .22em; transition:color 180ms ease;}
+.calendly-fallback-link:hover {color: var(--color-brand-hover);}
+.calendly-fallback-link:focus-visible,.calendly-dialog-close:focus-visible {outline: 2px solid var(--color-brand); outline-offset: 3px;}
+.calendly-dialog-overlay {position: fixed; z-index: 80; inset: 0; background: rgb(9 23 35 / 78%); backdrop-filter: blur(5px); animation: calendly-fade 160ms ease-out;}
+.calendly-dialog-content {position: fixed; z-index: 81; top: 50%; left: 50%; width: min(94vw,78rem); max-height: 92vh; overflow: auto; border: 1px solid rgb(205 176 145 / 55%); border-radius: var(--site-radius); padding: clamp(1.25rem,3vw,2.5rem); background: var(--color-ink-deep); color: white; box-shadow: 0 28px 80px rgb(0 0 0 / 40%); transform: translate(-50%,-50%); animation: calendly-dialog-in 180ms ease-out;}
+.calendly-dialog-heading {display: flex; align-items: start; justify-content: space-between; gap: 1.5rem; margin-bottom: 1.5rem;}
+.calendly-dialog-heading h2 {color: inherit; font-size: clamp(1.8rem,3vw,2.75rem);}
+.calendly-dialog-heading p {max-width: 50rem; margin-top: .5rem; color: #dce2e7; line-height: 1.6;}
+.calendly-dialog-close {display: grid; width: 2.75rem; height: 2.75rem; flex: none; place-items: center; border: 1px solid rgb(205 176 145 / 55%); border-radius: 50%; color: white; cursor: pointer; transition:background-color 180ms ease,border-color 180ms ease;}
+.calendly-dialog-close:hover {border-color: var(--color-brand); background: rgb(205 176 145 / 16%);}
+@keyframes calendly-fade {from {opacity: 0;} to {opacity: 1;}}
+@keyframes calendly-dialog-in {from {opacity: 0; transform: translate(-50%,-48%);} to {opacity: 1; transform: translate(-50%,-50%);}}
+
 .contact-cards-section {position: relative; overflow: hidden; padding: clamp(4.5rem, 8vw, 8rem) 0; background: radial-gradient(circle at 12% 8%, rgb(205 176 145 / 14%), transparent 28rem), var(--color-surface-soft);}
 .contact-cards-section::after {position: absolute; inset: 0 0 auto; height: 1px; background: linear-gradient(90deg, transparent, rgb(205 176 145 / 70%), transparent); content: '';}
 .contact-section-heading {position: relative; max-width: 48rem; margin: 0 auto clamp(2.75rem,5vw,4rem); padding-bottom: 1.4rem; color: var(--color-ink-deep); font-size: var(--site-heading-md); text-align: center;}
@@ -337,7 +387,16 @@
 .location-map-label .location-map-attorneys a {display: inline; color: #8b6338; font-weight: 700; text-decoration: underline; text-underline-offset: .18em;}
 .location-map-label a {display: inline-flex; flex: none; align-items: center; gap: .4rem; color: #8b6338; font-weight: 700;}
 
+@media (max-width: 980px) {
+  .calendly-booking-grid {grid-template-columns: 1fr; gap: clamp(2rem,5vw,3rem);}
+  .calendly-booking-intro {max-width: none;}
+}
+
 @media (max-width: 767px) {
+  .calendly-dialog-content {width: 100vw; max-height: 100dvh; min-height: 100dvh; border: 0;border-radius: 0;}
+  .calendly-dialog-heading {gap: .75rem;}
+  .calendly-booking-panel {padding: 1.15rem;}
+  .calendly-consent {min-height: 20rem;}
   .contact-info-card {min-height: 0; padding: 2rem 1.5rem;}
   .contact-form-grid {grid-template-columns: 1fr;}
   .contact-form-shell {margin-inline: -.25rem; margin-bottom: -4rem; padding: 1.5rem;}
@@ -350,6 +409,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .calendly-spinner {animation: none;}
+  .calendly-dialog-overlay,.calendly-dialog-content {animation: none;}
+  .calendly-office-pill span,.calendly-fallback-link,.calendly-dialog-close {transition: none;}
   .contact-info-card,.contact-info-card::after,.location-map-item iframe {transition: none;}
   .contact-info-card:hover,.contact-info-card:focus-within {transform: none;}
   .location-map-item:hover iframe {transform: none;}
@@ -747,13 +809,13 @@
 .site-header-nav {
   display: flex;
   align-items: center;
-  grid-column: 2;
+  grid-column: 2 / -1;
   grid-row: 1;
   gap: clamp(1rem, 1.5vw, 1.8rem);
   height: 100%;
   padding-inline: clamp(1rem, 2vw, 2.5rem);
   background: var(--color-ink);
-  justify-self: start;
+  justify-self: stretch;
 }
 
 .site-header-actions {
@@ -763,6 +825,11 @@
   grid-column: 3;
   grid-row: 1;
   gap: 1.25rem;
+}
+
+/* Pull the language switcher left off the right edge of the navigation band */
+.site-header-actions-desktop {
+  padding-inline-end: clamp(2rem, 6vw, 7rem);
 }
 
 .site-header-actions-mobile {

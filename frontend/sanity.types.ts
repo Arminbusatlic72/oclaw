@@ -124,13 +124,47 @@ export type BlogArchiveReference = {
   [internalGroqTypeReferenceTo]?: 'blogArchive'
 }
 
+export type OfficeReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'office'
+}
+
 export type Link = {
   _type: 'link'
-  linkType?: 'href' | 'page' | 'route'
+  linkType?: 'href' | 'page' | 'route' | 'calendly'
   href?: string
   page?: PageReference | PracticeAreaArchiveReference | BlogArchiveReference
   route?: 'attorneys' | 'offices' | 'resources' | 'privacyPolicy'
   openInNewTab?: boolean
+  calendlyEventUrl?: string
+  calendlyOfficeBookingOptions?: Array<{
+    office: OfficeReference
+    eventUrl?: string
+    _type: 'officeBookingOption'
+    _key: string
+  }>
+  calendlyPrivacyNotice?: string
+  calendlyFallbackLinkLabel?: string
+}
+
+export type CalendlyBooking = {
+  _type: 'calendlyBooking'
+  heading: string
+  description?: string
+  displayMode: 'inline' | 'popup'
+  eventUrl?: string
+  buttonLabel?: string
+  officeBookingOptions?: Array<{
+    office: OfficeReference
+    eventUrl?: string
+    _type: 'officeBookingOption'
+    _key: string
+  }>
+  embedHeight?: number
+  privacyNotice?: string
+  fallbackLinkLabel?: string
 }
 
 export type TestimonialsSection = {
@@ -186,13 +220,6 @@ export type StatisticsSection = {
     _type: 'statistic'
     _key: string
   }>
-}
-
-export type OfficeReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'office'
 }
 
 export type OfficesSection = {
@@ -1052,6 +1079,7 @@ export type PracticeArea = {
   displayOrder?: number
   featuredOnHomepage?: boolean
   consultationLabel?: string
+  consultationLink?: Link
   seo?: Seo
 }
 
@@ -1264,6 +1292,9 @@ export type Page = {
       } & ContactForm)
     | ({
         _key: string
+      } & CalendlyBooking)
+    | ({
+        _key: string
       } & LocationMap)
     | ({
         _key: string
@@ -1430,11 +1461,12 @@ export type AllSanitySchemaTypes =
   | PageReference
   | PracticeAreaArchiveReference
   | BlogArchiveReference
+  | OfficeReference
   | Link
+  | CalendlyBooking
   | TestimonialsSection
   | YoutubeVideos
   | StatisticsSection
-  | OfficeReference
   | OfficesSection
   | LocationMap
   | ContactForm
@@ -1553,7 +1585,7 @@ export type SettingsQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: footerQuery
-// Query: *[_type == "footer" && _id == $id][0]{    ...,    blocks[]{      ...,      _type == "footerContact" => {..., offices[]->{_id, name, language, "slug": slug.current, streetAddress, addressLine2, city, state, postalCode, country, phone, email}},      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}    },    bottomLinks[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}},    links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}}  }
+// Query: *[_type == "footer" && _id == $id][0]{    ...,    blocks[]{      ...,      _type == "footerContact" => {..., offices[]->{_id, name, language, "slug": slug.current, streetAddress, addressLine2, city, state, postalCode, country, phone, email}},      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}    },    bottomLinks[]{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}},    links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}  }
 export type FooterQueryResult = {
   _id: string
   _type: 'footer'
@@ -1618,7 +1650,7 @@ export type FooterQueryResult = {
           label: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page' | 'route'
+            linkType?: 'calendly' | 'href' | 'page' | 'route'
             href?: string
             page:
               | {
@@ -1642,6 +1674,19 @@ export type FooterQueryResult = {
               | null
             route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
+            calendlyEventUrl?: string
+            calendlyOfficeBookingOptions: Array<{
+              office: {
+                _id: string
+                name: string
+                language: 'en' | 'es' | null
+              }
+              eventUrl?: string
+              _type: 'officeBookingOption'
+              _key: string
+            }> | null
+            calendlyPrivacyNotice?: string
+            calendlyFallbackLinkLabel?: string
           }
         }>
       }
@@ -1681,7 +1726,7 @@ export type FooterQueryResult = {
     label: string
     link: {
       _type: 'link'
-      linkType?: 'href' | 'page' | 'route'
+      linkType?: 'calendly' | 'href' | 'page' | 'route'
       href?: string
       page:
         | {
@@ -1705,6 +1750,19 @@ export type FooterQueryResult = {
         | null
       route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
       openInNewTab?: boolean
+      calendlyEventUrl?: string
+      calendlyOfficeBookingOptions: Array<{
+        office: {
+          _id: string
+          name: string
+          language: 'en' | 'es' | null
+        }
+        eventUrl?: string
+        _type: 'officeBookingOption'
+        _key: string
+      }> | null
+      calendlyPrivacyNotice?: string
+      calendlyFallbackLinkLabel?: string
     }
   }> | null
   copyright?: string
@@ -1716,7 +1774,7 @@ export type FooterQueryResult = {
     label: string
     link: {
       _type: 'link'
-      linkType?: 'href' | 'page' | 'route'
+      linkType?: 'calendly' | 'href' | 'page' | 'route'
       href?: string
       page:
         | {
@@ -1740,13 +1798,26 @@ export type FooterQueryResult = {
         | null
       route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
       openInNewTab?: boolean
+      calendlyEventUrl?: string
+      calendlyOfficeBookingOptions: Array<{
+        office: {
+          _id: string
+          name: string
+          language: 'en' | 'es' | null
+        }
+        eventUrl?: string
+        _type: 'officeBookingOption'
+        _key: string
+      }> | null
+      calendlyPrivacyNotice?: string
+      calendlyFallbackLinkLabel?: string
     }
   }> | null
 } | null
 
 // Source: sanity/lib/queries.ts
 // Variable: navigationQuery
-// Query: *[_type == "navigation" && _id == $id][0]{    logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},    navItems[]{title, href, externalUrl, isButton,      link{..., page->{_id,_type,language,"slug":slug.current}},      children[]{title,href,link{...,page->{_id,_type,language,"slug":slug.current}}}    },    ctaLabel, ctaHref, ctaLink{...,page->{_id,_type,language,"slug":slug.current}}  }
+// Query: *[_type == "navigation" && _id == $id][0]{    logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},    navItems[]{title, href, externalUrl, isButton,      link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}},      children[]{title,href,link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}    },    ctaLabel, ctaHref, ctaLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}  }
 export type NavigationQueryResult = {
   logo: {
     alt: string | null
@@ -1766,7 +1837,7 @@ export type NavigationQueryResult = {
     isButton: boolean | null
     link: {
       _type: 'link'
-      linkType?: 'href' | 'page' | 'route'
+      linkType?: 'calendly' | 'href' | 'page' | 'route'
       href?: string
       page:
         | {
@@ -1790,13 +1861,26 @@ export type NavigationQueryResult = {
         | null
       route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
       openInNewTab?: boolean
+      calendlyEventUrl?: string
+      calendlyOfficeBookingOptions: Array<{
+        office: {
+          _id: string
+          name: string
+          language: 'en' | 'es' | null
+        }
+        eventUrl?: string
+        _type: 'officeBookingOption'
+        _key: string
+      }> | null
+      calendlyPrivacyNotice?: string
+      calendlyFallbackLinkLabel?: string
     } | null
     children: Array<{
       title: string
       href: string | null
       link: {
         _type: 'link'
-        linkType?: 'href' | 'page' | 'route'
+        linkType?: 'calendly' | 'href' | 'page' | 'route'
         href?: string
         page:
           | {
@@ -1820,6 +1904,19 @@ export type NavigationQueryResult = {
           | null
         route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
         openInNewTab?: boolean
+        calendlyEventUrl?: string
+        calendlyOfficeBookingOptions: Array<{
+          office: {
+            _id: string
+            name: string
+            language: 'en' | 'es' | null
+          }
+          eventUrl?: string
+          _type: 'officeBookingOption'
+          _key: string
+        }> | null
+        calendlyPrivacyNotice?: string
+        calendlyFallbackLinkLabel?: string
       } | null
     }> | null
   }>
@@ -1827,7 +1924,7 @@ export type NavigationQueryResult = {
   ctaHref: string | null
   ctaLink: {
     _type: 'link'
-    linkType?: 'href' | 'page' | 'route'
+    linkType?: 'calendly' | 'href' | 'page' | 'route'
     href?: string
     page:
       | {
@@ -1851,12 +1948,25 @@ export type NavigationQueryResult = {
       | null
     route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
     openInNewTab?: boolean
+    calendlyEventUrl?: string
+    calendlyOfficeBookingOptions: Array<{
+      office: {
+        _id: string
+        name: string
+        language: 'en' | 'es' | null
+      }
+      eventUrl?: string
+      _type: 'officeBookingOption'
+      _key: string
+    }> | null
+    calendlyPrivacyNotice?: string
+    calendlyFallbackLinkLabel?: string
   } | null
 } | null
 
 // Source: sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type == "page" && slug.current == $slug &&    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}},    _type == "youtubeVideos" => {..., videos[]{_key, _type, title, url}},    _type == "testimonialsSection" => {..., backgroundImage{..., asset->{_id}}, testimonials[]{..., photo{..., asset->{_id}}}}  }}
+// Query: *[_type == "page" && slug.current == $slug &&    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},    _type == "calendlyBooking" => {..., officeBookingOptions[]{..., office->{_id, name, language}}},    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}},    _type == "youtubeVideos" => {..., videos[]{_key, _type, title, url}},    _type == "testimonialsSection" => {..., backgroundImage{..., asset->{_id}}, testimonials[]{..., photo{..., asset->{_id}}}}  }}
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
@@ -1886,6 +1996,28 @@ export type GetPageQueryResult = {
       }
     | {
         _key: string
+        _type: 'calendlyBooking'
+        heading: string
+        description?: string
+        displayMode: 'inline' | 'popup'
+        eventUrl?: string
+        buttonLabel?: string
+        officeBookingOptions: Array<{
+          office: {
+            _id: string
+            name: string
+            language: 'en' | 'es' | null
+          }
+          eventUrl?: string
+          _type: 'officeBookingOption'
+          _key: string
+        }> | null
+        embedHeight?: number
+        privacyNotice?: string
+        fallbackLinkLabel?: string
+      }
+    | {
+        _key: string
         _type: 'callToAction'
         eyebrow?: string
         heading: string
@@ -1895,7 +2027,7 @@ export type GetPageQueryResult = {
           buttonText?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page' | 'route'
+            linkType?: 'calendly' | 'href' | 'page' | 'route'
             href?: string
             page:
               | {
@@ -1919,6 +2051,19 @@ export type GetPageQueryResult = {
               | null
             route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
+            calendlyEventUrl?: string
+            calendlyOfficeBookingOptions: Array<{
+              office: {
+                _id: string
+                name: string
+                language: 'en' | 'es' | null
+              }
+              eventUrl?: string
+              _type: 'officeBookingOption'
+              _key: string
+            }> | null
+            calendlyPrivacyNotice?: string
+            calendlyFallbackLinkLabel?: string
           } | null
         } | null
         image?: {
@@ -1958,7 +2103,7 @@ export type GetPageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page' | 'route'
+              linkType?: 'calendly' | 'href' | 'page' | 'route'
               href?: string
               page:
                 | {
@@ -1982,6 +2127,19 @@ export type GetPageQueryResult = {
                 | null
               route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
+              calendlyEventUrl?: string
+              calendlyOfficeBookingOptions: Array<{
+                office: {
+                  _id: string
+                  name: string
+                  language: 'en' | 'es' | null
+                }
+                eventUrl?: string
+                _type: 'officeBookingOption'
+                _key: string
+              }> | null
+              calendlyPrivacyNotice?: string
+              calendlyFallbackLinkLabel?: string
             } | null
           } | null
         }> | null
@@ -2014,7 +2172,7 @@ export type GetPageQueryResult = {
         errorMessage: string
         privacyPolicyLink: {
           _type: 'link'
-          linkType?: 'href' | 'page' | 'route'
+          linkType?: 'calendly' | 'href' | 'page' | 'route'
           href?: string
           page:
             | {
@@ -2038,6 +2196,15 @@ export type GetPageQueryResult = {
             | null
           route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
           openInNewTab?: boolean
+          calendlyEventUrl?: string
+          calendlyOfficeBookingOptions?: Array<{
+            office: OfficeReference
+            eventUrl?: string
+            _type: 'officeBookingOption'
+            _key: string
+          }>
+          calendlyPrivacyNotice?: string
+          calendlyFallbackLinkLabel?: string
         }
       }
     | {
@@ -2070,7 +2237,7 @@ export type GetPageQueryResult = {
           linkLabel?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page' | 'route'
+            linkType?: 'calendly' | 'href' | 'page' | 'route'
             href?: string
             page:
               | {
@@ -2094,6 +2261,19 @@ export type GetPageQueryResult = {
               | null
             route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
+            calendlyEventUrl?: string
+            calendlyOfficeBookingOptions: Array<{
+              office: {
+                _id: string
+                name: string
+                language: 'en' | 'es' | null
+              }
+              eventUrl?: string
+              _type: 'officeBookingOption'
+              _key: string
+            }> | null
+            calendlyPrivacyNotice?: string
+            calendlyFallbackLinkLabel?: string
           } | null
           _type: 'contactInfoCard'
           _key: string
@@ -2109,7 +2289,7 @@ export type GetPageQueryResult = {
           buttonText?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page' | 'route'
+            linkType?: 'calendly' | 'href' | 'page' | 'route'
             href?: string
             page:
               | {
@@ -2133,6 +2313,19 @@ export type GetPageQueryResult = {
               | null
             route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
+            calendlyEventUrl?: string
+            calendlyOfficeBookingOptions: Array<{
+              office: {
+                _id: string
+                name: string
+                language: 'en' | 'es' | null
+              }
+              eventUrl?: string
+              _type: 'officeBookingOption'
+              _key: string
+            }> | null
+            calendlyPrivacyNotice?: string
+            calendlyFallbackLinkLabel?: string
           } | null
         } | null
       }
@@ -2233,7 +2426,7 @@ export type GetPageQueryResult = {
             alt: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page' | 'route'
+              linkType?: 'calendly' | 'href' | 'page' | 'route'
               href?: string
               page:
                 | {
@@ -2257,6 +2450,19 @@ export type GetPageQueryResult = {
                 | null
               route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
+              calendlyEventUrl?: string
+              calendlyOfficeBookingOptions: Array<{
+                office: {
+                  _id: string
+                  name: string
+                  language: 'en' | 'es' | null
+                }
+                eventUrl?: string
+                _type: 'officeBookingOption'
+                _key: string
+              }> | null
+              calendlyPrivacyNotice?: string
+              calendlyFallbackLinkLabel?: string
             } | null
             _type: 'image'
           } | null
@@ -2267,7 +2473,7 @@ export type GetPageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page' | 'route'
+              linkType?: 'calendly' | 'href' | 'page' | 'route'
               href?: string
               page:
                 | {
@@ -2291,6 +2497,19 @@ export type GetPageQueryResult = {
                 | null
               route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
+              calendlyEventUrl?: string
+              calendlyOfficeBookingOptions: Array<{
+                office: {
+                  _id: string
+                  name: string
+                  language: 'en' | 'es' | null
+                }
+                eventUrl?: string
+                _type: 'officeBookingOption'
+                _key: string
+              }> | null
+              calendlyPrivacyNotice?: string
+              calendlyFallbackLinkLabel?: string
             } | null
           } | null
           secondaryCta: {
@@ -2298,7 +2517,7 @@ export type GetPageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page' | 'route'
+              linkType?: 'calendly' | 'href' | 'page' | 'route'
               href?: string
               page:
                 | {
@@ -2322,6 +2541,19 @@ export type GetPageQueryResult = {
                 | null
               route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
+              calendlyEventUrl?: string
+              calendlyOfficeBookingOptions: Array<{
+                office: {
+                  _id: string
+                  name: string
+                  language: 'en' | 'es' | null
+                }
+                eventUrl?: string
+                _type: 'officeBookingOption'
+                _key: string
+              }> | null
+              calendlyPrivacyNotice?: string
+              calendlyFallbackLinkLabel?: string
             } | null
           } | null
           _type: 'heroSliderSlide'
@@ -2462,7 +2694,7 @@ export type GetPageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page' | 'route'
+              linkType?: 'calendly' | 'href' | 'page' | 'route'
               href?: string
               page:
                 | {
@@ -2486,6 +2718,19 @@ export type GetPageQueryResult = {
                 | null
               route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
+              calendlyEventUrl?: string
+              calendlyOfficeBookingOptions: Array<{
+                office: {
+                  _id: string
+                  name: string
+                  language: 'en' | 'es' | null
+                }
+                eventUrl?: string
+                _type: 'officeBookingOption'
+                _key: string
+              }> | null
+              calendlyPrivacyNotice?: string
+              calendlyFallbackLinkLabel?: string
             } | null
           } | null
           _type: 'parallaxFeatureItem'
@@ -2529,7 +2774,7 @@ export type GetPageQueryResult = {
           buttonText?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page' | 'route'
+            linkType?: 'calendly' | 'href' | 'page' | 'route'
             href?: string
             page:
               | {
@@ -2553,6 +2798,19 @@ export type GetPageQueryResult = {
               | null
             route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
+            calendlyEventUrl?: string
+            calendlyOfficeBookingOptions: Array<{
+              office: {
+                _id: string
+                name: string
+                language: 'en' | 'es' | null
+              }
+              eventUrl?: string
+              _type: 'officeBookingOption'
+              _key: string
+            }> | null
+            calendlyPrivacyNotice?: string
+            calendlyFallbackLinkLabel?: string
           } | null
         } | null
         theme?: 'dark' | 'light'
@@ -2676,22 +2934,43 @@ export type GetPageQueryResult = {
         ctaLabel?: string
         ctaLink: {
           _type: 'link'
-          linkType?: 'href' | 'page' | 'route'
+          linkType?: 'calendly' | 'href' | 'page' | 'route'
           href?: string
           page:
             | {
                 _id: string
+                _type: 'blogArchive'
                 language: 'en' | 'es' | null
                 slug: null
               }
             | {
                 _id: string
+                _type: 'page'
                 language: 'en' | 'es' | null
                 slug: string
+              }
+            | {
+                _id: string
+                _type: 'practiceAreaArchive'
+                language: 'en' | 'es' | null
+                slug: null
               }
             | null
           route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
           openInNewTab?: boolean
+          calendlyEventUrl?: string
+          calendlyOfficeBookingOptions: Array<{
+            office: {
+              _id: string
+              name: string
+              language: 'en' | 'es' | null
+            }
+            eventUrl?: string
+            _type: 'officeBookingOption'
+            _key: string
+          }> | null
+          calendlyPrivacyNotice?: string
+          calendlyFallbackLinkLabel?: string
         } | null
       }
     | {
@@ -2716,7 +2995,7 @@ export type GetPageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: homePageQuery
-// Query: *[_type == "settings" && _id == $id][0].homePage->{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}}}},    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}},    _type == "youtubeVideos" => {..., videos[]{_key, _type, title, url}},    _type == "testimonialsSection" => {..., backgroundImage{..., asset->{_id}}, testimonials[]{..., photo{..., asset->{_id}}}}  }}
+// Query: *[_type == "settings" && _id == $id][0].homePage->{  _id, _type, language, name, slug, heading, subheading, seo,  "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},    _type == "calendlyBooking" => {..., officeBookingOptions[]{..., office->{_id, name, language}}},    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}},    _type == "youtubeVideos" => {..., videos[]{_key, _type, title, url}},    _type == "testimonialsSection" => {..., backgroundImage{..., asset->{_id}}, testimonials[]{..., photo{..., asset->{_id}}}}  }}
 export type HomePageQueryResult = {
   _id: string
   _type: 'page'
@@ -2746,6 +3025,28 @@ export type HomePageQueryResult = {
       }
     | {
         _key: string
+        _type: 'calendlyBooking'
+        heading: string
+        description?: string
+        displayMode: 'inline' | 'popup'
+        eventUrl?: string
+        buttonLabel?: string
+        officeBookingOptions: Array<{
+          office: {
+            _id: string
+            name: string
+            language: 'en' | 'es' | null
+          }
+          eventUrl?: string
+          _type: 'officeBookingOption'
+          _key: string
+        }> | null
+        embedHeight?: number
+        privacyNotice?: string
+        fallbackLinkLabel?: string
+      }
+    | {
+        _key: string
         _type: 'callToAction'
         eyebrow?: string
         heading: string
@@ -2755,7 +3056,7 @@ export type HomePageQueryResult = {
           buttonText?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page' | 'route'
+            linkType?: 'calendly' | 'href' | 'page' | 'route'
             href?: string
             page:
               | {
@@ -2779,6 +3080,19 @@ export type HomePageQueryResult = {
               | null
             route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
+            calendlyEventUrl?: string
+            calendlyOfficeBookingOptions: Array<{
+              office: {
+                _id: string
+                name: string
+                language: 'en' | 'es' | null
+              }
+              eventUrl?: string
+              _type: 'officeBookingOption'
+              _key: string
+            }> | null
+            calendlyPrivacyNotice?: string
+            calendlyFallbackLinkLabel?: string
           } | null
         } | null
         image?: {
@@ -2818,7 +3132,7 @@ export type HomePageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page' | 'route'
+              linkType?: 'calendly' | 'href' | 'page' | 'route'
               href?: string
               page:
                 | {
@@ -2842,6 +3156,19 @@ export type HomePageQueryResult = {
                 | null
               route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
+              calendlyEventUrl?: string
+              calendlyOfficeBookingOptions: Array<{
+                office: {
+                  _id: string
+                  name: string
+                  language: 'en' | 'es' | null
+                }
+                eventUrl?: string
+                _type: 'officeBookingOption'
+                _key: string
+              }> | null
+              calendlyPrivacyNotice?: string
+              calendlyFallbackLinkLabel?: string
             } | null
           } | null
         }> | null
@@ -2874,7 +3201,7 @@ export type HomePageQueryResult = {
         errorMessage: string
         privacyPolicyLink: {
           _type: 'link'
-          linkType?: 'href' | 'page' | 'route'
+          linkType?: 'calendly' | 'href' | 'page' | 'route'
           href?: string
           page:
             | {
@@ -2898,6 +3225,15 @@ export type HomePageQueryResult = {
             | null
           route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
           openInNewTab?: boolean
+          calendlyEventUrl?: string
+          calendlyOfficeBookingOptions?: Array<{
+            office: OfficeReference
+            eventUrl?: string
+            _type: 'officeBookingOption'
+            _key: string
+          }>
+          calendlyPrivacyNotice?: string
+          calendlyFallbackLinkLabel?: string
         }
       }
     | {
@@ -2930,7 +3266,7 @@ export type HomePageQueryResult = {
           linkLabel?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page' | 'route'
+            linkType?: 'calendly' | 'href' | 'page' | 'route'
             href?: string
             page:
               | {
@@ -2954,6 +3290,19 @@ export type HomePageQueryResult = {
               | null
             route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
+            calendlyEventUrl?: string
+            calendlyOfficeBookingOptions: Array<{
+              office: {
+                _id: string
+                name: string
+                language: 'en' | 'es' | null
+              }
+              eventUrl?: string
+              _type: 'officeBookingOption'
+              _key: string
+            }> | null
+            calendlyPrivacyNotice?: string
+            calendlyFallbackLinkLabel?: string
           } | null
           _type: 'contactInfoCard'
           _key: string
@@ -2969,7 +3318,7 @@ export type HomePageQueryResult = {
           buttonText?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page' | 'route'
+            linkType?: 'calendly' | 'href' | 'page' | 'route'
             href?: string
             page:
               | {
@@ -2993,6 +3342,19 @@ export type HomePageQueryResult = {
               | null
             route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
+            calendlyEventUrl?: string
+            calendlyOfficeBookingOptions: Array<{
+              office: {
+                _id: string
+                name: string
+                language: 'en' | 'es' | null
+              }
+              eventUrl?: string
+              _type: 'officeBookingOption'
+              _key: string
+            }> | null
+            calendlyPrivacyNotice?: string
+            calendlyFallbackLinkLabel?: string
           } | null
         } | null
       }
@@ -3093,7 +3455,7 @@ export type HomePageQueryResult = {
             alt: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page' | 'route'
+              linkType?: 'calendly' | 'href' | 'page' | 'route'
               href?: string
               page:
                 | {
@@ -3117,6 +3479,19 @@ export type HomePageQueryResult = {
                 | null
               route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
+              calendlyEventUrl?: string
+              calendlyOfficeBookingOptions: Array<{
+                office: {
+                  _id: string
+                  name: string
+                  language: 'en' | 'es' | null
+                }
+                eventUrl?: string
+                _type: 'officeBookingOption'
+                _key: string
+              }> | null
+              calendlyPrivacyNotice?: string
+              calendlyFallbackLinkLabel?: string
             } | null
             _type: 'image'
           } | null
@@ -3127,7 +3502,7 @@ export type HomePageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page' | 'route'
+              linkType?: 'calendly' | 'href' | 'page' | 'route'
               href?: string
               page:
                 | {
@@ -3151,6 +3526,19 @@ export type HomePageQueryResult = {
                 | null
               route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
+              calendlyEventUrl?: string
+              calendlyOfficeBookingOptions: Array<{
+                office: {
+                  _id: string
+                  name: string
+                  language: 'en' | 'es' | null
+                }
+                eventUrl?: string
+                _type: 'officeBookingOption'
+                _key: string
+              }> | null
+              calendlyPrivacyNotice?: string
+              calendlyFallbackLinkLabel?: string
             } | null
           } | null
           secondaryCta: {
@@ -3158,7 +3546,7 @@ export type HomePageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page' | 'route'
+              linkType?: 'calendly' | 'href' | 'page' | 'route'
               href?: string
               page:
                 | {
@@ -3182,6 +3570,19 @@ export type HomePageQueryResult = {
                 | null
               route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
+              calendlyEventUrl?: string
+              calendlyOfficeBookingOptions: Array<{
+                office: {
+                  _id: string
+                  name: string
+                  language: 'en' | 'es' | null
+                }
+                eventUrl?: string
+                _type: 'officeBookingOption'
+                _key: string
+              }> | null
+              calendlyPrivacyNotice?: string
+              calendlyFallbackLinkLabel?: string
             } | null
           } | null
           _type: 'heroSliderSlide'
@@ -3322,7 +3723,7 @@ export type HomePageQueryResult = {
             url?: string
             link: {
               _type: 'link'
-              linkType?: 'href' | 'page' | 'route'
+              linkType?: 'calendly' | 'href' | 'page' | 'route'
               href?: string
               page:
                 | {
@@ -3346,6 +3747,19 @@ export type HomePageQueryResult = {
                 | null
               route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
               openInNewTab?: boolean
+              calendlyEventUrl?: string
+              calendlyOfficeBookingOptions: Array<{
+                office: {
+                  _id: string
+                  name: string
+                  language: 'en' | 'es' | null
+                }
+                eventUrl?: string
+                _type: 'officeBookingOption'
+                _key: string
+              }> | null
+              calendlyPrivacyNotice?: string
+              calendlyFallbackLinkLabel?: string
             } | null
           } | null
           _type: 'parallaxFeatureItem'
@@ -3389,7 +3803,7 @@ export type HomePageQueryResult = {
           buttonText?: string
           link: {
             _type: 'link'
-            linkType?: 'href' | 'page' | 'route'
+            linkType?: 'calendly' | 'href' | 'page' | 'route'
             href?: string
             page:
               | {
@@ -3413,6 +3827,19 @@ export type HomePageQueryResult = {
               | null
             route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
             openInNewTab?: boolean
+            calendlyEventUrl?: string
+            calendlyOfficeBookingOptions: Array<{
+              office: {
+                _id: string
+                name: string
+                language: 'en' | 'es' | null
+              }
+              eventUrl?: string
+              _type: 'officeBookingOption'
+              _key: string
+            }> | null
+            calendlyPrivacyNotice?: string
+            calendlyFallbackLinkLabel?: string
           } | null
         } | null
         theme?: 'dark' | 'light'
@@ -3536,22 +3963,43 @@ export type HomePageQueryResult = {
         ctaLabel?: string
         ctaLink: {
           _type: 'link'
-          linkType?: 'href' | 'page' | 'route'
+          linkType?: 'calendly' | 'href' | 'page' | 'route'
           href?: string
           page:
             | {
                 _id: string
+                _type: 'blogArchive'
                 language: 'en' | 'es' | null
                 slug: null
               }
             | {
                 _id: string
+                _type: 'page'
                 language: 'en' | 'es' | null
                 slug: string
+              }
+            | {
+                _id: string
+                _type: 'practiceAreaArchive'
+                language: 'en' | 'es' | null
+                slug: null
               }
             | null
           route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
           openInNewTab?: boolean
+          calendlyEventUrl?: string
+          calendlyOfficeBookingOptions: Array<{
+            office: {
+              _id: string
+              name: string
+              language: 'en' | 'es' | null
+            }
+            eventUrl?: string
+            _type: 'officeBookingOption'
+            _key: string
+          }> | null
+          calendlyPrivacyNotice?: string
+          calendlyFallbackLinkLabel?: string
         } | null
       }
     | {
@@ -4018,7 +4466,7 @@ export type PracticeAreasQueryResult = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: practiceAreaQuery
-// Query: *[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, seo, _updatedAt}
+// Query: *[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, consultationLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}, seo, _updatedAt}
 export type PracticeAreaQueryResult = {
   _id: string
   title: string
@@ -4041,6 +4489,46 @@ export type PracticeAreaQueryResult = {
     _key: string
   }> | null
   consultationLabel: string | null
+  consultationLink: {
+    _type: 'link'
+    linkType?: 'calendly' | 'href' | 'page' | 'route'
+    href?: string
+    page:
+      | {
+          _id: string
+          _type: 'blogArchive'
+          language: 'en' | 'es' | null
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'page'
+          language: 'en' | 'es' | null
+          slug: string
+        }
+      | {
+          _id: string
+          _type: 'practiceAreaArchive'
+          language: 'en' | 'es' | null
+          slug: null
+        }
+      | null
+    route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
+    openInNewTab?: boolean
+    calendlyEventUrl?: string
+    calendlyOfficeBookingOptions: Array<{
+      office: {
+        _id: string
+        name: string
+        language: 'en' | 'es' | null
+      }
+      eventUrl?: string
+      _type: 'officeBookingOption'
+      _key: string
+    }> | null
+    calendlyPrivacyNotice?: string
+    calendlyFallbackLinkLabel?: string
+  } | null
   seo: Seo | null
   _updatedAt: string
 } | null
@@ -4620,10 +5108,10 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "settings" && _id == $id][0]': SettingsQueryResult
-    '\n  *[_type == "footer" && _id == $id][0]{\n    ...,\n    blocks[]{\n      ...,\n      _type == "footerContact" => {..., offices[]->{_id, name, language, "slug": slug.current, streetAddress, addressLine2, city, state, postalCode, country, phone, email}},\n      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}\n    },\n    bottomLinks[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}},\n    links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}}}\n  }\n': FooterQueryResult
-    '\n  *[_type == "navigation" && _id == $id][0]{\n    logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},\n    navItems[]{title, href, externalUrl, isButton,\n      link{..., page->{_id,_type,language,"slug":slug.current}},\n      children[]{title,href,link{...,page->{_id,_type,language,"slug":slug.current}}}\n    },\n    ctaLabel, ctaHref, ctaLink{...,page->{_id,_type,language,"slug":slug.current}}\n  }\n': NavigationQueryResult
-    '\n  *[_type == "page" && slug.current == $slug &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},\n    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}},\n    _type == "youtubeVideos" => {..., videos[]{_key, _type, title, url}},\n    _type == "testimonialsSection" => {..., backgroundImage{..., asset->{_id}}, testimonials[]{..., photo{..., asset->{_id}}}}\n  }\n}\n': GetPageQueryResult
-    '\n  *[_type == "settings" && _id == $id][0].homePage->{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}}}},\n    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},\n    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}},\n    _type == "youtubeVideos" => {..., videos[]{_key, _type, title, url}},\n    _type == "testimonialsSection" => {..., backgroundImage{..., asset->{_id}}, testimonials[]{..., photo{..., asset->{_id}}}}\n  }\n}\n': HomePageQueryResult
+    '\n  *[_type == "footer" && _id == $id][0]{\n    ...,\n    blocks[]{\n      ...,\n      _type == "footerContact" => {..., offices[]->{_id, name, language, "slug": slug.current, streetAddress, addressLine2, city, state, postalCode, country, phone, email}},\n      _type == "footerLinkGroup" => {..., links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}\n    },\n    bottomLinks[]{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}},\n    links[]{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}\n  }\n': FooterQueryResult
+    '\n  *[_type == "navigation" && _id == $id][0]{\n    logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},\n    navItems[]{title, href, externalUrl, isButton,\n      link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}},\n      children[]{title,href,link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}\n    },\n    ctaLabel, ctaHref, ctaLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}\n  }\n': NavigationQueryResult
+    '\n  *[_type == "page" && slug.current == $slug &&\n    ($language == "en" && coalesce(language, "en") == "en" || language == $language)][0]{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},\n    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},\n    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},\n    _type == "calendlyBooking" => {..., officeBookingOptions[]{..., office->{_id, name, language}}},\n    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}},\n    _type == "youtubeVideos" => {..., videos[]{_key, _type, title, url}},\n    _type == "testimonialsSection" => {..., backgroundImage{..., asset->{_id}}, testimonials[]{..., photo{..., asset->{_id}}}}\n  }\n}\n': GetPageQueryResult
+    '\n  *[_type == "settings" && _id == $id][0].homePage->{\n  _id, _type, language, name, slug, heading, subheading, seo,\n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},\n    _type == "heroSlider" => {..., slides[]{..., image{..., asset->{_id, metadata{dimensions{width,height}}}}, awardBadge{..., asset->{_id, metadata{dimensions{width,height}}}, link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}, secondaryCta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},\n    _type == "cardGrid" => {..., cards[]{..., image{..., asset->{_id,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},\n    _type == "processSteps" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},\n    _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}}},\n    _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},\n    _type == "ctaBanner" => {..., button{..., link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},\n    _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, link{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}}},\n    _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},\n    _type == "calendlyBooking" => {..., officeBookingOptions[]{..., office->{_id, name, language}}},\n    _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}},\n    _type == "youtubeVideos" => {..., videos[]{_key, _type, title, url}},\n    _type == "testimonialsSection" => {..., backgroundImage{..., asset->{_id}}, testimonials[]{..., photo{..., asset->{_id}}}}\n  }\n}\n': HomePageQueryResult
     '\n  *[_type == "settings" && _id in ["siteSettings", "siteSettings-es"]]{_id, "pageId": homePage._ref}\n': HomePageIdsQueryResult
     '\n  *[_type == "translation.metadata" && references($id)][0]{\n    translations[]{language, "page": value->{_id, language, "slug": slug.current, "noIndex": seo.noIndex}}\n  }\n': TranslationQueryResult
     '\n  *[_type == "page" && defined(slug.current) && (coalesce(language, "en") == "en" || language == "es")] {\n    _id, language, "slug": slug.current, _updatedAt, seo,\n    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "page": value->{_id, language, "slug": slug.current}}\n  }\n': SitemapDataResult
@@ -4640,7 +5128,7 @@ declare module '@sanity/client' {
     '\n  *[_type == "translation.metadata" && references($id)][0].translations[]{language, "post": value->{_id, _type, language, "slug": slug.current, publishedAt, seo}}\n': BlogTranslationQueryResult
     '\n  *[_type == "blogPost" && defined(slug.current) && defined(publishedAt) && publishedAt <= now() && language in ["en", "es"]]{\n    _id, language, "slug": slug.current, publishedAt, updatedAt, _updatedAt, seo,\n    "translations": *[_type == "translation.metadata" && references(^._id)][0].translations[]{language, "post": value->{_id, language, "slug": slug.current, publishedAt, seo}}\n  }\n': BlogSitemapQueryResult
     '*[_type == "practiceArea" && language == $language && defined(slug.current)] | order(displayOrder asc, title asc){_id, title, "slug": slug.current, language, "shortDescription": coalesce(shortDescription, pt::text(body[_type == "block" && style == "normal"][0])), iconName, icon, mainImage, featuredOnHomepage, displayOrder, seo, _updatedAt}': PracticeAreasQueryResult
-    '*[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, seo, _updatedAt}': PracticeAreaQueryResult
+    '*[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, consultationLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}, seo, _updatedAt}': PracticeAreaQueryResult
     '*[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, socialLinks, seo, _updatedAt}': AttorneyListQueryResult
     '*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}': AttorneyQueryResult
     '*[_type == "office" && language == $language && defined(slug.current)] | order(displayOrder asc, name asc){_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, image, openingHours, seo, _updatedAt, "attorneys": *[_type == "attorney" && language == $language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}': OfficeListQueryResult

@@ -3,11 +3,13 @@ import ScrollReveal from '@/components/animations/ScrollReveal'
 import StaggeredGrid from '@/components/animations/StaggeredGrid'
 
 import Card from './Card'
+import type {Locale} from '@/lib/i18n'
 
 type CardGridBlock = ExtractPageBuilderType<'cardGrid'>
 
 type CardGridProps = {
   block: CardGridBlock
+  locale?: Locale
 }
 
 const columnMap = (columns?: number) => Math.min(Math.max(columns ?? 3, 2), 4)
@@ -25,7 +27,7 @@ const toIdFragment = (value?: string) => {
     .replace(/^-+|-+$/g, '')
 }
 
-export default function CardGrid({block}: CardGridProps) {
+export default function CardGrid({block, locale = 'en'}: CardGridProps) {
   const {heading, subheading, cards, columns, alignment} = block
   const normalizedCards = (cards ?? []).filter((card): card is CardGridCard => Boolean(card))
   if (!normalizedCards.length) {
@@ -40,7 +42,7 @@ export default function CardGrid({block}: CardGridProps) {
   const gridColumnsClass = gridColumnClasses[columnCount]
 
   const cardElements = normalizedCards.map((card, index) => (
-    <Card key={card._key ?? `${card.title ?? 'card'}-${index}`} card={card} />
+    <Card key={card._key ?? `${card.title ?? 'card'}-${index}`} card={card} locale={locale} />
   ))
 
   return (

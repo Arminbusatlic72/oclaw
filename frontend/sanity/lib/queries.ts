@@ -1,7 +1,8 @@
 import {defineQuery} from 'next-sanity'
 
 export const settingsQuery = defineQuery(`*[_type == "settings" && _id == $id][0]`)
-const footerLinkFields = /* groq */ `link{..., page->{_id, _type, language, "slug": slug.current}}`
+const dereferencedLinkFields = /* groq */ `..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}`
+const footerLinkFields = /* groq */ `link{${dereferencedLinkFields}}`
 export const footerQuery = defineQuery(`
   *[_type == "footer" && _id == $id][0]{
     ...,
@@ -19,14 +20,14 @@ export const navigationQuery = defineQuery(`
   *[_type == "navigation" && _id == $id][0]{
     logo{alt, asset->{_id, metadata{dimensions{aspectRatio}}}},
     navItems[]{title, href, externalUrl, isButton,
-      link{..., page->{_id,_type,language,"slug":slug.current}},
-      children[]{title,href,link{...,page->{_id,_type,language,"slug":slug.current}}}
+      link{${dereferencedLinkFields}},
+      children[]{title,href,link{${dereferencedLinkFields}}}
     },
-    ctaLabel, ctaHref, ctaLink{...,page->{_id,_type,language,"slug":slug.current}}
+    ctaLabel, ctaHref, ctaLink{${dereferencedLinkFields}}
   }
 `)
 
-const linkFields = /* groq */ `link{..., page->{_id, _type, language, "slug": slug.current}}`
+const linkFields = /* groq */ `link{${dereferencedLinkFields}}`
 
 const pageFields = /* groq */ `
   _id, _type, language, name, slug, heading, subheading, seo,
@@ -38,11 +39,12 @@ const pageFields = /* groq */ `
     _type == "processSteps" => {..., button{..., ${linkFields}}},
     _type == "parallaxFeatures" => {..., features[]{..., image{..., asset->{_id,_ref,url}}, cta{..., ${linkFields}}}},
     _type == "infoSection" => {..., content[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},
-    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{..., page->{_id, language, "slug": slug.current}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},
+    _type == "whyChooseUs" => {..., image{..., asset->{_id,url}}, highlights[]{...}, ctaLink{${dereferencedLinkFields}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},
     _type == "editorialSection" => {..., image{..., asset->{_id,url}}, body[]{..., markDefs[]{..., _type == "link" => {page->{_id, language, "slug": slug.current}}}}},
     _type == "ctaBanner" => {..., button{..., ${linkFields}}},
     _type == "contactInfoCards" => {..., cards[]{..., office->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}, ${linkFields}}},
     _type == "contactForm" => {..., privacyPolicyLink{..., page->{_id, _type, language, "slug": slug.current}}},
+    _type == "calendlyBooking" => {..., officeBookingOptions[]{..., office->{_id, name, language}}},
     _type == "locationMap" => {..., offices[]->{_id, name, language, streetAddress, addressLine2, city, state, postalCode, country, phone, mapUrl, coordinates, "attorneys": *[_type == "attorney" && language == ^.language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}},
     _type == "youtubeVideos" => {..., videos[]{_key, _type, title, url}},
     _type == "testimonialsSection" => {..., backgroundImage{..., asset->{_id}}, testimonials[]{..., photo{..., asset->{_id}}}}
@@ -130,7 +132,7 @@ export const blogSitemapQuery = defineQuery(`
 
 // Public collection queries always use the published perspective at the call site.
 export const practiceAreasQuery = defineQuery(`*[_type == "practiceArea" && language == $language && defined(slug.current)] | order(displayOrder asc, title asc){_id, title, "slug": slug.current, language, "shortDescription": coalesce(shortDescription, pt::text(body[_type == "block" && style == "normal"][0])), iconName, icon, mainImage, featuredOnHomepage, displayOrder, seo, _updatedAt}`)
-export const practiceAreaQuery = defineQuery(`*[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, seo, _updatedAt}`)
+export const practiceAreaQuery = defineQuery(`*[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, consultationLink{${dereferencedLinkFields}}, seo, _updatedAt}`)
 export const attorneyListQuery = defineQuery(`*[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, socialLinks, seo, _updatedAt}`)
 export const attorneyQuery = defineQuery(`*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}`)
 export const officeListQuery = defineQuery(`*[_type == "office" && language == $language && defined(slug.current)] | order(displayOrder asc, name asc){_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, image, openingHours, seo, _updatedAt, "attorneys": *[_type == "attorney" && language == $language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}`)

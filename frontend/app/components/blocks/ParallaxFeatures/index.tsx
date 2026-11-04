@@ -8,12 +8,15 @@ import ScrollReveal from '@/components/animations/ScrollReveal'
 import useParallax from '@/hooks/useParallax'
 import {ExtractPageBuilderType} from '@/sanity/lib/types'
 import {urlForImage} from '@/sanity/lib/utils'
+import ResolvedLink from '@/app/components/ResolvedLink'
+import type {Locale} from '@/lib/i18n'
 
 type ParallaxFeaturesBlock = ExtractPageBuilderType<'parallaxFeatures'>
 type ParallaxFeature = NonNullable<ParallaxFeaturesBlock['features']>[number]
 
 type ParallaxFeaturesProps = {
   block: ParallaxFeaturesBlock
+  locale?: Locale
 }
 
 const columnMap = (columns?: number) => Math.min(Math.max(columns ?? 2, 1), 3)
@@ -32,7 +35,7 @@ const toIdFragment = (value?: string) => {
     .replace(/^-+|-+$/g, '')
 }
 
-export default function ParallaxFeatures({block}: ParallaxFeaturesProps) {
+export default function ParallaxFeatures({block, locale = 'en'}: ParallaxFeaturesProps) {
   const {heading, subheading, features, columns, theme = 'light'} = block
   const normalizedFeatures = (features ?? []).filter((f): f is ParallaxFeature => Boolean(f?.title))
 
@@ -65,7 +68,7 @@ export default function ParallaxFeatures({block}: ParallaxFeaturesProps) {
 
         <div className={`mt-14 grid gap-8 sm:gap-10 ${gridColumnsClass}`}>
           {normalizedFeatures.map((feature, index) => (
-            <ParallaxCard key={feature._key ?? `${feature.title}-${index}`} feature={feature} />
+            <ParallaxCard key={feature._key ?? `${feature.title}-${index}`} feature={feature} locale={locale} />
           ))}
         </div>
       </div>
@@ -73,7 +76,7 @@ export default function ParallaxFeatures({block}: ParallaxFeaturesProps) {
   )
 }
 
-function ParallaxCard({feature}: {feature: ParallaxFeature}) {
+function ParallaxCard({feature, locale}: {feature: ParallaxFeature; locale: Locale}) {
   const imageRef = useRef<HTMLDivElement>(null)
 
   // Use parallax only if we have an image (hook handles null refs gracefully)
@@ -117,13 +120,14 @@ function ParallaxCard({feature}: {feature: ParallaxFeature}) {
           </p>
         )}
 
-        {feature.cta?.label && feature.cta.url && (
-          <a
-            href={feature.cta.url}
-            target="_blank"
-            rel="noopener noreferrer"
+        {feature.cta?.label && (feature.cta.link || feature.cta.url) && (
+          feature.cta.link ? <ResolvedLink
+            link={feature.cta.link}
+            locale={locale}
             className="mt-4 inline-flex w-fit items-center rounded-full border border-blue-200 px-4 py-2 text-sm font-medium text-blue-700 transition-colors hover:border-blue-300 hover:text-blue-800 dark:border-blue-500/40 dark:text-blue-300 dark:hover:border-blue-400 dark:hover:text-blue-200"
           >
+            {feature.cta.label} →
+          </ResolvedLink> : <a href={feature.cta.url!} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex w-fit items-center rounded-full border border-blue-200 px-4 py-2 text-sm font-medium text-blue-700 transition-colors hover:border-blue-300 hover:text-blue-800 dark:border-blue-500/40 dark:text-blue-300 dark:hover:border-blue-400 dark:hover:text-blue-200">
             {feature.cta.label} →
           </a>
         )}

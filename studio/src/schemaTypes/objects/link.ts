@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {LinkIcon} from '@sanity/icons'
 import type {Link} from '../../../sanity.types'
+import {calendlyOfficeOptionsField, calendlyUrlField} from './calendlyActionFields'
 
 /**
  * Link schema object. This link object lets the user first select the type of link and then
@@ -24,6 +25,7 @@ export const link = defineType({
           {title: 'URL', value: 'href'},
           {title: 'Page', value: 'page'},
           {title: 'Site route', value: 'route'},
+          {title: 'Calendly booking', value: 'calendly'},
         ],
         layout: 'radio',
       },
@@ -86,6 +88,45 @@ export const link = defineType({
       title: 'Open in new tab',
       type: 'boolean',
       initialValue: false,
+      hidden: ({parent}) => parent?.linkType === 'calendly',
+    }),
+    calendlyUrlField(
+      'calendlyEventUrl',
+      'Global Calendly event URL',
+      ({parent}) => parent?.linkType !== 'calendly',
+    ),
+    calendlyOfficeOptionsField(
+      'calendlyOfficeBookingOptions',
+      ({parent}) => parent?.linkType !== 'calendly',
+    ),
+    defineField({
+      name: 'calendlyPrivacyNotice',
+      title: 'Calendly privacy notice',
+      type: 'text',
+      rows: 3,
+      hidden: ({parent}) => parent?.linkType !== 'calendly',
+      description: 'Optional localized notice. Do not request case details or confidential information.',
+    }),
+    defineField({
+      name: 'calendlyFallbackLinkLabel',
+      title: 'Calendly fallback link label',
+      type: 'string',
+      hidden: ({parent}) => parent?.linkType !== 'calendly',
     }),
   ],
+  validation: (Rule) =>
+    Rule.custom((value) => {
+      const action = value as
+        | {
+            linkType?: string
+            calendlyEventUrl?: string
+            calendlyOfficeBookingOptions?: Array<{eventUrl?: string}>
+          }
+        | undefined
+      if (action?.linkType !== 'calendly') return true
+      return action.calendlyEventUrl ||
+        action.calendlyOfficeBookingOptions?.some((option) => option.eventUrl)
+        ? true
+        : 'This action is disabled publicly until a client-approved Calendly URL is added.'
+    }).warning(),
 })

@@ -3,12 +3,14 @@ import ScrollReveal from '@/components/animations/ScrollReveal'
 import StaggeredGrid from '@/components/animations/StaggeredGrid'
 import {Button} from '@/components/ui/button'
 import {ExtractPageBuilderType} from '@/sanity/lib/types'
+import type {Locale} from '@/lib/i18n'
 
 type ProcessStepsBlock = ExtractPageBuilderType<'processSteps'>
 type ProcessStep = NonNullable<ProcessStepsBlock['steps']>[number]
 
 type ProcessStepsProps = {
   block: ProcessStepsBlock
+  locale?: Locale
 }
 
 const toIdFragment = (value?: string) => {
@@ -20,7 +22,7 @@ const toIdFragment = (value?: string) => {
     .replace(/^-+|-+$/g, '')
 }
 
-export default function ProcessSteps({block}: ProcessStepsProps) {
+export default function ProcessSteps({block, locale = 'en'}: ProcessStepsProps) {
   const {eyebrow, heading, subheading, steps, button, theme = 'light'} = block
   const normalizedSteps = (steps ?? []).filter((step): step is ProcessStep => Boolean(step?.title))
 
@@ -103,7 +105,7 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
           {button?.buttonText && button.link && (
             <ScrollReveal direction="up" delay={0.12} className="mt-10 flex justify-center">
               <Button asChild size="lg" className="rounded-full px-6">
-                <ResolvedLink link={button.link}>{button.buttonText}</ResolvedLink>
+                <ResolvedLink link={button.link} locale={locale}>{button.buttonText}</ResolvedLink>
               </Button>
             </ScrollReveal>
           )}

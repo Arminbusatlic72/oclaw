@@ -51,6 +51,7 @@ export const practiceArea = defineType({
     defineField({name: 'displayOrder', type: 'number', initialValue: 100, validation: (Rule) => Rule.integer()}),
     defineField({name: 'featuredOnHomepage', type: 'boolean', initialValue: false}),
     defineField({name: 'consultationLabel', type: 'string'}),
+    defineField({name: 'consultationLink', title: 'Consultation action', type: 'link', description: 'Optional. Existing documents continue to use the localized Contact page when this is empty.'}),
     defineField({name: 'seo', type: 'seo'}),
   ],
   preview: {select: {title: 'title', media: 'mainImage', language: 'language'}, prepare: ({title, media, language}) => ({title, media, subtitle: String(language || 'en').toUpperCase()})},

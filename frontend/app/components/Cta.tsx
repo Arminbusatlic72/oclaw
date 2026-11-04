@@ -7,6 +7,7 @@ import ScrollReveal from '@/components/animations/ScrollReveal'
 import {Button} from '@/components/ui/button'
 import {stegaClean} from '@sanity/client/stega'
 import {ExtractPageBuilderType} from '@/sanity/lib/types'
+import type {Locale} from '@/lib/i18n'
 
 type CtaProps = {
   block: ExtractPageBuilderType<'callToAction'>
@@ -14,9 +15,10 @@ type CtaProps = {
   // Needed if you want to createDataAttributes to do non-text overlays in Presentation (Visual Editing)
   pageType: string
   pageId: string
+  locale?: Locale
 }
 
-export default function CTA({block}: CtaProps) {
+export default function CTA({block, locale = 'en'}: CtaProps) {
   const {heading, eyebrow, body = [], button, image, theme, contentAlignment} = block
 
   const isDark = theme === 'dark'
@@ -52,7 +54,7 @@ export default function CTA({block}: CtaProps) {
               {button?.buttonText && button?.link && (
                 <div className="mt-6 flex">
                   <Button asChild size="lg" className="rounded-full px-6">
-                    <ResolvedLink link={button?.link}>{button?.buttonText}</ResolvedLink>
+                    <ResolvedLink link={button?.link} locale={locale}>{button?.buttonText}</ResolvedLink>
                   </Button>
                 </div>
               )}
