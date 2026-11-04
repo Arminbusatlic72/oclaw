@@ -10,6 +10,7 @@
     "lint:fix": "eslint . --fix",
     "sanity:typegen": "cd ../studio && sanity schema extract --enforce-required-fields --path ../sanity.schema.json && cd ../frontend && sanity typegen generate",
     "start": "next start",
+    "test": "node --test tests/*.test.ts tests/*.test.mjs",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
