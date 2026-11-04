@@ -995,6 +995,10 @@
   padding-block: clamp(4rem, 7vw, 7rem) 2rem;
 }
 
+.site-footer-inner-copyright-only {
+  padding-top: 2rem;
+}
+
 .site-footer :is(h2, dt) {
   color: white;
 }
@@ -1016,6 +1020,14 @@
 .site-footer-bottom {
   border-color: rgb(205 176 145 / 32%);
   color: rgb(255 255 255 / 62%);
+}
+
+.site-footer-bottom-copyright-only {
+  text-align: center;
+}
+
+.site-footer-copyright {
+  margin: 0;
 }
 
 @media (min-width: 1280px) {
