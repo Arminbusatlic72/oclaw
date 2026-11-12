@@ -821,6 +821,10 @@
               {
                 "type": "string",
                 "value": "popup"
+              },
+              {
+                "type": "string",
+                "value": "appointment"
               }
             ]
           },

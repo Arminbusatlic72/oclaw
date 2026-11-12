@@ -153,7 +153,7 @@ export type CalendlyBooking = {
   _type: 'calendlyBooking'
   heading: string
   description?: string
-  displayMode: 'inline' | 'popup'
+  displayMode: 'inline' | 'popup' | 'appointment'
   eventUrl?: string
   buttonLabel?: string
   officeBookingOptions?: Array<{
@@ -2026,7 +2026,7 @@ export type GetPageQueryResult = {
         _type: 'calendlyBooking'
         heading: string
         description?: string
-        displayMode: 'inline' | 'popup'
+        displayMode: 'appointment' | 'inline' | 'popup'
         eventUrl?: string
         buttonLabel?: string
         officeBookingOptions: Array<{
@@ -3055,7 +3055,7 @@ export type HomePageQueryResult = {
         _type: 'calendlyBooking'
         heading: string
         description?: string
-        displayMode: 'inline' | 'popup'
+        displayMode: 'appointment' | 'inline' | 'popup'
         eventUrl?: string
         buttonLabel?: string
         officeBookingOptions: Array<{

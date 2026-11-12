@@ -79,7 +79,7 @@ export default function ContactFormClient({block, locale, offices, privacyPolicy
   const errorFor = (name: string) => errors[name] ? <span className="contact-field-error" id={`${block._key}-${name}-error`}>{errors[name]}</span> : null
   const describedBy = (name: string) => errors[name] ? `${block._key}-${name}-error` : undefined
 
-  return <section className="contact-form-section">
+  return <section id={`contact-form-${block._key}`} className="contact-form-section">
     <div className="container">
       <header className="contact-form-heading">
         <h2>{block.heading}</h2>

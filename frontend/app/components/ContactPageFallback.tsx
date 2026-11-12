@@ -1,6 +1,7 @@
 import type {Metadata} from 'next'
 import {Clock3, Mail, MapPin, Phone} from 'lucide-react'
 
+import ContactAppointment from '@/app/components/ContactAppointment'
 import ContactFormClient from '@/app/components/blocks/ContactFormClient'
 import LocationMap from '@/app/components/blocks/LocationMap'
 import PageHero from '@/app/components/blocks/PageHero'
@@ -125,6 +126,7 @@ export default async function ContactPageFallback({locale}: {locale: Locale}) {
 
   return <>
     <PageHero block={{_key: `${locale}-contact-hero`, _type: 'pageHero', eyebrow: 'OC Law Group', heading: t.title, showBreadcrumb: true}} locale={locale} />
+    <ContactAppointment locale={locale} requestFormId={`contact-form-${formBlock._key}`} />
     <section className="contact-cards-section" aria-label={t.ariaLabel}>
       <div className="container">
         <h2 className="contact-section-heading">{t.introduction}</h2>

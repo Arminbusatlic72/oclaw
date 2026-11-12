@@ -10,6 +10,7 @@ import {Toaster} from 'sonner'
 
 import DraftModeToast from '@/app/components/DraftModeToast'
 import BackToTopButton from '@/app/components/BackToTopButton'
+import FloatingContactButton from '@/app/components/FloatingContactButton'
 import Footer from '@/app/components/Footer'
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider'
 import NavbarWrapper from '@/components/NavbarWrapper'
@@ -91,6 +92,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
             <main className="">{children}</main>
             <Footer locale={locale} />
             <BackToTopButton locale={locale} />
+            <FloatingContactButton locale={locale} />
           </section>
         </SmoothScrollProvider>
         <SpeedInsights />

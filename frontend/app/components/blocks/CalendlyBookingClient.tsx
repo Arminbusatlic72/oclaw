@@ -1,7 +1,7 @@
 'use client'
 
 import * as Dialog from '@radix-ui/react-dialog'
-import {CalendarDays, Clock, ExternalLink, Lock, ShieldCheck, X} from 'lucide-react'
+import {ArrowUpRight, CalendarDays, Clock, ExternalLink, Lock, ShieldCheck, X} from 'lucide-react'
 import {forwardRef, useEffect, useId, useState, type ButtonHTMLAttributes, type ReactNode} from 'react'
 
 import {Button, buttonVariants} from '@/components/ui/button'
@@ -12,7 +12,7 @@ import type {CalendlyBookingOption as BookingOption} from '@/lib/calendly'
 type Props = {
   heading: string
   description?: string | null
-  displayMode: 'inline' | 'popup'
+  displayMode: 'inline' | 'popup' | 'appointment'
   buttonLabel?: string | null
   privacyNotice?: string | null
   fallbackLinkLabel?: string | null
@@ -225,11 +225,13 @@ export default function CalendlyBookingClient(props: Props) {
 
   const bookingContent = <BookingContent {...props} selectedId={selectedId} setSelectedId={setSelectedId} groupName={groupName} consented={consented} setConsented={setConsented} />
 
-  if (displayMode === 'popup') {
+  if (displayMode === 'popup' || displayMode === 'appointment') {
+    const isAppointment = displayMode === 'appointment'
+    const label = buttonLabel || (locale === 'es' ? 'Reserve una cita' : 'Book an appointment')
     return (
-      <section className="calendly-booking-section calendly-booking-popup-section" aria-labelledby={headingId}>
-        <div className="container calendly-booking-intro calendly-booking-intro--center">
-          <p className="calendly-eyebrow">{t.eyebrow}</p>
+      <section className={isAppointment ? 'contact-appointment' : 'calendly-booking-section calendly-booking-popup-section'} aria-labelledby={headingId}>
+        <div className={isAppointment ? 'container' : 'container calendly-booking-intro calendly-booking-intro--center'}>
+          {!isAppointment && <p className="calendly-eyebrow">{t.eyebrow}</p>}
           <h2 id={headingId}>{heading}</h2>
           {description && <p>{description}</p>}
           <CalendlyPopupTrigger
@@ -240,9 +242,13 @@ export default function CalendlyBookingClient(props: Props) {
             privacyNotice={props.privacyNotice}
             fallbackLinkLabel={props.fallbackLinkLabel}
             embedHeight={props.embedHeight}
-            className={buttonVariants({size: 'lg', className: 'calendly-block-trigger'})}
+            className={isAppointment ? 'site-button-outline site-button-prominent' : buttonVariants({size: 'lg', className: 'calendly-block-trigger'})}
           >
-            {buttonLabel || (locale === 'es' ? 'Programar una consulta' : 'Schedule a Consultation')}
+            {isAppointment ? <>
+              <CalendarDays aria-hidden="true" focusable="false" />
+              <span className="site-button-prominent-label">{label}</span>
+              <ArrowUpRight aria-hidden="true" focusable="false" />
+            </> : buttonLabel || (locale === 'es' ? 'Programar una consulta' : 'Schedule a Consultation')}
           </CalendlyPopupTrigger>
         </div>
       </section>

@@ -2,6 +2,7 @@
 
 import {useCallback, useEffect, useMemo, useState} from 'react'
 import Image from 'next/image'
+import {ArrowUpRight, CalendarDays} from 'lucide-react'
 
 import type {Locale} from '@/lib/i18n'
 import {HeroSliderSlide, type HeroPracticeArea} from '@/sanity/lib/types'
@@ -12,6 +13,7 @@ type HeroSliderClientProps = {
   slides: HeroSliderSlide[]
   locale: Locale
   layout: 'classic' | 'immigration'
+  primaryCtaVariant?: 'default' | 'prominent'
   enhancedClassic: boolean
   showAwardBadge: boolean
   practiceAreas: HeroPracticeArea[]
@@ -29,6 +31,7 @@ export default function HeroSliderClient({
   locale,
   layout,
   enhancedClassic,
+  primaryCtaVariant,
   showAwardBadge,
   practiceAreas,
   practiceAreasHeading,
@@ -58,6 +61,14 @@ export default function HeroSliderClient({
   const intervalMs = Math.max(1000, autoplayInterval ?? 5000)
   const isImmigration = layout === 'immigration'
   const isEnhancedClassic = layout === 'classic' && enhancedClassic
+  // The semantic primary CTA gets emphasis without changing stored content or actions.
+  const isProminentCta =
+    (primaryCtaVariant ?? (isEnhancedClassic ? 'prominent' : 'default')) === 'prominent'
+  const primaryCtaClassName = `site-button-outline site-hero-cta${
+    isProminentCta
+      ? ' site-button-prominent'
+      : ''
+  }`
   const hasPracticeAreas = layout === 'classic' && practiceAreas.length > 0
   const labels =
     locale === 'es'
@@ -119,6 +130,13 @@ export default function HeroSliderClient({
           {preparedSlides.map((slide, index) => {
             const isActive = index === currentIndex
             const ctaHref = linkResolver(slide.cta?.link) || slide.cta?.url
+            const primaryCtaContent = isProminentCta ? (
+              <>
+                <CalendarDays aria-hidden="true" focusable="false" />
+                <span className="site-button-prominent-label">{slide.cta?.label}</span>
+                <ArrowUpRight aria-hidden="true" focusable="false" />
+              </>
+            ) : slide.cta?.label
             const isExternalCta = Boolean(ctaHref?.match(/^https?:\/\//))
             const secondaryCtaHref =
               linkResolver(slide.secondaryCta?.link) || slide.secondaryCta?.url
@@ -208,25 +226,25 @@ export default function HeroSliderClient({
                             <ResolvedLink
                               link={slide.cta.link}
                               locale={locale}
-                              className="site-button-outline site-hero-cta"
+                              className={primaryCtaClassName}
                             >
-                              {slide.cta.label}
+                              {primaryCtaContent}
                             </ResolvedLink>
                           ) : ctaHref ? (
                             <a
                               href={ctaHref}
                               target={isExternalCta ? '_blank' : undefined}
                               rel={isExternalCta ? 'noopener noreferrer' : undefined}
-                              className="site-button-outline site-hero-cta"
+                              className={primaryCtaClassName}
                             >
-                              {slide.cta.label}
+                              {primaryCtaContent}
                             </a>
                           ) : (
                             <span
-                              className="site-button-outline site-hero-cta"
+                              className={primaryCtaClassName}
                               aria-disabled="true"
                             >
-                              {slide.cta.label}
+                              {primaryCtaContent}
                             </span>
                           ))}
                         {slide.secondaryCta?.label &&

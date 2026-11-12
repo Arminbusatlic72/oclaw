@@ -6,9 +6,11 @@ import type {ExtractPageBuilderType} from '@/sanity/lib/types'
 type Block = ExtractPageBuilderType<'calendlyBooking'>
 
 export default function CalendlyBooking({block, locale = 'en'}: {block: Block; locale?: Locale}) {
+  // A block's explicit configuration always takes precedence over the site fallback.
+  const useDefault = block.displayMode === 'appointment' && !block.eventUrl && !block.officeBookingOptions?.length
   const options = calendlyOptionsFromAction(
     {
-      calendlyEventUrl: block.eventUrl,
+      calendlyEventUrl: useDefault ? process.env.CONTACT_CALENDLY_EVENT_URL : block.eventUrl,
       calendlyOfficeBookingOptions: block.officeBookingOptions,
     },
     locale,

@@ -6,6 +6,7 @@ import {calendlyOfficeOptionsField, calendlyUrlField} from '../objects/calendlyA
 export const calendlyBooking = defineType({
   name: 'calendlyBooking',
   title: 'Calendly booking',
+  description: 'Reusable booking block with its own Calendly URL. Choose Prominent appointment CTA for the navy-and-gold appointment section.',
   type: 'object',
   icon: CalendarIcon,
   fields: [
@@ -21,6 +22,7 @@ export const calendlyBooking = defineType({
         list: [
           {title: 'Inline', value: 'inline'},
           {title: 'Popup', value: 'popup'},
+          {title: 'Prominent appointment CTA (popup)', value: 'appointment'},
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -61,7 +63,7 @@ export const calendlyBooking = defineType({
         | undefined
       return block?.eventUrl || block?.officeBookingOptions?.some((option) => option.eventUrl)
         ? true
-        : 'This block is hidden on the public site until a client-approved Calendly URL is added.'
+        : 'Add a client-approved Calendly URL. Prominent appointment mode may also use the server CONTACT_CALENDLY_EVENT_URL fallback.'
     }).warning(),
   preview: {
     select: {title: 'heading', eventUrl: 'eventUrl', officeOptions: 'officeBookingOptions'},
@@ -70,7 +72,7 @@ export const calendlyBooking = defineType({
       subtitle:
         eventUrl || officeOptions?.some((option: {eventUrl?: string}) => option.eventUrl)
           ? 'Ready to display'
-          : 'Configuration needed: add an approved Calendly URL',
+          : 'Add an approved URL or configure the appointment server fallback',
       media: CalendarIcon,
     }),
   },

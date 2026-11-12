@@ -1,3 +1,4 @@
+import ContactAppointment from '@/app/components/ContactAppointment'
 import PageBuilderPage from '@/app/components/PageBuilder'
 import ContactDetailsCards, {englishContactDetailsBlock} from '@/app/components/blocks/ContactDetailsCards'
 import Link from 'next/link'
@@ -15,6 +16,9 @@ export default function DynamicPage({page, isHomepage = false}: {page: NonNullab
 
   const hasPageHero = page.pageBuilder?.[0]?._type === 'pageHero'
   const locale = page.language === 'es' ? 'es' : 'en'
+  const isContact = page.slug.current === (locale === 'es' ? 'contacto' : 'contact')
+  const contactForm = page.pageBuilder?.find((block) => block._type === 'contactForm')
+  const hasBookingBlock = page.pageBuilder?.some((block) => block._type === 'calendlyBooking')
   const homePath = locale === 'es' ? '/es/' : '/'
   const homeLabel = locale === 'es' ? 'Inicio' : 'Home'
 
@@ -32,6 +36,7 @@ export default function DynamicPage({page, isHomepage = false}: {page: NonNullab
         </div>
       </header>}
       {locale === 'en' && page.slug.current === 'contact' && !page.pageBuilder?.some((block) => block._type === 'contactDetailsCards') && <ContactDetailsCards block={englishContactDetailsBlock} />}
+      {isContact && !hasBookingBlock && <ContactAppointment locale={locale} requestFormId={contactForm ? `contact-form-${contactForm._key}` : undefined} />}
       <PageBuilderPage page={page} />
     </main>
   )

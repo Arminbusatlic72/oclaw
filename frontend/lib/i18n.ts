@@ -5,12 +5,14 @@ export const SITE_ORIGIN = 'https://www.oclaw.us'
 export const dictionary = {
   en: {
     home: 'Home',
+    contactUs: 'Contact Us',
     menu: 'Toggle navigation menu',
     language: 'Language',
     unavailable: 'Translation unavailable',
   },
   es: {
     home: 'Inicio',
+    contactUs: 'Contáctenos',
     menu: 'Abrir menú de navegación',
     language: 'Idioma',
     unavailable: 'Traducción no disponible',

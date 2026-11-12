@@ -43,3 +43,19 @@ The webhook receives an `Authorization: Bearer …` header and the submission UU
 In-memory throttling and idempotency provide immediate protection per running instance. The receiving provider should enforce the same idempotency key and an organization-wide rate limit for multi-instance production deployments.
 
 Supporting documents support PDF, DOC, DOCX, JPG, and PNG files, with at most five files, 15 MB per file, and 25 MB combined. The app checks extensions and file signatures, sanitizes filenames, and forwards files directly to the approved HTTPS webhook without storing them in Sanity. Keep `CONTACT_FORM_UPLOADS_ENABLED=false` until the receiving service has approved malware scanning, private storage/delivery, access controls, retention, and deletion policies.
+
+## Contact appointment action
+
+English and Spanish Contact pages now include a prominent appointment action, including the built-in fallback pages. It reuses the matching language's **Navigation → CTA Link** when that link is a Calendly action with an approved global event URL or office booking options. The existing shared popup preserves consent, office selection, and the external scheduling fallback. No booking URL or production content is created by this change.
+
+Without a valid Calendly action, the button reads “Request an appointment” (Spanish: “Solicite una cita”) and links to the page's existing contact form. The accompanying copy explains that the team must confirm availability. If a CMS contact page has neither a booking action nor a contact form, no dead button is shown. CMS contact pages with an existing Calendly booking block retain that block without adding a duplicate appointment section.
+
+### Reusable navy-and-gold Calendly appointment block
+
+To configure booking independently of navigation, add **Calendly booking** to any page's PageBuilder and choose **Prominent appointment CTA (popup)** as its display mode. This retains the Contact appointment design, including the calendar and arrow icons, and uses the existing Calendly popup. Fill in heading, description, localized booking button label, and either **Global Calendly event URL** or office-specific booking options. Privacy notice and fallback-link label remain editable. Repeat with translated copy on the Spanish page.
+
+On CMS Contact pages, this block replaces the automatically added appointment section. Without an approved booking URL in the block or the appointment server fallback, the block renders nothing; Studio shows a configuration reminder. Existing inline and popup modes are unchanged. Adding the block to the desired page and supplying the actual approved Calendly URL is required; source-code changes alone do not alter published Sanity documents or activate booking.
+
+### Server fallback for appointment booking
+
+`CONTACT_CALENDLY_EVENT_URL` supplies an approved default for the built-in Contact appointment action (when navigation has no Calendly action) and for prominent appointment blocks with no event URL or office configuration. Explicit block settings always take precedence; inline and standard popup blocks do not inherit this fallback. Set the variable in the deployment environment to enable the same default there. The provided URL is configured in the ignored local `frontend/.env.local`; no published Sanity documents were changed. Invalid fallback URLs render no booking action.
