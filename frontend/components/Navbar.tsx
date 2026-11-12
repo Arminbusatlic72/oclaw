@@ -27,6 +27,8 @@ type NavbarProps = {
 }
 
 function NavLink({item, locale, onNavigate}: {item: NavItem; locale: Locale; onNavigate?: () => void}) {
+  const pathname = usePathname()
+  const isActive = Boolean(item.href && pathname.replace(/\/$/, '') === item.href.replace(/\/$/, ''))
   const className = 'site-header-link inline-flex items-center py-2'
   if (item.link?.linkType === 'calendly') {
     return <ResolvedLink link={item.link} locale={locale} className={className}>{item.title}</ResolvedLink>
@@ -46,7 +48,7 @@ function NavLink({item, locale, onNavigate}: {item: NavItem; locale: Locale; onN
   }
 
   return (
-    <Link href={item.href || '#'} className={className} onClick={onNavigate}>
+    <Link href={item.href || '#'} className={className} onClick={onNavigate} aria-current={isActive ? 'page' : undefined}>
       {item.title}
     </Link>
   )
@@ -116,7 +118,7 @@ export default function Navbar({
   }, [])
 
   const logoUrl = data.logo
-    ? urlForImage(data.logo)?.width(360).fit('max').url()
+    ? urlForImage(data.logo)?.width(634).fit('max').url()
     : undefined
   const logoAspectRatio = data.logo?.asset?.metadata?.dimensions?.aspectRatio
   const isMarkOnly = Boolean(logoUrl && logoAspectRatio && logoAspectRatio < 2.4)
@@ -135,7 +137,7 @@ export default function Navbar({
                   src={logoUrl}
                   alt={isMarkOnly ? '' : data.logo?.alt || siteTitle}
                   fill
-                  sizes={isMarkOnly ? '80px' : '(max-width: 1279px) 160px, 240px'}
+                  sizes={isMarkOnly ? '(max-width: 1279px) 84.48px, 105.6px' : '(max-width: 1279px) 211.2px, 316.8px'}
                   className="object-contain object-left"
                   priority
                 />
@@ -156,7 +158,7 @@ export default function Navbar({
               return (
                 <DropdownMenu key={item.title}>
                   <DropdownMenuTrigger asChild>
-                    <button type="button" className="site-header-link inline-flex items-center gap-1 py-2">
+                    <button type="button" className="site-header-link inline-flex items-center gap-1 py-2" data-active={item.children.some((child) => child.href && (pathname.replace(/\/$/, '') === child.href.replace(/\/$/, '') || pathname.startsWith(`${child.href.replace(/\/$/, '')}/`))) || undefined}>
                       {item.title}
                       <ChevronDown aria-hidden="true" className="h-3.5 w-3.5" />
                     </button>

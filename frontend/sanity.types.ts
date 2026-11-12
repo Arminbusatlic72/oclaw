@@ -947,6 +947,33 @@ export type Attorney = {
   biography?: BlockContent
   experience?: BlockContent
   education?: Array<string>
+  educationDetails?: Array<{
+    institution: string
+    degree: string
+    graduationYear?: number
+    description?: string
+    _type: 'educationEntry'
+    _key: string
+  }>
+  admissions?: Array<{
+    jurisdiction: string
+    bar?: string
+    year?: number
+    description?: string
+    _type: 'admissionEntry'
+    _key: string
+  }>
+  insights?: Array<{
+    category: 'speaking' | 'blog' | 'news'
+    post?: BlogPostReference
+    title?: string
+    url?: string
+    date?: string
+    description?: string
+    _type: 'attorneyInsight'
+    _key: string
+  }>
+  consultationLink?: Link
   skills?: Array<{
     label: string
     level: number
@@ -4562,7 +4589,7 @@ export type AttorneyListQueryResult = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: attorneyQuery
-// Query: *[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}
+// Query: *[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, educationDetails, admissions,  insights[]{_key, category, title, url, date, description, "hasPost": defined(post._ref), "post": select(post->_type == "blogPost" && post->language == $language && defined(post->slug.current) && defined(post->publishedAt) && post->publishedAt <= now() => post->{_id, title, "slug": slug.current, publishedAt})},  consultationLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": (practiceAreas[]->)[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": (offices[]->)[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}
 export type AttorneyQueryResult = {
   _id: string
   fullName: string
@@ -4583,6 +4610,77 @@ export type AttorneyQueryResult = {
   biography: BlockContent | null
   experience: BlockContent | null
   education: Array<string> | null
+  educationDetails: Array<{
+    institution: string
+    degree: string
+    graduationYear?: number
+    description?: string
+    _type: 'educationEntry'
+    _key: string
+  }> | null
+  admissions: Array<{
+    jurisdiction: string
+    bar?: string
+    year?: number
+    description?: string
+    _type: 'admissionEntry'
+    _key: string
+  }> | null
+  insights: Array<{
+    _key: string
+    category: 'blog' | 'news' | 'speaking'
+    title: string | null
+    url: string | null
+    date: string | null
+    description: string | null
+    hasPost: false | true
+    post: {
+      _id: string
+      title: string
+      slug: string
+      publishedAt: string
+    } | null
+  }> | null
+  consultationLink: {
+    _type: 'link'
+    linkType?: 'calendly' | 'href' | 'page' | 'route'
+    href?: string
+    page:
+      | {
+          _id: string
+          _type: 'blogArchive'
+          language: 'en' | 'es' | null
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'page'
+          language: 'en' | 'es' | null
+          slug: string
+        }
+      | {
+          _id: string
+          _type: 'practiceAreaArchive'
+          language: 'en' | 'es' | null
+          slug: null
+        }
+      | null
+    route?: 'attorneys' | 'offices' | 'privacyPolicy' | 'resources'
+    openInNewTab?: boolean
+    calendlyEventUrl?: string
+    calendlyOfficeBookingOptions: Array<{
+      office: {
+        _id: string
+        name: string
+        language: 'en' | 'es' | null
+      }
+      eventUrl?: string
+      _type: 'officeBookingOption'
+      _key: string
+    }> | null
+    calendlyPrivacyNotice?: string
+    calendlyFallbackLinkLabel?: string
+  } | null
   skills: Array<{
     label: string
     level: number
@@ -5130,7 +5228,7 @@ declare module '@sanity/client' {
     '*[_type == "practiceArea" && language == $language && defined(slug.current)] | order(displayOrder asc, title asc){_id, title, "slug": slug.current, language, "shortDescription": coalesce(shortDescription, pt::text(body[_type == "block" && style == "normal"][0])), iconName, icon, mainImage, featuredOnHomepage, displayOrder, seo, _updatedAt}': PracticeAreasQueryResult
     '*[_type == "practiceArea" && language == $language && slug.current == $slug][0]{_id, title, "slug": slug.current, language, shortDescription, mainImage, body, sections, consultationLabel, consultationLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}, seo, _updatedAt}': PracticeAreaQueryResult
     '*[_type == "attorney" && language == $language && defined(slug.current)] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, language, professionalTitle, profileImage, shortBiography, socialLinks, seo, _updatedAt}': AttorneyListQueryResult
-    '*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": practiceAreas[]->[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": offices[]->[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}': AttorneyQueryResult
+    '*[_type == "attorney" && language == $language && slug.current == $slug][0]{_id, fullName, "slug": slug.current, language, professionalTitle, yearsOfExperience, practiceAddress, profileImage, shortBiography, biography, experience, education, educationDetails, admissions,\n  insights[]{_key, category, title, url, date, description, "hasPost": defined(post._ref), "post": select(post->_type == "blogPost" && post->language == $language && defined(post->slug.current) && defined(post->publishedAt) && post->publishedAt <= now() => post->{_id, title, "slug": slug.current, publishedAt})},\n  consultationLink{..., page->{_id, _type, language, "slug": slug.current}, calendlyOfficeBookingOptions[]{..., office->{_id, name, language}}}, "skills": skills[]{label, level}, achievements, certificates, barAdmissions, professionalMemberships, languagesSpoken, email, phone, socialLinks, seo, _updatedAt, "practiceAreas": (practiceAreas[]->)[_type == "practiceArea" && language == $language && defined(slug.current)]{_id,title,"slug":slug.current}, "offices": (offices[]->)[_type == "office" && language == $language && defined(slug.current)]{_id,name,"slug":slug.current,city}}': AttorneyQueryResult
     '*[_type == "office" && language == $language && defined(slug.current)] | order(displayOrder asc, name asc){_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, image, openingHours, seo, _updatedAt, "attorneys": *[_type == "attorney" && language == $language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}': OfficeListQueryResult
     '*[_type == "office" && language == $language && slug.current == $slug][0]{_id, name, "slug": slug.current, language, streetAddress, addressLine2, city, state, postalCode, country, phone, email, mapUrl, coordinates, image, openingHours, seo, _updatedAt, "attorneys": *[_type == "attorney" && language == $language && ^._id in offices[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current}}': OfficeQueryResult
     '*[_type == "attorney" && language == $language && defined(slug.current) && $id in practiceAreas[]._ref] | order(displayOrder asc, fullName asc){_id, fullName, "slug": slug.current, professionalTitle, profileImage, shortBiography, socialLinks, "officeIds": offices[]._ref}': AttorneysForPracticeQueryResult

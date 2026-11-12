@@ -92,7 +92,7 @@ export default async function AttorneysSection({block, locale}: {block: Block; l
               if (!person.slug || !person.fullName) return null
               const href = collectionPath('attorney', locale, person.slug)
               return (
-                <article className="attorneys-showcase-card" key={person._id}>
+                <div className="attorneys-showcase-person" key={person._id}><article className="attorneys-showcase-card">
                   <Link className="attorneys-showcase-photo-link" href={href} aria-label={person.fullName}>
                     {person.profileImage?.asset?._ref ? (
                       <SanityImage
@@ -111,7 +111,7 @@ export default async function AttorneysSection({block, locale}: {block: Block; l
                     {person.professionalTitle && <p>{person.professionalTitle}</p>}
                     {block.showSocialLinks !== false && <AttorneySocialLinks links={person.socialLinks} />}
                   </div>
-                </article>
+                </article>{person.shortBiography && <p className="attorneys-showcase-summary">{person.shortBiography}</p>}</div>
               )
             })}
           </div>

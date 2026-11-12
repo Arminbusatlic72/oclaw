@@ -947,6 +947,33 @@ export type Attorney = {
   biography?: BlockContent
   experience?: BlockContent
   education?: Array<string>
+  educationDetails?: Array<{
+    institution: string
+    degree: string
+    graduationYear?: number
+    description?: string
+    _type: 'educationEntry'
+    _key: string
+  }>
+  admissions?: Array<{
+    jurisdiction: string
+    bar?: string
+    year?: number
+    description?: string
+    _type: 'admissionEntry'
+    _key: string
+  }>
+  insights?: Array<{
+    category: 'speaking' | 'blog' | 'news'
+    post?: BlogPostReference
+    title?: string
+    url?: string
+    date?: string
+    description?: string
+    _type: 'attorneyInsight'
+    _key: string
+  }>
+  consultationLink?: Link
   skills?: Array<{
     label: string
     level: number

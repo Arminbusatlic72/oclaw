@@ -9,9 +9,9 @@ import PracticeAreaCard from './PracticeAreaCard'
 import AttorneyCard, {type AttorneyCardData} from './AttorneyCard'
 import AttorneyProfile from './AttorneyProfile'
 import {archiveId, breadcrumbs, collectionPath, type Collection} from '@/lib/collections'
-import {absoluteUrl, type Locale} from '@/lib/i18n'
+import {absoluteUrl, navigationId, type Locale} from '@/lib/i18n'
 import {sanityFetch} from '@/sanity/lib/live'
-import {attorneyListQuery, attorneyQuery, attorneysForOfficeQuery, attorneysForPracticeQuery, officeListQuery, officeQuery, practiceAreaArchiveQuery, practiceAreaQuery, practiceAreasQuery} from '@/sanity/lib/queries'
+import {navigationQuery, attorneyListQuery, attorneyQuery, attorneysForOfficeQuery, attorneysForPracticeQuery, officeListQuery, officeQuery, practiceAreaArchiveQuery, practiceAreaQuery, practiceAreasQuery} from '@/sanity/lib/queries'
 
 function JsonLd({value}: {value: object}) {return <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(value).replace(/</g, '\\u003c')}} />}
 function Breadcrumbs({items}: {items: Array<{name: string; path: string}>}) {return <><nav aria-label="Breadcrumb" className="collection-breadcrumbs">{items.map((item, i) => <span key={item.path}>{i > 0 && <span aria-hidden="true"> / </span>}<Link href={item.path}>{item.name}</Link></span>)}</nav><JsonLd value={breadcrumbs(items)} /></>}
@@ -75,7 +75,8 @@ export async function CollectionDetail({type, locale, slug}: {type: Collection; 
   if (type === 'attorney') {
     const {data: person} = await sanityFetch({query: attorneyQuery, params: {language: locale, slug}, perspective: 'published', stega: false})
     if (!person) notFound()
-    return <AttorneyProfile person={person} locale={locale} slug={slug} />
+    const {data: navigation} = await sanityFetch({query: navigationQuery, params: {id: navigationId(locale)}, perspective: 'published', stega: false})
+    return <AttorneyProfile person={person} locale={locale} slug={slug} bookingAction={navigation?.ctaLink?.linkType === 'calendly' ? navigation.ctaLink : null} />
   }
   const {data: office} = await sanityFetch({query: officeQuery, params: {language: locale, slug}, perspective: 'published', stega: false})
   if (!office) notFound()
