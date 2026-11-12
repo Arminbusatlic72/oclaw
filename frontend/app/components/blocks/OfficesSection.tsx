@@ -26,15 +26,20 @@ export default async function OfficesSection({block, locale}: {block: Block; loc
         {block.description && <p className="site-block-subheading">{block.description}</p>}
       </header>
       {offices.length ? <div className="home-offices-grid">
-        {offices.map((office, index) => {
+        {offices.map((office) => {
           const href = collectionPath('office', locale, office.slug)
           const locality = [office.city, office.state, office.postalCode].filter(Boolean).join(', ')
           const address = [office.streetAddress, office.addressLine2, locality].filter(Boolean)
+          const mapAddress = [...address, office.country].filter(Boolean).join(', ')
+          const mapSrc = office.streetAddress || office.city
+            ? `https://www.google.com/maps/embed?${new URLSearchParams({hl: locale, origin: 'mfe', pb: `!1m3!2m1!1s${mapAddress}!6i14`}).toString()}`
+            : null
           return <article className="home-office-card" key={office._id}>
-            <Link className="home-office-visual" href={href} aria-label={office.name || undefined}>
+            {mapSrc ? <div className="home-office-visual home-office-map">
+              <iframe src={mapSrc} title={`${office.name} — ${mapAddress}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
+            </div> : <Link className="home-office-visual" href={href} aria-label={office.name || undefined}>
               {office.image?.asset?._ref ? <SanityImage id={office.image.asset._ref} alt={office.image.alt || office.name || ''} width={900} className="home-office-image" /> : <span className="home-office-image-fallback"><MapPin size={44} strokeWidth={1.3} /></span>}
-              <span className="home-office-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            </Link>
+            </Link>}
             <div className="home-office-content">
               <h3><Link href={href}>{office.name}</Link></h3>
               {address.length ? <address><MapPin size={18} aria-hidden="true" /><span>{address.map((line) => <span key={line}>{line}</span>)}</span></address> : null}
