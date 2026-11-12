@@ -2,7 +2,7 @@
 
 import {useCallback, useEffect, useMemo, useState} from 'react'
 import Image from 'next/image'
-import {ArrowUpRight, CalendarDays} from 'lucide-react'
+import {ArrowUpRight, CalendarDays, MessageSquare} from 'lucide-react'
 
 import type {Locale} from '@/lib/i18n'
 import {HeroSliderSlide, type HeroPracticeArea} from '@/sanity/lib/types'
@@ -138,6 +138,14 @@ export default function HeroSliderClient({
               </>
             ) : slide.cta?.label
             const isExternalCta = Boolean(ctaHref?.match(/^https?:\/\//))
+            const secondaryCtaClassName = `site-button-outline site-button-secondary site-hero-cta${isEnhancedClassic ? ' site-hero-cta-companion' : ''}`
+            const secondaryCtaContent = isEnhancedClassic ? (
+              <>
+                <MessageSquare aria-hidden="true" focusable="false" />
+                <span>{slide.secondaryCta?.label}</span>
+                <ArrowUpRight aria-hidden="true" focusable="false" />
+              </>
+            ) : slide.secondaryCta?.label
             const secondaryCtaHref =
               linkResolver(slide.secondaryCta?.link) || slide.secondaryCta?.url
             const isExternalSecondaryCta = Boolean(secondaryCtaHref?.match(/^https?:\/\//))
@@ -252,25 +260,25 @@ export default function HeroSliderClient({
                             <ResolvedLink
                               link={slide.secondaryCta.link}
                               locale={locale}
-                              className="site-button-outline site-button-secondary site-hero-cta"
+                              className={secondaryCtaClassName}
                             >
-                              {slide.secondaryCta.label}
+                              {secondaryCtaContent}
                             </ResolvedLink>
                           ) : secondaryCtaHref ? (
                             <a
                               href={secondaryCtaHref}
                               target={isExternalSecondaryCta ? '_blank' : undefined}
                               rel={isExternalSecondaryCta ? 'noopener noreferrer' : undefined}
-                              className="site-button-outline site-button-secondary site-hero-cta"
+                              className={secondaryCtaClassName}
                             >
-                              {slide.secondaryCta.label}
+                              {secondaryCtaContent}
                             </a>
                           ) : (
                             <span
-                              className="site-button-outline site-button-secondary site-hero-cta"
+                              className={secondaryCtaClassName}
                               aria-disabled="true"
                             >
-                              {slide.secondaryCta.label}
+                              {secondaryCtaContent}
                             </span>
                           ))}
                       </div>

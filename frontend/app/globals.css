@@ -914,6 +914,29 @@ body:has([role="dialog"][data-state="open"], [aria-modal="true"], dialog[open], 
   padding-inline: 1.5rem;
 }
 
+/* Companion action shares the primary CTA geometry while retaining an outline. */
+.site-hero-enhanced-classic .site-hero-cta-companion {
+  min-width: 0;
+  gap: 1rem;
+  min-height: 4rem;
+  padding: .95rem 2rem;
+  border-width: 2px;
+  border-color: var(--color-brand);
+  border-radius: var(--site-radius);
+  background: var(--color-ink-deep);
+  color: var(--color-brand);
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.site-hero-cta-companion > span {min-width: 0;}
+.site-hero-cta-companion > svg {width: 1.2em; height: 1.2em; flex: none; stroke-width: 1.8;}
+.site-hero-enhanced-classic .site-hero-cta-companion::before {display: none;}
+.site-hero-enhanced-classic .site-hero-cta-companion:hover {background: var(--color-brand); color: var(--color-ink-deep);}
+.site-hero-enhanced-classic .site-hero-cta-companion:active {background: var(--color-brand-hover); color: var(--color-ink-deep);}
+.site-hero-enhanced-classic .site-hero-cta-companion:focus-visible {outline: 3px solid white; outline-offset: 4px;}
+.site-hero-enhanced-classic .site-hero-cta-companion[aria-disabled='true'] {background: var(--color-ink-deep); color: var(--color-brand); opacity: .65;}
+
 /* Reusable emphasis for a primary consultation action; labels may wrap. */
 .site-button-outline.site-button-prominent {
   box-sizing: border-box;
@@ -934,17 +957,18 @@ body:has([role="dialog"][data-state="open"], [aria-modal="true"], dialog[open], 
 .site-button-prominent > svg {width: 1.2em; height: 1.2em; flex: none; stroke-width: 1.8;}
 .site-button-prominent-label {min-width: 0;}
 .site-button-outline.site-button-prominent::before {display: none;}
-.site-button-outline.site-button-prominent:hover {background: var(--color-brand-hover); color: var(--color-ink-deep);}
+.site-button-outline.site-button-prominent:hover {background: var(--color-brand-hover); color: var(--color-ink-deep); cursor: pointer;}
 .site-button-outline.site-button-prominent:active {background: var(--color-brand); color: var(--color-ink-deep);}
 .site-button-outline.site-button-prominent:focus-visible {outline: 3px solid white; outline-offset: 4px;}
-.site-button-outline.site-button-prominent[aria-disabled='true'] {background: var(--color-brand); color: var(--color-ink-deep); opacity: .65;}
+.site-button-outline.site-button-prominent[aria-disabled='true'] {cursor: default; background: var(--color-brand); color: var(--color-ink-deep); opacity: .65;}
 .site-hero-enhanced-classic .site-hero-actions {width: 100%; min-width: 0; gap: 1.5rem;}
 @media (min-width: 600px) and (max-width: 1023px) {
+  .site-hero-enhanced-classic .site-hero-cta-companion {min-height: 3.75rem;}
   .site-button-outline.site-button-prominent {min-height: 3.75rem; padding: .95rem 2rem; font-size: 1.125rem;}
 }
 @media (max-width: 599px) {
   .site-button-outline.site-button-prominent {width: 100%; min-height: 3.5rem; padding: .875rem 1.5rem; font-size: 1.0625rem;}
-  .site-hero-enhanced-classic .site-hero-actions .site-button-secondary {width: fit-content; min-height: 3.25rem; font-size: 1rem;}
+  .site-hero-enhanced-classic .site-hero-actions .site-button-secondary {width: fit-content; min-height: 3.5rem; padding: .875rem 1.5rem; font-size: 1rem;}
 }
 
 .site-hero-enhanced-classic .site-hero-image {
