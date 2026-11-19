@@ -392,7 +392,7 @@ export type WhyChooseUs = {
     caption?: string
     _type: 'image'
   }
-  specializationHeading: string
+  specializationHeading?: string
   highlights: Array<{
     icon: 'award' | 'briefcase' | 'scale' | 'shield' | 'people' | 'star' | 'house'
     value: string

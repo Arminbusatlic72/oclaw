@@ -392,7 +392,7 @@ export type WhyChooseUs = {
     caption?: string
     _type: 'image'
   }
-  specializationHeading: string
+  specializationHeading?: string
   highlights: Array<{
     icon: 'award' | 'briefcase' | 'scale' | 'shield' | 'people' | 'star' | 'house'
     value: string
@@ -2921,7 +2921,7 @@ export type GetPageQueryResult = {
           caption?: string
           _type: 'image'
         } | null
-        specializationHeading: string
+        specializationHeading?: string
         highlights: Array<{
           icon: 'award' | 'briefcase' | 'house' | 'people' | 'scale' | 'shield' | 'star'
           value: string
@@ -3959,7 +3959,7 @@ export type HomePageQueryResult = {
           caption?: string
           _type: 'image'
         } | null
-        specializationHeading: string
+        specializationHeading?: string
         highlights: Array<{
           icon: 'award' | 'briefcase' | 'house' | 'people' | 'scale' | 'shield' | 'star'
           value: string

@@ -154,7 +154,6 @@ export const whyChooseUs = defineType({
       title: 'Specialization heading',
       type: 'string',
       fieldset: 'highlights',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'highlights',

@@ -2451,7 +2451,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "highlights": {
           "type": "objectAttribute",

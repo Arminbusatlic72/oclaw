@@ -131,19 +131,16 @@ export default function Navbar({
       <div className="site-header-inner">
         <Link href={localePath(locale)} className="site-header-logo" aria-label={dictionary[locale].home}>
           {logoUrl ? (
-            <>
-              <span className={`site-header-logo-box${isMarkOnly ? ' site-header-logo-box-mark' : ''}`}>
-                <Image
-                  src={logoUrl}
-                  alt={isMarkOnly ? '' : data.logo?.alt || siteTitle}
-                  fill
-                  sizes={isMarkOnly ? '(max-width: 1279px) 84.48px, 105.6px' : '(max-width: 1279px) 211.2px, 316.8px'}
-                  className="object-contain object-left"
-                  priority
-                />
-              </span>
-              {isMarkOnly && <span className="site-header-logo-name">{siteTitle}</span>}
-            </>
+            <span className={`site-header-logo-box${isMarkOnly ? ' site-header-logo-box-mark' : ''}`}>
+              <Image
+                src={logoUrl}
+                alt={data.logo?.alt || siteTitle}
+                fill
+                sizes={isMarkOnly ? '(max-width: 1279px) 131px, 158px' : '(max-width: 1279px) 285px, 413px'}
+                className="object-contain"
+                priority
+              />
+            </span>
           ) : (
             <span>{siteTitle}</span>
           )}
