@@ -153,7 +153,7 @@ export type CalendlyBooking = {
   _type: 'calendlyBooking'
   heading: string
   description?: string
-  displayMode: 'inline' | 'popup'
+  displayMode: 'inline' | 'popup' | 'appointment'
   eventUrl?: string
   buttonLabel?: string
   officeBookingOptions?: Array<{

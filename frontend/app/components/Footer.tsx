@@ -16,7 +16,7 @@ export default async function Footer({locale}: {locale: Locale}) {
       <footer className="site-footer">
         <div className="site-footer-inner site-footer-inner-copyright-only container">
           <div className="site-footer-bottom site-footer-bottom-copyright-only border-t pt-6 text-sm">
-            <CopyrightFooter />
+            <CopyrightFooter locale={locale} />
           </div>
         </div>
       </footer>
@@ -63,7 +63,7 @@ export default async function Footer({locale}: {locale: Locale}) {
         )}
 
         <div className="site-footer-bottom mt-14 flex flex-col gap-4 border-t pt-6 text-sm md:flex-row md:items-center md:justify-between">
-          <CopyrightFooter />
+          <CopyrightFooter locale={locale} />
           {bottomLinks?.length ? (
             <nav aria-label={footer.bottomLinksLabel || undefined}>
               <FooterLinks links={bottomLinks} compact />
