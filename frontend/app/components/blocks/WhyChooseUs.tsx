@@ -4,6 +4,7 @@ import {Award, BriefcaseBusiness, House, Scale, ShieldCheck, Star, UsersRound} f
 import PortableText from '@/app/components/PortableText'
 import ResolvedLink from '@/app/components/ResolvedLink'
 import Image from '@/app/components/SanityImage'
+import HighlightValue from './HighlightValue'
 import {ExtractPageBuilderType} from '@/sanity/lib/types'
 import {linkResolver} from '@/sanity/lib/utils'
 import {stegaClean} from '@sanity/client/stega'
@@ -105,14 +106,14 @@ export default function WhyChooseUs({block, locale = 'en'}: {block: WhyChooseUsB
             )}
           </figure>
 
-          <div className="min-w-0">
+          <div className="min-w-0 self-center">
             {specializationHeading && (
               <h3 className="font-serif text-2xl leading-tight sm:text-3xl">
                 {specializationHeading}
               </h3>
             )}
             {highlights && highlights.length > 0 && (
-              <ul className="mt-12">
+              <ul className={specializationHeading ? 'mt-12' : undefined}>
                 {highlights.map((highlight: Highlight) => (
                   <HighlightItem
                     key={highlight._key}
@@ -214,7 +215,7 @@ function HighlightItem({
         <Icon aria-hidden="true" size={25} strokeWidth={1.5} />
       </span>
       <div className="min-w-0">
-        <p className="text-xl leading-tight text-[#819cb0]">{highlight.value}</p>
+        <HighlightValue key={highlight.value} value={highlight.value} />
         <h4 className="mt-2 font-serif text-xl font-semibold leading-tight sm:text-2xl">{highlight.label}</h4>
         {highlight.description && (
           <p className={`mt-1 text-sm leading-6 ${mutedClass}`}>{highlight.description}</p>
