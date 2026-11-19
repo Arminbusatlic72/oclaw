@@ -394,15 +394,24 @@ export type WhyChooseUs = {
   }
   specializationHeading: string
   highlights: Array<{
-    icon: 'award' | 'briefcase' | 'scale' | 'shield' | 'people' | 'star'
+    icon: 'award' | 'briefcase' | 'scale' | 'shield' | 'people' | 'star' | 'house'
     value: string
     label: string
     description?: string
     _type: 'whyChooseUsHighlight'
     _key: string
   }>
-  contentHeading: string
-  body: BlockContent
+  contentHeading?: string
+  body?: BlockContent
+  procedureEyebrow?: string
+  procedureHeading?: string
+  procedureIntro?: string
+  procedureSteps?: Array<{
+    title: string
+    description?: string
+    _type: 'whyChooseUsProcedureStep'
+    _key: string
+  }>
   ctaLabel?: string
   ctaLink?: Link
 }
@@ -2914,14 +2923,14 @@ export type GetPageQueryResult = {
         } | null
         specializationHeading: string
         highlights: Array<{
-          icon: 'award' | 'briefcase' | 'people' | 'scale' | 'shield' | 'star'
+          icon: 'award' | 'briefcase' | 'house' | 'people' | 'scale' | 'shield' | 'star'
           value: string
           label: string
           description?: string
           _type: 'whyChooseUsHighlight'
           _key: string
         }>
-        contentHeading: string
+        contentHeading?: string
         body: Array<
           | {
               children?: Array<{
@@ -2957,7 +2966,16 @@ export type GetPageQueryResult = {
               _key: string
               markDefs: null
             }
-        >
+        > | null
+        procedureEyebrow?: string
+        procedureHeading?: string
+        procedureIntro?: string
+        procedureSteps?: Array<{
+          title: string
+          description?: string
+          _type: 'whyChooseUsProcedureStep'
+          _key: string
+        }>
         ctaLabel?: string
         ctaLink: {
           _type: 'link'
@@ -3943,14 +3961,14 @@ export type HomePageQueryResult = {
         } | null
         specializationHeading: string
         highlights: Array<{
-          icon: 'award' | 'briefcase' | 'people' | 'scale' | 'shield' | 'star'
+          icon: 'award' | 'briefcase' | 'house' | 'people' | 'scale' | 'shield' | 'star'
           value: string
           label: string
           description?: string
           _type: 'whyChooseUsHighlight'
           _key: string
         }>
-        contentHeading: string
+        contentHeading?: string
         body: Array<
           | {
               children?: Array<{
@@ -3986,7 +4004,16 @@ export type HomePageQueryResult = {
               _key: string
               markDefs: null
             }
-        >
+        > | null
+        procedureEyebrow?: string
+        procedureHeading?: string
+        procedureIntro?: string
+        procedureSteps?: Array<{
+          title: string
+          description?: string
+          _type: 'whyChooseUsProcedureStep'
+          _key: string
+        }>
         ctaLabel?: string
         ctaLink: {
           _type: 'link'

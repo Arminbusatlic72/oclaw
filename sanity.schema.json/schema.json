@@ -2488,6 +2488,10 @@
                       {
                         "type": "string",
                         "value": "star"
+                      },
+                      {
+                        "type": "string",
+                        "value": "house"
                       }
                     ]
                   },
@@ -2542,7 +2546,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "body": {
           "type": "objectAttribute",
@@ -2550,7 +2554,72 @@
             "type": "inline",
             "name": "blockContent"
           },
-          "optional": false
+          "optional": true
+        },
+        "procedureEyebrow": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "procedureHeading": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "procedureIntro": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "procedureSteps": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "title": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  },
+                  "optional": false
+                },
+                "description": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  },
+                  "optional": true
+                },
+                "_type": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string",
+                    "value": "whyChooseUsProcedureStep"
+                  }
+                }
+              },
+              "rest": {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "optional": true
         },
         "ctaLabel": {
           "type": "objectAttribute",

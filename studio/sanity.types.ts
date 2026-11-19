@@ -394,15 +394,24 @@ export type WhyChooseUs = {
   }
   specializationHeading: string
   highlights: Array<{
-    icon: 'award' | 'briefcase' | 'scale' | 'shield' | 'people' | 'star'
+    icon: 'award' | 'briefcase' | 'scale' | 'shield' | 'people' | 'star' | 'house'
     value: string
     label: string
     description?: string
     _type: 'whyChooseUsHighlight'
     _key: string
   }>
-  contentHeading: string
-  body: BlockContent
+  contentHeading?: string
+  body?: BlockContent
+  procedureEyebrow?: string
+  procedureHeading?: string
+  procedureIntro?: string
+  procedureSteps?: Array<{
+    title: string
+    description?: string
+    _type: 'whyChooseUsProcedureStep'
+    _key: string
+  }>
   ctaLabel?: string
   ctaLink?: Link
 }
