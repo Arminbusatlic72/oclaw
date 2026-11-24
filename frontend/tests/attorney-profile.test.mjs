@@ -110,6 +110,7 @@ test('empty sections are omitted and Spanish content stays independent', () => {
   for (const id of [
     'overview',
     'memberships',
+    'honors',
     'insights',
     'services',
     'education',
@@ -148,6 +149,7 @@ test('structured and legacy credentials, memberships and relationships are retai
         },
       ],
       professionalMemberships: ['Organization fixture'],
+      honors: ['Honor fixture'],
       offices: [{_id: 'office', name: 'Office fixture', slug: 'office-fixture'}],
       practiceAreas: [{_id: 'practice', title: 'Practice fixture', slug: 'practice-fixture'}],
       phone: '+1 (555) 000-0000',
@@ -165,6 +167,8 @@ test('structured and legacy credentials, memberships and relationships are retai
     'Court fixture, 2002',
     'Admission description',
     'Organization fixture',
+    'Honor fixture',
+    '>Distinciones</h2>',
     '/es/oficinas/office-fixture/',
     '/es/areas-de-practica/practice-fixture/',
     'mailto:fixture@example.com',
@@ -172,6 +176,13 @@ test('structured and legacy credentials, memberships and relationships are retai
     '>Admisiones</h2>',
   ])
     assert.ok(html.includes(text), text)
+})
+
+test('honors appear directly after memberships and before resources', () => {
+  const html = render({professionalMemberships: ['Membership fixture'], honors: ['Honor fixture'], insights: [{_key: 'news', category: 'news', title: 'News fixture', url: 'https://example.com/news'}]})
+  assert.ok(html.indexOf('id="memberships"') < html.indexOf('id="honors"'))
+  assert.ok(html.indexOf('id="honors"') < html.indexOf('id="insights"'))
+  assert.ok(!render({honors: ['   ']}).includes('id="honors"'))
 })
 
 test('resources group approved links and hide unavailable references and unsafe URLs', () => {

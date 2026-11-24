@@ -41,6 +41,7 @@ export const attorney = defineType({
     defineField({name: 'achievements', type: 'array', of: [{type: 'string'}]}),
     defineField({name: 'certificates', type: 'array', of: [{type: 'image', fields: [defineField({name: 'alt', type: 'string', validation: (Rule) => Rule.required()})]}]}),
     defineField({name: 'barAdmissions', title: 'Bar admissions', type: 'array', of: [{type: 'string'}]}),
+    defineField({name: 'honors', title: 'Honors', type: 'array', of: [{type: 'string'}], description: 'Awards and professional distinctions. Shown below Membership & Involvement on this language’s profile.'}),
     defineField({name: 'professionalMemberships', title: 'Professional memberships', type: 'array', of: [{type: 'string'}]}),
     defineField({name: 'languagesSpoken', title: 'Languages spoken', type: 'array', of: [{type: 'string'}]}),
     defineField({name: 'email', type: 'email'}),

@@ -1000,6 +1000,7 @@ export type Attorney = {
     _key: string
   }>
   barAdmissions?: Array<string>
+  honors?: Array<string>
   professionalMemberships?: Array<string>
   languagesSpoken?: Array<string>
   email?: string

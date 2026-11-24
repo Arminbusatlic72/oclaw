@@ -6477,6 +6477,16 @@
         },
         "optional": true
       },
+      "honors": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
+        },
+        "optional": true
+      },
       "professionalMemberships": {
         "type": "objectAttribute",
         "value": {

@@ -63,6 +63,7 @@ export default function AttorneyProfile({
         position: 'Puesto',
         overview: 'Descripción general',
         memberships: 'Membresías y participación',
+        honors: 'Distinciones',
         insights: 'Recursos y perspectivas',
         speaking: 'Conferencias',
         blog: 'Artículos del blog',
@@ -90,6 +91,7 @@ export default function AttorneyProfile({
         position: 'Position',
         overview: 'Overview',
         memberships: 'Membership & Involvement',
+        honors: 'Honors',
         insights: 'Resources & Insights',
         speaking: 'Speaking Engagements',
         blog: 'Blog Posts',
@@ -120,6 +122,7 @@ export default function AttorneyProfile({
   const education = person.educationDetails?.filter((item) => item.institution || item.degree) ?? []
   const admissions = person.admissions?.filter((item) => item.jurisdiction || item.bar) ?? []
   const memberships = person.professionalMemberships?.filter((item) => item.trim()) ?? []
+  const honors = person.honors?.filter((item) => item.trim()) ?? []
   const resources = (person.insights ?? []).flatMap((item) => {
     // A missing, unpublished or wrong-language reference must never fall back to an external URL.
     const href = item.hasPost
@@ -142,6 +145,7 @@ export default function AttorneyProfile({
   const sections = [
     {id: 'overview', title: t.overview, visible: person.biography?.length},
     {id: 'memberships', title: t.memberships, visible: memberships.length},
+    {id: 'honors', title: t.honors, visible: honors.length},
     {id: 'insights', title: t.insights, visible: resourceGroups.length},
     {id: 'services', title: t.practices, visible: practiceAreas.length},
     {id: 'education', title: t.education, visible: education.length || person.education?.length},
@@ -276,6 +280,11 @@ export default function AttorneyProfile({
           {memberships.length > 0 && (
             <ProfileSection id="memberships" title={t.memberships}>
               <MarkerList items={memberships} />
+            </ProfileSection>
+          )}
+          {honors.length > 0 && (
+            <ProfileSection id="honors" title={t.honors}>
+              <MarkerList items={honors} />
             </ProfileSection>
           )}
           {resourceGroups.length > 0 && (
